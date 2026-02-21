@@ -1,0 +1,476 @@
+import 'package:flutter/material.dart';
+import '3rdpage.dart';
+
+class SecondPage extends StatefulWidget {
+  final String feeling;
+  final ValueNotifier<bool> isLightNotifier;
+  final ValueChanged<bool> onThemeChanged;
+
+  SecondPage({
+    required this.feeling,
+    required this.isLightNotifier,
+    required this.onThemeChanged,
+  });
+
+  @override
+  State<SecondPage> createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> {
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<bool>(
+      valueListenable: widget.isLightNotifier,
+      builder: (context, isLight, _) {
+        return Scaffold(
+          backgroundColor: isLight
+              ? Color.fromARGB(255, 255, 255, 255)
+              : Color.fromARGB(255, 19, 19, 19),
+          appBar: AppBar(
+            backgroundColor: isLight
+                ? Color.fromARGB(255, 255, 255, 255)
+                : Color.fromARGB(255, 19, 19, 19),
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: isLight
+                    ? Color.fromARGB(255, 6, 6, 6)
+                    : Color.fromARGB(255, 194, 226, 202),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 10, bottom: 50),
+                  width: 400,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    border: Border.all(
+                      color: isLight
+                          ? Color.fromARGB(255, 16, 100, 56)
+                          : Color.fromARGB(255, 184, 220, 193),
+                      width: 3,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: isLight
+                            ? Color.fromARGB(255, 184, 220, 193)
+                            : Color.fromARGB(255, 16, 100, 56),
+                        blurRadius: 10,
+                        offset: Offset(0, 5),
+                      ),
+                    ],
+                    color: isLight
+                        ? Color.fromARGB(255, 254, 254, 254)
+                        : Color.fromARGB(255, 34, 34, 34),
+                  ),
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    'It'
+                    's okay to feel ${widget.feeling} sometimes, Raiyan. Remember, you know yourself best and you can be your biggest healer.',
+                    style: TextStyle(
+                      fontSize: 23,
+                      fontFamily: 'Nunito',
+                      fontWeight: FontWeight.w900,
+                      color: isLight
+                          ? Color.fromARGB(255, 16, 100, 56)
+                          : Color.fromARGB(255, 192, 226, 201),
+                    ),
+                  ),
+                ),
+
+                Text(
+                  textAlign: TextAlign.center,
+                  'So, be the one and choose \nin which way you want to heal yourself today.',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: 'Nunito',
+                    fontWeight: FontWeight.w900,
+                    color: isLight
+                        ? Color.fromARGB(255, 16, 100, 56)
+                        : Color.fromARGB(255, 184, 220, 193),
+                  ),
+                ),
+                const SizedBox(height: 70),
+                Row(
+                  children: [
+                    SizedBox(width: 30),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ThirdPage(
+                              selection: 'Religion',
+                              feeling: widget.feeling,
+                              isLightNotifier: widget.isLightNotifier,
+                              onThemeChanged: widget.onThemeChanged,
+                            ),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 20,
+                        side: BorderSide(
+                          color: isLight
+                              ? Color.fromARGB(255, 16, 100, 56)
+                              : Color.fromARGB(255, 184, 220, 193),
+                          width: 2,
+                        ),
+                        backgroundColor: isLight
+                            ? Color.fromARGB(255, 240, 240, 240)
+                            : Color.fromARGB(255, 41, 46, 42),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 35,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      icon: Icon(
+                        Icons.mosque,
+                        size: 30,
+                        color: isLight
+                            ? Color.fromARGB(255, 16, 100, 56)
+                            : Color.fromARGB(255, 184, 220, 193),
+                      ),
+                      label: Text(
+                        'Religion',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Nunito',
+                          fontWeight: FontWeight.w600,
+                          color: isLight
+                              ? Color.fromARGB(255, 16, 100, 56)
+                              : Color.fromARGB(255, 184, 220, 193),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 30),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ThirdPage(
+                              selection: 'Entertainment',
+                              feeling: widget.feeling,
+                              isLightNotifier: widget.isLightNotifier,
+                              onThemeChanged: widget.onThemeChanged,
+                            ),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 20,
+                        side: BorderSide(
+                          color: isLight
+                              ? Color.fromARGB(255, 16, 100, 56)
+                              : Color.fromARGB(255, 184, 220, 193),
+                          width: 2,
+                        ),
+                        backgroundColor: isLight
+                            ? Color.fromARGB(255, 240, 240, 240)
+                            : Color.fromARGB(255, 41, 46, 42),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 38,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      icon: Icon(
+                        Icons.movie,
+                        size: 25,
+                        color: isLight
+                            ? Color.fromARGB(255, 16, 100, 56)
+                            : Color.fromARGB(255, 184, 220, 193),
+                      ),
+                      label: Text(
+                        'Entertainment',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: 'Nunito',
+                          fontWeight: FontWeight.w600,
+                          color: isLight
+                              ? Color.fromARGB(255, 16, 100, 56)
+                              : Color.fromARGB(255, 184, 220, 193),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 60),
+                Row(
+                  children: [
+                    SizedBox(width: 20),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ThirdPage(
+                              selection: 'Articles & Documentaries',
+                              feeling: widget.feeling,
+                              isLightNotifier: widget.isLightNotifier,
+                              onThemeChanged: widget.onThemeChanged,
+                            ),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 20,
+                        side: BorderSide(
+                          color: isLight
+                              ? Color.fromARGB(255, 16, 100, 56)
+                              : Color.fromARGB(255, 184, 220, 193),
+                          width: 2,
+                        ),
+                        backgroundColor: isLight
+                            ? Color.fromARGB(255, 240, 240, 240)
+                            : Color.fromARGB(255, 41, 46, 42),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 35,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      icon: Icon(
+                        Icons.article,
+                        size: 30,
+                        color: isLight
+                            ? Color.fromARGB(255, 16, 100, 56)
+                            : Color.fromARGB(255, 184, 220, 193),
+                      ),
+                      label: Text(
+                        '     Articles \n          &\nDocumentaries',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Nunito',
+                          fontWeight: FontWeight.w600,
+                          color: isLight
+                              ? Color.fromARGB(255, 16, 100, 56)
+                              : Color.fromARGB(255, 184, 220, 193),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 25),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ThirdPage(
+                              selection: 'Literature',
+                              feeling: widget.feeling,
+                              isLightNotifier: widget.isLightNotifier,
+                              onThemeChanged: widget.onThemeChanged,
+                            ),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 20,
+                        side: BorderSide(
+                          color: isLight
+                              ? Color.fromARGB(255, 16, 100, 56)
+                              : Color.fromARGB(255, 184, 220, 193),
+                          width: 2,
+                        ),
+                        backgroundColor: isLight
+                            ? Color.fromARGB(255, 240, 240, 240)
+                            : Color.fromARGB(255, 41, 46, 42),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 38,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      icon: Icon(
+                        Icons.menu_book_sharp,
+                        size: 25,
+                        color: isLight
+                            ? Color.fromARGB(255, 16, 100, 56)
+                            : Color.fromARGB(255, 184, 220, 193),
+                      ),
+                      label: Text(
+                        'Literature',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Nunito',
+                          fontWeight: FontWeight.w600,
+                          color: isLight
+                              ? Color.fromARGB(255, 16, 100, 56)
+                              : Color.fromARGB(255, 184, 220, 193),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Text(
+                  '\n\n"Healing takes time, and asking for help\n is a courageous step" - Mariska Hargitay',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: isLight
+                        ? Color.fromARGB(255, 16, 100, 56)
+                        : Color.fromARGB(255, 184, 220, 193),
+                    fontFamily: 'Nunito',
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          endDrawer: Drawer(
+            width: 250,
+            elevation: 30,
+            backgroundColor: isLight
+                ? Color.fromARGB(255, 255, 255, 255)
+                : Color.fromARGB(255, 19, 19, 19),
+            shadowColor: isLight
+                ? Color.fromARGB(255, 4, 13, 9)
+                : Color.fromARGB(255, 184, 220, 193),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+              ),
+            ),
+            child: Container(
+              child: Column(
+                children: [
+                  SizedBox(height: 100),
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: isLight
+                          ? Color.fromARGB(255, 255, 255, 255)
+                          : Color.fromARGB(255, 19, 19, 19),
+                    ),
+                    icon: Icon(
+                      Icons.person,
+                      color: isLight
+                          ? Color.fromARGB(255, 16, 100, 56)
+                          : Color.fromARGB(255, 184, 220, 193),
+                      size: 25,
+                    ),
+                    label: Text(
+                      'Profile',
+
+                      style: TextStyle(
+                        color: isLight
+                            ? Color.fromARGB(255, 16, 100, 56)
+                            : Color.fromARGB(255, 184, 220, 193),
+                        fontFamily: 'Nunito',
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    '-------------------------',
+                    style: TextStyle(
+                      color: isLight
+                          ? Color.fromARGB(255, 16, 100, 56)
+                          : Color.fromARGB(255, 184, 220, 193),
+                      fontFamily: 'Nunito',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: isLight
+                                ? Color.fromARGB(255, 16, 100, 56)
+                                : Color.fromARGB(255, 184, 220, 193),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                widget.onThemeChanged(true);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 12,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: isLight
+                                      ? Color.fromARGB(255, 16, 100, 56)
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(13),
+                                ),
+                                child: Icon(
+                                  Icons.light_mode,
+                                  color: isLight
+                                      ? Color.fromARGB(255, 255, 255, 255)
+                                      : Color.fromARGB(255, 184, 220, 193),
+                                  size: 24,
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                widget.onThemeChanged(false);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 12,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: !isLight
+                                      ? Color.fromARGB(255, 184, 220, 193)
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Icon(
+                                  Icons.dark_mode,
+                                  color: !isLight
+                                      ? Color.fromARGB(255, 42, 42, 42)
+                                      : Color.fromARGB(255, 16, 100, 56),
+                                  size: 24,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
