@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'religionpage.dart';
 
 class ThirdPage extends StatefulWidget {
   final String selection;
@@ -20,6 +21,15 @@ class ThirdPage extends StatefulWidget {
 class _ThirdPageState extends State<ThirdPage> {
   @override
   Widget build(BuildContext context) {
+    // If Religion is selected, navigate to ReligionPage directly
+    if (widget.selection == 'Religion') {
+      return ReligionPage(
+        feeling: widget.feeling,
+        isLightNotifier: widget.isLightNotifier,
+        onThemeChanged: widget.onThemeChanged,
+      );
+    }
+
     return ValueListenableBuilder<bool>(
       valueListenable: widget.isLightNotifier,
       builder: (context, isLight, _) {

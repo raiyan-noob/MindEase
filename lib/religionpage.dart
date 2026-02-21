@@ -48,46 +48,37 @@ class _ReligionPageState extends State<ReligionPage> {
           ),
           body: Stack(
             children: [
-              // Background image covering entire body
               Positioned.fill(
                 child: Image.asset(
                   isLight ? 'assets/relbg.jpg' : 'assets/reld.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
-              // Body content
+
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 230),
-                    Container(
-                      margin: const EdgeInsets.only(top: 10, bottom: 20),
-                      width: 250,
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: accent, width: 3),
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: accent.withOpacity(0.3),
-                            blurRadius: 10,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                        color: isLight
-                            ? Color.fromRGBO(254, 254, 254, 1.0)
-                            : Color.fromRGBO(34, 34, 34, 1.0),
-                      ),
-                      child: Text(
-                        'Sometimes religion can be the best way to heal yourself, go through how you want to heal yourself.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w800,
-                          color: textPrimary,
-                        ),
+                    const SizedBox(height: 260),
+                    Text(
+                      'Sometimes religion can be\n the best way to be healed,\n go through how you want to heal\n yourself.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Nunito',
+                        fontWeight: FontWeight.bold,
+                        color: textPrimary,
+                        shadows:
+                            textPrimary.withOpacity(0.7) !=
+                                const Color.fromARGB(0, 47, 81, 54)
+                            ? [
+                                Shadow(
+                                  offset: const Offset(0, 1),
+                                  blurRadius: 2,
+                                  color: textPrimary.withOpacity(0.7),
+                                ),
+                              ]
+                            : null,
                       ),
                     ),
 
@@ -205,7 +196,7 @@ class _ReligionPageState extends State<ReligionPage> {
                       ),
                     ),
 
-                    const SizedBox(height: 105),
+                    const SizedBox(height: 125),
 
                     Text(
                       '"Surely with hardship comes ease"\n- Al-Qur\'an 94:5',
@@ -216,6 +207,17 @@ class _ReligionPageState extends State<ReligionPage> {
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                         fontStyle: FontStyle.italic,
+                        shadows:
+                            textPrimary.withOpacity(0.5) !=
+                                const Color.fromARGB(0, 47, 81, 54)
+                            ? [
+                                Shadow(
+                                  offset: const Offset(0, 1),
+                                  blurRadius: 2,
+                                  color: textPrimary.withOpacity(0.5),
+                                ),
+                              ]
+                            : null,
                       ),
                     ),
                   ],
