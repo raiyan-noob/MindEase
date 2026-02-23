@@ -80,6 +80,8 @@ flutter:
     - assets/reld.jpg
     - assets/enwbg.jpg
     - assets/enbbg.jpg
+    - assets/artwbg.jpg
+    - assets/artbbg.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

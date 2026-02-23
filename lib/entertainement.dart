@@ -80,199 +80,223 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                 ),
               ),
 
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 240),
-                    Text(
-                      'Entertainment can be\n a wonderful way to unwind,\n go through what brings you joy\n and eases your mind.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Nunito',
-                        fontWeight: FontWeight.bold,
-                        color: textPrimary,
-                        shadows:
-                            textPrimary.withOpacity(0.7) !=
-                                const Color.fromARGB(0, 47, 81, 54)
-                            ? [
-                                Shadow(
-                                  offset: const Offset(0, 1),
-                                  blurRadius: 2,
-                                  color: textPrimary.withOpacity(0.7),
-                                ),
-                              ]
-                            : null,
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  return SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
                       ),
-                    ),
-
-                    const SizedBox(height: 15),
-
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 45,
-                        vertical: 6,
-                      ),
-                      margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            _fadePageRoute(
-                              MovieEntPage(
-                                selection: 'Movie',
-                                feeling: widget.feeling,
-                                isLightNotifier: widget.isLightNotifier,
-                                onThemeChanged: widget.onThemeChanged,
-                              ),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 20,
-                          side: BorderSide(
-                            color: isLight
-                                ? Color.fromARGB(255, 16, 100, 56)
-                                : Color.fromARGB(255, 184, 220, 193),
-                            width: 2,
-                          ),
-                          backgroundColor: isLight
-                              ? Color.fromARGB(255, 240, 240, 240)
-                              : Color.fromARGB(255, 41, 46, 42),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 20,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                        ),
+                      child: IntrinsicHeight(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
+                            const SizedBox(height: 240),
                             Text(
-                              '🎬 Movies & Videos',
+                              'Entertainment can be\n a wonderful way to unwind,\n go through what brings you joy\n and eases your mind.',
+                              textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontFamily: 'Nunito',
-                                fontWeight: FontWeight.w700,
+                                fontWeight: FontWeight.bold,
                                 color: textPrimary,
+                                shadows:
+                                    textPrimary.withOpacity(0.7) !=
+                                        const Color.fromARGB(0, 47, 81, 54)
+                                    ? [
+                                        Shadow(
+                                          offset: const Offset(0, 1),
+                                          blurRadius: 2,
+                                          color: textPrimary.withOpacity(0.7),
+                                        ),
+                                      ]
+                                    : null,
                               ),
                             ),
-                            const SizedBox(height: 8),
-                            Text(
-                              'Connect with entertaining content that brings joy and light to your day.',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: 'Nunito',
-                                fontWeight: FontWeight.w500,
-                                color: isLight
-                                    ? Color.fromRGBO(50, 50, 50, 1.0)
-                                    : Color.fromRGBO(200, 200, 200, 1.0),
+
+                            const SizedBox(height: 15),
+
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 45,
+                                vertical: 6,
+                              ),
+                              margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    _fadePageRoute(
+                                      MovieEntPage(
+                                        selection: 'Movie',
+                                        feeling: widget.feeling,
+                                        isLightNotifier: widget.isLightNotifier,
+                                        onThemeChanged: widget.onThemeChanged,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 20,
+                                  side: BorderSide(
+                                    color: isLight
+                                        ? Color.fromARGB(255, 16, 100, 56)
+                                        : Color.fromARGB(255, 184, 220, 193),
+                                    width: 2,
+                                  ),
+                                  backgroundColor: isLight
+                                      ? Color.fromARGB(255, 240, 240, 240)
+                                      : Color.fromARGB(255, 41, 46, 42),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 20,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '🎬 Movies & Videos',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontFamily: 'Nunito',
+                                        fontWeight: FontWeight.w700,
+                                        color: textPrimary,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      'Connect with entertaining content that brings joy and light to your day.',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: 'Nunito',
+                                        fontWeight: FontWeight.w500,
+                                        color: isLight
+                                            ? Color.fromRGBO(50, 50, 50, 1.0)
+                                            : Color.fromRGBO(
+                                                200,
+                                                200,
+                                                200,
+                                                1.0,
+                                              ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 20),
+
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 65,
+                                vertical: 6,
+                              ),
+                              margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    _fadePageRoute(
+                                      SongEntPage(
+                                        selection: 'Song',
+                                        feeling: widget.feeling,
+                                        isLightNotifier: widget.isLightNotifier,
+                                        onThemeChanged: widget.onThemeChanged,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 20,
+                                  side: BorderSide(
+                                    color: isLight
+                                        ? Color.fromARGB(255, 16, 100, 56)
+                                        : Color.fromARGB(255, 184, 220, 193),
+                                    width: 2,
+                                  ),
+                                  backgroundColor: isLight
+                                      ? Color.fromARGB(255, 240, 240, 240)
+                                      : Color.fromARGB(255, 41, 46, 42),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 20,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '🎵 Music & Songs',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontFamily: 'Nunito',
+                                        fontWeight: FontWeight.w700,
+                                        color: textPrimary,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      'Explore engaging music and songs that bring joy and inspiration.',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: 'Nunito',
+                                        fontWeight: FontWeight.w500,
+                                        color: isLight
+                                            ? Color.fromRGBO(50, 50, 50, 1.0)
+                                            : Color.fromRGBO(
+                                                200,
+                                                200,
+                                                200,
+                                                1.0,
+                                              ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                            const Spacer(),
+
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: Text(
+                                '"There is a crack in everything.\nThat\'s how the light gets in" - Leonard Cohen',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: textPrimary,
+                                  fontFamily: 'Nunito',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.italic,
+                                  shadows:
+                                      textPrimary.withOpacity(0.5) !=
+                                          const Color.fromARGB(0, 47, 81, 54)
+                                      ? [
+                                          Shadow(
+                                            offset: const Offset(0, 1),
+                                            blurRadius: 2,
+                                            color: textPrimary.withOpacity(0.5),
+                                          ),
+                                        ]
+                                      : null,
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
                     ),
-
-                    const SizedBox(height: 20),
-
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 65,
-                        vertical: 6,
-                      ),
-                      margin: EdgeInsets.fromLTRB(10, 0, 0, 90),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            _fadePageRoute(
-                              SongEntPage(
-                                selection: 'Song',
-                                feeling: widget.feeling,
-                                isLightNotifier: widget.isLightNotifier,
-                                onThemeChanged: widget.onThemeChanged,
-                              ),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 20,
-                          side: BorderSide(
-                            color: isLight
-                                ? Color.fromARGB(255, 16, 100, 56)
-                                : Color.fromARGB(255, 184, 220, 193),
-                            width: 2,
-                          ),
-                          backgroundColor: isLight
-                              ? Color.fromARGB(255, 240, 240, 240)
-                              : Color.fromARGB(255, 41, 46, 42),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 20,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '🎵 Music & Songs',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontFamily: 'Nunito',
-                                fontWeight: FontWeight.w700,
-                                color: textPrimary,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              'Explore engaging music and songs that bring joy and inspiration.',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: 'Nunito',
-                                fontWeight: FontWeight.w500,
-                                color: isLight
-                                    ? Color.fromRGBO(50, 50, 50, 1.0)
-                                    : Color.fromRGBO(200, 200, 200, 1.0),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 125),
-
-                    Text(
-                      '"There is a crack in everything.\nThat\'s how the light gets in" - Leonard Cohen',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: textPrimary,
-                        fontFamily: 'Nunito',
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic,
-                        shadows:
-                            textPrimary.withOpacity(0.5) !=
-                                const Color.fromARGB(0, 47, 81, 54)
-                            ? [
-                                Shadow(
-                                  offset: const Offset(0, 1),
-                                  blurRadius: 2,
-                                  color: textPrimary.withOpacity(0.5),
-                                ),
-                              ]
-                            : null,
-                      ),
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
             ],
           ),
@@ -312,7 +336,6 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                     ),
                     label: Text(
                       'Profile',
-
                       style: TextStyle(
                         color: isLight
                             ? Color.fromARGB(255, 16, 100, 56)

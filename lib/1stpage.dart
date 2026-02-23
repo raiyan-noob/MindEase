@@ -53,168 +53,233 @@ class _MyAppState extends State<MyAppFirst> {
                 ),
               ),
 
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 40),
-
-                    Text(
-                      'Hello, Raiyan!',
-                      style: TextStyle(
-                        color: isLight
-                            ? Color.fromARGB(255, 16, 100, 56).withOpacity(
-                                0.8 + (math.Random().nextDouble() * 0.2),
-                              )
-                            : Color.fromARGB(255, 184, 220, 193).withOpacity(
-                                0.8 + (math.Random().nextDouble() * 0.2),
-                              ),
-                        fontFamily: 'Titillium Web',
-                        textBaseline: TextBaseline.ideographic,
-                        fontSize: 25,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.bold,
-                        decorationStyle: TextDecorationStyle.wavy,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    Text(
-                      'How are you feeling today?',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: isLight
-                            ? Color.fromARGB(255, 16, 100, 56).withOpacity(
-                                0.8 + (math.Random().nextDouble() * 0.2),
-                              )
-                            : Color.fromARGB(255, 184, 220, 193).withOpacity(
-                                0.8 + (math.Random().nextDouble() * 0.2),
-                              ),
-                        fontFamily: 'Nunito',
-                        textBaseline: TextBaseline.alphabetic,
-                        fontSize: 50,
-
-                        fontWeight: FontWeight.bold,
-                        decorationStyle: TextDecorationStyle.wavy,
-                      ),
-                    ),
-                    const SizedBox(height: 25),
-                    Container(
-                      width: 300,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: isLight
-                            ? Color.fromARGB(255, 255, 255, 255)
-                            : Color.fromARGB(255, 3, 2, 2),
-
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(
-                          color: isLight
-                              ? Color.fromARGB(255, 16, 100, 56)
-                              : Color.fromARGB(255, 184, 220, 193),
-                          width: 2,
+              SafeArea(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return SingleChildScrollView(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: constraints.maxHeight,
                         ),
-                      ),
-                      child: DropdownButton<String>(
-                        value: selectedFeeling,
-                        hint: Text(
-                          'Dive into your feelings',
+                        child: IntrinsicHeight(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 40),
 
-                          style: TextStyle(
-                            color: isLight
-                                ? Color.fromARGB(255, 16, 100, 56).withOpacity(
-                                    0.8 + (math.Random().nextDouble() * 0.2),
-                                  )
-                                : Color.fromARGB(
-                                    255,
-                                    184,
-                                    220,
-                                    193,
-                                  ).withOpacity(
-                                    0.8 + (math.Random().nextDouble() * 0.2),
-                                  ),
-                            fontFamily: 'Titillium Web',
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        iconDisabledColor: isLight
-                            ? Color.fromARGB(255, 16, 100, 56)
-                            : Color.fromARGB(255, 184, 220, 193),
-                        dropdownColor: isLight
-                            ? Color.fromARGB(255, 255, 255, 255)
-                            : Color.fromARGB(255, 3, 2, 2),
-                        iconEnabledColor: isLight
-                            ? Color.fromARGB(255, 16, 100, 56)
-                            : Color.fromARGB(255, 184, 220, 193),
-                        underline: SizedBox.shrink(),
-                        borderRadius: BorderRadius.circular(15),
-
-                        items:
-                            <String>[
-                              'Sad',
-                              'Depressed',
-                              'Anxious',
-                              'Frustrated',
-                              'Angry',
-                              'Hopeless',
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                  style: TextStyle(
+                              Text(
+                                'Hello, Raiyan!',
+                                style: TextStyle(
+                                  color: isLight
+                                      ? Color.fromARGB(
+                                          255,
+                                          16,
+                                          100,
+                                          56,
+                                        ).withOpacity(
+                                          0.8 +
+                                              (math.Random().nextDouble() *
+                                                  0.2),
+                                        )
+                                      : Color.fromARGB(
+                                          255,
+                                          184,
+                                          220,
+                                          193,
+                                        ).withOpacity(
+                                          0.8 +
+                                              (math.Random().nextDouble() *
+                                                  0.2),
+                                        ),
+                                  fontFamily: 'Titillium Web',
+                                  textBaseline: TextBaseline.ideographic,
+                                  fontSize: 25,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold,
+                                  decorationStyle: TextDecorationStyle.wavy,
+                                ),
+                              ),
+                              const SizedBox(height: 15),
+                              Text(
+                                'How are you feeling today?',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: isLight
+                                      ? Color.fromARGB(
+                                          255,
+                                          16,
+                                          100,
+                                          56,
+                                        ).withOpacity(
+                                          0.8 +
+                                              (math.Random().nextDouble() *
+                                                  0.2),
+                                        )
+                                      : Color.fromARGB(
+                                          255,
+                                          184,
+                                          220,
+                                          193,
+                                        ).withOpacity(
+                                          0.8 +
+                                              (math.Random().nextDouble() *
+                                                  0.2),
+                                        ),
+                                  fontFamily: 'Nunito',
+                                  textBaseline: TextBaseline.alphabetic,
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.bold,
+                                  decorationStyle: TextDecorationStyle.wavy,
+                                ),
+                              ),
+                              const SizedBox(height: 25),
+                              Container(
+                                width: 300,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: isLight
+                                      ? Color.fromARGB(255, 255, 255, 255)
+                                      : Color.fromARGB(255, 3, 2, 2),
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
                                     color: isLight
                                         ? Color.fromARGB(255, 16, 100, 56)
                                         : Color.fromARGB(255, 184, 220, 193),
-                                    fontFamily: 'Titillium Web',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                                    width: 2,
                                   ),
                                 ),
-                              );
-                            }).toList(),
-                        onChanged: (String? newValue) async {
-                          setState(() {
-                            selectedFeeling = newValue;
-                          });
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SecondPage(
-                                feeling: selectedFeeling!,
-                                isLightNotifier: widget.isLightNotifier,
-                                onThemeChanged: widget.onThemeChanged,
+                                child: DropdownButton<String>(
+                                  value: selectedFeeling,
+                                  hint: Text(
+                                    'Dive into your feelings',
+                                    style: TextStyle(
+                                      color: isLight
+                                          ? Color.fromARGB(
+                                              255,
+                                              16,
+                                              100,
+                                              56,
+                                            ).withOpacity(
+                                              0.8 +
+                                                  (math.Random().nextDouble() *
+                                                      0.2),
+                                            )
+                                          : Color.fromARGB(
+                                              255,
+                                              184,
+                                              220,
+                                              193,
+                                            ).withOpacity(
+                                              0.8 +
+                                                  (math.Random().nextDouble() *
+                                                      0.2),
+                                            ),
+                                      fontFamily: 'Titillium Web',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  iconDisabledColor: isLight
+                                      ? Color.fromARGB(255, 16, 100, 56)
+                                      : Color.fromARGB(255, 184, 220, 193),
+                                  dropdownColor: isLight
+                                      ? Color.fromARGB(255, 255, 255, 255)
+                                      : Color.fromARGB(255, 3, 2, 2),
+                                  iconEnabledColor: isLight
+                                      ? Color.fromARGB(255, 16, 100, 56)
+                                      : Color.fromARGB(255, 184, 220, 193),
+                                  underline: SizedBox.shrink(),
+                                  borderRadius: BorderRadius.circular(15),
+                                  items:
+                                      <String>[
+                                        'Sad',
+                                        'Depressed',
+                                        'Anxious',
+                                        'Frustrated',
+                                        'Angry',
+                                        'Hopeless',
+                                      ].map<DropdownMenuItem<String>>((
+                                        String value,
+                                      ) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(
+                                            value,
+                                            style: TextStyle(
+                                              color: isLight
+                                                  ? Color.fromARGB(
+                                                      255,
+                                                      16,
+                                                      100,
+                                                      56,
+                                                    )
+                                                  : Color.fromARGB(
+                                                      255,
+                                                      184,
+                                                      220,
+                                                      193,
+                                                    ),
+                                              fontFamily: 'Titillium Web',
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        );
+                                      }).toList(),
+                                  onChanged: (String? newValue) async {
+                                    setState(() {
+                                      selectedFeeling = newValue;
+                                    });
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SecondPage(
+                                          feeling: selectedFeeling!,
+                                          isLightNotifier:
+                                              widget.isLightNotifier,
+                                          onThemeChanged: widget.onThemeChanged,
+                                        ),
+                                      ),
+                                    );
+                                    setState(() {
+                                      selectedFeeling = null;
+                                    });
+                                  },
+                                  isExpanded: true,
+                                ),
                               ),
-                            ),
-                          );
-                          setState(() {
-                            selectedFeeling = null;
-                          });
-                        },
-                        isExpanded: true,
-                      ),
-                    ),
-                    const SizedBox(height: 425),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const SizedBox(width: 20),
-                        Text(
-                          '"Even in the darkest moments, light exists\n if you have faith to see it" - Dean Koontz',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            color: isLight
-                                ? Color.fromARGB(255, 16, 100, 56)
-                                : Color.fromARGB(255, 184, 220, 193),
-                            fontFamily: 'Nunito',
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.italic,
+
+                              
+                              const Spacer(),
+
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const SizedBox(width: 20),
+                                  Text(
+                                    '"Even in the darkest moments, light exists\n if you have faith to see it" - Dean Koontz',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color: isLight
+                                          ? Color.fromARGB(255, 16, 100, 56)
+                                          : Color.fromARGB(255, 184, 220, 193),
+                                      fontFamily: 'Nunito',
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
