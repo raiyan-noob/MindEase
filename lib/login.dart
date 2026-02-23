@@ -80,6 +80,23 @@ class _LoginPageState extends State<LoginPage>{
 
             const SizedBox(height: 20),
 
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Don't have an account?"),
+                const SizedBox(width: 5),
+                TextButton(
+                    onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage()));
+                }, child: const Text("Sign Up")
+                )
+              ],
+            ),
+
+
+            const SizedBox(height: 20),
+
             //mesg box
 
             Text(
@@ -88,7 +105,9 @@ class _LoginPageState extends State<LoginPage>{
                 color: Colors.deepOrange,
                 fontSize: 16,
               ),
-            )
+            ),
+
+
           ],
         ),
       ),

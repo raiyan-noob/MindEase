@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splash_design/1stpage.dart';
+import 'package:splash_design/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +24,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyAppFirst(isLightNotifier: isLight, onThemeChanged: _setLight),
+      // home: MyAppFirst(isLightNotifier: isLight, onThemeChanged: _setLight),
+      home: LoginPage(),
     );
   }
 }
