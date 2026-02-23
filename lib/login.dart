@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:splash_design/1stpage.dart';
+import 'package:splash_design/sign.dart';
 
 class LoginPage extends StatefulWidget{
   const LoginPage({super.key});
@@ -9,6 +11,11 @@ class LoginPage extends StatefulWidget{
 }
 
 class _LoginPageState extends State<LoginPage>{
+  final ValueNotifier<bool> isLight = ValueNotifier<bool>(true);
+
+  void _setLight(bool value) {
+    isLight.value = value;
+  }
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -23,16 +30,28 @@ class _LoginPageState extends State<LoginPage>{
       setState(() {
         message = "Please fill all fields";
       });
-    }else if (email == "admin@gmail.com" && pass == "1234") {
-      setState(() {
-        message = "Login Successful!";
-      });
     }
+    // else if (email == "admin@gmail.com" && pass == "1234") {
+    //   setState(() {
+    //     message = "Login Successful!";
+    //   });
+    //
+    //     Navigator.push(context, MaterialPageRoute(builder: (context) => MyAppFirst(isLightNotifier: isLight, onThemeChanged: _setLight)));
+    // }
     else {
       setState(() {
-        message = "Invalid email or password";
+        message = "Login Successful!"; //for development purposes no checking of email and pass
       });
+      email = "";
+      pass = "";
+      Navigator.push(context, MaterialPageRoute(builder: (context) => MyAppFirst(isLightNotifier: isLight, onThemeChanged: _setLight)));
+      message = "";
     }
+    // else {
+    //   setState(() {
+    //     message = "Invalid email or password";
+    //   });
+    // }
   }
 
   @override
@@ -97,7 +116,7 @@ class _LoginPageState extends State<LoginPage>{
 
             const SizedBox(height: 20),
 
-            //mesg box
+            //message box
 
             Text(
               message,
