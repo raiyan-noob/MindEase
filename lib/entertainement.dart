@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:splash_design/readrel.dart';
-import 'videorel.dart';
+import 'songent.dart';
+import 'movent.dart';
 
 Route<dynamic> _fadePageRoute(Widget page) {
   return PageRouteBuilder(
@@ -25,12 +25,12 @@ Route<dynamic> _fadePageRoute(Widget page) {
   );
 }
 
-class ReligionPage extends StatefulWidget {
+class EntertainmentPage extends StatefulWidget {
   final String feeling;
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
 
-  const ReligionPage({
+  const EntertainmentPage({
     Key? key,
     required this.feeling,
     required this.isLightNotifier,
@@ -38,10 +38,10 @@ class ReligionPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ReligionPage> createState() => _ReligionPageState();
+  State<EntertainmentPage> createState() => _EntertainmentPageState();
 }
 
-class _ReligionPageState extends State<ReligionPage> {
+class _EntertainmentPageState extends State<EntertainmentPage> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
@@ -75,7 +75,7 @@ class _ReligionPageState extends State<ReligionPage> {
             children: [
               Positioned.fill(
                 child: Image.asset(
-                  isLight ? 'assets/relbg.jpg' : 'assets/reld.jpg',
+                  isLight ? 'assets/enwbg.jpg' : 'assets/enbbg.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -84,9 +84,9 @@ class _ReligionPageState extends State<ReligionPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 260),
+                    const SizedBox(height: 240),
                     Text(
-                      'Sometimes religion can be\n the best way to be healed,\n go through how you want to heal\n yourself.',
+                      'Entertainment can be\n a wonderful way to unwind,\n go through what brings you joy\n and eases your mind.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20,
@@ -107,20 +107,21 @@ class _ReligionPageState extends State<ReligionPage> {
                       ),
                     ),
 
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 15),
 
                     Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 30,
-                        vertical: 12,
+                        horizontal: 45,
+                        vertical: 6,
                       ),
+                      margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                             context,
                             _fadePageRoute(
-                              VideoRelPage(
-                                selection: 'Video',
+                              MovieEntPage(
+                                selection: 'Movie',
                                 feeling: widget.feeling,
                                 isLightNotifier: widget.isLightNotifier,
                                 onThemeChanged: widget.onThemeChanged,
@@ -141,7 +142,7 @@ class _ReligionPageState extends State<ReligionPage> {
                               : Color.fromARGB(255, 41, 46, 42),
                           padding: EdgeInsets.symmetric(
                             horizontal: 20,
-                            vertical: 35,
+                            vertical: 20,
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25),
@@ -151,7 +152,7 @@ class _ReligionPageState extends State<ReligionPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '▶ Watch or Listen',
+                              '🎬 Movies & Videos',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontFamily: 'Nunito',
@@ -161,7 +162,7 @@ class _ReligionPageState extends State<ReligionPage> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Connect your inner self by watching or listening to spiritual contents that resonates with you.',
+                              'Connect with entertaining content that brings joy and light to your day.',
                               style: TextStyle(
                                 fontSize: 14,
                                 fontFamily: 'Nunito',
@@ -176,20 +177,21 @@ class _ReligionPageState extends State<ReligionPage> {
                       ),
                     ),
 
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 20),
 
                     Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 40,
-                        vertical: 12,
+                        horizontal: 65,
+                        vertical: 6,
                       ),
+                      margin: EdgeInsets.fromLTRB(10, 0, 0, 90),
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                             context,
                             _fadePageRoute(
-                              ReadRelPage(
-                                selection: 'Read',
+                              SongEntPage(
+                                selection: 'Song',
                                 feeling: widget.feeling,
                                 isLightNotifier: widget.isLightNotifier,
                                 onThemeChanged: widget.onThemeChanged,
@@ -210,7 +212,7 @@ class _ReligionPageState extends State<ReligionPage> {
                               : Color.fromARGB(255, 41, 46, 42),
                           padding: EdgeInsets.symmetric(
                             horizontal: 20,
-                            vertical: 35,
+                            vertical: 20,
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -220,7 +222,7 @@ class _ReligionPageState extends State<ReligionPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '📖 Read',
+                              '🎵 Music & Songs',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontFamily: 'Nunito',
@@ -230,7 +232,7 @@ class _ReligionPageState extends State<ReligionPage> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Find your answer through the verses of spiritual books',
+                              'Explore engaging music and songs that bring joy and inspiration.',
                               style: TextStyle(
                                 fontSize: 14,
                                 fontFamily: 'Nunito',
@@ -248,7 +250,7 @@ class _ReligionPageState extends State<ReligionPage> {
                     const SizedBox(height: 125),
 
                     Text(
-                      '"Surely with hardship comes ease"\n- Al-Qur\'an 94:5',
+                      '"There is a crack in everything.\nThat\'s how the light gets in" - Leonard Cohen',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: textPrimary,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '3rdpage.dart';
+import 'religionpage.dart';
+import 'entertainement.dart';
 
 class SecondPage extends StatefulWidget {
   final String feeling;
@@ -108,8 +109,7 @@ class _SecondPageState extends State<SecondPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ThirdPage(
-                              selection: 'Religion',
+                            builder: (context) => ReligionPage(
                               feeling: widget.feeling,
                               isLightNotifier: widget.isLightNotifier,
                               onThemeChanged: widget.onThemeChanged,
@@ -161,8 +161,7 @@ class _SecondPageState extends State<SecondPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ThirdPage(
-                              selection: 'Entertainment',
+                            builder: (context) => EntertainmentPage(
                               feeling: widget.feeling,
                               isLightNotifier: widget.isLightNotifier,
                               onThemeChanged: widget.onThemeChanged,
@@ -219,8 +218,7 @@ class _SecondPageState extends State<SecondPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ThirdPage(
-                              selection: 'Articles & Documentaries',
+                            builder: (context) => EntertainmentPage(
                               feeling: widget.feeling,
                               isLightNotifier: widget.isLightNotifier,
                               onThemeChanged: widget.onThemeChanged,
@@ -272,8 +270,7 @@ class _SecondPageState extends State<SecondPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ThirdPage(
-                              selection: 'Literature',
+                            builder: (context) => EntertainmentPage(
                               feeling: widget.feeling,
                               isLightNotifier: widget.isLightNotifier,
                               onThemeChanged: widget.onThemeChanged,
