@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'songent.dart';
-import 'movent.dart';
+import 'litnov.dart';
+import 'litpo.dart';
 
 Route<dynamic> _fadePageRoute(Widget page) {
   return PageRouteBuilder(
@@ -25,12 +25,12 @@ Route<dynamic> _fadePageRoute(Widget page) {
   );
 }
 
-class EntertainmentPage extends StatefulWidget {
+class LitPage extends StatefulWidget {
   final String feeling;
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
 
-  const EntertainmentPage({
+  const LitPage({
     super.key,
     required this.feeling,
     required this.isLightNotifier,
@@ -38,10 +38,10 @@ class EntertainmentPage extends StatefulWidget {
   });
 
   @override
-  State<EntertainmentPage> createState() => _EntertainmentPageState();
+  State<LitPage> createState() => _LitPageState();
 }
 
-class _EntertainmentPageState extends State<EntertainmentPage> {
+class _LitPageState extends State<LitPage> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
@@ -75,7 +75,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
             children: [
               Positioned.fill(
                 child: Image.asset(
-                  isLight ? 'assets/enwbg.jpg' : 'assets/enbbg.jpg',
+                  isLight ? 'assets/litwbg.jpg' : 'assets/litbbg.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -91,9 +91,9 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 240),
+                            const SizedBox(height: 230),
                             Text(
-                              'Entertainment can be\n a wonderful way to unwind,\n go through what brings you joy\n and eases your mind.',
+                              'Literature can be a powerful\n source of comfort and \nunderstanding during difficult\n times.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 20,
@@ -114,7 +114,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                               ),
                             ),
 
-                            const SizedBox(height: 15),
+                            const SizedBox(height: 20),
 
                             Container(
                               padding: const EdgeInsets.symmetric(
@@ -127,8 +127,8 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                                   Navigator.push(
                                     context,
                                     _fadePageRoute(
-                                      MovieEntPage(
-                                        selection: 'Movie',
+                                      NovelPage(
+                                        selection: 'Novel',
                                         feeling: widget.feeling,
                                         isLightNotifier: widget.isLightNotifier,
                                         onThemeChanged: widget.onThemeChanged,
@@ -159,7 +159,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '🎬 Movies & Videos',
+                                      '📚 Novels & Stories',
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontFamily: 'Nunito',
@@ -169,7 +169,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
-                                      'Connect with entertaining content that brings joy and light to your day.',
+                                      'Discover insightful novels and stories that offer comfort and guidance.',
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontFamily: 'Nunito',
@@ -189,21 +189,20 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                               ),
                             ),
 
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 25),
 
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 65,
+                                horizontal: 55,
                                 vertical: 6,
                               ),
-                              margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
                               child: ElevatedButton(
                                 onPressed: () {
                                   Navigator.push(
                                     context,
                                     _fadePageRoute(
-                                      SongEntPage(
-                                        selection: 'Song',
+                                      PoemPage(
+                                        selection: 'Poem',
                                         feeling: widget.feeling,
                                         isLightNotifier: widget.isLightNotifier,
                                         onThemeChanged: widget.onThemeChanged,
@@ -234,7 +233,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '🎵 Music & Songs',
+                                      '📜 Poems & Quotes',
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontFamily: 'Nunito',
@@ -244,7 +243,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
-                                      'Explore engaging music and songs that bring joy and inspiration.',
+                                      'Explore poems and quotes that offer comfort and inspiration.',
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontFamily: 'Nunito',
@@ -269,7 +268,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 20),
                               child: Text(
-                                '"There is a crack in everything.\nThat\'s how the light gets in" - Leonard Cohen',
+                                '"Even the darkest night will end \nand the sun will rise." - Victor Hugo',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: textPrimary,

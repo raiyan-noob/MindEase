@@ -20,7 +20,8 @@ class BlogPage extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
 
-  BlogPage({
+  const BlogPage({
+    super.key,
     required this.selection,
     required this.feeling,
     required this.isLightNotifier,

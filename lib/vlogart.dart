@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 
-class VideoData {
+class VlogData {
   final String title;
   final String description;
   final String thumbnailUrl; // URL or asset path
-  final String videoUrl;
-  // true for assets, false for URLs
+  final String bookUrl;
 
-  VideoData({
+  VlogData({
     required this.title,
     required this.description,
     required this.thumbnailUrl,
-    required this.videoUrl,
+    required this.bookUrl,
   });
 }
 
-class VideoRelPage extends StatefulWidget {
+class VlogPage extends StatefulWidget {
   final String selection;
   final String feeling;
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
 
-  const VideoRelPage({
+  const VlogPage({
     super.key,
     required this.selection,
     required this.feeling,
@@ -30,69 +29,103 @@ class VideoRelPage extends StatefulWidget {
   });
 
   @override
-  State<VideoRelPage> createState() => _VideoRelPageState();
+  State<VlogPage> createState() => _VlogPageState();
 }
 
-class _VideoRelPageState extends State<VideoRelPage> {
-  List<VideoData> videos = [
-    VideoData(
-      title: 'Peaceful Islamic Recitation',
+class _VlogPageState extends State<VlogPage> {
+  List<VlogData> vlogs = [
+    VlogData(
+      title: 'What Depression Feels Like',
       description:
-          'Listen to the beautiful recitation of Quran verses that bring peace and tranquility to your heart.',
+          'A raw and honest vlog by a mental health creator sharing their personal experience living with depression.',
       thumbnailUrl:
-          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.youtube.com/watch?v=XiCrniLQGYc',
     ),
-    VideoData(
-      title: 'Meditation Guide',
+    VlogData(
+      title: 'My Anxiety Story - Anna',
       description:
-          'A guided meditation session to help you calm your mind and find inner peace through breathing techniques.',
+          'Anna opens up about her journey with anxiety, panic attacks, and how she found healthy ways to cope.',
+      thumbnailUrl:
+          'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.youtube.com/watch?v=WWloIAQpMcQ',
+    ),
+    VlogData(
+      title: 'Day in My Life',
+      description:
+          'A calming day-in-my-life vlog focused on self-care routines, therapy sessions, and mental health recovery.',
       thumbnailUrl:
           'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      bookUrl: 'https://www.youtube.com/watch?v=4q1dgn_C0AU',
     ),
-    VideoData(
-      title: 'Spiritual Healing Music',
+
+    VlogData(
+      title: 'The Mind Explained - Netflix',
       description:
-          'Immerse yourself in soothing spiritual music designed to heal your soul and uplift your spirit.',
+          'A fascinating Netflix documentary series exploring anxiety, mindfulness, memory, and how our brains work.',
       thumbnailUrl:
-          'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.youtube.com/watch?v=KNjMq4mS6fQ',
     ),
-    VideoData(
-      title: 'Quran Reading - Al-Baqarah',
+    VlogData(
+      title: 'The Power of the Mind',
       description:
-          'Complete recitation of Surah Al-Baqarah with clear pronunciation and spiritual reflection.',
+          'A powerful documentary exploring the connection between mind, body, and spirit in the healing process.',
       thumbnailUrl:
-          'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://images.unsplash.com/photo-1532798442725-41036acc7489?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.youtube.com/watch?v=gJo81_JfsSg',
     ),
-    VideoData(
-      title: 'Morning Affirmations',
+    VlogData(
+      title: 'What Makes Us Happy?',
       description:
-          'Start your day with positive affirmations and spiritual motivation to face challenges with strength.',
+          'A documentary traveling the world to discover the secrets of happiness from neuroscience to real-life stories.',
       thumbnailUrl:
-          'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.youtube.com/watch?v=krq9GcFaRSA',
     ),
-    VideoData(
-      title: 'Islamic Lectures',
+    VlogData(
+      title: 'My Year of Living Mindfully',
       description:
-          'Inspiring lectures by renowned Islamic scholars discussing spirituality and personal growth.',
+          'A filmmaker documents his year-long experiment with daily meditation and its impact on his mental health.',
       thumbnailUrl:
-          'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.youtube.com/watch?v=AqBbXHf_bOc',
     ),
-    VideoData(
-      title: 'Quran Reading',
+
+    VlogData(
+      title: 'How Therapy Works',
       description:
-          'Evening recitation session perfect for reflecting on the day and seeking guidance.',
+          'A mental health professional explains different therapy types like CBT, DBT, and EMDR in simple terms.',
       thumbnailUrl:
-          'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.youtube.com/watch?v=g-i6QMvIAA0',
+    ),
+    VlogData(
+      title: 'Burnout Is Real',
+      description:
+          'A personal vlog documenting the signs of burnout and the steps taken to recover and rebuild balance.',
+      thumbnailUrl:
+          'https://images.unsplash.com/photo-1508963493744-76fce69379c0?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.youtube.com/watch?v=WR03vbN2LOY',
+    ),
+    VlogData(
+      title: 'Living with PTSD',
+      description:
+          'A military veteran shares their emotional journey of living with PTSD and finding hope through community.',
+      thumbnailUrl:
+          'https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.youtube.com/watch?v=b1BtagDjafI',
+    ),
+    VlogData(
+      title: 'Free from Social Anxiety',
+      description:
+          'A heartfelt vlog about the daily struggles of social anxiety and practical steps to overcome it gradually.',
+      thumbnailUrl:
+          'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.youtube.com/watch?v=8tRoIgNZ_SU',
     ),
   ];
-  Widget _buildVideoContainer(VideoData video, Color accent, bool isLight) {
+  Widget _buildVlogContainer(VlogData vlog, Color accent, bool isLight) {
     return Container(
       height: 120,
       width: double.infinity,
@@ -116,7 +149,7 @@ class _VideoRelPageState extends State<VideoRelPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GestureDetector(
-            onTap: () => _launchURL(video.videoUrl),
+            onTap: () => _launchURL(vlog.bookUrl),
             child: Container(
               width: 88,
               height: 67,
@@ -135,12 +168,16 @@ class _VideoRelPageState extends State<VideoRelPage> {
                 alignment: Alignment.center,
                 children: [
                   Image.network(
-                    video.thumbnailUrl,
+                    vlog.thumbnailUrl,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
                         color: accent.withOpacity(0.2),
-                        child: Icon(Icons.play_circle, color: accent, size: 40),
+                        child: Icon(
+                          Icons.play_circle_filled_rounded,
+                          color: accent,
+                          size: 40,
+                        ),
                       );
                     },
                   ),
@@ -152,7 +189,7 @@ class _VideoRelPageState extends State<VideoRelPage> {
                     ),
                     padding: const EdgeInsets.all(8),
                     child: Icon(
-                      Icons.play_arrow,
+                      Icons.play_circle_fill_rounded,
                       color: Colors.white,
                       size: 24,
                     ),
@@ -170,7 +207,7 @@ class _VideoRelPageState extends State<VideoRelPage> {
               children: [
                 GestureDetector(
                   child: Text(
-                    video.title,
+                    vlog.title,
                     style: TextStyle(
                       fontSize: 18,
                       fontFamily: 'Nunito',
@@ -184,7 +221,7 @@ class _VideoRelPageState extends State<VideoRelPage> {
                 const SizedBox(height: 8),
 
                 Text(
-                  video.description,
+                  vlog.description,
                   style: TextStyle(
                     fontSize: 13,
                     fontFamily: 'Nunito',
@@ -208,8 +245,8 @@ class _VideoRelPageState extends State<VideoRelPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Text('Open Video'),
-        content: Text('Would you like to open this video?\n\n$url'),
+        title: const Text('Open Page'),
+        content: Text('Would you like to open this page?\n\n$url'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -274,13 +311,13 @@ class _VideoRelPageState extends State<VideoRelPage> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
-                '▶ Watch or Listen',
+                '🎥 Vlogs & Documentaries',
                 style: TextStyle(
                   color: isLight
                       ? Color.fromRGBO(16, 100, 56, 1.0)
                       : Color.fromRGBO(184, 220, 193, 1.0),
                   fontFamily: 'Nunito',
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -291,10 +328,10 @@ class _VideoRelPageState extends State<VideoRelPage> {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                ...videos.map(
-                  (video) => Padding(
+                ...vlogs.map(
+                  (vlog) => Padding(
                     padding: const EdgeInsets.only(bottom: 20),
-                    child: _buildVideoContainer(video, accent, isLight),
+                    child: _buildVlogContainer(vlog, accent, isLight),
                   ),
                 ),
                 const SizedBox(height: 40),

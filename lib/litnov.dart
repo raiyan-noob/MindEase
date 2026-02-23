@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 
-class VideoData {
+class NovelData {
   final String title;
   final String description;
   final String thumbnailUrl; // URL or asset path
-  final String videoUrl;
-  // true for assets, false for URLs
+  final String bookUrl;
 
-  VideoData({
+  NovelData({
     required this.title,
     required this.description,
     required this.thumbnailUrl,
-    required this.videoUrl,
+    required this.bookUrl,
   });
 }
 
-class VideoRelPage extends StatefulWidget {
+class NovelPage extends StatefulWidget {
   final String selection;
   final String feeling;
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
 
-  const VideoRelPage({
+  const NovelPage({
     super.key,
     required this.selection,
     required this.feeling,
@@ -30,71 +29,140 @@ class VideoRelPage extends StatefulWidget {
   });
 
   @override
-  State<VideoRelPage> createState() => _VideoRelPageState();
+  State<NovelPage> createState() => _NovelPageState();
 }
 
-class _VideoRelPageState extends State<VideoRelPage> {
-  List<VideoData> videos = [
-    VideoData(
-      title: 'Peaceful Islamic Recitation',
+class _NovelPageState extends State<NovelPage> {
+  List<NovelData> novels = [
+    NovelData(
+      title: 'The Bell Jar - Sylvia Plath',
       description:
-          'Listen to the beautiful recitation of Quran verses that bring peace and tranquility to your heart.',
+          'A powerful semi-autobiographical novel about a young woman\'s descent into depression and her journey toward recovery.',
       thumbnailUrl:
-          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.goodreads.com/book/show/6514.The_Bell_Jar',
     ),
-    VideoData(
-      title: 'Meditation Guide',
+    NovelData(
+      title: 'It\'s Kind of a Funny Story - Ned Vizzini',
       description:
-          'A guided meditation session to help you calm your mind and find inner peace through breathing techniques.',
+          'A heartfelt and humorous novel about a teen who checks himself into a psychiatric hospital and discovers hope.',
       thumbnailUrl:
-          'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=300&fit=crop',
+      bookUrl:
+          'https://www.goodreads.com/book/show/248704.It_s_Kind_of_a_Funny_Story',
     ),
-    VideoData(
-      title: 'Spiritual Healing Music',
+    NovelData(
+      title: 'The Perks of Being a Wallflower',
       description:
-          'Immerse yourself in soothing spiritual music designed to heal your soul and uplift your spirit.',
+          'A coming-of-age story exploring trauma, anxiety, and the healing power of friendship through heartfelt letters.',
       thumbnailUrl:
-          'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
+      bookUrl:
+          'https://www.goodreads.com/book/show/22628.The_Perks_of_Being_a_Wallflower',
     ),
-    VideoData(
-      title: 'Quran Reading - Al-Baqarah',
+
+    NovelData(
+      title: 'Eleanor Oliphant Is Completely Fine',
       description:
-          'Complete recitation of Surah Al-Baqarah with clear pronunciation and spiritual reflection.',
+          'A beautiful story of a socially awkward woman who learns that connection and kindness can heal deep wounds.',
       thumbnailUrl:
-          'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400&h=300&fit=crop',
+      bookUrl:
+          'https://www.goodreads.com/book/show/31434883-eleanor-oliphant-is-completely-fine',
     ),
-    VideoData(
-      title: 'Morning Affirmations',
+    NovelData(
+      title: 'All the Bright Places - Jennifer Niven',
       description:
-          'Start your day with positive affirmations and spiritual motivation to face challenges with strength.',
+          'A deeply moving love story between two teens who struggle with mental illness and help each other find reasons to live.',
       thumbnailUrl:
-          'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=400&h=300&fit=crop',
+      bookUrl:
+          'https://www.goodreads.com/book/show/18460392-all-the-bright-places',
     ),
-    VideoData(
-      title: 'Islamic Lectures',
+    NovelData(
+      title: 'Turtles All the Way Down - John Green',
       description:
-          'Inspiring lectures by renowned Islamic scholars discussing spirituality and personal growth.',
+          'A gripping novel about living with OCD, spiraling thoughts, and finding your identity beyond your mental illness.',
       thumbnailUrl:
-          'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=300&fit=crop',
+      bookUrl:
+          'https://www.goodreads.com/book/show/35504431-turtles-all-the-way-down',
     ),
-    VideoData(
-      title: 'Quran Reading',
+
+    NovelData(
+      title: 'The Midnight Library - Matt Haig',
       description:
-          'Evening recitation session perfect for reflecting on the day and seeking guidance.',
+          'A magical novel about a woman who gets to explore alternate lives she could have lived, discovering what truly matters.',
       thumbnailUrl:
-          'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop',
+      bookUrl:
+          'https://www.goodreads.com/book/show/52578297-the-midnight-library',
+    ),
+    NovelData(
+      title: 'Reasons to Stay Alive - Matt Haig',
+      description:
+          'A memoir-style novel blending fiction and real life about overcoming depression and finding reasons to keep going.',
+      thumbnailUrl:
+          'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+      bookUrl:
+          'https://www.goodreads.com/book/show/25733573-reasons-to-stay-alive',
+    ),
+    NovelData(
+      title: 'A Man Called Ove - Fredrik Backman',
+      description:
+          'A heartwarming tale of a grumpy old man who rediscovers the joy of living through unexpected friendships.',
+      thumbnailUrl:
+          'https://images.unsplash.com/photo-1519682577862-22b62b24e493?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.goodreads.com/book/show/18774964-a-man-called-ove',
+    ),
+
+    NovelData(
+      title: 'Challenger Deep - Neal Shusterman',
+      description:
+          'An award-winning novel about a teen navigating schizophrenia, told through vivid imagery and dual narratives.',
+      thumbnailUrl:
+          'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.goodreads.com/book/show/18075234-challenger-deep',
+    ),
+    NovelData(
+      title: 'Highly Illogical Behavior - John Corey Whaley',
+      description:
+          'A quirky novel about a teen with agoraphobia and the unexpected friendship that challenges his comfort zone.',
+      thumbnailUrl:
+          'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop',
+      bookUrl:
+          'https://www.goodreads.com/book/show/26109391-highly-illogical-behavior',
+    ),
+    NovelData(
+      title: 'Girl in Pieces - Kathleen Glasgow',
+      description:
+          'A raw and emotional story of a young girl recovering from self-harm and rebuilding her life through art.',
+      thumbnailUrl:
+          'https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.goodreads.com/book/show/29236380-girl-in-pieces',
+    ),
+
+    NovelData(
+      title: 'Norwegian Wood - Haruki Murakami',
+      description:
+          'A beautifully written story about love, loss, and mental health set against the backdrop of 1960s Tokyo.',
+      thumbnailUrl:
+          'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
+      bookUrl: 'https://www.goodreads.com/book/show/11297.Norwegian_Wood',
+    ),
+    NovelData(
+      title: 'The Catcher in the Rye - J.D. Salinger',
+      description:
+          'A timeless classic exploring teenage alienation, identity crisis, and the struggle to find meaning in the world.',
+      thumbnailUrl:
+          'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=400&h=300&fit=crop',
+      bookUrl:
+          'https://www.goodreads.com/book/show/5107.The_Catcher_in_the_Rye',
     ),
   ];
-  Widget _buildVideoContainer(VideoData video, Color accent, bool isLight) {
+  Widget _buildNovelContainer(NovelData novel, Color accent, bool isLight) {
     return Container(
-      height: 120,
+      height: 135,
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.all(12),
@@ -116,10 +184,10 @@ class _VideoRelPageState extends State<VideoRelPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GestureDetector(
-            onTap: () => _launchURL(video.videoUrl),
+            onTap: () => _launchURL(novel.bookUrl),
             child: Container(
-              width: 88,
-              height: 67,
+              width: 108,
+              height: 82,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: accent, width: 2),
@@ -135,12 +203,12 @@ class _VideoRelPageState extends State<VideoRelPage> {
                 alignment: Alignment.center,
                 children: [
                   Image.network(
-                    video.thumbnailUrl,
+                    novel.thumbnailUrl,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
                         color: accent.withOpacity(0.2),
-                        child: Icon(Icons.play_circle, color: accent, size: 40),
+                        child: Icon(Icons.book, color: accent, size: 40),
                       );
                     },
                   ),
@@ -151,11 +219,7 @@ class _VideoRelPageState extends State<VideoRelPage> {
                       color: Colors.black.withOpacity(0.4),
                     ),
                     padding: const EdgeInsets.all(8),
-                    child: Icon(
-                      Icons.play_arrow,
-                      color: Colors.white,
-                      size: 24,
-                    ),
+                    child: Icon(Icons.menu_book, color: Colors.white, size: 24),
                   ),
                 ],
               ),
@@ -170,9 +234,9 @@ class _VideoRelPageState extends State<VideoRelPage> {
               children: [
                 GestureDetector(
                   child: Text(
-                    video.title,
+                    novel.title,
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       fontFamily: 'Nunito',
                       fontWeight: FontWeight.bold,
                       color: accent,
@@ -184,9 +248,9 @@ class _VideoRelPageState extends State<VideoRelPage> {
                 const SizedBox(height: 8),
 
                 Text(
-                  video.description,
+                  novel.description,
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 12,
                     fontFamily: 'Nunito',
                     fontWeight: FontWeight.w500,
                     color: isLight
@@ -208,8 +272,8 @@ class _VideoRelPageState extends State<VideoRelPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Text('Open Video'),
-        content: Text('Would you like to open this video?\n\n$url'),
+        title: const Text('Open Page'),
+        content: Text('Would you like to open this page?\n\n$url'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -274,7 +338,7 @@ class _VideoRelPageState extends State<VideoRelPage> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
-                '▶ Watch or Listen',
+                '📚 Novels & Stories',
                 style: TextStyle(
                   color: isLight
                       ? Color.fromRGBO(16, 100, 56, 1.0)
@@ -291,10 +355,10 @@ class _VideoRelPageState extends State<VideoRelPage> {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                ...videos.map(
-                  (video) => Padding(
+                ...novels.map(
+                  (novel) => Padding(
                     padding: const EdgeInsets.only(bottom: 20),
-                    child: _buildVideoContainer(video, accent, isLight),
+                    child: _buildNovelContainer(novel, accent, isLight),
                   ),
                 ),
                 const SizedBox(height: 40),

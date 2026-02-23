@@ -21,7 +21,8 @@ class SongEntPage extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
 
-  SongEntPage({
+  const SongEntPage({
+    super.key,
     required this.selection,
     required this.feeling,
     required this.isLightNotifier,

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:splash_design/login.dart';
 
@@ -10,14 +9,14 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController ageController = TextEditingController();
-  final TextEditingController genderController =  TextEditingController();
-  final TextEditingController passwordController =  TextEditingController();
-  final TextEditingController confirmPasswordController =  TextEditingController();
+  final TextEditingController genderController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   String message = "";
 
@@ -30,148 +29,145 @@ class _SignupPageState extends State<SignupPage> {
     String password = passwordController.text;
     String confirmPassword = confirmPasswordController.text;
 
-    if(fullName.isEmpty || phoneNumber.isEmpty || email.isEmpty
-        || age.isEmpty || gender.isEmpty || password.isEmpty || confirmPassword.isEmpty){
-      setState((){
+    if (fullName.isEmpty ||
+        phoneNumber.isEmpty ||
+        email.isEmpty ||
+        age.isEmpty ||
+        gender.isEmpty ||
+        password.isEmpty ||
+        confirmPassword.isEmpty) {
+      setState(() {
         message = "Please fill all fields";
       });
-    }else if(email == "admin@gmail.com" ){
-      if(password != confirmPassword){
+    } else if (email == "admin@gmail.com") {
+      if (password != confirmPassword) {
         setState(() {
           message = "Passwords do not match";
         });
-      }else {
-      setState(() {
-        message = "Signup Successful!";
-      });
-    }
-  } else {
+      } else {
+        setState(() {
+          message = "Signup Successful!";
+        });
+      }
+    } else {
       setState(() {
         message = "Email already exists";
       });
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Signup"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text("Signup"), centerTitle: true),
       body: Padding(
-          padding: const EdgeInsets.all(20),
-      child:
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          //Full name field
-          TextField(
-            controller: fullNameController,
-            decoration: const InputDecoration(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //Full name field
+            TextField(
+              controller: fullNameController,
+              decoration: const InputDecoration(
                 labelText: "Enter your full name",
-                border: OutlineInputBorder()
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
 
-          const SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-          //Phone number field
-          TextField(
-            controller: phoneNumberController,
-            decoration: const InputDecoration(
+            //Phone number field
+            TextField(
+              controller: phoneNumberController,
+              decoration: const InputDecoration(
                 labelText: "Enter your phone number",
-                border: OutlineInputBorder()
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
 
-          const SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-          //Email field
-          TextField(
-            controller: emailController,
-            decoration: const InputDecoration(
+            //Email field
+            TextField(
+              controller: emailController,
+              decoration: const InputDecoration(
                 labelText: "Enter your email (eg. abc@gmail.com)",
-                border: OutlineInputBorder()
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
 
-          const SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-          //Age field
-          TextField(
-            controller: ageController,
-            decoration: const InputDecoration(
+            //Age field
+            TextField(
+              controller: ageController,
+              decoration: const InputDecoration(
                 labelText: "Enter your age",
-                border: OutlineInputBorder()
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
 
-          const SizedBox(height: 20),
-          //Gender field
-          TextField(
-            controller: genderController,
-            decoration: const InputDecoration(
+            const SizedBox(height: 20),
+            //Gender field
+            TextField(
+              controller: genderController,
+              decoration: const InputDecoration(
                 labelText: "Enter your gender",
-                border: OutlineInputBorder()
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
 
+            const SizedBox(height: 20),
 
-          const SizedBox(height: 20),
-
-          //Password field
-          TextField(
-            controller: passwordController,
-            obscureText: true,
-            decoration: const InputDecoration(
+            //Password field
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: const InputDecoration(
                 labelText: "Enter your password",
-                border: OutlineInputBorder()
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
 
-          const SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-          //Confirm password field
-          TextField(
-            controller: confirmPasswordController,
-            obscureText: true,
-            decoration: const InputDecoration(
+            //Confirm password field
+            TextField(
+              controller: confirmPasswordController,
+              obscureText: true,
+              decoration: const InputDecoration(
                 labelText: "Confirm your password",
-                border: OutlineInputBorder()
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
 
-          const SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-          //Signup button
-          ElevatedButton(
-              onPressed: signup,
-              child: const Text("Signup")
-          ),
+            //Signup button
+            ElevatedButton(onPressed: signup, child: const Text("Signup")),
 
-          const SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-          Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text("Already have an account?"),
                 const SizedBox(width: 5),
 
-              TextButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
-
-              },
-              child: const Text("login."))
-              ]),
-          ]
-      )
-      )
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
+                  },
+                  child: const Text("login."),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
-
-
 }

@@ -31,11 +31,11 @@ class ReligionPage extends StatefulWidget {
   final ValueChanged<bool> onThemeChanged;
 
   const ReligionPage({
-    Key? key,
+    super.key,
     required this.feeling,
     required this.isLightNotifier,
     required this.onThemeChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<ReligionPage> createState() => _ReligionPageState();

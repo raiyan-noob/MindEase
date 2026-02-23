@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:splash_design/Literature.dart';
 import 'religionpage.dart';
 import 'entertainement.dart';
 import 'article.dart';
@@ -8,7 +9,8 @@ class SecondPage extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
 
-  SecondPage({
+  const SecondPage({
+    super.key,
     required this.feeling,
     required this.isLightNotifier,
     required this.onThemeChanged,
@@ -215,10 +217,10 @@ class _SecondPageState extends State<SecondPage> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 60),
+                        const SizedBox(height: 70),
                         Row(
                           children: [
-                            SizedBox(width: 20),
+                            SizedBox(width: 25),
                             ElevatedButton.icon(
                               onPressed: () {
                                 Navigator.push(
@@ -244,8 +246,8 @@ class _SecondPageState extends State<SecondPage> {
                                     ? Color.fromARGB(255, 240, 240, 240)
                                     : Color.fromARGB(255, 41, 46, 42),
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 35,
+                                  horizontal: 17,
+                                  vertical: 23,
                                 ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
@@ -276,7 +278,7 @@ class _SecondPageState extends State<SecondPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => EntertainmentPage(
+                                    builder: (context) => LitPage(
                                       feeling: widget.feeling,
                                       isLightNotifier: widget.isLightNotifier,
                                       onThemeChanged: widget.onThemeChanged,

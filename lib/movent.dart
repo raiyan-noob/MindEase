@@ -20,7 +20,8 @@ class MovieEntPage extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
 
-  MovieEntPage({
+  const MovieEntPage({
+    super.key,
     required this.selection,
     required this.feeling,
     required this.isLightNotifier,

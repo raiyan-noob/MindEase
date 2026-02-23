@@ -21,7 +21,8 @@ class ReadRelPage extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
 
-  ReadRelPage({
+  const ReadRelPage({
+    super.key,
     required this.selection,
     required this.feeling,
     required this.isLightNotifier,

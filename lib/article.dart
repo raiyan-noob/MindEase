@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'blogart.dart';
+import 'vlogart.dart';
 
 Route<dynamic> _fadePageRoute(Widget page) {
   return PageRouteBuilder(
@@ -30,11 +31,11 @@ class ArticlePage extends StatefulWidget {
   final ValueChanged<bool> onThemeChanged;
 
   const ArticlePage({
-    Key? key,
+    super.key,
     required this.feeling,
     required this.isLightNotifier,
     required this.onThemeChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<ArticlePage> createState() => _ArticlePageState();
@@ -200,8 +201,8 @@ class _ArticlePageState extends State<ArticlePage> {
                                   Navigator.push(
                                     context,
                                     _fadePageRoute(
-                                      BlogPage(
-                                        selection: 'Blog',
+                                      VlogPage(
+                                        selection: 'Vlog',
                                         feeling: widget.feeling,
                                         isLightNotifier: widget.isLightNotifier,
                                         onThemeChanged: widget.onThemeChanged,

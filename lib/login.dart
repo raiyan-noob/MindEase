@@ -1,16 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:splash_design/1stpage.dart';
 import 'package:splash_design/sign.dart';
 
-class LoginPage extends StatefulWidget{
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>{
+class _LoginPageState extends State<LoginPage> {
   final ValueNotifier<bool> isLight = ValueNotifier<bool>(true);
 
   void _setLight(bool value) {
@@ -22,11 +21,11 @@ class _LoginPageState extends State<LoginPage>{
 
   String message = "";
 
-  void login(){
+  void login() {
     String email = emailController.text;
     String pass = passwordController.text;
 
-    if(email.isEmpty || pass.isEmpty){
+    if (email.isEmpty || pass.isEmpty) {
       setState(() {
         message = "Please fill all fields";
       });
@@ -40,11 +39,18 @@ class _LoginPageState extends State<LoginPage>{
     // }
     else {
       setState(() {
-        message = "Login Successful!"; //for development purposes no checking of email and pass
+        message =
+            "Login Successful!"; //for development purposes no checking of email and pass
       });
       email = "";
       pass = "";
-      Navigator.push(context, MaterialPageRoute(builder: (context) => MyAppFirst(isLightNotifier: isLight, onThemeChanged: _setLight)));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              MyAppFirst(isLightNotifier: isLight, onThemeChanged: _setLight),
+        ),
+      );
       message = "";
     }
     // else {
@@ -55,12 +61,9 @@ class _LoginPageState extends State<LoginPage>{
   }
 
   @override
-  Widget build (BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Login"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text("Login"), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(20),
 
@@ -72,7 +75,7 @@ class _LoginPageState extends State<LoginPage>{
               controller: emailController,
               decoration: const InputDecoration(
                 labelText: "Enter your email (eg. abc@gmail.com)",
-                border: OutlineInputBorder()
+                border: OutlineInputBorder(),
               ),
             ),
 
@@ -84,21 +87,16 @@ class _LoginPageState extends State<LoginPage>{
               obscureText: true,
               decoration: const InputDecoration(
                 labelText: "Enter your password.",
-                border: OutlineInputBorder()
+                border: OutlineInputBorder(),
               ),
             ),
 
             const SizedBox(height: 20),
 
             //login button
-
-            ElevatedButton(
-                onPressed: login,
-                child: const Text("Login")
-            ),
+            ElevatedButton(onPressed: login, child: const Text("Login")),
 
             const SizedBox(height: 20),
-
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -106,27 +104,24 @@ class _LoginPageState extends State<LoginPage>{
                 const Text("Don't have an account?"),
                 const SizedBox(width: 5),
                 TextButton(
-                    onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage()));
-                }, child: const Text("Sign Up")
-                )
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignupPage()),
+                    );
+                  },
+                  child: const Text("Sign Up"),
+                ),
               ],
             ),
-
 
             const SizedBox(height: 20),
 
             //message box
-
             Text(
               message,
-              style: const TextStyle(
-                color: Colors.deepOrange,
-                fontSize: 16,
-              ),
+              style: const TextStyle(color: Colors.deepOrange, fontSize: 16),
             ),
-
-
           ],
         ),
       ),
