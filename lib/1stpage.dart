@@ -54,7 +54,9 @@ class _MyAppState extends State<MyAppFirst> {
               ),
 
               Center(
-                child: Column(
+
+                child: SingleChildScrollView(
+                  child:Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const SizedBox(height: 40),
@@ -215,6 +217,8 @@ class _MyAppState extends State<MyAppFirst> {
                       ],
                     ),
                   ],
+
+                ),
                 ),
               ),
             ],

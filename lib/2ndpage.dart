@@ -129,7 +129,7 @@ class _SecondPageState extends State<SecondPage> {
                             ? Color.fromARGB(255, 240, 240, 240)
                             : Color.fromARGB(255, 41, 46, 42),
                         padding: EdgeInsets.symmetric(
-                          horizontal: 20,
+                          horizontal: 10,
                           vertical: 35,
                         ),
                         shape: RoundedRectangleBorder(
@@ -181,7 +181,7 @@ class _SecondPageState extends State<SecondPage> {
                             ? Color.fromARGB(255, 240, 240, 240)
                             : Color.fromARGB(255, 41, 46, 42),
                         padding: EdgeInsets.symmetric(
-                          horizontal: 20,
+                          horizontal: 10,
                           vertical: 38,
                         ),
                         shape: RoundedRectangleBorder(
@@ -238,7 +238,7 @@ class _SecondPageState extends State<SecondPage> {
                             ? Color.fromARGB(255, 240, 240, 240)
                             : Color.fromARGB(255, 41, 46, 42),
                         padding: EdgeInsets.symmetric(
-                          horizontal: 20,
+                          horizontal: 10,
                           vertical: 35,
                         ),
                         shape: RoundedRectangleBorder(
@@ -290,7 +290,7 @@ class _SecondPageState extends State<SecondPage> {
                             ? Color.fromARGB(255, 240, 240, 240)
                             : Color.fromARGB(255, 41, 46, 42),
                         padding: EdgeInsets.symmetric(
-                          horizontal: 20,
+                          horizontal: 10,
                           vertical: 38,
                         ),
                         shape: RoundedRectangleBorder(
