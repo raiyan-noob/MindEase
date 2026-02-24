@@ -38,21 +38,30 @@ class _SignupPageState extends State<SignupPage> {
         confirmPassword.isEmpty) {
       setState(() {
         message = "Please fill all fields";
-      });
-    } else if (email == "admin@gmail.com") {
-      if (password != confirmPassword) {
-        setState(() {
-          message = "Passwords do not match";
-        });
-      } else {
-        setState(() {
-          message = "Signup Successful!";
-        });
-      }
-    } else {
+      });}
+    // } else if (email == "admin@gmail.com") {
+    //   if (password != confirmPassword) {
+    //     setState(() {
+    //       message = "Passwords do not match";
+    //     });
+    //   } else {
+    //     setState(() {
+    //       message = "Signup Successful!";
+    //     });
+    //   }
+    // } else {
+    //   setState(() {
+    //     message = "Email already exists";
+    //   });
+    // }
+      else{
       setState(() {
-        message = "Email already exists";
+        message = "Signup Successful!"; //for development purposes no checking of email and pass
       });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
     }
   }
 
@@ -66,16 +75,32 @@ class _SignupPageState extends State<SignupPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 40),
+              const SizedBox(height: 30),
               //image here
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
-                  'assets/signupbannerremovebg.png',
-                  width: double.infinity,
+                  'assets/newLogoremovebg.png',
+                  width: 220,
+                  height: 160,
                   fit: BoxFit.cover,
                 ),
               ),
+              const SizedBox(height: 20),
+              Text(
+                "Start Your Healing Journey!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              Text(
+                "Create Your Safe Space For Mindfulness.",
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+              const SizedBox(height: 20),
                //Full name field
               TextField(
                 controller: fullNameController,

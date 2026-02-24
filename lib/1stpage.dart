@@ -58,7 +58,7 @@ class _MyAppState extends State<MyAppFirst> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      barrierColor: Colors.black.withOpacity(0.4),
+      barrierColor: Color.fromRGBO(0, 0, 0, 0.4),
       builder: (BuildContext context) {
         return Container(
           height: MediaQuery.of(context).size.height * 0.65,
@@ -160,12 +160,12 @@ class _MyAppState extends State<MyAppFirst> {
                         ),
                         decoration: BoxDecoration(
                           color: isLight
-                              ? bgColor.withOpacity(0.5)
-                              : Color.fromARGB(255, 45, 45, 45),
-                          borderRadius: BorderRadius.circular(16),
+                              ? Color.fromARGB(255, 255, 255, 255)
+                              : Color.fromARGB(255, 3, 2, 2),
+                          borderRadius: BorderRadius.circular(15),
                           border: Border.all(
                             color: isLight
-                                ? color.withOpacity(0.3)
+                                ? Color.fromRGBO((bgColor.r * 255.0).round().clamp(0, 255), (bgColor.g * 255.0).round().clamp(0, 255), (bgColor.b * 255.0).round().clamp(0, 255), 0.3)
                                 : Colors.grey.shade700,
                             width: 1,
                           ),
@@ -179,7 +179,7 @@ class _MyAppState extends State<MyAppFirst> {
                                 shape: BoxShape.circle,
                                 color: isLight
                                     ? bgColor
-                                    : color.withOpacity(0.15),
+                                    : Color.fromRGBO((color.r * 255.0).round().clamp(0, 255), (color.g * 255.0).round().clamp(0, 255), (color.b * 255.0).round().clamp(0, 255), 0.15),
                               ),
                               child: Icon(icon, color: color, size: 22),
                             ),
@@ -202,7 +202,7 @@ class _MyAppState extends State<MyAppFirst> {
                             Icon(
                               Icons.arrow_forward_ios_rounded,
                               color: isLight
-                                  ? color.withOpacity(0.5)
+                                  ? Color.fromRGBO((color.r * 255.0).round().clamp(0, 255), (color.g * 255.0).round().clamp(0, 255), (color.b * 255.0).round().clamp(0, 255), 0.5)
                                   : Colors.grey.shade600,
                               size: 16,
                             ),
@@ -232,25 +232,77 @@ class _MyAppState extends State<MyAppFirst> {
         return Scaffold(
           backgroundColor: Colors.transparent,
           extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-
-            leading: Image.asset(
-              'assets/newLogoremovebg.png',
-              fit: BoxFit.cover,
-            ),
-
-            title: Text(
-              'MindEase',
-              style: TextStyle(
-                color: isLight
-                    ? Color.fromARGB(255, 16, 100, 56)
-                    : Color.fromARGB(255, 184, 220, 193),
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.normal,
-                decorationStyle: TextDecorationStyle.solid,
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(70),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 50), // Space at the top
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/newLogoremovebg.png',
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            'MindEase',
+                            style: TextStyle(
+                              color: isLight
+                                  ? Color.fromARGB(255, 16, 100, 56)
+                                  : Color.fromARGB(255, 184, 220, 193),
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Nunito',
+                            ),
+                          ),
+                        ],
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          widget.onThemeChanged(!isLight);
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: isLight
+                                ? Color.fromRGBO(255, 255, 255, 0.9)
+                                : Color.fromRGBO(0, 0, 0, 0.6),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(0, 0, 0, 0.15),
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              )
+                            ],
+                          ),
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            transitionBuilder: (child, animation) =>
+                                RotationTransition(turns: animation, child: child),
+                            child: Icon(
+                              isLight ? Icons.light_mode : Icons.dark_mode,
+                              key: ValueKey(isLight),
+                              color: isLight
+                                  ? Color.fromRGBO(0, 152, 139, 1)
+                                  : Color.fromARGB(255, 184, 220, 193),
+                              size: 24,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
@@ -276,27 +328,25 @@ class _MyAppState extends State<MyAppFirst> {
                             children: [
                               const SizedBox(height: 40),
                               Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                ),
-
-                                child: Text(
-                                  'Hello, Raiyan!',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    color: accent.withOpacity(
-                                      0.8 + (math.Random().nextDouble() * 0.2),
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: Text(
+                                    'Hello, Raiyan!',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color: accent.withOpacity(
+                                        0.8 + (math.Random().nextDouble() * 0.2),
+                                      ),
+                                      fontFamily: 'Titillium Web',
+                                      fontSize: 25,
+                                      fontStyle: FontStyle.italic,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    fontFamily: 'Titillium Web',
-                                    textBaseline: TextBaseline.alphabetic,
-                                    fontSize: 25,
-                                    fontStyle: FontStyle.italic,
-                                    fontWeight: FontWeight.bold,
-                                    decorationStyle: TextDecorationStyle.wavy,
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 25),
+                              const SizedBox(height: 15),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 20,
@@ -334,7 +384,7 @@ class _MyAppState extends State<MyAppFirst> {
                                     borderRadius: BorderRadius.circular(15),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: accent.withOpacity(0.5),
+                                        color: Color.fromRGBO((accent.r * 255.0).round().clamp(0, 255), (accent.g * 255.0).round().clamp(0, 255), (accent.b * 255.0).round().clamp(0, 255), 0.5),
                                         blurRadius: 10,
                                         offset: const Offset(0, 4),
                                       ),
@@ -347,11 +397,7 @@ class _MyAppState extends State<MyAppFirst> {
                                       Text(
                                         'Dive into your feelings',
                                         style: TextStyle(
-                                          color: accent.withOpacity(
-                                            0.8 +
-                                                (math.Random().nextDouble() *
-                                                    0.2),
-                                          ),
+                                          color: Color.fromRGBO((accent.r * 255.0).round().clamp(0, 255), (accent.g * 255.0).round().clamp(0, 255), (accent.b * 255.0).round().clamp(0, 255), 0.8 + (math.Random().nextDouble() * 0.2)),
                                           fontFamily: 'Titillium Web',
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
@@ -372,9 +418,9 @@ class _MyAppState extends State<MyAppFirst> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  const SizedBox(width: 20),
+                                  const SizedBox(width: 35),
                                   Text(
-                                    '       "Even in the darkest moments, light exists\n        if you have faith to see it" - Dean Koontz',
+                                    '"Even in the darkest moments, light exists\nif you have faith to see it" - Dean Koontz',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: isLight
@@ -400,148 +446,148 @@ class _MyAppState extends State<MyAppFirst> {
             ],
           ),
 
-          endDrawer: Drawer(
-            width: 250,
-            elevation: 30,
-            backgroundColor: isLight
-                ? Color.fromARGB(255, 255, 255, 255)
-                : Color.fromARGB(255, 19, 19, 19),
-            shadowColor: isLight
-                ? Color.fromARGB(255, 4, 13, 9)
-                : Color.fromARGB(255, 184, 220, 193),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
-              ),
-            ),
-            child: Container(
-              child: Column(
-                children: [
-                  SizedBox(height: 100),
-                  ElevatedButton.icon(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      backgroundColor: isLight
-                          ? Color.fromARGB(255, 255, 255, 255)
-                          : Color.fromARGB(255, 19, 19, 19),
-                    ),
-                    icon: Icon(
-                      Icons.person,
-                      color: isLight
-                          ? Color.fromARGB(255, 16, 100, 56)
-                          : Color.fromARGB(255, 184, 220, 193),
-                      size: 25,
-                    ),
-                    label: Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: isLight
-                            ? Color.fromARGB(255, 16, 100, 56)
-                            : Color.fromARGB(255, 184, 220, 193),
-                        fontFamily: 'Nunito',
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    '-------------------------',
-                    style: TextStyle(
-                      color: isLight
-                          ? Color.fromARGB(255, 16, 100, 56)
-                          : Color.fromARGB(255, 184, 220, 193),
-                      fontFamily: 'Nunito',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: isLight
-                                ? Color.fromARGB(255, 16, 100, 56)
-                                : Color.fromARGB(255, 184, 220, 193),
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                widget.onThemeChanged(true);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: isLight
-                                      ? Color.fromARGB(255, 16, 100, 56)
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(13),
-                                ),
-                                child: Icon(
-                                  Icons.light_mode,
-                                  color: isLight
-                                      ? Color.fromARGB(255, 255, 255, 255)
-                                      : Color.fromARGB(255, 184, 220, 193),
-                                  size: 24,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                widget.onThemeChanged(false);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: !isLight
-                                      ? Color.fromARGB(255, 184, 220, 193)
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Icon(
-                                  Icons.dark_mode,
-                                  color: !isLight
-                                      ? Color.fromARGB(255, 42, 42, 42)
-                                      : Color.fromARGB(255, 16, 100, 56),
-                                  size: 24,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    '-------------------------',
-                    style: TextStyle(
-                      color: isLight
-                          ? Color.fromARGB(255, 16, 100, 56)
-                          : Color.fromARGB(255, 184, 220, 193),
-                      fontFamily: 'Nunito',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // endDrawer: Drawer(
+          //   width: 250,
+          //   elevation: 30,
+          //   backgroundColor: isLight
+          //       ? Color.fromARGB(255, 255, 255, 255)
+          //       : Color.fromARGB(255, 19, 19, 19),
+          //   shadowColor: isLight
+          //       ? Color.fromARGB(255, 4, 13, 9)
+          //       : Color.fromARGB(255, 184, 220, 193),
+          //   shape: RoundedRectangleBorder(
+          //     borderRadius: BorderRadius.only(
+          //       topLeft: Radius.circular(20),
+          //       bottomLeft: Radius.circular(20),
+          //     ),
+          //   ),
+          //   child: Container(
+          //     child: Column(
+          //       children: [
+          //         SizedBox(height: 100),
+          //         ElevatedButton.icon(
+          //           onPressed: () {},
+          //           style: ElevatedButton.styleFrom(
+          //             elevation: 0,
+          //             backgroundColor: isLight
+          //                 ? Color.fromARGB(255, 255, 255, 255)
+          //                 : Color.fromARGB(255, 19, 19, 19),
+          //           ),
+          //           icon: Icon(
+          //             Icons.person,
+          //             color: isLight
+          //                 ? Color.fromARGB(255, 16, 100, 56)
+          //                 : Color.fromARGB(255, 184, 220, 193),
+          //             size: 25,
+          //           ),
+          //           label: Text(
+          //             'Profile',
+          //             style: TextStyle(
+          //               color: isLight
+          //                   ? Color.fromARGB(255, 16, 100, 56)
+          //                   : Color.fromARGB(255, 184, 220, 193),
+          //               fontFamily: 'Nunito',
+          //               fontSize: 25,
+          //               fontWeight: FontWeight.bold,
+          //             ),
+          //           ),
+          //         ),
+          //         Text(
+          //           '-------------------------',
+          //           style: TextStyle(
+          //             color: isLight
+          //                 ? Color.fromARGB(255, 16, 100, 56)
+          //                 : Color.fromARGB(255, 184, 220, 193),
+          //             fontFamily: 'Nunito',
+          //             fontSize: 20,
+          //             fontWeight: FontWeight.w600,
+          //           ),
+          //         ),
+          //         SizedBox(height: 20),
+          //         Row(
+          //           mainAxisAlignment: MainAxisAlignment.center,
+          //           children: [
+          //             Container(
+          //               decoration: BoxDecoration(
+          //                 border: Border.all(
+          //                   color: isLight
+          //                       ? Color.fromARGB(255, 16, 100, 56)
+          //                       : Color.fromARGB(255, 184, 220, 193),
+          //                   width: 2,
+          //                 ),
+          //                 borderRadius: BorderRadius.circular(20),
+          //               ),
+          //               child: Row(
+          //                 children: [
+          //                   GestureDetector(
+          //                     onTap: () {
+          //                       widget.onThemeChanged(true);
+          //                     },
+          //                     child: Container(
+          //                       padding: EdgeInsets.symmetric(
+          //                         horizontal: 20,
+          //                         vertical: 12,
+          //                       ),
+          //                       decoration: BoxDecoration(
+          //                         color: isLight
+          //                             ? Color.fromARGB(255, 16, 100, 56)
+          //                             : Colors.transparent,
+          //                         borderRadius: BorderRadius.circular(13),
+          //                       ),
+          //                       child: Icon(
+          //                         Icons.light_mode,
+          //                         color: isLight
+          //                             ? Color.fromARGB(255, 255, 255, 255)
+          //                             : Color.fromARGB(255, 184, 220, 193),
+          //                         size: 24,
+          //                       ),
+          //                     ),
+          //                   ),
+          //                   GestureDetector(
+          //                     onTap: () {
+          //                       widget.onThemeChanged(false);
+          //                     },
+          //                     child: Container(
+          //                       padding: EdgeInsets.symmetric(
+          //                         horizontal: 20,
+          //                         vertical: 12,
+          //                       ),
+          //                       decoration: BoxDecoration(
+          //                         color: !isLight
+          //                             ? Color.fromARGB(255, 184, 220, 193)
+          //                             : Colors.transparent,
+          //                         borderRadius: BorderRadius.circular(16),
+          //                       ),
+          //                       child: Icon(
+          //                         Icons.dark_mode,
+          //                         color: !isLight
+          //                             ? Color.fromARGB(255, 42, 42, 42)
+          //                             : Color.fromARGB(255, 16, 100, 56),
+          //                         size: 24,
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ],
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //         const SizedBox(height: 20),
+          //         Text(
+          //           '-------------------------',
+          //           style: TextStyle(
+          //             color: isLight
+          //                 ? Color.fromARGB(255, 16, 100, 56)
+          //                 : Color.fromARGB(255, 184, 220, 193),
+          //             fontFamily: 'Nunito',
+          //             fontSize: 20,
+          //             fontWeight: FontWeight.w600,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         );
       },
     );
