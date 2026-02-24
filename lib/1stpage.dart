@@ -34,7 +34,7 @@ class _MyAppState extends State<MyAppFirst> {
             title: const Text(
               'MindEase',
               style: TextStyle(
-                color: Color.fromARGB(255, 16, 100, 56),
+                color: Color.fromARGB(255, 211, 224, 217),
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.normal,
@@ -42,7 +42,7 @@ class _MyAppState extends State<MyAppFirst> {
               ),
             ),
 
-            backgroundColor: Color.fromARGB(255, 184, 220, 193),
+            backgroundColor: Color.fromRGBO(0, 152, 139, 1),
           ),
           body: Stack(
             children: [
@@ -71,11 +71,11 @@ class _MyAppState extends State<MyAppFirst> {
                                 'Hello, Raiyan!',
                                 style: TextStyle(
                                   color: isLight
-                                      ? Color.fromARGB(
-                                          255,
-                                          16,
-                                          100,
-                                          56,
+                                      ? Color.fromRGBO(
+                                          0,
+                                          152,
+                                          139,
+                                          1,
                                         ).withOpacity(
                                           0.8 +
                                               (math.Random().nextDouble() *
@@ -105,11 +105,11 @@ class _MyAppState extends State<MyAppFirst> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: isLight
-                                      ? Color.fromARGB(
-                                          255,
-                                          16,
-                                          100,
-                                          56,
+                                      ? Color.fromRGBO(
+                                          0,
+                                          152,
+                                          139,
+                                          1,
                                         ).withOpacity(
                                           0.8 +
                                               (math.Random().nextDouble() *
@@ -145,7 +145,7 @@ class _MyAppState extends State<MyAppFirst> {
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
                                     color: isLight
-                                        ? Color.fromARGB(255, 16, 100, 56)
+                                        ? Color.fromRGBO(0, 152, 139, 1)
                                         : Color.fromARGB(255, 184, 220, 193),
                                     width: 2,
                                   ),
@@ -156,11 +156,11 @@ class _MyAppState extends State<MyAppFirst> {
                                     'Dive into your feelings',
                                     style: TextStyle(
                                       color: isLight
-                                          ? Color.fromARGB(
-                                              255,
-                                              16,
-                                              100,
-                                              56,
+                                          ? Color.fromRGBO(
+                                              0,
+                                              152,
+                                              139,
+                                              1,
                                             ).withOpacity(
                                               0.8 +
                                                   (math.Random().nextDouble() *
@@ -199,7 +199,7 @@ class _MyAppState extends State<MyAppFirst> {
                                         'Anxious',
                                         'Frustrated',
                                         'Angry',
-                                        'Hopeless',
+                                        ' Hopeless',
                                       ].map<DropdownMenuItem<String>>((
                                         String value,
                                       ) {
@@ -209,11 +209,11 @@ class _MyAppState extends State<MyAppFirst> {
                                             value,
                                             style: TextStyle(
                                               color: isLight
-                                                  ? Color.fromARGB(
-                                                      255,
-                                                      16,
-                                                      100,
-                                                      56,
+                                                  ? Color.fromRGBO(
+                                                      0,
+                                                      152,
+                                                      139,
+                                                      1,
                                                     )
                                                   : Color.fromARGB(
                                                       255,
@@ -251,7 +251,6 @@ class _MyAppState extends State<MyAppFirst> {
                                 ),
                               ),
 
-                              
                               const Spacer(),
 
                               Row(
@@ -263,7 +262,7 @@ class _MyAppState extends State<MyAppFirst> {
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       color: isLight
-                                          ? Color.fromARGB(255, 16, 100, 56)
+                                          ? Color.fromRGBO(0, 152, 139, 1)
                                           : Color.fromARGB(255, 184, 220, 193),
                                       fontFamily: 'Nunito',
                                       fontSize: 14,

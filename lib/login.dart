@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       body: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
@@ -92,10 +92,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Text(
                 "Your safe space is waiting.",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 40),
               //Email field
@@ -103,12 +100,11 @@ class _LoginPageState extends State<LoginPage> {
                 controller: emailController,
                 decoration: const InputDecoration(
                   labelText: "Enter your email (eg. abc@gmail.com)",
-                  labelStyle: TextStyle(
-                      color: Colors.grey,
-                  ),
+                  labelStyle: TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
-                    borderSide: BorderSide.none, // Remove visible border but keep radius
+                    borderSide: BorderSide
+                        .none, // Remove visible border but keep radius
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -121,9 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                   filled: true,
                   fillColor: Color(0xFFF0F0F0),
                 ),
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
+                style: TextStyle(color: Colors.grey),
               ),
 
               const SizedBox(height: 20),
@@ -137,7 +131,8 @@ class _LoginPageState extends State<LoginPage> {
                   labelStyle: TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
-                    borderSide: BorderSide.none, // Remove visible border but keep radius
+                    borderSide: BorderSide
+                        .none, // Remove visible border but keep radius
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -161,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: ElevatedButton(
                   onPressed: login,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF00988B),
+                    backgroundColor: Color.fromRGBO(0, 152, 139, 1),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -185,8 +180,9 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                      "Don't have an account?",
-                  style: TextStyle(color: Colors.grey)),
+                    "Don't have an account?",
+                    style: TextStyle(color: Colors.grey),
+                  ),
                   const SizedBox(width: 5),
                   TextButton(
                     onPressed: () {
