@@ -203,12 +203,245 @@ class _MovieEntPageState extends State<MovieEntPage> {
     );
   }
 
+  void _showRatingDialog() {
+    final bool isLight = widget.isLightNotifier.value;
+    final Color accent = isLight
+        ? Color.fromRGBO(16, 100, 56, 1.0)
+        : Color.fromRGBO(184, 220, 193, 1.0);
+
+    String? selectedEmoji;
+
+    final Map<String, String> ratingOptions = {
+      '😞': 'Worse',
+      '😔': 'Bad',
+      '😐': 'Same',
+      '😊': 'Better',
+      '😄': 'Great',
+    };
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setDialogState) {
+            return AlertDialog(
+              backgroundColor: isLight
+                  ? Colors.white
+                  : Color.fromRGBO(30, 30, 30, 1.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+                side: BorderSide(color: accent, width: 2),
+              ),
+              title: Column(
+                children: [
+                  Text(
+                    'Was it helpful?',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                      color: accent,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Divider(color: accent.withOpacity(0.4), thickness: 2),
+                ],
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Rate how you are feeling now',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: isLight
+                          ? Color.fromRGBO(70, 70, 70, 1.0)
+                          : Color.fromRGBO(200, 200, 200, 1.0),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: ratingOptions.entries.map((entry) {
+                      final String emoji = entry.key;
+                      final String label = entry.value;
+                      final bool isSelected = selectedEmoji == emoji;
+
+                      return GestureDetector(
+                        onTap: () {
+                          setDialogState(() {
+                            selectedEmoji = emoji;
+                          });
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? accent.withOpacity(0.15)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: isSelected ? accent : Colors.transparent,
+                              width: 2,
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                emoji,
+                                style: TextStyle(
+                                  fontSize: isSelected ? 32 : 26,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                label,
+                                style: TextStyle(
+                                  fontFamily: 'Nunito',
+                                  fontSize: 12,
+                                  fontWeight: isSelected
+                                      ? FontWeight.bold
+                                      : FontWeight.bold,
+                                  color: isSelected
+                                      ? accent
+                                      : (isLight
+                                            ? Color.fromRGBO(52, 52, 52, 1)
+                                            : Color.fromRGBO(
+                                                170,
+                                                170,
+                                                170,
+                                                1.0,
+                                              )),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  if (selectedEmoji != null)
+                    Text(
+                      _getRatingMessage(selectedEmoji!),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Nunito',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                        fontStyle: FontStyle.italic,
+                        color: accent,
+                      ),
+                    ),
+                ],
+              ),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          side: BorderSide(
+                            color: accent.withOpacity(0.7),
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        'Skip',
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                          color: isLight
+                              ? Color.fromRGBO(61, 61, 61, 1)
+                              : Color.fromRGBO(170, 170, 170, 1.0),
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: selectedEmoji != null
+                          ? () {
+                              Navigator.pop(context);
+                            }
+                          : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: accent,
+                        disabledBackgroundColor: accent.withOpacity(0.3),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 10,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: isLight
+                              ? Colors.white
+                              : Color.fromRGBO(30, 30, 30, 1.0),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  String _getRatingMessage(String emoji) {
+    switch (emoji) {
+      case '😞':
+        return "We're sorry to hear that. 💛\nWe're here for you.";
+      case '😔':
+        return "Hang in there. 🌿\nIt's okay to not be okay.";
+      case '😐':
+        return "That's alright. 🤍\nSmall steps still count.";
+      case '😊':
+        return "That's wonderful! 🌱\nYou're doing great.";
+      case '😄':
+        return "Amazing! 🌟\nSo glad it helped you!";
+      default:
+        return "";
+    }
+  }
+
   Future<void> _launchURL(String url) async {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Text('Open Video'),
-        content: Text('Would you like to open this video?\n\n$url'),
+        title: const Text('Open Page'),
+        content: Text('Would you like to open this page?\n\n$url'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -217,6 +450,9 @@ class _MovieEntPageState extends State<MovieEntPage> {
           TextButton(
             onPressed: () {
               Navigator.pop(context);
+              Future.delayed(const Duration(milliseconds: 300), () {
+                _showRatingDialog();
+              });
             },
             child: const Text('Open'),
           ),
