@@ -344,7 +344,10 @@ class _SecondPageState extends State<SecondPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => ProfileScreen(),
+                          builder: (_) => ProfileScreen(
+                            isLightNotifier: widget.isLightNotifier,
+                            onThemeChanged: widget.onThemeChanged,
+                          ),
                         ),
                       );
                     },

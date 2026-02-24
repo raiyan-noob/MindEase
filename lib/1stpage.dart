@@ -232,70 +232,79 @@ class _MyAppState extends State<MyAppFirst> {
         return Scaffold(
           backgroundColor: Colors.transparent,
           extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            toolbarHeight: 90, // Increase AppBar height
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-
-            leading: Image.asset(
-              'assets/newLogoremovebg.png',
-              width: 50,
-              height: 50,
-              fit: BoxFit.cover,
-            ),
-
-            title: Text(
-              'MindEase',
-              style: TextStyle(
-                color: isLight
-                    ? Color.fromARGB(255, 16, 100, 56)
-                    : Color.fromARGB(255, 184, 220, 193),
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.normal,
-                decorationStyle: TextDecorationStyle.solid,
-              ),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: GestureDetector(
-                  onTap: () {
-                    widget.onThemeChanged(!isLight);
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isLight
-                          ? Color.fromRGBO(255, 255, 255, 0.9)
-                          : Color.fromRGBO(0, 0, 0, 0.6),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromRGBO(0, 0, 0, 0.15),
-                          blurRadius: 8,
-                          offset: const Offset(0, 4),
-                        )
-                      ],
-                    ),
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 300),
-                      transitionBuilder: (child, animation) =>
-                          RotationTransition(turns: animation, child: child),
-                      child: Icon(
-                        isLight ? Icons.light_mode : Icons.dark_mode,
-                        key: ValueKey(isLight),
-                        color: isLight
-                            ? Color.fromRGBO(0, 152, 139, 1)
-                            : Color.fromARGB(255, 184, 220, 193),
-                        size: 24,
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(70),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 50), // Space at the top
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/newLogoremovebg.png',
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            'MindEase',
+                            style: TextStyle(
+                              color: isLight
+                                  ? Color.fromARGB(255, 16, 100, 56)
+                                  : Color.fromARGB(255, 184, 220, 193),
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Nunito',
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
+                      GestureDetector(
+                        onTap: () {
+                          widget.onThemeChanged(!isLight);
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: isLight
+                                ? Color.fromRGBO(255, 255, 255, 0.9)
+                                : Color.fromRGBO(0, 0, 0, 0.6),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(0, 0, 0, 0.15),
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              )
+                            ],
+                          ),
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            transitionBuilder: (child, animation) =>
+                                RotationTransition(turns: animation, child: child),
+                            child: Icon(
+                              isLight ? Icons.light_mode : Icons.dark_mode,
+                              key: ValueKey(isLight),
+                              color: isLight
+                                  ? Color.fromRGBO(0, 152, 139, 1)
+                                  : Color.fromARGB(255, 184, 220, 193),
+                              size: 24,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
           body: Stack(
             children: [
@@ -319,27 +328,25 @@ class _MyAppState extends State<MyAppFirst> {
                             children: [
                               const SizedBox(height: 40),
                               Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                ),
-
-                                child: Text(
-                                  'Hello, Raiyan!',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    color: accent.withOpacity(
-                                      0.8 + (math.Random().nextDouble() * 0.2),
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: Text(
+                                    'Hello, Raiyan!',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color: accent.withOpacity(
+                                        0.8 + (math.Random().nextDouble() * 0.2),
+                                      ),
+                                      fontFamily: 'Titillium Web',
+                                      fontSize: 25,
+                                      fontStyle: FontStyle.italic,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    fontFamily: 'Titillium Web',
-                                    textBaseline: TextBaseline.alphabetic,
-                                    fontSize: 25,
-                                    fontStyle: FontStyle.italic,
-                                    fontWeight: FontWeight.bold,
-                                    decorationStyle: TextDecorationStyle.wavy,
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 25),
+                              const SizedBox(height: 15),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 20,
@@ -377,7 +384,7 @@ class _MyAppState extends State<MyAppFirst> {
                                     borderRadius: BorderRadius.circular(15),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: accent.withOpacity(0.5),
+                                        color: Color.fromRGBO((accent.r * 255.0).round().clamp(0, 255), (accent.g * 255.0).round().clamp(0, 255), (accent.b * 255.0).round().clamp(0, 255), 0.5),
                                         blurRadius: 10,
                                         offset: const Offset(0, 4),
                                       ),
@@ -411,9 +418,9 @@ class _MyAppState extends State<MyAppFirst> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  const SizedBox(width: 20),
+                                  const SizedBox(width: 35),
                                   Text(
-                                    '       "Even in the darkest moments, light exists\n        if you have faith to see it" - Dean Koontz',
+                                    '"Even in the darkest moments, light exists\nif you have faith to see it" - Dean Koontz',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: isLight
