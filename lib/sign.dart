@@ -59,113 +59,243 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Signup"), centerTitle: true),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            //Full name field
-            TextField(
-              controller: fullNameController,
-              decoration: const InputDecoration(
-                labelText: "Enter your full name",
-                border: OutlineInputBorder(),
-              ),
-            ),
 
-            const SizedBox(height: 20),
-
-            //Phone number field
-            TextField(
-              controller: phoneNumberController,
-              decoration: const InputDecoration(
-                labelText: "Enter your phone number",
-                border: OutlineInputBorder(),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            //Email field
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                labelText: "Enter your email (eg. abc@gmail.com)",
-                border: OutlineInputBorder(),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            //Age field
-            TextField(
-              controller: ageController,
-              decoration: const InputDecoration(
-                labelText: "Enter your age",
-                border: OutlineInputBorder(),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-            //Gender field
-            TextField(
-              controller: genderController,
-              decoration: const InputDecoration(
-                labelText: "Enter your gender",
-                border: OutlineInputBorder(),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            //Password field
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: "Enter your password",
-                border: OutlineInputBorder(),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            //Confirm password field
-            TextField(
-              controller: confirmPasswordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: "Confirm your password",
-                border: OutlineInputBorder(),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            //Signup button
-            ElevatedButton(onPressed: signup, child: const Text("Signup")),
-
-            const SizedBox(height: 20),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Already have an account?"),
-                const SizedBox(width: 5),
-
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  },
-                  child: const Text("login."),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 40),
+              //image here
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset(
+                  'assets/signupbannerremovebg.png',
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
-              ],
-            ),
-          ],
+              ),
+               //Full name field
+              TextField(
+                controller: fullNameController,
+                decoration: const InputDecoration(
+                  labelText: "Enter your full name",
+                  labelStyle: TextStyle(color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Color(0xFFF0F0F0),
+                ),
+                style: TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 20),
+              //Phone number field
+              TextField(
+                controller: phoneNumberController,
+                decoration: const InputDecoration(
+                  labelText: "Enter your phone number",
+                  labelStyle: TextStyle(color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Color(0xFFF0F0F0),
+                ),
+                style: TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 20),
+              //Email field
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  labelText: "Enter your email (eg. abc@gmail.com)",
+                  labelStyle: TextStyle(color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Color(0xFFF0F0F0),
+                ),
+                style: TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 20),
+              //Age field
+              TextField(
+                controller: ageController,
+                decoration: const InputDecoration(
+                  labelText: "Enter your age",
+                  labelStyle: TextStyle(color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Color(0xFFF0F0F0),
+                ),
+                style: TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 20),
+              //Gender field
+              TextField(
+                controller: genderController,
+                decoration: const InputDecoration(
+                  labelText: "Enter your gender",
+                  labelStyle: TextStyle(color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Color(0xFFF0F0F0),
+                ),
+                style: TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 20),
+              //Password field
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: "Enter your password",
+                  labelStyle: TextStyle(color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Color(0xFFF0F0F0),
+                ),
+                style: TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 20),
+              //Confirm password field
+              TextField(
+                controller: confirmPasswordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: "Confirm your password",
+                  labelStyle: TextStyle(color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Color(0xFFF0F0F0),
+                ),
+                style: TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 20),
+              //Signup button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: signup,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF00988B),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: const Text(
+                    "Signup",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                      "Already have an account?",
+                      style: TextStyle(color: Colors.grey)
+                  ),
+                   TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                    child: const Text(
+                        "login.",
+                        style: TextStyle(
+                          color: Color(0xFF00988B),
+                          fontWeight: FontWeight.bold,
+                        )
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
