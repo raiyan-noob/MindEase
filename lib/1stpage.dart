@@ -239,6 +239,8 @@ class _MyAppState extends State<MyAppFirst> {
 
             leading: Image.asset(
               'assets/newLogoremovebg.png',
+              width: 50,
+              height: 50,
               fit: BoxFit.cover,
             ),
 
