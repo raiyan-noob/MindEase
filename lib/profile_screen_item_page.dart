@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:splash_design/1stpage.dart';
 
 class History extends StatelessWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
-  const History({super.key, required this.isLightNotifier, required this.onThemeChanged});
+  const History({
+    super.key,
+    required this.isLightNotifier,
+    required this.onThemeChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,15 +16,24 @@ class History extends StatelessWidget {
       valueListenable: isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
-        final textColor = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
+        final textColor = isLight
+            ? const Color(0xFF0F5132)
+            : const Color(0xFFB8DCC1);
         return Scaffold(
           backgroundColor: bg,
           appBar: AppBar(
-            backgroundColor: isLight ? const Color.fromRGBO(0, 152, 139, 1) : const Color(0xFF193022),
-            title: Text('History', style: TextStyle(color: Colors.white)),
+            backgroundColor: isLight
+                ? const Color.fromRGBO(0, 152, 139, 1)
+                : const Color(0xFF193022),
+            title: Text('Mood History', style: TextStyle(color: Colors.white)),
             centerTitle: true,
           ),
-          body: Center(child: Text('History Page', style: TextStyle(color: textColor))),
+          body: Center(
+            child: Text(
+              'Mood History Page',
+              style: TextStyle(color: textColor),
+            ),
+          ),
         );
       },
     );
@@ -29,7 +43,11 @@ class History extends StatelessWidget {
 class Security extends StatelessWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
-  const Security({super.key, required this.isLightNotifier, required this.onThemeChanged});
+  const Security({
+    super.key,
+    required this.isLightNotifier,
+    required this.onThemeChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +55,21 @@ class Security extends StatelessWidget {
       valueListenable: isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
-        final textColor = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
+        final textColor = isLight
+            ? const Color(0xFF0F5132)
+            : const Color(0xFFB8DCC1);
         return Scaffold(
           backgroundColor: bg,
           appBar: AppBar(
-            backgroundColor: isLight ? const Color.fromRGBO(0, 152, 139, 1) : const Color(0xFF193022),
+            backgroundColor: isLight
+                ? const Color.fromRGBO(0, 152, 139, 1)
+                : const Color(0xFF193022),
             title: Text('Security', style: TextStyle(color: Colors.white)),
             centerTitle: true,
           ),
-          body: Center(child: Text('Security Page', style: TextStyle(color: textColor))),
+          body: Center(
+            child: Text('Security Page', style: TextStyle(color: textColor)),
+          ),
         );
       },
     );
@@ -55,7 +79,11 @@ class Security extends StatelessWidget {
 class Announcements extends StatelessWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
-  const Announcements({super.key, required this.isLightNotifier, required this.onThemeChanged});
+  const Announcements({
+    super.key,
+    required this.isLightNotifier,
+    required this.onThemeChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -63,15 +91,21 @@ class Announcements extends StatelessWidget {
       valueListenable: isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
-        final textColor = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
+        final textColor = isLight
+            ? const Color(0xFF0F5132)
+            : const Color(0xFFB8DCC1);
         return Scaffold(
           backgroundColor: bg,
           appBar: AppBar(
-            backgroundColor: isLight ? const Color.fromRGBO(0, 152, 139, 1) : const Color(0xFF193022),
-            title: Text('Announcements', style: TextStyle(color: Colors.white)),
+            backgroundColor: isLight
+                ? const Color.fromRGBO(0, 152, 139, 1)
+                : const Color(0xFF193022),
+            title: Text('Activities', style: TextStyle(color: Colors.white)),
             centerTitle: true,
           ),
-          body: Center(child: Text('Announcements Page', style: TextStyle(color: textColor))),
+          body: Center(
+            child: Text('Activities Page', style: TextStyle(color: textColor)),
+          ),
         );
       },
     );
@@ -81,7 +115,11 @@ class Announcements extends StatelessWidget {
 class SocialAndExtras extends StatelessWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
-  const SocialAndExtras({super.key, required this.isLightNotifier, required this.onThemeChanged});
+  const SocialAndExtras({
+    super.key,
+    required this.isLightNotifier,
+    required this.onThemeChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -89,15 +127,27 @@ class SocialAndExtras extends StatelessWidget {
       valueListenable: isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
-        final textColor = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
+        final textColor = isLight
+            ? const Color(0xFF0F5132)
+            : const Color(0xFFB8DCC1);
         return Scaffold(
           backgroundColor: bg,
           appBar: AppBar(
-            backgroundColor: isLight ? const Color.fromRGBO(0, 152, 139, 1) : const Color(0xFF193022),
-            title: Text('Social & Extras', style: TextStyle(color: Colors.white)),
+            backgroundColor: isLight
+                ? const Color.fromRGBO(0, 152, 139, 1)
+                : const Color(0xFF193022),
+            title: Text(
+              'Social & Extras',
+              style: TextStyle(color: Colors.white),
+            ),
             centerTitle: true,
           ),
-          body: Center(child: Text('Social & Extras Page', style: TextStyle(color: textColor))),
+          body: Center(
+            child: Text(
+              'Social & Extras Page',
+              style: TextStyle(color: textColor),
+            ),
+          ),
         );
       },
     );
@@ -107,7 +157,11 @@ class SocialAndExtras extends StatelessWidget {
 class InviteFriends extends StatelessWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
-  const InviteFriends({super.key, required this.isLightNotifier, required this.onThemeChanged});
+  const InviteFriends({
+    super.key,
+    required this.isLightNotifier,
+    required this.onThemeChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -115,15 +169,27 @@ class InviteFriends extends StatelessWidget {
       valueListenable: isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
-        final textColor = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
+        final textColor = isLight
+            ? const Color(0xFF0F5132)
+            : const Color(0xFFB8DCC1);
         return Scaffold(
           backgroundColor: bg,
           appBar: AppBar(
-            backgroundColor: isLight ? const Color.fromRGBO(0, 152, 139, 1) : const Color(0xFF193022),
-            title: Text('Invite Friends', style: TextStyle(color: Colors.white)),
+            backgroundColor: isLight
+                ? const Color.fromRGBO(0, 152, 139, 1)
+                : const Color(0xFF193022),
+            title: Text(
+              'Invite Friends',
+              style: TextStyle(color: Colors.white),
+            ),
             centerTitle: true,
           ),
-          body: Center(child: Text('Invite Friends Page', style: TextStyle(color: textColor))),
+          body: Center(
+            child: Text(
+              'Invite Friends Page',
+              style: TextStyle(color: textColor),
+            ),
+          ),
         );
       },
     );
@@ -133,7 +199,11 @@ class InviteFriends extends StatelessWidget {
 class PrivacyPolicy extends StatelessWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
-  const PrivacyPolicy({super.key, required this.isLightNotifier, required this.onThemeChanged});
+  const PrivacyPolicy({
+    super.key,
+    required this.isLightNotifier,
+    required this.onThemeChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -141,15 +211,27 @@ class PrivacyPolicy extends StatelessWidget {
       valueListenable: isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
-        final textColor = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
+        final textColor = isLight
+            ? const Color(0xFF0F5132)
+            : const Color(0xFFB8DCC1);
         return Scaffold(
           backgroundColor: bg,
           appBar: AppBar(
-            backgroundColor: isLight ? const Color.fromRGBO(0, 152, 139, 1) : const Color(0xFF193022),
-            title: Text('Privacy Policy', style: TextStyle(color: Colors.white)),
+            backgroundColor: isLight
+                ? const Color.fromRGBO(0, 152, 139, 1)
+                : const Color(0xFF193022),
+            title: Text(
+              'Privacy Policy',
+              style: TextStyle(color: Colors.white),
+            ),
             centerTitle: true,
           ),
-          body: Center(child: Text('Privacy Policy Page', style: TextStyle(color: textColor))),
+          body: Center(
+            child: Text(
+              'Privacy Policy Page',
+              style: TextStyle(color: textColor),
+            ),
+          ),
         );
       },
     );
@@ -159,7 +241,11 @@ class PrivacyPolicy extends StatelessWidget {
 class ContactUs extends StatelessWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
-  const ContactUs({super.key, required this.isLightNotifier, required this.onThemeChanged});
+  const ContactUs({
+    super.key,
+    required this.isLightNotifier,
+    required this.onThemeChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -167,41 +253,21 @@ class ContactUs extends StatelessWidget {
       valueListenable: isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
-        final textColor = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
+        final textColor = isLight
+            ? const Color(0xFF0F5132)
+            : const Color(0xFFB8DCC1);
         return Scaffold(
           backgroundColor: bg,
           appBar: AppBar(
-            backgroundColor: isLight ? const Color.fromRGBO(0, 152, 139, 1) : const Color(0xFF193022),
+            backgroundColor: isLight
+                ? const Color.fromRGBO(0, 152, 139, 1)
+                : const Color(0xFF193022),
             title: Text('Contact Us', style: TextStyle(color: Colors.white)),
             centerTitle: true,
           ),
-          body: Center(child: Text('Contact Us Page', style: TextStyle(color: textColor))),
-        );
-      },
-    );
-  }
-}
-
-class Logout extends StatelessWidget {
-  final ValueNotifier<bool> isLightNotifier;
-  final ValueChanged<bool> onThemeChanged;
-  const Logout({super.key, required this.isLightNotifier, required this.onThemeChanged});
-
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder<bool>(
-      valueListenable: isLightNotifier,
-      builder: (context, isLight, _) {
-        final bg = isLight ? Colors.white : const Color(0xFF121212);
-        final textColor = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
-        return Scaffold(
-          backgroundColor: bg,
-          appBar: AppBar(
-            backgroundColor: isLight ? const Color.fromRGBO(0, 152, 139, 1) : const Color(0xFF193022),
-            title: Text('Logout', style: TextStyle(color: Colors.white)),
-            centerTitle: true,
+          body: Center(
+            child: Text('Contact Us Page', style: TextStyle(color: textColor)),
           ),
-          body: Center(child: Text('Logout Page', style: TextStyle(color: textColor))),
         );
       },
     );
@@ -296,7 +362,7 @@ class ViewProfilePage extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 child: const Text(
-                  "Back To Home",
+                  "Go Back",
                   style: TextStyle(color: Colors.white),
                 ),
               ),
