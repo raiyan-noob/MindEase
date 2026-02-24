@@ -75,7 +75,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
             children: [
               Positioned.fill(
                 child: Image.asset(
-                  isLight ? 'assets/enwbg.jpg' : 'assets/enbbg.jpg',
+                  isLight ? 'assets/entwbg.jpg' : 'assets/entbbg.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -193,7 +193,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
 
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 65,
+                                horizontal: 45,
                                 vertical: 6,
                               ),
                               margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -267,14 +267,14 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                             const Spacer(),
 
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
+                              padding: const EdgeInsets.only(bottom: 30),
                               child: Text(
                                 '"There is a crack in everything.\nThat\'s how the light gets in" - Leonard Cohen',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: textPrimary,
                                   fontFamily: 'Nunito',
-                                  fontSize: 14,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                   fontStyle: FontStyle.italic,
                                   shadows:
