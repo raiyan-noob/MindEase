@@ -372,7 +372,8 @@ class _MyAppState extends State<MyAppFirst> {
                               GestureDetector(
                                 onTap: () => _showFeelingBottomSheet(isLight),
                                 child: Container(
-                                  width: 300,
+
+                                  width: 340,
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 16,
                                     vertical: 14,

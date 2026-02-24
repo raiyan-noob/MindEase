@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:splash_design/1stpage.dart';
 
 import 'package:splash_design/Literature.dart';
 import 'religionpage.dart';
@@ -294,21 +295,7 @@ class _SecondPageState extends State<SecondPage> {
           ),
 
           // ===== BOTTOM NAV (like screenshot) =====
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              // center "+" action
-              // example: open quick actions / breathing / journal etc.
-            },
-            backgroundColor: isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1),
-            child: Icon(
-              Icons.add,
-              color: isLight ? Colors.white : const Color(0xFF0F172A),
-            ),
-          ),
           bottomNavigationBar: BottomAppBar(
-            shape: const CircularNotchedRectangle(),
-            notchMargin: 10,
             color: isLight ? Colors.white : const Color(0xFF1C1C1C),
             elevation: 18,
             child: SizedBox(
@@ -320,18 +307,28 @@ class _SecondPageState extends State<SecondPage> {
                     isLight: isLight,
                     icon: Icons.home_filled,
                     selected: _selectedIndex == 0,
-                    onTap: () => setState(() => _selectedIndex = 0),
+                    onTap:  () {
+                      setState(() => _selectedIndex = 3);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => MyAppFirst(
+                            isLightNotifier: widget.isLightNotifier,
+                            onThemeChanged: widget.onThemeChanged,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   _BottomIcon(
                     isLight: isLight,
-                    icon: Icons.favorite_border,
+                    icon: Icons.bookmark_border,
                     selected: _selectedIndex == 1,
                     onTap: () => setState(() => _selectedIndex = 1),
                   ),
-                  const SizedBox(width: 42), // space for FAB notch
                   _BottomIcon(
                     isLight: isLight,
-                    icon: Icons.calendar_month_outlined,
+                    icon: Icons.timer_outlined,
                     selected: _selectedIndex == 2,
                     onTap: () => setState(() => _selectedIndex = 2),
                   ),
