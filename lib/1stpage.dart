@@ -226,7 +226,7 @@ class _MyAppState extends State<MyAppFirst> {
       valueListenable: widget.isLightNotifier,
       builder: (context, isLight, _) {
         final Color accent = isLight
-            ? Color.fromRGBO(0, 152, 139, 1)
+            ? Color.fromARGB(255, 16, 100, 56)
             : Color.fromARGB(255, 184, 220, 193);
 
         return Scaffold(
@@ -235,14 +235,18 @@ class _MyAppState extends State<MyAppFirst> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
+
             leading: Image.asset(
               'assets/newLogoremovebg.png',
               fit: BoxFit.cover,
             ),
+
             title: Text(
               'MindEase',
               style: TextStyle(
-                color: Color.fromRGBO(0, 152, 139, 1),
+                color: isLight
+                    ? Color.fromARGB(255, 16, 100, 56)
+                    : Color.fromARGB(255, 184, 220, 193),
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.normal,
@@ -271,33 +275,46 @@ class _MyAppState extends State<MyAppFirst> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const SizedBox(height: 40),
-                              Text(
-                                'Hello, Raiyan!',
-                                style: TextStyle(
-                                  color: accent.withOpacity(
-                                    0.8 + (math.Random().nextDouble() * 0.2),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                ),
+
+                                child: Text(
+                                  'Hello, Raiyan!',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: accent.withOpacity(
+                                      0.8 + (math.Random().nextDouble() * 0.2),
+                                    ),
+                                    fontFamily: 'Titillium Web',
+                                    textBaseline: TextBaseline.alphabetic,
+                                    fontSize: 25,
+                                    fontStyle: FontStyle.italic,
+                                    fontWeight: FontWeight.bold,
+                                    decorationStyle: TextDecorationStyle.wavy,
                                   ),
-                                  fontFamily: 'Titillium Web',
-                                  textBaseline: TextBaseline.ideographic,
-                                  fontSize: 25,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
-                                  decorationStyle: TextDecorationStyle.wavy,
                                 ),
                               ),
-                              const SizedBox(height: 15),
-                              Text(
-                                'How are you feeling today?',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: accent.withOpacity(
-                                    0.8 + (math.Random().nextDouble() * 0.2),
+                              const SizedBox(height: 25),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                ),
+
+                                child: Text(
+                                  'How are you feeling today?',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: accent.withOpacity(
+                                      0.8 + (math.Random().nextDouble() * 0.2),
+                                    ),
+                                    fontFamily: 'Nunito',
+                                    textBaseline: TextBaseline.alphabetic,
+                                    fontSize: 39,
+                                    fontWeight: FontWeight.bold,
+                                    decorationStyle: TextDecorationStyle.wavy,
                                   ),
-                                  fontFamily: 'Nunito',
-                                  textBaseline: TextBaseline.alphabetic,
-                                  fontSize: 50,
-                                  fontWeight: FontWeight.bold,
-                                  decorationStyle: TextDecorationStyle.wavy,
                                 ),
                               ),
                               const SizedBox(height: 25),
@@ -315,12 +332,13 @@ class _MyAppState extends State<MyAppFirst> {
                                         ? Color.fromARGB(255, 255, 255, 255)
                                         : Color.fromARGB(255, 3, 2, 2),
                                     borderRadius: BorderRadius.circular(15),
-                                    border: Border.all(
-                                      color: isLight
-                                          ? Color.fromRGBO(0, 152, 139, 1)
-                                          : Color.fromARGB(255, 184, 220, 193),
-                                      width: 2,
-                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: accent.withOpacity(0.5),
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 4),
+                                      ),
+                                    ],
                                   ),
                                   child: Row(
                                     mainAxisAlignment:
@@ -340,7 +358,7 @@ class _MyAppState extends State<MyAppFirst> {
                                         ),
                                       ),
                                       Icon(
-                                        Icons.keyboard_arrow_down_rounded,
+                                        Icons.keyboard_arrow_up_rounded,
                                         color: accent,
                                         size: 28,
                                       ),
@@ -356,11 +374,11 @@ class _MyAppState extends State<MyAppFirst> {
                                 children: [
                                   const SizedBox(width: 20),
                                   Text(
-                                    '"Even in the darkest moments, light exists\n if you have faith to see it" - Dean Koontz',
+                                    '       "Even in the darkest moments, light exists\n        if you have faith to see it" - Dean Koontz',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: isLight
-                                          ? Color.fromRGBO(0, 152, 139, 1)
+                                          ? Color.fromARGB(255, 16, 100, 56)
                                           : Color.fromARGB(255, 184, 220, 193),
                                       fontFamily: 'Nunito',
                                       fontSize: 15,
