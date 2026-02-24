@@ -15,7 +15,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final ValueNotifier<bool> isLight = ValueNotifier<bool>(true);
 
-  void _setLight(bool value) {
+  void setLight(bool value) {
     isLight.value = value;
   }
 

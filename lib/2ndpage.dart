@@ -4,6 +4,7 @@ import 'package:splash_design/Literature.dart';
 import 'religionpage.dart';
 import 'entertainement.dart';
 import 'article.dart';
+import 'profile_screen_main.dart';
 
 class SecondPage extends StatefulWidget {
   final String feeling;
@@ -50,32 +51,68 @@ class _SecondPageState extends State<SecondPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 10),
-                  Container(
-                    child:Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          'assets/newLogoremovebg.png',
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.contain,
-                          errorBuilder: (context, error, stackTrace) {
-                            return const Icon(Icons.image_not_supported, size: 32);
-                          },
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          "MindEase",
-                          style: TextStyle(
-                            fontFamily: "Nunito",
-                            fontSize: 28,
-                            fontWeight: FontWeight.w800,
-                            color: textMain,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/newLogoremovebg.png',
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.contain,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            "MindEase",
+                            style: TextStyle(
+                              fontFamily: "Nunito",
+                              fontSize: 28,
+                              fontWeight: FontWeight.w800,
+                              color: textMain,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      //  THEME TOGGLE BUTTON
+                      GestureDetector(
+                        onTap: () {
+                          widget.onThemeChanged(!isLight);
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: isLight
+                                ? const Color(0xFFEAF7EF)
+                                : const Color(0xFF2A2A2A),
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(0, 0, 0, 0.15),
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              )
+                            ],
+                          ),
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            transitionBuilder: (child, animation) =>
+                                RotationTransition(turns: animation, child: child),
+                            child: Icon(
+                              isLight ? Icons.light_mode : Icons.dark_mode,
+                              key: ValueKey(isLight),
+                              color: isLight
+                                  ? const Color(0xFF0F5132)
+                                  : const Color(0xFFB8DCC1),
+                              size: 24,
+                            ),
                           ),
                         ),
-                      ],
-                    ),
-                   ),
+                      ),
+                    ],
+                  ),
 
                     const SizedBox(height: 18),
                   // Top card (MindEase + message)
@@ -88,7 +125,7 @@ class _SecondPageState extends State<SecondPage> {
                       border: Border.all(color: border),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(isLight ? 0.06 : 0.25),
+                          color: Color.fromRGBO(0, 0, 0, isLight ? 0.06 : 0.25),
                           blurRadius: 18,
                           offset: const Offset(0, 10),
                         ),
@@ -302,7 +339,15 @@ class _SecondPageState extends State<SecondPage> {
                     isLight: isLight,
                     icon: Icons.person_outline,
                     selected: _selectedIndex == 3,
-                    onTap: () => setState(() => _selectedIndex = 3),
+                    onTap: () {
+                      setState(() => _selectedIndex = 3);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ProfileScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -349,7 +394,7 @@ class _HealOptionCard extends StatelessWidget {
           border: Border.all(color: border),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(isLight ? 0.06 : 0.22),
+              color: Color.fromRGBO(0, 0, 0, isLight ? 0.06 : 0.22),
               blurRadius: 14,
               offset: const Offset(0, 10),
             ),
