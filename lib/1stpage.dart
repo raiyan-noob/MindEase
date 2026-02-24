@@ -30,7 +30,7 @@ class _MyAppState extends State<MyAppFirst> {
               ? Color.fromARGB(255, 255, 255, 255)
               : Color.fromARGB(255, 34, 34, 34),
           appBar: AppBar(
-            leading: Image.asset('assets/Mindease.jpg', fit: BoxFit.cover),
+            leading: Image.asset('assets/newLogoremovebg.png', fit: BoxFit.cover),
             title: const Text(
               'MindEase',
               style: TextStyle(
