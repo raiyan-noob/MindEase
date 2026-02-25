@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:splash_design/profile_screen_main.dart';
+import '1stpage.dart';
+import '2ndpage.dart';
 import 'songent.dart';
 import 'movent.dart';
 
@@ -70,6 +73,46 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
               ),
               onPressed: () => Navigator.pop(context),
             ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 16, top: 8),
+                child: GestureDetector(
+                  onTap: () {
+                    widget.onThemeChanged(!isLight);
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: isLight
+                          ? Color.fromRGBO(255, 255, 255, 0.9)
+                          : Color.fromRGBO(0, 0, 0, 0.6),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.15),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        )
+                      ],
+                    ),
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      transitionBuilder: (child, animation) =>
+                          RotationTransition(turns: animation, child: child),
+                      child: Icon(
+                        isLight ? Icons.light_mode : Icons.dark_mode,
+                        key: ValueKey(isLight),
+                        color: isLight
+                            ? Color.fromRGBO(16, 100, 56, 1)
+                            : Color.fromRGBO(184, 220, 193, 1),
+                        size: 24,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           body: Stack(
             children: [
@@ -91,7 +134,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 240),
+                            const SizedBox(height: 160),
                             Text(
                               'Entertainment can be\n a wonderful way to unwind,\n go through what brings you joy\n and eases your mind.',
                               textAlign: TextAlign.center,
@@ -300,131 +343,56 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
               ),
             ],
           ),
-          endDrawer: Drawer(
-            width: 250,
-            elevation: 30,
-            backgroundColor: isLight
-                ? Color.fromARGB(255, 255, 255, 255)
-                : Color.fromARGB(255, 19, 19, 19),
-            shadowColor: isLight
-                ? Color.fromARGB(255, 4, 13, 9)
-                : Color.fromARGB(255, 184, 220, 193),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
-              ),
-            ),
-            child: Container(
-              child: Column(
+
+          // Add bottom navigation bar (copied from SecondPage)
+          bottomNavigationBar: BottomAppBar(
+            color: isLight ? Colors.white : const Color(0xFF1C1C1C),
+            elevation: 18,
+            child: SizedBox(
+              height: 64,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(height: 100),
-                  ElevatedButton.icon(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      backgroundColor: isLight
-                          ? Color.fromARGB(255, 255, 255, 255)
-                          : Color.fromARGB(255, 19, 19, 19),
-                    ),
-                    icon: Icon(
-                      Icons.person,
-                      color: isLight
-                          ? Color.fromARGB(255, 16, 100, 56)
-                          : Color.fromARGB(255, 184, 220, 193),
-                      size: 25,
-                    ),
-                    label: Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: isLight
-                            ? Color.fromARGB(255, 16, 100, 56)
-                            : Color.fromARGB(255, 184, 220, 193),
-                        fontFamily: 'Nunito',
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
+                  _BottomIcon(
+                    isLight: isLight,
+                    icon: Icons.home_filled,
+                    selected: false,
+                    onTap: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => MyAppFirst(
+                          // feeling: widget.feeling,
+                          isLightNotifier: widget.isLightNotifier,
+                          onThemeChanged: widget.onThemeChanged,
+                        ),
                       ),
                     ),
                   ),
-                  Text(
-                    '-------------------------',
-                    style: TextStyle(
-                      color: isLight
-                          ? Color.fromARGB(255, 16, 100, 56)
-                          : Color.fromARGB(255, 184, 220, 193),
-                      fontFamily: 'Nunito',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  _BottomIcon(
+                    isLight: isLight,
+                    icon: Icons.bookmark_border,
+                    selected: false,
+                    onTap: () {},
                   ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: isLight
-                                ? Color.fromARGB(255, 16, 100, 56)
-                                : Color.fromARGB(255, 184, 220, 193),
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                widget.onThemeChanged(true);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: isLight
-                                      ? Color.fromARGB(255, 16, 100, 56)
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(13),
-                                ),
-                                child: Icon(
-                                  Icons.light_mode,
-                                  color: isLight
-                                      ? Color.fromARGB(255, 255, 255, 255)
-                                      : Color.fromARGB(255, 184, 220, 193),
-                                  size: 24,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                widget.onThemeChanged(false);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: !isLight
-                                      ? Color.fromARGB(255, 184, 220, 193)
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Icon(
-                                  Icons.dark_mode,
-                                  color: !isLight
-                                      ? Color.fromARGB(255, 42, 42, 42)
-                                      : Color.fromARGB(255, 16, 100, 56),
-                                  size: 24,
-                                ),
-                              ),
-                            ),
-                          ],
+                  _BottomIcon(
+                    isLight: isLight,
+                    icon: Icons.timer_outlined,
+                    selected: false,
+                    onTap: () {},
+                  ),
+                  _BottomIcon(
+                    isLight: isLight,
+                    icon: Icons.person_outline,
+                    selected: false,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ProfileScreen(
+                          isLightNotifier: widget.isLightNotifier,
+                          onThemeChanged: widget.onThemeChanged,
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),
@@ -435,3 +403,35 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
     );
   }
 }
+
+// Add _BottomIcon widget if not present
+class _BottomIcon extends StatelessWidget {
+  final bool isLight;
+  final IconData icon;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _BottomIcon({
+    required this.isLight,
+    required this.icon,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final active = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
+    final inactive = isLight ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280);
+
+    return InkResponse(
+      onTap: onTap,
+      radius: 26,
+      child: Icon(
+        icon,
+        size: 26,
+        color: selected ? active : inactive,
+      ),
+    );
+  }
+}
+

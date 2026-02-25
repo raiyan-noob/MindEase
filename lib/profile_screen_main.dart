@@ -28,6 +28,8 @@ class ProfileScreen extends StatelessWidget {
         final border = isLight
             ? const Color(0xFFE7F3EC)
             : const Color(0xFF2A2A2A);
+        // Set deep green color for all text in profile pages
+        final deepGreen = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
         return Scaffold(
           backgroundColor: bg,
           body: SafeArea(
@@ -39,7 +41,7 @@ class ProfileScreen extends StatelessWidget {
                     vertical: 20,
                   ),
                   color: isLight
-                      ? const Color.fromRGBO(0, 152, 139, 1)
+                      ? deepGreen
                       : const Color(0xFF193022),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                         child: Icon(
                           Icons.person,
                           size: 35,
-                          color: Color.fromRGBO(0, 152, 139, 1),
+                          color: Color(0xFF0F5132),
                         ),
                       ),
 
@@ -60,6 +62,7 @@ class ProfileScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // Profile header
                             Text(
                               "Rejwanul Islam",
                               style: TextStyle(
@@ -83,7 +86,7 @@ class ProfileScreen extends StatelessWidget {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: isLight
-                              ? const Color.fromRGBO(0, 152, 139, 1)
+                              ? const Color(0xFF0F5132)
                               : const Color(0xFF193022),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -117,6 +120,7 @@ class ProfileScreen extends StatelessWidget {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
+                          // ProfileScreenItem usage
                           ProfileScreenItem(
                             title: 'Mood History',
                             icon1: Icons.history,

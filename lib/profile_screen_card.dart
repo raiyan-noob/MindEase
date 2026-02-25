@@ -18,8 +18,7 @@ class ProfileScreenItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cardColor = isLight ? Colors.white : const Color(0xFF1E1E1E);
-    final textColor = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
-    final iconColor = isLight ? const Color.fromRGBO(0, 152, 139, 1) : const Color(0xFFB8DCC1);
+    final deepGreen = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
     final shadowColor = isLight ? const Color.fromRGBO(0, 152, 139, 0.15) : const Color(0xFF2A2A2A);
     return InkWell(
       onTap: onTap,
@@ -31,7 +30,7 @@ class ProfileScreenItem extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
-              Icon(icon1, size: 30, color: iconColor),
+              Icon(icon1, size: 30, color: deepGreen),
               const SizedBox(width: 16),
               Expanded(
                 child: Text(
@@ -39,7 +38,7 @@ class ProfileScreenItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: textColor,
+                    color: deepGreen,
                   ),
                 ),
               ),
@@ -53,7 +52,7 @@ class ProfileScreenItem extends StatelessWidget {
                 child: Icon(
                   icon2,
                   size: 16,
-                  color: iconColor,
+                  color: deepGreen,
                 ),
               ),
             ],
