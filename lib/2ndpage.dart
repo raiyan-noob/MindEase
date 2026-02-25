@@ -37,9 +37,15 @@ class _SecondPageState extends State<SecondPage> {
       builder: (context, isLight, _) {
         final bg = isLight ? const Color(0xFFF7FAF8) : const Color(0xFF121212);
         final card = isLight ? Colors.white : const Color(0xFF1E1E1E);
-        final textMain = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
-        final subtle = isLight ? const Color(0xFF6B7280) : const Color(0xFF9CA3AF);
-        final border = isLight ? const Color(0xFFE7F3EC) : const Color(0xFF2A2A2A);
+        final textMain = isLight
+            ? const Color(0xFF0F5132)
+            : const Color(0xFFB8DCC1);
+        final subtle = isLight
+            ? const Color(0xFF6B7280)
+            : const Color(0xFF9CA3AF);
+        final border = isLight
+            ? const Color(0xFFE7F3EC)
+            : const Color(0xFF2A2A2A);
 
         return Scaffold(
           backgroundColor: bg,
@@ -94,13 +100,16 @@ class _SecondPageState extends State<SecondPage> {
                                 color: Color.fromRGBO(0, 0, 0, 0.15),
                                 blurRadius: 8,
                                 offset: const Offset(0, 4),
-                              )
+                              ),
                             ],
                           ),
                           child: AnimatedSwitcher(
                             duration: const Duration(milliseconds: 300),
                             transitionBuilder: (child, animation) =>
-                                RotationTransition(turns: animation, child: child),
+                                RotationTransition(
+                                  turns: animation,
+                                  child: child,
+                                ),
                             child: Icon(
                               isLight ? Icons.light_mode : Icons.dark_mode,
                               key: ValueKey(isLight),
@@ -115,7 +124,7 @@ class _SecondPageState extends State<SecondPage> {
                     ],
                   ),
 
-                    const SizedBox(height: 18),
+                  const SizedBox(height: 18),
                   // Top card (MindEase + message)
                   Container(
                     width: double.infinity,
@@ -141,7 +150,9 @@ class _SecondPageState extends State<SecondPage> {
                               width: 48,
                               height: 48,
                               decoration: BoxDecoration(
-                                color: isLight ? const Color(0xFFEAF7EF) : const Color(0xFF193022),
+                                color: isLight
+                                    ? const Color(0xFFEAF7EF)
+                                    : const Color(0xFF193022),
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(
@@ -170,7 +181,10 @@ class _SecondPageState extends State<SecondPage> {
                                       ),
                                     ),
                                     const TextSpan(text: "Raiyan.\n"),
-                                    const TextSpan(text: "You are your own biggest healer.\n"),
+                                    const TextSpan(
+                                      text:
+                                          "You are your own biggest healer.\n",
+                                    ),
                                     const TextSpan(text: "Take a deep breath."),
                                   ],
                                 ),
@@ -206,8 +220,12 @@ class _SecondPageState extends State<SecondPage> {
                           isLight: isLight,
                           title: "Religion",
                           icon: Icons.mosque,
-                          iconBg: isLight ? const Color(0xFFEAF7EF) : const Color(0xFF193022),
-                          iconColor: isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1),
+                          iconBg: isLight
+                              ? const Color(0xFFEAF7EF)
+                              : const Color(0xFF193022),
+                          iconColor: isLight
+                              ? const Color(0xFF0F5132)
+                              : const Color(0xFFB8DCC1),
                           onTap: () => _goTo(
                             ReligionPage(
                               feeling: widget.feeling,
@@ -223,8 +241,12 @@ class _SecondPageState extends State<SecondPage> {
                           isLight: isLight,
                           title: "Entertainment",
                           icon: Icons.movie_filter_outlined,
-                          iconBg: isLight ? const Color(0xFFEFF6FF) : const Color(0xFF182033),
-                          iconColor: isLight ? const Color(0xFF2563EB) : const Color(0xFF93C5FD),
+                          iconBg: isLight
+                              ? const Color(0xFFEFF6FF)
+                              : const Color(0xFF182033),
+                          iconColor: isLight
+                              ? const Color(0xFF2563EB)
+                              : const Color(0xFF93C5FD),
                           onTap: () => _goTo(
                             EntertainmentPage(
                               feeling: widget.feeling,
@@ -242,10 +264,14 @@ class _SecondPageState extends State<SecondPage> {
                       Expanded(
                         child: _HealOptionCard(
                           isLight: isLight,
-                          title: "Articles & Docs",
+                          title: "Articles  & Documentaries",
                           icon: Icons.article_outlined,
-                          iconBg: isLight ? const Color(0xFFFFF7ED) : const Color(0xFF2A1D12),
-                          iconColor: isLight ? const Color(0xFFEA580C) : const Color(0xFFFBBF24),
+                          iconBg: isLight
+                              ? const Color(0xFFFFF7ED)
+                              : const Color(0xFF2A1D12),
+                          iconColor: isLight
+                              ? const Color(0xFFEA580C)
+                              : const Color(0xFFFBBF24),
                           onTap: () => _goTo(
                             ArticlePage(
                               feeling: widget.feeling,
@@ -261,8 +287,12 @@ class _SecondPageState extends State<SecondPage> {
                           isLight: isLight,
                           title: "Literature",
                           icon: Icons.menu_book_outlined,
-                          iconBg: isLight ? const Color(0xFFF5F3FF) : const Color(0xFF221A33),
-                          iconColor: isLight ? const Color(0xFF7C3AED) : const Color(0xFFC4B5FD),
+                          iconBg: isLight
+                              ? const Color(0xFFF5F3FF)
+                              : const Color(0xFF221A33),
+                          iconColor: isLight
+                              ? const Color(0xFF7C3AED)
+                              : const Color(0xFFC4B5FD),
                           onTap: () => _goTo(
                             LitPage(
                               feeling: widget.feeling,
@@ -278,14 +308,16 @@ class _SecondPageState extends State<SecondPage> {
                   const SizedBox(height: 22),
 
                   Text(
-                    '"Healing takes time, and asking for help\nis a courageous step"',
+                    '"Healing takes time, and asking for help\nis a courageous step"- Mariska Hargitay',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: "Nunito",
-                      fontSize: 12.5,
+                      fontSize: 13.5,
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w800,
-                      color: isLight ? const Color(0xFF6B7280) : const Color(0xFFA7B0A9),
+                      color: isLight
+                          ? const Color(0xFF6B7280)
+                          : const Color(0xFFA7B0A9),
                       height: 1.3,
                     ),
                   ),
@@ -406,10 +438,7 @@ class _HealOptionCard extends StatelessWidget {
             Container(
               width: 48,
               height: 48,
-              decoration: BoxDecoration(
-                color: iconBg,
-                shape: BoxShape.circle,
-              ),
+              decoration: BoxDecoration(color: iconBg, shape: BoxShape.circle),
               child: Icon(icon, color: iconColor, size: 24),
             ),
             const SizedBox(height: 10),
@@ -446,16 +475,14 @@ class _BottomIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final active = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
-    final inactive = isLight ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280);
+    final inactive = isLight
+        ? const Color(0xFF9CA3AF)
+        : const Color(0xFF6B7280);
 
     return InkResponse(
       onTap: onTap,
       radius: 26,
-      child: Icon(
-        icon,
-        size: 26,
-        color: selected ? active : inactive,
-      ),
+      child: Icon(icon, size: 26, color: selected ? active : inactive),
     );
   }
 }
