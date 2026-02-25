@@ -38,7 +38,8 @@ class _SignupPageState extends State<SignupPage> {
         confirmPassword.isEmpty) {
       setState(() {
         message = "Please fill all fields";
-      });}
+      });
+    }
     // } else if (email == "admin@gmail.com") {
     //   if (password != confirmPassword) {
     //     setState(() {
@@ -54,9 +55,10 @@ class _SignupPageState extends State<SignupPage> {
     //     message = "Email already exists";
     //   });
     // }
-      else{
+    else {
       setState(() {
-        message = "Signup Successful!"; //for development purposes no checking of email and pass
+        message =
+            "Signup Successful!"; //for development purposes no checking of email and pass
       });
       Navigator.push(
         context,
@@ -68,7 +70,6 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -88,7 +89,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 20),
               Text(
-                "Start Your Healing Journey!",
+                "MindEase",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 35,
@@ -97,11 +98,11 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               Text(
-                "Create Your Safe Space For Mindfulness.",
+                "Where you become your own healer",
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 20),
-               //Full name field
+              //Full name field
               TextField(
                 controller: fullNameController,
                 decoration: const InputDecoration(
@@ -299,10 +300,10 @@ class _SignupPageState extends State<SignupPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                      "Already have an account?",
-                      style: TextStyle(color: Colors.grey)
+                    "Already have an account?",
+                    style: TextStyle(color: Colors.grey),
                   ),
-                   TextButton(
+                  TextButton(
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -310,11 +311,11 @@ class _SignupPageState extends State<SignupPage> {
                       );
                     },
                     child: const Text(
-                        "login.",
-                        style: TextStyle(
-                          color: Color(0xFF00988B),
-                          fontWeight: FontWeight.bold,
-                        )
+                      "login.",
+                      style: TextStyle(
+                        color: Color(0xFF00988B),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
