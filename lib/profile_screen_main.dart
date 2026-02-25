@@ -3,7 +3,7 @@ import 'package:splash_design/login.dart';
 import 'profile_screen_card.dart';
 import 'profile_screen_item_page.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
   const ProfileScreen({
@@ -13,9 +13,14 @@ class ProfileScreen extends StatelessWidget {
   });
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
-      valueListenable: isLightNotifier,
+      valueListenable: widget.isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? const Color(0xFFF7FAF8) : const Color(0xFF121212);
         final card = isLight ? Colors.white : const Color(0xFF1E1E1E);
@@ -131,8 +136,8 @@ class ProfileScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => History(
-                                    isLightNotifier: isLightNotifier,
-                                    onThemeChanged: onThemeChanged,
+                                    isLightNotifier: widget.isLightNotifier,
+                                    onThemeChanged: widget.onThemeChanged,
                                   ),
                                 ),
                               );
@@ -152,8 +157,8 @@ class ProfileScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => Security(
-                                    isLightNotifier: isLightNotifier,
-                                    onThemeChanged: onThemeChanged,
+                                    isLightNotifier: widget.isLightNotifier,
+                                    onThemeChanged: widget.onThemeChanged,
                                   ),
                                 ),
                               );
@@ -173,8 +178,8 @@ class ProfileScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => Announcements(
-                                    isLightNotifier: isLightNotifier,
-                                    onThemeChanged: onThemeChanged,
+                                    isLightNotifier: widget.isLightNotifier,
+                                    onThemeChanged: widget.onThemeChanged,
                                   ),
                                 ),
                               );
@@ -194,8 +199,8 @@ class ProfileScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => SocialAndExtras(
-                                    isLightNotifier: isLightNotifier,
-                                    onThemeChanged: onThemeChanged,
+                                    isLightNotifier: widget.isLightNotifier,
+                                    onThemeChanged: widget.onThemeChanged,
                                   ),
                                 ),
                               );
@@ -215,8 +220,8 @@ class ProfileScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => InviteFriends(
-                                    isLightNotifier: isLightNotifier,
-                                    onThemeChanged: onThemeChanged,
+                                    isLightNotifier: widget.isLightNotifier,
+                                    onThemeChanged: widget.onThemeChanged,
                                   ),
                                 ),
                               );
@@ -236,8 +241,8 @@ class ProfileScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => PrivacyPolicy(
-                                    isLightNotifier: isLightNotifier,
-                                    onThemeChanged: onThemeChanged,
+                                    isLightNotifier: widget.isLightNotifier,
+                                    onThemeChanged: widget.onThemeChanged,
                                   ),
                                 ),
                               );
@@ -257,8 +262,8 @@ class ProfileScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => ContactUs(
-                                    isLightNotifier: isLightNotifier,
-                                    onThemeChanged: onThemeChanged,
+                                    isLightNotifier: widget.isLightNotifier,
+                                    onThemeChanged: widget.onThemeChanged,
                                   ),
                                 ),
                               );
