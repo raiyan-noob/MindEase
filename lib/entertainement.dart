@@ -44,7 +44,135 @@ class EntertainmentPage extends StatefulWidget {
   State<EntertainmentPage> createState() => _EntertainmentPageState();
 }
 
-class _EntertainmentPageState extends State<EntertainmentPage> {
+class _EntertainmentPageState extends State<EntertainmentPage>
+    with TickerProviderStateMixin {
+  // ✅ No tab highlighted since this is a sub-page
+  int _selectedIndex = 1;
+
+  late AnimationController _navAnimController;
+  late Animation<double> _navBounceAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _navAnimController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 400),
+    );
+    _navBounceAnimation = CurvedAnimation(
+      parent: _navAnimController,
+      curve: Curves.elasticOut,
+    );
+    _navAnimController.forward();
+  }
+
+  @override
+  void dispose() {
+    _navAnimController.dispose();
+    super.dispose();
+  }
+
+  void _onNavTap(int index) {
+    if (_selectedIndex == index) return;
+    setState(() => _selectedIndex = index);
+    _navAnimController.reset();
+    _navAnimController.forward();
+
+    switch (index) {
+      case 0:
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => MyAppFirst(
+              isLightNotifier: widget.isLightNotifier,
+              onThemeChanged: widget.onThemeChanged,
+            ),
+            transitionsBuilder: (_, anim, __, child) {
+              return FadeTransition(
+                opacity: anim,
+                child: SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(-0.15, 0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(parent: anim, curve: Curves.easeOut),
+                      ),
+                  child: child,
+                ),
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 350),
+          ),
+        ).then((_) {
+          if (mounted) setState(() => _selectedIndex = -1);
+        });
+        break;
+      case 1:
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => SecondPage(
+              feeling: widget.feeling,
+              isLightNotifier: widget.isLightNotifier,
+              onThemeChanged: widget.onThemeChanged,
+            ),
+            transitionsBuilder: (_, anim, __, child) {
+              return FadeTransition(
+                opacity: anim,
+                child: SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(-0.15, 0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(parent: anim, curve: Curves.easeOut),
+                      ),
+                  child: child,
+                ),
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 350),
+          ),
+        ).then((_) {
+          if (mounted) setState(() => _selectedIndex = -1);
+        });
+        break;
+      case 2:
+        // Timer placeholder
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => ProfileScreen(
+              isLightNotifier: widget.isLightNotifier,
+              onThemeChanged: widget.onThemeChanged,
+            ),
+            transitionsBuilder: (_, anim, __, child) {
+              return FadeTransition(
+                opacity: anim,
+                child: SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(0.15, 0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(parent: anim, curve: Curves.easeOut),
+                      ),
+                  child: child,
+                ),
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 350),
+          ),
+        ).then((_) {
+          if (mounted) setState(() => _selectedIndex = -1);
+        });
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
@@ -63,6 +191,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
         return Scaffold(
           backgroundColor: Colors.transparent,
           extendBodyBehindAppBar: true,
+          extendBody: true,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -93,7 +222,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                           color: Color.fromRGBO(0, 0, 0, 0.15),
                           blurRadius: 8,
                           offset: const Offset(0, 4),
-                        )
+                        ),
                       ],
                     ),
                     child: AnimatedSwitcher(
@@ -122,7 +251,6 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                   fit: BoxFit.cover,
                 ),
               ),
-
               LayoutBuilder(
                 builder: (context, constraints) {
                   return SingleChildScrollView(
@@ -134,7 +262,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 160),
+                            const SizedBox(height: 240),
                             Text(
                               'Entertainment can be\n a wonderful way to unwind,\n go through what brings you joy\n and eases your mind.',
                               textAlign: TextAlign.center,
@@ -156,9 +284,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                                     : null,
                               ),
                             ),
-
                             const SizedBox(height: 15),
-
                             Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 45,
@@ -231,9 +357,7 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                                 ),
                               ),
                             ),
-
                             const SizedBox(height: 20),
-
                             Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 45,
@@ -306,11 +430,9 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                                 ),
                               ),
                             ),
-
                             const Spacer(),
-
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 30),
+                              padding: const EdgeInsets.only(bottom: 90),
                               child: Text(
                                 '"There is a crack in everything.\nThat\'s how the light gets in" - Leonard Cohen',
                                 textAlign: TextAlign.center,
@@ -344,57 +466,72 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
             ],
           ),
 
-          // Add bottom navigation bar (copied from SecondPage)
-          bottomNavigationBar: BottomAppBar(
-            color: isLight ? Colors.white : const Color(0xFF1C1C1C),
-            elevation: 18,
-            child: SizedBox(
-              height: 64,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _BottomIcon(
-                    isLight: isLight,
-                    icon: Icons.home_filled,
-                    selected: false,
-                    onTap: () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => MyAppFirst(
-                          // feeling: widget.feeling,
-                          isLightNotifier: widget.isLightNotifier,
-                          onThemeChanged: widget.onThemeChanged,
-                        ),
-                      ),
+          // ===== ✅ REDESIGNED ANIMATED BOTTOM NAV =====
+          bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              color: isLight
+                  ? Colors.white.withOpacity(0.95)
+                  : const Color(0xFF1C1C1C).withOpacity(0.95),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(28),
+                topRight: Radius.circular(28),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromRGBO(0, 0, 0, isLight ? 0.08 : 0.35),
+                  blurRadius: 24,
+                  offset: const Offset(0, -6),
+                ),
+              ],
+            ),
+            child: SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 10,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _AnimatedNavItem(
+                      icon: Icons.home_filled,
+                      label: "Home",
+                      index: 0,
+                      selectedIndex: _selectedIndex,
+                      isLight: isLight,
+                      bounceAnimation: _navBounceAnimation,
+                      onTap: () => _onNavTap(0),
                     ),
-                  ),
-                  _BottomIcon(
-                    isLight: isLight,
-                    icon: Icons.bookmark_border,
-                    selected: false,
-                    onTap: () {},
-                  ),
-                  _BottomIcon(
-                    isLight: isLight,
-                    icon: Icons.timer_outlined,
-                    selected: false,
-                    onTap: () {},
-                  ),
-                  _BottomIcon(
-                    isLight: isLight,
-                    icon: Icons.person_outline,
-                    selected: false,
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => ProfileScreen(
-                          isLightNotifier: widget.isLightNotifier,
-                          onThemeChanged: widget.onThemeChanged,
-                        ),
-                      ),
+                    _AnimatedNavItem(
+                      icon: Icons.spa_outlined,
+                      label: "",
+                      index: 1,
+                      selectedIndex: _selectedIndex,
+                      isLight: isLight,
+                      bounceAnimation: _navBounceAnimation,
+                      onTap: () => _onNavTap(1),
                     ),
-                  ),
-                ],
+                    _AnimatedNavItem(
+                      icon: Icons.timer_outlined,
+                      label: "Timer",
+                      index: 2,
+                      selectedIndex: _selectedIndex,
+                      isLight: isLight,
+                      bounceAnimation: _navBounceAnimation,
+                      onTap: () => _onNavTap(2),
+                    ),
+                    _AnimatedNavItem(
+                      icon: Icons.person_outline,
+                      label: "Profile",
+                      index: 3,
+                      selectedIndex: _selectedIndex,
+                      isLight: isLight,
+                      bounceAnimation: _navBounceAnimation,
+                      onTap: () => _onNavTap(3),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -404,34 +541,98 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
   }
 }
 
-// Add _BottomIcon widget if not present
-class _BottomIcon extends StatelessWidget {
-  final bool isLight;
+// ===== ✅ ANIMATED NAV ITEM WIDGET =====
+class _AnimatedNavItem extends StatelessWidget {
   final IconData icon;
-  final bool selected;
+  final String label;
+  final int index;
+  final int selectedIndex;
+  final bool isLight;
+  final Animation<double> bounceAnimation;
   final VoidCallback onTap;
 
-  const _BottomIcon({
-    required this.isLight,
+  const _AnimatedNavItem({
     required this.icon,
-    required this.selected,
+    required this.label,
+    required this.index,
+    required this.selectedIndex,
+    required this.isLight,
+    required this.bounceAnimation,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    final active = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
-    final inactive = isLight ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280);
+    final bool isSelected = index == selectedIndex;
 
-    return InkResponse(
+    final Color activeColor = isLight
+        ? const Color(0xFF0F5132)
+        : const Color(0xFFB8DCC1);
+    final Color inactiveColor = isLight
+        ? const Color(0xFF9CA3AF)
+        : const Color(0xFF6B7280);
+    final Color activeBg = isLight
+        ? const Color(0xFFEAF7EF)
+        : const Color(0xFF193022);
+
+    return GestureDetector(
       onTap: onTap,
-      radius: 26,
-      child: Icon(
-        icon,
-        size: 26,
-        color: selected ? active : inactive,
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 350),
+        curve: Curves.easeOutCubic,
+        padding: EdgeInsets.symmetric(
+          horizontal: isSelected ? 16 : 12,
+          vertical: 8,
+        ),
+        decoration: BoxDecoration(
+          color: isSelected ? activeBg : Colors.transparent,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TweenAnimationBuilder<double>(
+              tween: Tween(
+                begin: isSelected ? 0.8 : 1.0,
+                end: isSelected ? 1.15 : 1.0,
+              ),
+              duration: const Duration(milliseconds: 350),
+              curve: Curves.elasticOut,
+              builder: (context, scale, child) {
+                return Transform.scale(scale: scale, child: child);
+              },
+              child: Icon(
+                icon,
+                size: 24,
+                color: isSelected ? activeColor : inactiveColor,
+              ),
+            ),
+            AnimatedSize(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOutCubic,
+              child: isSelected
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: AnimatedOpacity(
+                        opacity: isSelected ? 1.0 : 0.0,
+                        duration: const Duration(milliseconds: 250),
+                        child: Text(
+                          label,
+                          style: TextStyle(
+                            fontFamily: "Nunito",
+                            fontSize: 13,
+                            fontWeight: FontWeight.w800,
+                            color: activeColor,
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-

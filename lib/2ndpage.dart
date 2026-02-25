@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:splash_design/1stpage.dart';
-
 import 'package:splash_design/Literature.dart';
 import 'religionpage.dart';
 import 'entertainement.dart';
@@ -23,8 +22,104 @@ class SecondPage extends StatefulWidget {
   State<SecondPage> createState() => _SecondPageState();
 }
 
-class _SecondPageState extends State<SecondPage> {
-  int _selectedIndex = 0;
+class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
+  // ✅ Default to index 1 since this is the 2nd screen
+  int _selectedIndex = 1;
+
+  // Animation controller for bottom nav indicator
+  late AnimationController _navAnimController;
+  late Animation<double> _navBounceAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _navAnimController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 400),
+    );
+    _navBounceAnimation = CurvedAnimation(
+      parent: _navAnimController,
+      curve: Curves.elasticOut,
+    );
+    _navAnimController.forward();
+  }
+
+  @override
+  void dispose() {
+    _navAnimController.dispose();
+    super.dispose();
+  }
+
+  void _onNavTap(int index) {
+    if (_selectedIndex == index) return;
+    setState(() => _selectedIndex = index);
+    _navAnimController.reset();
+    _navAnimController.forward();
+
+    // Navigate based on index
+    switch (index) {
+      case 0:
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => MyAppFirst(
+              isLightNotifier: widget.isLightNotifier,
+              onThemeChanged: widget.onThemeChanged,
+            ),
+            transitionsBuilder: (_, anim, __, child) {
+              return FadeTransition(
+                opacity: anim,
+                child: SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(-0.15, 0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(parent: anim, curve: Curves.easeOut),
+                      ),
+                  child: child,
+                ),
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 350),
+          ),
+        );
+        break;
+      case 1:
+        // Already on this page
+        break;
+      case 2:
+        // Timer page placeholder — add your page here
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => ProfileScreen(
+              isLightNotifier: widget.isLightNotifier,
+              onThemeChanged: widget.onThemeChanged,
+            ),
+            transitionsBuilder: (_, anim, __, child) {
+              return FadeTransition(
+                opacity: anim,
+                child: SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(0.15, 0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(parent: anim, curve: Curves.easeOut),
+                      ),
+                  child: child,
+                ),
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 350),
+          ),
+        );
+        break;
+    }
+  }
 
   void _goTo(Widget page) {
     Navigator.push(context, MaterialPageRoute(builder: (_) => page));
@@ -97,7 +192,7 @@ class _SecondPageState extends State<SecondPage> {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: Color.fromRGBO(0, 0, 0, 0.15),
+                                color: const Color.fromRGBO(0, 0, 0, 0.15),
                                 blurRadius: 8,
                                 offset: const Offset(0, 4),
                               ),
@@ -123,9 +218,7 @@ class _SecondPageState extends State<SecondPage> {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 18),
-                  // Top card (MindEase + message)
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(16),
@@ -174,7 +267,7 @@ class _SecondPageState extends State<SecondPage> {
                                   ),
                                   children: [
                                     TextSpan(
-                                      text: "It’s okay to feel this way,\n",
+                                      text: "It's okay to feel this way,\n",
                                       style: TextStyle(
                                         color: textMain,
                                         fontWeight: FontWeight.w900,
@@ -195,9 +288,7 @@ class _SecondPageState extends State<SecondPage> {
                       ],
                     ),
                   ),
-
                   const SizedBox(height: 18),
-
                   Text(
                     "Choose how you want to\nheal yourself today",
                     textAlign: TextAlign.center,
@@ -209,10 +300,7 @@ class _SecondPageState extends State<SecondPage> {
                       height: 1.15,
                     ),
                   ),
-
                   const SizedBox(height: 25),
-
-                  // Options grid
                   Row(
                     children: [
                       Expanded(
@@ -304,9 +392,7 @@ class _SecondPageState extends State<SecondPage> {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 22),
-
                   Text(
                     '"Healing takes time, and asking for help\nis a courageous step"- Mariska Hargitay',
                     textAlign: TextAlign.center,
@@ -326,62 +412,70 @@ class _SecondPageState extends State<SecondPage> {
             ),
           ),
 
-          // ===== BOTTOM NAV (like screenshot) =====
-          bottomNavigationBar: BottomAppBar(
-            color: isLight ? Colors.white : const Color(0xFF1C1C1C),
-            elevation: 18,
-            child: SizedBox(
-              height: 64,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _BottomIcon(
-                    isLight: isLight,
-                    icon: Icons.home_filled,
-                    selected: _selectedIndex == 0,
-                    onTap:  () {
-                      setState(() => _selectedIndex = 3);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => MyAppFirst(
-                            isLightNotifier: widget.isLightNotifier,
-                            onThemeChanged: widget.onThemeChanged,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  _BottomIcon(
-                    isLight: isLight,
-                    icon: Icons.bookmark_border,
-                    selected: _selectedIndex == 1,
-                    onTap: () => setState(() => _selectedIndex = 1),
-                  ),
-                  _BottomIcon(
-                    isLight: isLight,
-                    icon: Icons.timer_outlined,
-                    selected: _selectedIndex == 2,
-                    onTap: () => setState(() => _selectedIndex = 2),
-                  ),
-                  _BottomIcon(
-                    isLight: isLight,
-                    icon: Icons.person_outline,
-                    selected: _selectedIndex == 3,
-                    onTap: () {
-                      setState(() => _selectedIndex = 3);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => ProfileScreen(
-                            isLightNotifier: widget.isLightNotifier,
-                            onThemeChanged: widget.onThemeChanged,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+
+          bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              color: isLight ? Colors.white : const Color(0xFF1C1C1C),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(28),
+                topRight: Radius.circular(28),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromRGBO(0, 0, 0, isLight ? 0.08 : 0.35),
+                  blurRadius: 24,
+                  offset: const Offset(0, -6),
+                ),
+              ],
+            ),
+            child: SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 10,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _AnimatedNavItem(
+                      icon: Icons.home_filled,
+                      label: "Home",
+                      index: 0,
+                      selectedIndex: _selectedIndex,
+                      isLight: isLight,
+                      bounceAnimation: _navBounceAnimation,
+                      onTap: () => _onNavTap(0),
+                    ),
+                    _AnimatedNavItem(
+                      icon: Icons.spa_outlined,
+                      label: "",
+                      index: 1,
+                      selectedIndex: _selectedIndex,
+                      isLight: isLight,
+                      bounceAnimation: _navBounceAnimation,
+                      onTap: () => _onNavTap(1),
+                    ),
+                    _AnimatedNavItem(
+                      icon: Icons.timer_outlined,
+                      label: "",
+                      index: 2,
+                      selectedIndex: _selectedIndex,
+                      isLight: isLight,
+                      bounceAnimation: _navBounceAnimation,
+                      onTap: () => _onNavTap(2),
+                    ),
+                    _AnimatedNavItem(
+                      icon: Icons.person_outline,
+                      label: "Profile",
+                      index: 3,
+                      selectedIndex: _selectedIndex,
+                      isLight: isLight,
+                      bounceAnimation: _navBounceAnimation,
+                      onTap: () => _onNavTap(3),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -391,6 +485,148 @@ class _SecondPageState extends State<SecondPage> {
   }
 }
 
+// ===== ✅ ANIMATED NAV ITEM WIDGET =====
+class _AnimatedNavItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final int index;
+  final int selectedIndex;
+  final bool isLight;
+  final Animation<double> bounceAnimation;
+  final VoidCallback onTap;
+
+  const _AnimatedNavItem({
+    required this.icon,
+    required this.label,
+    required this.index,
+    required this.selectedIndex,
+    required this.isLight,
+    required this.bounceAnimation,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isSelected = index == selectedIndex;
+
+    final Color activeColor = isLight
+        ? const Color(0xFF0F5132)
+        : const Color(0xFFB8DCC1);
+    final Color inactiveColor = isLight
+        ? const Color(0xFF9CA3AF)
+        : const Color(0xFF6B7280);
+    final Color activeBg = isLight
+        ? const Color(0xFFEAF7EF)
+        : const Color(0xFF193022);
+
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedBuilder(
+        animation: bounceAnimation,
+        isSelected: isSelected,
+        builder: (context, isSelected) {
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 350),
+            curve: Curves.easeOutCubic,
+            padding: EdgeInsets.symmetric(
+              horizontal: isSelected ? 16 : 12,
+              vertical: 8,
+            ),
+            decoration: BoxDecoration(
+              color: isSelected ? activeBg : Colors.transparent,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Animated icon with scale
+                TweenAnimationBuilder<double>(
+                  tween: Tween(
+                    begin: isSelected ? 0.8 : 1.0,
+                    end: isSelected ? 1.15 : 1.0,
+                  ),
+                  duration: const Duration(milliseconds: 350),
+                  curve: Curves.elasticOut,
+                  builder: (context, scale, child) {
+                    return Transform.scale(scale: scale, child: child);
+                  },
+                  child: Icon(
+                    icon,
+                    size: 24,
+                    color: isSelected ? activeColor : inactiveColor,
+                  ),
+                ),
+                // Animated label that slides in/out
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeOutCubic,
+                  child: isSelected
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: AnimatedOpacity(
+                            opacity: isSelected ? 1.0 : 0.0,
+                            duration: const Duration(milliseconds: 250),
+                            child: Text(
+                              label,
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 13,
+                                fontWeight: FontWeight.w800,
+                                color: activeColor,
+                              ),
+                            ),
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+
+class AnimatedBuilder extends StatelessWidget {
+  final Animation<double> animation;
+  final bool isSelected;
+  final Widget Function(BuildContext context, bool isSelected) builder;
+
+  const AnimatedBuilder({
+    super.key,
+    required this.animation,
+    required this.isSelected,
+    required this.builder,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder2(
+      animation: animation,
+      builder: (context, _) => builder(context, isSelected),
+    );
+  }
+}
+
+class AnimatedBuilder2 extends AnimatedWidget {
+  final Widget Function(BuildContext context, Widget? child) builder;
+
+  const AnimatedBuilder2({
+    super.key,
+    required Animation<double> animation,
+    required this.builder,
+  }) : super(listenable: animation);
+
+  @override
+  Widget build(BuildContext context) {
+    return builder(context, null);
+  }
+}
+
+// ===== HEAL OPTION CARD (unchanged) =====
 class _HealOptionCard extends StatelessWidget {
   final bool isLight;
   final String title;
@@ -455,34 +691,6 @@ class _HealOptionCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _BottomIcon extends StatelessWidget {
-  final bool isLight;
-  final IconData icon;
-  final bool selected;
-  final VoidCallback onTap;
-
-  const _BottomIcon({
-    required this.isLight,
-    required this.icon,
-    required this.selected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final active = isLight ? const Color(0xFF0F5132) : const Color(0xFFB8DCC1);
-    final inactive = isLight
-        ? const Color(0xFF9CA3AF)
-        : const Color(0xFF6B7280);
-
-    return InkResponse(
-      onTap: onTap,
-      radius: 26,
-      child: Icon(icon, size: 26, color: selected ? active : inactive),
     );
   }
 }
