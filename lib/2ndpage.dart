@@ -82,7 +82,7 @@ class _SecondPageState extends State<SecondPage> {
                         ],
                       ),
 
-                      //  THEME TOGGLE BUTTON
+                      //  toggle
                       GestureDetector(
                         onTap: () {
                           widget.onThemeChanged(!isLight);
