@@ -585,6 +585,46 @@ class _NovelPageState extends State<NovelPage> {
                 ),
               ),
             ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 16, top: 8),
+                child: GestureDetector(
+                  onTap: () {
+                    widget.onThemeChanged(!isLight);
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: isLight
+                          ? Color.fromRGBO(255, 255, 255, 0.9)
+                          : Color.fromRGBO(0, 0, 0, 0.6),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.15),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      transitionBuilder: (child, animation) =>
+                          RotationTransition(turns: animation, child: child),
+                      child: Icon(
+                        isLight ? Icons.light_mode : Icons.dark_mode,
+                        key: ValueKey(isLight),
+                        color: isLight
+                            ? Color.fromRGBO(16, 100, 56, 1)
+                            : Color.fromRGBO(184, 220, 193, 1),
+                        size: 24,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
@@ -602,7 +642,7 @@ class _NovelPageState extends State<NovelPage> {
             ),
           ),
 
-          endDrawer: Drawer(
+          /*endDrawer: Drawer(
             width: 250,
             elevation: 30,
             backgroundColor: isLight
@@ -732,7 +772,7 @@ class _NovelPageState extends State<NovelPage> {
                 ],
               ),
             ),
-          ),
+          ),*/
         );
       },
     );

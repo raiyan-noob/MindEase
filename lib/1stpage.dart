@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:splash_design/2ndpage.dart';
+import 'profile_screen_main.dart';
 
 class MyAppFirst extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
@@ -17,8 +18,14 @@ class MyAppFirst extends StatefulWidget {
   State<MyAppFirst> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyAppFirst> {
+class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
   String? selectedFeeling;
+
+  // ✅ Default to index 0 since this is the Home/1st page
+  int _selectedIndex = 0;
+
+  late AnimationController _navAnimController;
+  late Animation<double> _navBounceAnimation;
 
   final Map<String, Map<String, dynamic>> feelingOptions = {
     'Sad': {
@@ -53,6 +60,80 @@ class _MyAppState extends State<MyAppFirst> {
     },
   };
 
+  @override
+  void initState() {
+    super.initState();
+    _navAnimController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 400),
+    );
+    _navBounceAnimation = CurvedAnimation(
+      parent: _navAnimController,
+      curve: Curves.elasticOut,
+    );
+    _navAnimController.forward();
+  }
+
+  @override
+  void dispose() {
+    _navAnimController.dispose();
+    super.dispose();
+  }
+
+  void _onNavTap(int index) {
+    if (_selectedIndex == index) return;
+    setState(() => _selectedIndex = index);
+    _navAnimController.reset();
+    _navAnimController.forward();
+
+    switch (index) {
+      case 0:
+        // Already on Home
+        break;
+      case 1:
+        // Heal page — show the feeling bottom sheet
+        final isLight = widget.isLightNotifier.value;
+        _showFeelingBottomSheet(isLight);
+        // Reset back to home after bottom sheet
+        Future.delayed(const Duration(milliseconds: 200), () {
+          if (mounted) setState(() => _selectedIndex = 0);
+        });
+        break;
+      case 2:
+        // Timer page placeholder
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => ProfileScreen(
+              isLightNotifier: widget.isLightNotifier,
+              onThemeChanged: widget.onThemeChanged,
+            ),
+            transitionsBuilder: (_, anim, __, child) {
+              return FadeTransition(
+                opacity: anim,
+                child: SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(0.15, 0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(parent: anim, curve: Curves.easeOut),
+                      ),
+                  child: child,
+                ),
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 350),
+          ),
+        ).then((_) {
+          if (mounted) setState(() => _selectedIndex = 0);
+        });
+        break;
+    }
+  }
+
   void _showFeelingBottomSheet(bool isLight) {
     showModalBottomSheet(
       context: context,
@@ -81,7 +162,6 @@ class _MyAppState extends State<MyAppFirst> {
                 ),
               ),
               const SizedBox(height: 16),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
@@ -121,11 +201,9 @@ class _MyAppState extends State<MyAppFirst> {
                 ),
               ),
               const SizedBox(height: 20),
-
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-
                   children: feelingOptions.entries.map((entry) {
                     final String label = entry.key;
                     final IconData icon = entry.value['icon'];
@@ -150,6 +228,7 @@ class _MyAppState extends State<MyAppFirst> {
                         );
                         setState(() {
                           selectedFeeling = null;
+                          _selectedIndex = 0;
                         });
                       },
                       child: Container(
@@ -165,7 +244,12 @@ class _MyAppState extends State<MyAppFirst> {
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(
                             color: isLight
-                                ? Color.fromRGBO((bgColor.r * 255.0).round().clamp(0, 255), (bgColor.g * 255.0).round().clamp(0, 255), (bgColor.b * 255.0).round().clamp(0, 255), 0.3)
+                                ? Color.fromRGBO(
+                                    (bgColor.r * 255.0).round().clamp(0, 255),
+                                    (bgColor.g * 255.0).round().clamp(0, 255),
+                                    (bgColor.b * 255.0).round().clamp(0, 255),
+                                    0.3,
+                                  )
                                 : Colors.grey.shade700,
                             width: 1,
                           ),
@@ -179,12 +263,16 @@ class _MyAppState extends State<MyAppFirst> {
                                 shape: BoxShape.circle,
                                 color: isLight
                                     ? bgColor
-                                    : Color.fromRGBO((color.r * 255.0).round().clamp(0, 255), (color.g * 255.0).round().clamp(0, 255), (color.b * 255.0).round().clamp(0, 255), 0.15),
+                                    : Color.fromRGBO(
+                                        (color.r * 255.0).round().clamp(0, 255),
+                                        (color.g * 255.0).round().clamp(0, 255),
+                                        (color.b * 255.0).round().clamp(0, 255),
+                                        0.15,
+                                      ),
                               ),
                               child: Icon(icon, color: color, size: 22),
                             ),
                             const SizedBox(width: 16),
-
                             Text(
                               label,
                               style: TextStyle(
@@ -196,13 +284,16 @@ class _MyAppState extends State<MyAppFirst> {
                                     : Color.fromARGB(255, 200, 200, 200),
                               ),
                             ),
-
                             const Spacer(),
-
                             Icon(
                               Icons.arrow_forward_ios_rounded,
                               color: isLight
-                                  ? Color.fromRGBO((color.r * 255.0).round().clamp(0, 255), (color.g * 255.0).round().clamp(0, 255), (color.b * 255.0).round().clamp(0, 255), 0.5)
+                                  ? Color.fromRGBO(
+                                      (color.r * 255.0).round().clamp(0, 255),
+                                      (color.g * 255.0).round().clamp(0, 255),
+                                      (color.b * 255.0).round().clamp(0, 255),
+                                      0.5,
+                                    )
                                   : Colors.grey.shade600,
                               size: 16,
                             ),
@@ -239,7 +330,7 @@ class _MyAppState extends State<MyAppFirst> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(height: 50), // Space at the top
+                  SizedBox(height: 50),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -282,13 +373,16 @@ class _MyAppState extends State<MyAppFirst> {
                                 color: Color.fromRGBO(0, 0, 0, 0.15),
                                 blurRadius: 8,
                                 offset: const Offset(0, 4),
-                              )
+                              ),
                             ],
                           ),
                           child: AnimatedSwitcher(
                             duration: const Duration(milliseconds: 300),
                             transitionBuilder: (child, animation) =>
-                                RotationTransition(turns: animation, child: child),
+                                RotationTransition(
+                                  turns: animation,
+                                  child: child,
+                                ),
                             child: Icon(
                               isLight ? Icons.light_mode : Icons.dark_mode,
                               key: ValueKey(isLight),
@@ -328,7 +422,9 @@ class _MyAppState extends State<MyAppFirst> {
                             children: [
                               const SizedBox(height: 40),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                ),
                                 child: SizedBox(
                                   width: double.infinity,
                                   child: Text(
@@ -336,7 +432,8 @@ class _MyAppState extends State<MyAppFirst> {
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       color: accent.withOpacity(
-                                        0.8 + (math.Random().nextDouble() * 0.2),
+                                        0.8 +
+                                            (math.Random().nextDouble() * 0.2),
                                       ),
                                       fontFamily: 'Titillium Web',
                                       fontSize: 25,
@@ -351,7 +448,6 @@ class _MyAppState extends State<MyAppFirst> {
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 20,
                                 ),
-
                                 child: Text(
                                   'How are you feeling today?',
                                   textAlign: TextAlign.left,
@@ -368,11 +464,9 @@ class _MyAppState extends State<MyAppFirst> {
                                 ),
                               ),
                               const SizedBox(height: 25),
-
                               GestureDetector(
                                 onTap: () => _showFeelingBottomSheet(isLight),
                                 child: Container(
-
                                   width: 340,
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 16,
@@ -385,7 +479,21 @@ class _MyAppState extends State<MyAppFirst> {
                                     borderRadius: BorderRadius.circular(15),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color.fromRGBO((accent.r * 255.0).round().clamp(0, 255), (accent.g * 255.0).round().clamp(0, 255), (accent.b * 255.0).round().clamp(0, 255), 0.5),
+                                        color: Color.fromRGBO(
+                                          (accent.r * 255.0).round().clamp(
+                                            0,
+                                            255,
+                                          ),
+                                          (accent.g * 255.0).round().clamp(
+                                            0,
+                                            255,
+                                          ),
+                                          (accent.b * 255.0).round().clamp(
+                                            0,
+                                            255,
+                                          ),
+                                          0.5,
+                                        ),
                                         blurRadius: 10,
                                         offset: const Offset(0, 4),
                                       ),
@@ -398,7 +506,23 @@ class _MyAppState extends State<MyAppFirst> {
                                       Text(
                                         'Dive into your feelings',
                                         style: TextStyle(
-                                          color: Color.fromRGBO((accent.r * 255.0).round().clamp(0, 255), (accent.g * 255.0).round().clamp(0, 255), (accent.b * 255.0).round().clamp(0, 255), 0.8 + (math.Random().nextDouble() * 0.2)),
+                                          color: Color.fromRGBO(
+                                            (accent.r * 255.0).round().clamp(
+                                              0,
+                                              255,
+                                            ),
+                                            (accent.g * 255.0).round().clamp(
+                                              0,
+                                              255,
+                                            ),
+                                            (accent.b * 255.0).round().clamp(
+                                              0,
+                                              255,
+                                            ),
+                                            0.8 +
+                                                (math.Random().nextDouble() *
+                                                    0.2),
+                                          ),
                                           fontFamily: 'Titillium Web',
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
@@ -413,9 +537,7 @@ class _MyAppState extends State<MyAppFirst> {
                                   ),
                                 ),
                               ),
-
                               const Spacer(),
-
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -435,7 +557,8 @@ class _MyAppState extends State<MyAppFirst> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 20),
+                              // ✅ Extra space so content doesn't hide behind nav
+                              const SizedBox(height: 90),
                             ],
                           ),
                         ),
@@ -447,150 +570,176 @@ class _MyAppState extends State<MyAppFirst> {
             ],
           ),
 
-          // endDrawer: Drawer(
-          //   width: 250,
-          //   elevation: 30,
-          //   backgroundColor: isLight
-          //       ? Color.fromARGB(255, 255, 255, 255)
-          //       : Color.fromARGB(255, 19, 19, 19),
-          //   shadowColor: isLight
-          //       ? Color.fromARGB(255, 4, 13, 9)
-          //       : Color.fromARGB(255, 184, 220, 193),
-          //   shape: RoundedRectangleBorder(
-          //     borderRadius: BorderRadius.only(
-          //       topLeft: Radius.circular(20),
-          //       bottomLeft: Radius.circular(20),
-          //     ),
-          //   ),
-          //   child: Container(
-          //     child: Column(
-          //       children: [
-          //         SizedBox(height: 100),
-          //         ElevatedButton.icon(
-          //           onPressed: () {},
-          //           style: ElevatedButton.styleFrom(
-          //             elevation: 0,
-          //             backgroundColor: isLight
-          //                 ? Color.fromARGB(255, 255, 255, 255)
-          //                 : Color.fromARGB(255, 19, 19, 19),
-          //           ),
-          //           icon: Icon(
-          //             Icons.person,
-          //             color: isLight
-          //                 ? Color.fromARGB(255, 16, 100, 56)
-          //                 : Color.fromARGB(255, 184, 220, 193),
-          //             size: 25,
-          //           ),
-          //           label: Text(
-          //             'Profile',
-          //             style: TextStyle(
-          //               color: isLight
-          //                   ? Color.fromARGB(255, 16, 100, 56)
-          //                   : Color.fromARGB(255, 184, 220, 193),
-          //               fontFamily: 'Nunito',
-          //               fontSize: 25,
-          //               fontWeight: FontWeight.bold,
-          //             ),
-          //           ),
-          //         ),
-          //         Text(
-          //           '-------------------------',
-          //           style: TextStyle(
-          //             color: isLight
-          //                 ? Color.fromARGB(255, 16, 100, 56)
-          //                 : Color.fromARGB(255, 184, 220, 193),
-          //             fontFamily: 'Nunito',
-          //             fontSize: 20,
-          //             fontWeight: FontWeight.w600,
-          //           ),
-          //         ),
-          //         SizedBox(height: 20),
-          //         Row(
-          //           mainAxisAlignment: MainAxisAlignment.center,
-          //           children: [
-          //             Container(
-          //               decoration: BoxDecoration(
-          //                 border: Border.all(
-          //                   color: isLight
-          //                       ? Color.fromARGB(255, 16, 100, 56)
-          //                       : Color.fromARGB(255, 184, 220, 193),
-          //                   width: 2,
-          //                 ),
-          //                 borderRadius: BorderRadius.circular(20),
-          //               ),
-          //               child: Row(
-          //                 children: [
-          //                   GestureDetector(
-          //                     onTap: () {
-          //                       widget.onThemeChanged(true);
-          //                     },
-          //                     child: Container(
-          //                       padding: EdgeInsets.symmetric(
-          //                         horizontal: 20,
-          //                         vertical: 12,
-          //                       ),
-          //                       decoration: BoxDecoration(
-          //                         color: isLight
-          //                             ? Color.fromARGB(255, 16, 100, 56)
-          //                             : Colors.transparent,
-          //                         borderRadius: BorderRadius.circular(13),
-          //                       ),
-          //                       child: Icon(
-          //                         Icons.light_mode,
-          //                         color: isLight
-          //                             ? Color.fromARGB(255, 255, 255, 255)
-          //                             : Color.fromARGB(255, 184, 220, 193),
-          //                         size: 24,
-          //                       ),
-          //                     ),
-          //                   ),
-          //                   GestureDetector(
-          //                     onTap: () {
-          //                       widget.onThemeChanged(false);
-          //                     },
-          //                     child: Container(
-          //                       padding: EdgeInsets.symmetric(
-          //                         horizontal: 20,
-          //                         vertical: 12,
-          //                       ),
-          //                       decoration: BoxDecoration(
-          //                         color: !isLight
-          //                             ? Color.fromARGB(255, 184, 220, 193)
-          //                             : Colors.transparent,
-          //                         borderRadius: BorderRadius.circular(16),
-          //                       ),
-          //                       child: Icon(
-          //                         Icons.dark_mode,
-          //                         color: !isLight
-          //                             ? Color.fromARGB(255, 42, 42, 42)
-          //                             : Color.fromARGB(255, 16, 100, 56),
-          //                         size: 24,
-          //                       ),
-          //                     ),
-          //                   ),
-          //                 ],
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //         const SizedBox(height: 20),
-          //         Text(
-          //           '-------------------------',
-          //           style: TextStyle(
-          //             color: isLight
-          //                 ? Color.fromARGB(255, 16, 100, 56)
-          //                 : Color.fromARGB(255, 184, 220, 193),
-          //             fontFamily: 'Nunito',
-          //             fontSize: 20,
-          //             fontWeight: FontWeight.w600,
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          // ===== ✅ ANIMATED BOTTOM NAVIGATION BAR =====
+          extendBody: true,
+          bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              color: isLight
+                  ? Colors.white.withOpacity(0.95)
+                  : const Color(0xFF1C1C1C).withOpacity(0.95),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(28),
+                topRight: Radius.circular(28),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromRGBO(0, 0, 0, isLight ? 0.08 : 0.35),
+                  blurRadius: 24,
+                  offset: const Offset(0, -6),
+                ),
+              ],
+            ),
+            child: SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 10,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _AnimatedNavItem(
+                      icon: Icons.home_filled,
+                      label: "",
+                      index: 0,
+                      selectedIndex: _selectedIndex,
+                      isLight: isLight,
+                      bounceAnimation: _navBounceAnimation,
+                      onTap: () => _onNavTap(0),
+                    ),
+                    _AnimatedNavItem(
+                      icon: Icons.spa_outlined,
+                      label: "",
+                      index: 1,
+                      selectedIndex: _selectedIndex,
+                      isLight: isLight,
+                      bounceAnimation: _navBounceAnimation,
+                      onTap: () => _onNavTap(1),
+                    ),
+                    _AnimatedNavItem(
+                      icon: Icons.timer_outlined,
+                      label: "",
+                      index: 2,
+                      selectedIndex: _selectedIndex,
+                      isLight: isLight,
+                      bounceAnimation: _navBounceAnimation,
+                      onTap: () => _onNavTap(2),
+                    ),
+                    _AnimatedNavItem(
+                      icon: Icons.person_outline,
+                      label: "Profile",
+                      index: 3,
+                      selectedIndex: _selectedIndex,
+                      isLight: isLight,
+                      bounceAnimation: _navBounceAnimation,
+                      onTap: () => _onNavTap(3),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         );
       },
+    );
+  }
+}
+
+// ===== ✅ ANIMATED NAV ITEM WIDGET =====
+class _AnimatedNavItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final int index;
+  final int selectedIndex;
+  final bool isLight;
+  final Animation<double> bounceAnimation;
+  final VoidCallback onTap;
+
+  const _AnimatedNavItem({
+    required this.icon,
+    required this.label,
+    required this.index,
+    required this.selectedIndex,
+    required this.isLight,
+    required this.bounceAnimation,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isSelected = index == selectedIndex;
+
+    final Color activeColor = isLight
+        ? const Color(0xFF0F5132)
+        : const Color(0xFFB8DCC1);
+    final Color inactiveColor = isLight
+        ? const Color(0xFF9CA3AF)
+        : const Color(0xFF6B7280);
+    final Color activeBg = isLight
+        ? const Color(0xFFEAF7EF)
+        : const Color(0xFF193022);
+
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 350),
+        curve: Curves.easeOutCubic,
+        padding: EdgeInsets.symmetric(
+          horizontal: isSelected ? 16 : 12,
+          vertical: 8,
+        ),
+        decoration: BoxDecoration(
+          color: isSelected ? activeBg : Colors.transparent,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Animated icon with scale
+            TweenAnimationBuilder<double>(
+              tween: Tween(
+                begin: isSelected ? 0.8 : 1.0,
+                end: isSelected ? 1.15 : 1.0,
+              ),
+              duration: const Duration(milliseconds: 350),
+              curve: Curves.elasticOut,
+              builder: (context, scale, child) {
+                return Transform.scale(scale: scale, child: child);
+              },
+              child: Icon(
+                icon,
+                size: 24,
+                color: isSelected ? activeColor : inactiveColor,
+              ),
+            ),
+            // Animated label that slides in/out
+            AnimatedSize(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOutCubic,
+              child: isSelected
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: AnimatedOpacity(
+                        opacity: isSelected ? 1.0 : 0.0,
+                        duration: const Duration(milliseconds: 250),
+                        child: Text(
+                          label,
+                          style: TextStyle(
+                            fontFamily: "Nunito",
+                            fontSize: 13,
+                            fontWeight: FontWeight.w800,
+                            color: activeColor,
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
