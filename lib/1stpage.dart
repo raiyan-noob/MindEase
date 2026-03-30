@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:splash_design/2ndpage.dart';
-import 'profile_screen_main.dart';
+import 'profile/profile_screen_main.dart';
 
 class MyAppFirst extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
