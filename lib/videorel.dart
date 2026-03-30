@@ -112,94 +112,96 @@ class _VideoRelPageState extends State<VideoRelPage> {
           ),
         ],
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          GestureDetector(
-            onTap: () => _launchURL(video.videoUrl),
-            child: Container(
-              width: 88,
-              height: 67,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: accent, width: 2),
-                boxShadow: [
-                  BoxShadow(
-                    color: accent.withOpacity(0.3),
-                    blurRadius: 4,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.network(
-                    video.thumbnailUrl,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: accent.withOpacity(0.2),
-                        child: Icon(Icons.play_circle, color: accent, size: 40),
-                      );
-                    },
-                  ),
-
-                  Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black.withOpacity(0.4),
+      child: SafeArea(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GestureDetector(
+              onTap: () => _launchURL(video.videoUrl),
+              child: Container(
+                width: 88,
+                height: 67,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: accent, width: 2),
+                  boxShadow: [
+                    BoxShadow(
+                      color: accent.withOpacity(0.3),
+                      blurRadius: 4,
+                      offset: Offset(0, 2),
                     ),
-                    padding: const EdgeInsets.all(8),
-                    child: Icon(
-                      Icons.play_arrow,
-                      color: Colors.white,
-                      size: 24,
+                  ],
+                ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.network(
+                      video.thumbnailUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: accent.withOpacity(0.2),
+                          child: Icon(Icons.play_circle, color: accent, size: 40),
+                        );
+                      },
                     ),
-                  ),
-                ],
+        
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.black.withOpacity(0.4),
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: Icon(
+                        Icons.play_arrow,
+                        color: Colors.white,
+                        size: 24,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(width: 12),
-
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  child: Text(
-                    video.title,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.bold,
-                      color: accent,
+            const SizedBox(width: 12),
+        
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    child: Text(
+                      video.title,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontFamily: 'Nunito',
+                        fontWeight: FontWeight.bold,
+                        color: accent,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    maxLines: 2,
+                  ),
+                  const SizedBox(height: 8),
+        
+                  Text(
+                    video.description,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontFamily: 'Nunito',
+                      fontWeight: FontWeight.w500,
+                      color: isLight
+                          ? Color.fromRGBO(70, 70, 70, 1.0)
+                          : Color.fromRGBO(200, 200, 200, 1.0),
+                    ),
+                    maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                const SizedBox(height: 8),
-
-                Text(
-                  video.description,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontFamily: 'Nunito',
-                    fontWeight: FontWeight.w500,
-                    color: isLight
-                        ? Color.fromRGBO(70, 70, 70, 1.0)
-                        : Color.fromRGBO(200, 200, 200, 1.0),
-                  ),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

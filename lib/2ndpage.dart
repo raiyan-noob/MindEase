@@ -4,7 +4,7 @@ import 'package:splash_design/Literature.dart';
 import 'religionpage.dart';
 import 'entertainement.dart';
 import 'article.dart';
-import 'profile_screen_main.dart';
+import 'profile/profile_screen_main.dart';
 
 class SecondPage extends StatefulWidget {
   final String feeling;

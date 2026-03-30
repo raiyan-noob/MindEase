@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:splash_design/profile_screen_main.dart';
+import 'package:splash_design/profile/profile_screen_main.dart';
 import '1stpage.dart';
 import '2ndpage.dart';
 import 'blogart.dart';

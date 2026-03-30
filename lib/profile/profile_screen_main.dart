@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:splash_design/login.dart';
 import 'package:splash_design/1stpage.dart';
-import 'package:splash_design/2ndpage.dart';
+import 'package:splash_design/profile/activities_page.dart';
+import 'package:splash_design/profile/contact_us_page.dart';
+import 'package:splash_design/profile/invite_friends_page.dart';
+import 'package:splash_design/profile/mood_history_page.dart';
+import 'package:splash_design/profile/privacy_policy_page.dart';
+import 'package:splash_design/profile/security_page.dart';
+import 'package:splash_design/profile/social_and_extras_page.dart';
+import 'package:splash_design/profile/view_profie_page.dart';
 import 'profile_screen_card.dart';
-import 'profile_screen_item_page.dart';
 
 class ProfileScreen extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
@@ -21,7 +27,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen>
     with TickerProviderStateMixin {
-  // ✅ Default to index 3 since this is the Profile page
+
   int _selectedIndex = 3;
 
   late AnimationController _navAnimController;
@@ -84,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         });
         break;
       case 1:
-        // Heal — needs a feeling, so go to Home first
+        
         Navigator.push(
           context,
           PageRouteBuilder(
@@ -114,13 +120,13 @@ class _ProfileScreenState extends State<ProfileScreen>
         });
         break;
       case 2:
-        // Timer placeholder
+        
         Future.delayed(const Duration(milliseconds: 200), () {
           if (mounted) setState(() => _selectedIndex = 3);
         });
         break;
       case 3:
-        // Already on Profile
+        
         break;
     }
   }
@@ -140,7 +146,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           body: SafeArea(
             child: Column(
               children: [
-                // ===== PROFILE HEADER =====
+                
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -214,7 +220,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
                 const SizedBox(height: 10),
 
-                // ===== PROFILE ITEMS =====
+                
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -359,8 +365,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                             },
                             isLight: isLight,
                           ),
-                          // ✅ Extra bottom space so items don't hide behind nav
-                          const SizedBox(height: 80),
+                          
+                          const SizedBox(height: 10),
                         ],
                       ),
                     ),
@@ -370,7 +376,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             ),
           ),
 
-          // ===== ✅ REDESIGNED ANIMATED BOTTOM NAV =====
+          
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               color: isLight
@@ -445,7 +451,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 }
 
-// ===== ✅ ANIMATED NAV ITEM WIDGET =====
+
 class _AnimatedNavItem extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -540,3 +546,5 @@ class _AnimatedNavItem extends StatelessWidget {
     );
   }
 }
+
+

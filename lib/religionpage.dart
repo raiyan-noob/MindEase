@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splash_design/1stpage.dart';
-import 'package:splash_design/profile_screen_main.dart';
+import 'package:splash_design/profile/profile_screen_main.dart';
 import 'package:splash_design/readrel.dart';
 import '2ndpage.dart';
 import 'videorel.dart';
