@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:splash_design/1stpage.dart';
 import 'package:splash_design/Literature.dart';
+import 'package:splash_design/breathing_page.dart';
 import 'religionpage.dart';
 import 'entertainement.dart';
 import 'article.dart';
@@ -56,7 +57,6 @@ class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
     _navAnimController.reset();
     _navAnimController.forward();
 
-    // Navigate based on index
     switch (index) {
       case 0:
         Navigator.push(
@@ -72,7 +72,7 @@ class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
                 child: SlideTransition(
                   position:
                       Tween<Offset>(
-                        begin: const Offset(-0.15, 0),
+                        begin: const Offset(0.15, 0),
                         end: Offset.zero,
                       ).animate(
                         CurvedAnimation(parent: anim, curve: Curves.easeOut),
@@ -84,12 +84,36 @@ class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
             transitionDuration: const Duration(milliseconds: 350),
           ),
         );
+
         break;
       case 1:
-        // Already on this page
         break;
       case 2:
-        // Timer page placeholder — add your page here
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => BreathingPage(
+              isLightNotifier: widget.isLightNotifier,
+              onThemeChanged: widget.onThemeChanged,
+            ),
+            transitionsBuilder: (_, anim, __, child) {
+              return FadeTransition(
+                opacity: anim,
+                child: SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(0.15, 0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(parent: anim, curve: Curves.easeOut),
+                      ),
+                  child: child,
+                ),
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 350),
+          ),
+        );
         break;
       case 3:
         Navigator.push(
@@ -447,7 +471,7 @@ class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
                     ),
                     _AnimatedNavItem(
                       icon: Icons.spa_outlined,
-                      label: "",
+                      label: "Heal",
                       index: 1,
                       selectedIndex: _selectedIndex,
                       isLight: isLight,
@@ -455,8 +479,8 @@ class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
                       onTap: () => _onNavTap(1),
                     ),
                     _AnimatedNavItem(
-                      icon: Icons.timer_outlined,
-                      label: "",
+                      icon: Icons.self_improvement_outlined,
+                      label: "Breathe",
                       index: 2,
                       selectedIndex: _selectedIndex,
                       isLight: isLight,

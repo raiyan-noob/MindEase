@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splash_design/1stpage.dart';
+import 'package:splash_design/breathing_page.dart';
 import 'package:splash_design/profile/profile_screen_main.dart';
 import 'package:splash_design/readrel.dart';
 import '2ndpage.dart';
@@ -138,7 +139,31 @@ class _ReligionPageState extends State<ReligionPage>
         });
         break;
       case 2:
-        // Timer placeholder
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => BreathingPage(
+              isLightNotifier: widget.isLightNotifier,
+              onThemeChanged: widget.onThemeChanged,
+            ),
+            transitionsBuilder: (_, anim, __, child) {
+              return FadeTransition(
+                opacity: anim,
+                child: SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(0.15, 0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(parent: anim, curve: Curves.easeOut),
+                      ),
+                  child: child,
+                ),
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 350),
+          ),
+        );
         break;
       case 3:
         Navigator.push(

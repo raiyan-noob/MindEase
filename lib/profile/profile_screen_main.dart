@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:splash_design/breathing_page.dart';
 import 'package:splash_design/login.dart';
 import 'package:splash_design/1stpage.dart';
 import 'package:splash_design/profile/activities_page.dart';
@@ -27,7 +28,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen>
     with TickerProviderStateMixin {
-
   int _selectedIndex = 3;
 
   late AnimationController _navAnimController;
@@ -74,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 child: SlideTransition(
                   position:
                       Tween<Offset>(
-                        begin: const Offset(-0.15, 0),
+                        begin: const Offset(0.15, 0),
                         end: Offset.zero,
                       ).animate(
                         CurvedAnimation(parent: anim, curve: Curves.easeOut),
@@ -85,12 +85,9 @@ class _ProfileScreenState extends State<ProfileScreen>
             },
             transitionDuration: const Duration(milliseconds: 350),
           ),
-        ).then((_) {
-          if (mounted) setState(() => _selectedIndex = 3);
-        });
+        );
         break;
       case 1:
-        
         Navigator.push(
           context,
           PageRouteBuilder(
@@ -104,7 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 child: SlideTransition(
                   position:
                       Tween<Offset>(
-                        begin: const Offset(-0.15, 0),
+                        begin: const Offset(0.15, 0),
                         end: Offset.zero,
                       ).animate(
                         CurvedAnimation(parent: anim, curve: Curves.easeOut),
@@ -115,18 +112,36 @@ class _ProfileScreenState extends State<ProfileScreen>
             },
             transitionDuration: const Duration(milliseconds: 350),
           ),
-        ).then((_) {
-          if (mounted) setState(() => _selectedIndex = 3);
-        });
+        );
         break;
       case 2:
-        
-        Future.delayed(const Duration(milliseconds: 200), () {
-          if (mounted) setState(() => _selectedIndex = 3);
-        });
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => BreathingPage(
+              isLightNotifier: widget.isLightNotifier,
+              onThemeChanged: widget.onThemeChanged,
+            ),
+            transitionsBuilder: (_, anim, __, child) {
+              return FadeTransition(
+                opacity: anim,
+                child: SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(0.15, 0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(parent: anim, curve: Curves.easeOut),
+                      ),
+                  child: child,
+                ),
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 350),
+          ),
+        );
         break;
       case 3:
-        
         break;
     }
   }
@@ -423,7 +438,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       onTap: () => _onNavTap(1),
                     ),
                     _AnimatedNavItem(
-                      icon: Icons.timer_outlined,
+                      icon: Icons.self_improvement_outlined,
                       label: "Timer",
                       index: 2,
                       selectedIndex: _selectedIndex,
