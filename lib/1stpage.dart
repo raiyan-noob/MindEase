@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:splash_design/2ndpage.dart';
+import 'package:splash_design/breathing_page.dart';
 import 'profile_screen_main.dart';
 
 class MyAppFirst extends StatefulWidget {
@@ -21,7 +22,6 @@ class MyAppFirst extends StatefulWidget {
 class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
   String? selectedFeeling;
 
-  // ✅ Default to index 0 since this is the Home/1st page
   int _selectedIndex = 0;
 
   late AnimationController _navAnimController;
@@ -88,19 +88,41 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
 
     switch (index) {
       case 0:
-        // Already on Home
         break;
       case 1:
-        // Heal page — show the feeling bottom sheet
         final isLight = widget.isLightNotifier.value;
         _showFeelingBottomSheet(isLight);
-        // Reset back to home after bottom sheet
+
         Future.delayed(const Duration(milliseconds: 200), () {
           if (mounted) setState(() => _selectedIndex = 0);
         });
         break;
       case 2:
-        // Timer page placeholder
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => BreathingPage(
+              isLightNotifier: widget.isLightNotifier,
+              onThemeChanged: widget.onThemeChanged,
+            ),
+            transitionsBuilder: (_, anim, __, child) {
+              return FadeTransition(
+                opacity: anim,
+                child: SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(0.15, 0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(parent: anim, curve: Curves.easeOut),
+                      ),
+                  child: child,
+                ),
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 350),
+          ),
+        );
         break;
       case 3:
         Navigator.push(
@@ -127,9 +149,7 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
             },
             transitionDuration: const Duration(milliseconds: 350),
           ),
-        ).then((_) {
-          if (mounted) setState(() => _selectedIndex = 0);
-        });
+        );
         break;
     }
   }
@@ -529,7 +549,7 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
                                         ),
                                       ),
                                       Icon(
-                                        Icons.keyboard_arrow_up_rounded,
+                                        Icons.arrow_drop_down_sharp,
                                         color: accent,
                                         size: 28,
                                       ),
@@ -600,7 +620,7 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
                   children: [
                     _AnimatedNavItem(
                       icon: Icons.home_filled,
-                      label: "",
+                      label: "Home",
                       index: 0,
                       selectedIndex: _selectedIndex,
                       isLight: isLight,
@@ -609,7 +629,7 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
                     ),
                     _AnimatedNavItem(
                       icon: Icons.spa_outlined,
-                      label: "",
+                      label: "Heal",
                       index: 1,
                       selectedIndex: _selectedIndex,
                       isLight: isLight,
@@ -617,8 +637,8 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
                       onTap: () => _onNavTap(1),
                     ),
                     _AnimatedNavItem(
-                      icon: Icons.timer_outlined,
-                      label: "",
+                      icon: Icons.self_improvement_outlined,
+                      label: "Breathe",
                       index: 2,
                       selectedIndex: _selectedIndex,
                       isLight: isLight,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:splash_design/breathing_page.dart';
 import 'package:splash_design/profile_screen_main.dart';
 import '1stpage.dart';
 import '2ndpage.dart';
@@ -138,6 +139,31 @@ class _ArticlePageState extends State<ArticlePage>
         });
         break;
       case 2:
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => BreathingPage(
+              isLightNotifier: widget.isLightNotifier,
+              onThemeChanged: widget.onThemeChanged,
+            ),
+            transitionsBuilder: (_, anim, __, child) {
+              return FadeTransition(
+                opacity: anim,
+                child: SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(0.15, 0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(parent: anim, curve: Curves.easeOut),
+                      ),
+                  child: child,
+                ),
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 350),
+          ),
+        );
         break;
       case 3:
         Navigator.push(
