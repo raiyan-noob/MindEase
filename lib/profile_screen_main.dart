@@ -2,15 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:splash_design/breathing_page.dart';
 import 'package:splash_design/login.dart';
 import 'package:splash_design/1stpage.dart';
-import 'package:splash_design/profile/activities_page.dart';
-import 'package:splash_design/profile/contact_us_page.dart';
-import 'package:splash_design/profile/invite_friends_page.dart';
-import 'package:splash_design/profile/mood_history_page.dart';
-import 'package:splash_design/profile/privacy_policy_page.dart';
-import 'package:splash_design/profile/security_page.dart';
-import 'package:splash_design/profile/social_and_extras_page.dart';
-import 'package:splash_design/profile/view_profie_page.dart';
-import 'profile_screen_card.dart';
+import 'profile/profile_screen_card.dart';
+import 'profile_screen_item_page.dart';
 
 class ProfileScreen extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
@@ -161,6 +154,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           body: SafeArea(
             child: Column(
               children: [
+                // ===== PROFILE HEADER =====
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -234,6 +228,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
                 const SizedBox(height: 10),
 
+                // ===== PROFILE ITEMS =====
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -378,8 +373,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                             },
                             isLight: isLight,
                           ),
-
-                          const SizedBox(height: 10),
+                          // ✅ Extra bottom space so items don't hide behind nav
+                          const SizedBox(height: 80),
                         ],
                       ),
                     ),
@@ -389,6 +384,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             ),
           ),
 
+          // ===== ✅ REDESIGNED ANIMATED BOTTOM NAV =====
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               color: isLight
@@ -463,6 +459,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 }
 
+// ===== ✅ ANIMATED NAV ITEM WIDGET =====
 class _AnimatedNavItem extends StatelessWidget {
   final IconData icon;
   final String label;

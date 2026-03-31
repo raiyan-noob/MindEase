@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-\
+import 'breathing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:splash_design/2ndpage.dart';
 import 'profile/profile_screen_main.dart';

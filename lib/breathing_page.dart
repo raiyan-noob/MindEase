@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:splash_design/1stpage.dart';
 
-import 'profile_screen_main.dart';
+import 'profile/profile_screen_main.dart';
 
 enum SessionState { intro, running, paused }
 
