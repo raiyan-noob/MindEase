@@ -557,7 +557,7 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
                                   ),
                                 ],
                               ),
-                              // ✅ Extra space so content doesn't hide behind nav
+
                               const SizedBox(height: 90),
                             ],
                           ),
@@ -570,7 +570,6 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
             ],
           ),
 
-          // ===== ✅ ANIMATED BOTTOM NAVIGATION BAR =====
           extendBody: true,
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
@@ -646,7 +645,6 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
   }
 }
 
-// ===== ✅ ANIMATED NAV ITEM WIDGET =====
 class _AnimatedNavItem extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -697,7 +695,6 @@ class _AnimatedNavItem extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Animated icon with scale
             TweenAnimationBuilder<double>(
               tween: Tween(
                 begin: isSelected ? 0.8 : 1.0,
@@ -714,7 +711,7 @@ class _AnimatedNavItem extends StatelessWidget {
                 color: isSelected ? activeColor : inactiveColor,
               ),
             ),
-            // Animated label that slides in/out
+
             AnimatedSize(
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeOutCubic,

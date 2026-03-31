@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splash_design/login.dart';
 import 'package:splash_design/1stpage.dart';
-import 'package:splash_design/2ndpage.dart';
 import 'profile_screen_card.dart';
 import 'profile_screen_item_page.dart';
 
@@ -21,7 +20,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen>
     with TickerProviderStateMixin {
-  // ✅ Default to index 3 since this is the Profile page
   int _selectedIndex = 3;
 
   late AnimationController _navAnimController;

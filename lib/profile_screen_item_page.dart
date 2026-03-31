@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:splash_design/1stpage.dart';
 
 class History extends StatelessWidget {
   final ValueNotifier<bool> isLightNotifier;
