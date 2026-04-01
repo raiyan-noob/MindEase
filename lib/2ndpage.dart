@@ -23,7 +23,6 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
-  // ✅ Default to index 1 since this is the 2nd screen
   int _selectedIndex = 1;
 
   // Animation controller for bottom nav indicator
@@ -89,7 +88,7 @@ class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
         // Already on this page
         break;
       case 2:
-        // Timer page placeholder — add your page here
+        // Timer page placeholder
         break;
       case 3:
         Navigator.push(
@@ -485,7 +484,7 @@ class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
   }
 }
 
-// ===== ✅ ANIMATED NAV ITEM WIDGET =====
+// ANIMATED NAV ITEM WIDGET
 class _AnimatedNavItem extends StatelessWidget {
   final IconData icon;
   final String label;

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:splash_design/login.dart';
 
@@ -9,6 +11,9 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -19,15 +24,16 @@ class _SignupPageState extends State<SignupPage> {
       TextEditingController();
 
   String message = "";
+  bool isLoading = false;
 
-  void signup() {
-    String fullName = fullNameController.text;
-    String phoneNumber = phoneNumberController.text;
-    String email = emailController.text;
-    String age = ageController.text;
-    String gender = genderController.text;
-    String password = passwordController.text;
-    String confirmPassword = confirmPasswordController.text;
+  Future<void> signup() async {
+    final String fullName = fullNameController.text.trim();
+    final String phoneNumber = phoneNumberController.text.trim();
+    final String email = emailController.text.trim();
+    final String age = ageController.text.trim();
+    final String gender = genderController.text.trim();
+    final String password = passwordController.text.trim();
+    final String confirmPassword = confirmPasswordController.text.trim();
 
     if (fullName.isEmpty ||
         phoneNumber.isEmpty ||
@@ -39,32 +45,102 @@ class _SignupPageState extends State<SignupPage> {
       setState(() {
         message = "Please fill all fields";
       });
+      return;
     }
-    // } else if (email == "admin@gmail.com") {
-    //   if (password != confirmPassword) {
-    //     setState(() {
-    //       message = "Passwords do not match";
-    //     });
-    //   } else {
-    //     setState(() {
-    //       message = "Signup Successful!";
-    //     });
-    //   }
-    // } else {
-    //   setState(() {
-    //     message = "Email already exists";
-    //   });
-    // }
-    else {
+
+    if (password != confirmPassword) {
       setState(() {
-        message =
-            "Signup Successful!"; //for development purposes no checking of email and pass
+        message = "Passwords do not match";
       });
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
-      );
+      return;
     }
+
+    if (password.length < 6) {
+      setState(() {
+        message = "Password must be at least 6 characters";
+      });
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+      message = "";
+    });
+
+    try {
+      final UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password);
+
+      final User? user = userCredential.user;
+      if (user != null) {
+        try {
+          await _firestore.collection('users').doc(user.uid).set({
+            'uid': user.uid,
+            'fullName': fullName,
+            'phoneNumber': phoneNumber,
+            'email': email,
+            'age': age,
+            'gender': gender,
+            'createdAt': FieldValue.serverTimestamp(),
+          });
+        } on FirebaseException catch (e) {
+          debugPrint('Firestore profile save error: ${e.code} ${e.message}');
+          setState(() {
+            message = "Account created, but profile save failed";
+          });
+          return;
+        }
+      }
+
+      if (!mounted) return;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginPage()),
+      );
+    } on FirebaseAuthException catch (e) {
+      debugPrint('Signup auth error: ${e.code} ${e.message}');
+      String errorText = e.toString();
+      if (e.code == 'email-already-in-use') {
+        errorText = "This email is already registered";
+      } else if (e.code == 'invalid-email') {
+        errorText = "Please enter a valid email";
+      } else if (e.code == 'weak-password') {
+        errorText = "Password is too weak";
+      } else if (e.code == 'operation-not-allowed') {
+        errorText = "Enable Email/Password in Firebase Auth";
+      } else if (e.code == 'network-request-failed') {
+        errorText = "No internet connection";
+      } else if (e.code == 'too-many-requests') {
+        errorText = "Too many attempts. Try again later";
+      }
+
+      setState(() {
+        message = errorText;
+      });
+    } catch (e) {
+      debugPrint('Signup unknown error: $e');
+      setState(() {
+        message = "Something went wrong. Please try again";
+      });
+    } finally {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    fullNameController.dispose();
+    phoneNumberController.dispose();
+    emailController.dispose();
+    ageController.dispose();
+    genderController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -276,7 +352,7 @@ class _SignupPageState extends State<SignupPage> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: signup,
+                  onPressed: isLoading ? null : signup,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF00988B),
                     foregroundColor: Colors.white,
@@ -285,8 +361,8 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text(
-                    "Signup",
+                  child: Text(
+                    isLoading ? "Please wait..." : "Signup",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -296,6 +372,16 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               const SizedBox(height: 10),
+              if (message.isNotEmpty)
+                Text(
+                  message,
+                  style: const TextStyle(
+                    color: Colors.deepOrange,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              if (message.isNotEmpty) const SizedBox(height: 6),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
