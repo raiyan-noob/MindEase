@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:splash_design/2ndpage.dart';
 import 'profile_screen_main.dart';
@@ -20,6 +22,7 @@ class MyAppFirst extends StatefulWidget {
 
 class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
   String? selectedFeeling;
+  String _displayName = 'User';
 
   // ✅ Default to index 0 since this is the Home/1st page
   int _selectedIndex = 0;
@@ -63,6 +66,7 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    _loadLoggedInUserName();
     _navAnimController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
@@ -311,6 +315,33 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
     );
   }
 
+  Future<void> _loadLoggedInUserName() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+
+    try {
+      final snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      final data = snapshot.data();
+      final String? name = data?['fullName'] as String?;
+      if (!mounted) return;
+
+      setState(() {
+        _displayName = (name != null && name.trim().isNotEmpty)
+            ? name.trim()
+            : (user.email?.split('@').first ?? 'User');
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _displayName = user.email?.split('@').first ?? 'User';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
@@ -428,7 +459,7 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
                                 child: SizedBox(
                                   width: double.infinity,
                                   child: Text(
-                                    'Hello, Raiyan!',
+                                    'Hello, $_displayName!',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       color: accent.withOpacity(
