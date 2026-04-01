@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:splash_design/1stpage.dart';
 import 'package:splash_design/sign.dart';
@@ -11,6 +12,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final ValueNotifier<bool> isLight = ValueNotifier<bool>(true);
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void _setLight(bool value) {
     isLight.value = value;
@@ -20,44 +22,66 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   String message = "";
+  bool isLoading = false;
 
-  void login() {
-    String email = emailController.text;
-    String pass = passwordController.text;
+  Future<void> login() async {
+    final String email = emailController.text.trim();
+    final String pass = passwordController.text.trim();
 
     if (email.isEmpty || pass.isEmpty) {
       setState(() {
         message = "Please fill all fields";
       });
+      return;
     }
-    // else if (email == "admin@gmail.com" && pass == "1234") {
-    //   setState(() {
-    //     message = "Login Successful!";
-    //   });
-    //
-    //     Navigator.push(context, MaterialPageRoute(builder: (context) => MyAppFirst(isLightNotifier: isLight, onThemeChanged: _setLight)));
-    // }
-    else {
-      setState(() {
-        message =
-            "Login Successful!"; //for development purposes no checking of email and pass
-      });
-      email = "";
-      pass = "";
-      Navigator.push(
+
+    setState(() {
+      isLoading = true;
+      message = "";
+    });
+
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: pass);
+      if (!mounted) return;
+
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) =>
               MyAppFirst(isLightNotifier: isLight, onThemeChanged: _setLight),
         ),
       );
-      message = "";
+    } on FirebaseAuthException catch (e) {
+      String errorText = "Login failed";
+      if (e.code == 'user-not-found') {
+        errorText = "No user found with this email";
+      } else if (e.code == 'wrong-password' || e.code == 'invalid-credential') {
+        errorText = "Wrong email or password";
+      } else if (e.code == 'invalid-email') {
+        errorText = "Please enter a valid email";
+      }
+
+      setState(() {
+        message = errorText;
+      });
+    } catch (_) {
+      setState(() {
+        message = "Something went wrong. Please try again";
+      });
+    } finally {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
-    // else {
-    //   setState(() {
-    //     message = "Invalid email or password";
-    //   });
-    // }
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -154,7 +178,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: login,
+                  onPressed: isLoading ? null : login,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromRGBO(0, 152, 139, 1),
                     foregroundColor: Colors.white,
@@ -163,8 +187,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text(
-                    "Login",
+                  child: Text(
+                    isLoading ? "Please wait..." : "Login",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -175,6 +199,17 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               const SizedBox(height: 10),
+
+              if (message.isNotEmpty)
+                Text(
+                  message,
+                  style: const TextStyle(
+                    color: Colors.deepOrange,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              if (message.isNotEmpty) const SizedBox(height: 6),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

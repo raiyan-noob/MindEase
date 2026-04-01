@@ -24,7 +24,6 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
-  // ✅ Default to index 1 since this is the 2nd screen
   int _selectedIndex = 1;
 
   // Animation controller for bottom nav indicator
@@ -434,7 +433,7 @@ class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
             ),
           ),
 
-          // ===== ✅ REDESIGNED ANIMATED BOTTOM NAV =====
+
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               color: isLight ? Colors.white : const Color(0xFF1C1C1C),
@@ -507,7 +506,7 @@ class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
   }
 }
 
-// ===== ✅ ANIMATED NAV ITEM WIDGET =====
+// ANIMATED NAV ITEM WIDGET
 class _AnimatedNavItem extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -611,7 +610,7 @@ class _AnimatedNavItem extends StatelessWidget {
   }
 }
 
-// ===== ✅ HELPER: AnimatedBuilder that passes isSelected =====
+
 class AnimatedBuilder extends StatelessWidget {
   final Animation<double> animation;
   final bool isSelected;

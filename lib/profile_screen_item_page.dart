@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class History extends StatelessWidget {
+class History extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
   const History({
@@ -10,9 +10,14 @@ class History extends StatelessWidget {
   });
 
   @override
+  State<History> createState() => _HistoryState();
+}
+
+class _HistoryState extends State<History> {
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
-      valueListenable: isLightNotifier,
+      valueListenable: widget.isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
         final textColor = isLight
@@ -39,7 +44,7 @@ class History extends StatelessWidget {
   }
 }
 
-class Security extends StatelessWidget {
+class Security extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
   const Security({
@@ -49,9 +54,14 @@ class Security extends StatelessWidget {
   });
 
   @override
+  State<Security> createState() => _SecurityState();
+}
+
+class _SecurityState extends State<Security> {
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
-      valueListenable: isLightNotifier,
+      valueListenable: widget.isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
         final textColor = isLight
@@ -75,7 +85,7 @@ class Security extends StatelessWidget {
   }
 }
 
-class Announcements extends StatelessWidget {
+class Announcements extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
   const Announcements({
@@ -85,9 +95,14 @@ class Announcements extends StatelessWidget {
   });
 
   @override
+  State<Announcements> createState() => _AnnouncementsState();
+}
+
+class _AnnouncementsState extends State<Announcements> {
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
-      valueListenable: isLightNotifier,
+      valueListenable: widget.isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
         final textColor = isLight
@@ -111,7 +126,7 @@ class Announcements extends StatelessWidget {
   }
 }
 
-class SocialAndExtras extends StatelessWidget {
+class SocialAndExtras extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
   const SocialAndExtras({
@@ -121,9 +136,14 @@ class SocialAndExtras extends StatelessWidget {
   });
 
   @override
+  State<SocialAndExtras> createState() => _SocialAndExtrasState();
+}
+
+class _SocialAndExtrasState extends State<SocialAndExtras> {
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
-      valueListenable: isLightNotifier,
+      valueListenable: widget.isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
         final textColor = isLight
@@ -153,7 +173,7 @@ class SocialAndExtras extends StatelessWidget {
   }
 }
 
-class InviteFriends extends StatelessWidget {
+class InviteFriends extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
   const InviteFriends({
@@ -163,9 +183,14 @@ class InviteFriends extends StatelessWidget {
   });
 
   @override
+  State<InviteFriends> createState() => _InviteFriendsState();
+}
+
+class _InviteFriendsState extends State<InviteFriends> {
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
-      valueListenable: isLightNotifier,
+      valueListenable: widget.isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
         final textColor = isLight
@@ -195,7 +220,7 @@ class InviteFriends extends StatelessWidget {
   }
 }
 
-class PrivacyPolicy extends StatelessWidget {
+class PrivacyPolicy extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
   const PrivacyPolicy({
@@ -205,9 +230,14 @@ class PrivacyPolicy extends StatelessWidget {
   });
 
   @override
+  State<PrivacyPolicy> createState() => _PrivacyPolicyState();
+}
+
+class _PrivacyPolicyState extends State<PrivacyPolicy> {
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
-      valueListenable: isLightNotifier,
+      valueListenable: widget.isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
         final textColor = isLight
@@ -237,7 +267,7 @@ class PrivacyPolicy extends StatelessWidget {
   }
 }
 
-class ContactUs extends StatelessWidget {
+class ContactUs extends StatefulWidget {
   final ValueNotifier<bool> isLightNotifier;
   final ValueChanged<bool> onThemeChanged;
   const ContactUs({
@@ -247,9 +277,14 @@ class ContactUs extends StatelessWidget {
   });
 
   @override
+  State<ContactUs> createState() => _ContactUsState();
+}
+
+class _ContactUsState extends State<ContactUs> {
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
-      valueListenable: isLightNotifier,
+      valueListenable: widget.isLightNotifier,
       builder: (context, isLight, _) {
         final bg = isLight ? Colors.white : const Color(0xFF121212);
         final textColor = isLight
@@ -273,9 +308,14 @@ class ContactUs extends StatelessWidget {
   }
 }
 
-class ViewProfilePage extends StatelessWidget {
+class ViewProfilePage extends StatefulWidget {
   const ViewProfilePage({super.key});
 
+  @override
+  State<ViewProfilePage> createState() => _ViewProfilePageState();
+}
+
+class _ViewProfilePageState extends State<ViewProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
