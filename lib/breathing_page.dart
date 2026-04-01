@@ -119,15 +119,30 @@ class _BreathingPageState extends State<BreathingPage>
     });
   }
 
+  bool get _isBreathingPageActive {
+    if (!mounted) return false;
+    final route = ModalRoute.of(context);
+    return route?.isCurrent ?? false;
+  }
+
   void _startCountdown() {
     _countdownTimer?.cancel();
     _countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
+
       if (_remainingSeconds > 0) {
         setState(() => _remainingSeconds--);
       } else {
         timer.cancel();
         _breatheController.stop();
-        _showCompletionDialog();
+
+        // Show the appreciation dialog only when this page is currently visible.
+        if (_isBreathingPageActive) {
+          _showCompletionDialog();
+        }
       }
     });
   }
@@ -179,6 +194,8 @@ class _BreathingPageState extends State<BreathingPage>
 
   //dialogs
   void _showCompletionDialog() {
+    if (!_isBreathingPageActive) return;
+
     final isLight = widget.isLightNotifier.value;
     final textMain = isLight
         ? const Color(0xFF0F5132)

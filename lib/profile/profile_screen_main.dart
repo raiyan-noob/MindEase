@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:splash_design/breathing_page.dart';
 import 'package:splash_design/login.dart';
 import 'package:splash_design/1stpage.dart';
@@ -30,12 +31,16 @@ class _ProfileScreenState extends State<ProfileScreen>
     with TickerProviderStateMixin {
   int _selectedIndex = 3;
 
+  String _currentUserName = 'Guest User';
+  String _currentUserInfo = 'Not signed in';
+
   late AnimationController _navAnimController;
   late Animation<double> _navBounceAnimation;
 
   @override
   void initState() {
     super.initState();
+    _loadCurrentUser();
     _navAnimController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
@@ -146,6 +151,25 @@ class _ProfileScreenState extends State<ProfileScreen>
     }
   }
 
+  void _loadCurrentUser() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+
+    final displayName = user.displayName?.trim() ?? '';
+    final email = user.email?.trim() ?? '';
+
+    String resolvedName = displayName;
+    if (resolvedName.isEmpty && email.isNotEmpty) {
+      resolvedName = email.split('@').first;
+    }
+
+    if (!mounted) return;
+    setState(() {
+      _currentUserName = resolvedName.isNotEmpty ? resolvedName : 'User';
+      _currentUserInfo = email.isNotEmpty ? email : 'Signed in user';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
@@ -185,7 +209,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Rejwanul Islam",
+                              _currentUserName,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -194,7 +218,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             ),
                             SizedBox(height: 4),
                             Text(
-                              "ID: xxxxxxxxxx",
+                              _currentUserInfo,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,

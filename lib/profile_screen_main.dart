@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:splash_design/breathing_page.dart';
 import 'package:splash_design/login.dart';
 import 'package:splash_design/1stpage.dart';
@@ -23,12 +24,16 @@ class _ProfileScreenState extends State<ProfileScreen>
     with TickerProviderStateMixin {
   int _selectedIndex = 3;
 
+  String _currentUserName = 'Guest User';
+  String _currentUserIdLabel = 'Not signed in';
+
   late AnimationController _navAnimController;
   late Animation<double> _navBounceAnimation;
 
   @override
   void initState() {
     super.initState();
+    _loadCurrentUser();
     _navAnimController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
@@ -139,6 +144,25 @@ class _ProfileScreenState extends State<ProfileScreen>
     }
   }
 
+  void _loadCurrentUser() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+
+    final displayName = user.displayName?.trim() ?? '';
+    final email = user.email?.trim() ?? '';
+
+    String name = displayName;
+    if (name.isEmpty && email.isNotEmpty) {
+      name = email.split('@').first;
+    }
+
+    if (!mounted) return;
+    setState(() {
+      _currentUserName = name.isNotEmpty ? name : 'User';
+      _currentUserIdLabel = email.isNotEmpty ? email : 'Signed in user';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
@@ -154,7 +178,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           body: SafeArea(
             child: Column(
               children: [
-                // ===== PROFILE HEADER =====
+                // Profile header section
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -179,7 +203,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Rejwanul Islam",
+                              _currentUserName,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -188,7 +212,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             ),
                             SizedBox(height: 4),
                             Text(
-                              "ID: xxxxxxxxxx",
+                              _currentUserIdLabel,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -228,7 +252,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
                 const SizedBox(height: 10),
 
-                // ===== PROFILE ITEMS =====
+                // Profile options list
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -373,7 +397,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             },
                             isLight: isLight,
                           ),
-                          // ✅ Extra bottom space so items don't hide behind nav
+                          // Extra bottom spacing so the last item is not hidden by nav
                           const SizedBox(height: 80),
                         ],
                       ),
@@ -384,7 +408,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             ),
           ),
 
-          // ===== ✅ REDESIGNED ANIMATED BOTTOM NAV =====
+          // Bottom navigation bar
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               color: isLight
@@ -459,7 +483,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 }
 
-// ===== ✅ ANIMATED NAV ITEM WIDGET =====
+// Animated bottom nav item
 class _AnimatedNavItem extends StatelessWidget {
   final IconData icon;
   final String label;
