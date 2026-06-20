@@ -558,19 +558,21 @@ class _ReadRelPageState extends State<ReadRelPage> {
               ),
             ],
           ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                ...books.map(
-                  (book) => Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: _buildBookContainer(book, accent, isLight),
-                  ),
-                ),
-                const SizedBox(height: 40),
-              ],
+          body: SafeArea(
+            top: false,
+            child: ListView.separated(
+              padding: EdgeInsets.fromLTRB(
+                16,
+                20,
+                16,
+                MediaQuery.of(context).padding.bottom + 20,
+              ),
+              itemCount: books.length,
+              itemBuilder: (context, index) {
+                final book = books[index];
+                return _buildBookContainer(book, accent, isLight);
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 20),
             ),
           ),
 

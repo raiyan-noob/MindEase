@@ -141,11 +141,15 @@ class _VideoRelPageState extends State<VideoRelPage> {
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
                           color: accent.withOpacity(0.2),
-                          child: Icon(Icons.play_circle, color: accent, size: 40),
+                          child: Icon(
+                            Icons.play_circle,
+                            color: accent,
+                            size: 40,
+                          ),
                         );
                       },
                     ),
-        
+
                     Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
@@ -163,7 +167,7 @@ class _VideoRelPageState extends State<VideoRelPage> {
               ),
             ),
             const SizedBox(width: 12),
-        
+
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,7 +187,7 @@ class _VideoRelPageState extends State<VideoRelPage> {
                     ),
                   ),
                   const SizedBox(height: 8),
-        
+
                   Text(
                     video.description,
                     style: TextStyle(
@@ -564,19 +568,21 @@ class _VideoRelPageState extends State<VideoRelPage> {
               ),
             ],
           ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                ...videos.map(
-                  (video) => Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: _buildVideoContainer(video, accent, isLight),
-                  ),
-                ),
-                const SizedBox(height: 40),
-              ],
+          body: SafeArea(
+            top: false,
+            child: ListView.separated(
+              padding: EdgeInsets.fromLTRB(
+                16,
+                20,
+                16,
+                MediaQuery.of(context).padding.bottom + 20,
+              ),
+              itemCount: videos.length,
+              itemBuilder: (context, index) {
+                final video = videos[index];
+                return _buildVideoContainer(video, accent, isLight);
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 20),
             ),
           ),
 

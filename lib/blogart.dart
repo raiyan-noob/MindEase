@@ -583,19 +583,21 @@ class _BlogPageState extends State<BlogPage> {
               ),
             ],
           ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                ...blogs.map(
-                  (blog) => Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: _buildBlogContainer(blog, accent, isLight),
-                  ),
-                ),
-                const SizedBox(height: 40),
-              ],
+          body: SafeArea(
+            top: false,
+            child: ListView.separated(
+              padding: EdgeInsets.fromLTRB(
+                16,
+                20,
+                16,
+                MediaQuery.of(context).padding.bottom + 20,
+              ),
+              itemCount: blogs.length,
+              itemBuilder: (context, index) {
+                final blog = blogs[index];
+                return _buildBlogContainer(blog, accent, isLight);
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 20),
             ),
           ),
 
