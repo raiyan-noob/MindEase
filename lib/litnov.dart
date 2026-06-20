@@ -626,19 +626,21 @@ class _NovelPageState extends State<NovelPage> {
               ),
             ],
           ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                ...novels.map(
-                  (novel) => Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: _buildNovelContainer(novel, accent, isLight),
-                  ),
-                ),
-                const SizedBox(height: 40),
-              ],
+          body: SafeArea(
+            top: false,
+            child: ListView.separated(
+              padding: EdgeInsets.fromLTRB(
+                16,
+                20,
+                16,
+                MediaQuery.of(context).padding.bottom + 20,
+              ),
+              itemCount: novels.length,
+              itemBuilder: (context, index) {
+                final novel = novels[index];
+                return _buildNovelContainer(novel, accent, isLight);
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 20),
             ),
           ),
 

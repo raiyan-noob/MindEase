@@ -630,19 +630,21 @@ class _PoemPageState extends State<PoemPage> {
               ),
             ],
           ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                ...poems.map(
-                  (poem) => Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: _buildPoemContainer(poem, accent, isLight),
-                  ),
-                ),
-                const SizedBox(height: 40),
-              ],
+          body: SafeArea(
+            top: false,
+            child: ListView.separated(
+              padding: EdgeInsets.fromLTRB(
+                16,
+                20,
+                16,
+                MediaQuery.of(context).padding.bottom + 20,
+              ),
+              itemCount: poems.length,
+              itemBuilder: (context, index) {
+                final poem = poems[index];
+                return _buildPoemContainer(poem, accent, isLight);
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 20),
             ),
           ),
 
