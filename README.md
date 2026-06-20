@@ -1,4 +1,4 @@
-# splash_design
+# MindEase
 
 A new Flutter project.
 
