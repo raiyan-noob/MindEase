@@ -162,7 +162,6 @@ class _NovelPageState extends State<NovelPage> {
   ];
   Widget _buildNovelContainer(NovelData novel, Color accent, bool isLight) {
     return Container(
-      height: 135,
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.all(12),

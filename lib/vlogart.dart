@@ -127,7 +127,6 @@ class _VlogPageState extends State<VlogPage> {
   ];
   Widget _buildVlogContainer(VlogData vlog, Color accent, bool isLight) {
     return Container(
-      height: 120,
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.all(12),

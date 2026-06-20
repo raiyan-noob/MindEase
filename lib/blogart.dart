@@ -119,7 +119,6 @@ class _BlogPageState extends State<BlogPage> {
   ];
   Widget _buildBlogContainer(BlogData blog, Color accent, bool isLight) {
     return Container(
-      height: 120,
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.all(12),

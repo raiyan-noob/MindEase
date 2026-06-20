@@ -94,7 +94,6 @@ class _VideoRelPageState extends State<VideoRelPage> {
   ];
   Widget _buildVideoContainer(VideoData video, Color accent, bool isLight) {
     return Container(
-      height: 120,
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.all(12),
