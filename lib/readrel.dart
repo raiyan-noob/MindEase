@@ -94,7 +94,6 @@ class _ReadRelPageState extends State<ReadRelPage> {
   ];
   Widget _buildBookContainer(BookData book, Color accent, bool isLight) {
     return Container(
-      height: 120,
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.all(12),

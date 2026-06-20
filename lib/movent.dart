@@ -93,7 +93,6 @@ class _MovieEntPageState extends State<MovieEntPage> {
   ];
   Widget _buildMovieContainer(MovieData movie, Color accent, bool isLight) {
     return Container(
-      height: 120,
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.all(12),

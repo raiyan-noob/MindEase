@@ -166,7 +166,6 @@ class _PoemPageState extends State<PoemPage> {
   ];
   Widget _buildPoemContainer(PoemData poem, Color accent, bool isLight) {
     return Container(
-      height: 135,
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.all(12),
