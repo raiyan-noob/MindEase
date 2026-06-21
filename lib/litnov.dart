@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NovelData {
   final String title;
@@ -32,134 +33,316 @@ class NovelPage extends StatefulWidget {
   State<NovelPage> createState() => _NovelPageState();
 }
 
-class _NovelPageState extends State<NovelPage> {
-  List<NovelData> novels = [
-    NovelData(
-      title: 'The Bell Jar - Sylvia Plath',
-      description:
-          'A powerful semi-autobiographical novel about a young woman\'s descent into depression and her journey toward recovery.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.goodreads.com/book/show/6514.The_Bell_Jar',
-    ),
-    NovelData(
-      title: 'It\'s Kind of a Funny Story - Ned Vizzini',
-      description:
-          'A heartfelt and humorous novel about a teen who checks himself into a psychiatric hospital and discovers hope.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.goodreads.com/book/show/248704.It_s_Kind_of_a_Funny_Story',
-    ),
-    NovelData(
-      title: 'The Perks of Being a Wallflower',
-      description:
-          'A coming-of-age story exploring trauma, anxiety, and the healing power of friendship through heartfelt letters.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.goodreads.com/book/show/22628.The_Perks_of_Being_a_Wallflower',
-    ),
+class _NovelPageState extends State<NovelPage> with WidgetsBindingObserver {
+  late final List<NovelData> novels;
+  bool _pendingShowRating = false;
 
-    NovelData(
-      title: 'Eleanor Oliphant Is Completely Fine',
-      description:
-          'A beautiful story of a socially awkward woman who learns that connection and kindness can heal deep wounds.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.goodreads.com/book/show/31434883-eleanor-oliphant-is-completely-fine',
-    ),
-    NovelData(
-      title: 'All the Bright Places - Jennifer Niven',
-      description:
-          'A deeply moving love story between two teens who struggle with mental illness and help each other find reasons to live.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.goodreads.com/book/show/18460392-all-the-bright-places',
-    ),
-    NovelData(
-      title: 'Turtles All the Way Down - John Green',
-      description:
-          'A gripping novel about living with OCD, spiraling thoughts, and finding your identity beyond your mental illness.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.goodreads.com/book/show/35504431-turtles-all-the-way-down',
-    ),
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    novels = _getNovelDataForFeeling(widget.feeling);
+  }
 
-    NovelData(
-      title: 'The Midnight Library - Matt Haig',
-      description:
-          'A magical novel about a woman who gets to explore alternate lives she could have lived, discovering what truly matters.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.goodreads.com/book/show/52578297-the-midnight-library',
-    ),
-    NovelData(
-      title: 'Reasons to Stay Alive - Matt Haig',
-      description:
-          'A memoir-style novel blending fiction and real life about overcoming depression and finding reasons to keep going.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.goodreads.com/book/show/25733573-reasons-to-stay-alive',
-    ),
-    NovelData(
-      title: 'A Man Called Ove - Fredrik Backman',
-      description:
-          'A heartwarming tale of a grumpy old man who rediscovers the joy of living through unexpected friendships.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1519682577862-22b62b24e493?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.goodreads.com/book/show/18774964-a-man-called-ove',
-    ),
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
-    NovelData(
-      title: 'Challenger Deep - Neal Shusterman',
-      description:
-          'An award-winning novel about a teen navigating schizophrenia, told through vivid imagery and dual narratives.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.goodreads.com/book/show/18075234-challenger-deep',
-    ),
-    NovelData(
-      title: 'Highly Illogical Behavior - John Corey Whaley',
-      description:
-          'A quirky novel about a teen with agoraphobia and the unexpected friendship that challenges his comfort zone.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.goodreads.com/book/show/26109391-highly-illogical-behavior',
-    ),
-    NovelData(
-      title: 'Girl in Pieces - Kathleen Glasgow',
-      description:
-          'A raw and emotional story of a young girl recovering from self-harm and rebuilding her life through art.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.goodreads.com/book/show/29236380-girl-in-pieces',
-    ),
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && _pendingShowRating) {
+      _pendingShowRating = false;
+      Future.delayed(const Duration(milliseconds: 600), () {
+        if (mounted) _showRatingDialog();
+      });
+    }
+  }
 
-    NovelData(
-      title: 'Norwegian Wood - Haruki Murakami',
-      description:
-          'A beautifully written story about love, loss, and mental health set against the backdrop of 1960s Tokyo.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.goodreads.com/book/show/11297.Norwegian_Wood',
-    ),
-    NovelData(
-      title: 'The Catcher in the Rye - J.D. Salinger',
-      description:
-          'A timeless classic exploring teenage alienation, identity crisis, and the struggle to find meaning in the world.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.goodreads.com/book/show/5107.The_Catcher_in_the_Rye',
-    ),
-  ];
+  List<NovelData> _getNovelDataForFeeling(String feeling) {
+    switch (feeling) {
+      case 'Sad':
+        return [
+          NovelData(
+            title: 'The Perks of Being a Wallflower',
+            description:
+                'A coming-of-age story exploring trauma, anxiety, and the healing power of friendship through heartfelt letters.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/22628.The_Perks_of_Being_a_Wallflower',
+          ),
+          NovelData(
+            title: 'Reasons to Stay Alive - Matt Haig',
+            description:
+                'A memoir-style novel blending fiction and real life about overcoming depression and finding reasons to keep going.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/25733573-reasons-to-stay-alive',
+          ),
+          NovelData(
+            title: 'Girl in Pieces - Kathleen Glasgow',
+            description:
+                'A raw and emotional story of a young girl recovering from self-harm and rebuilding her life through art.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/29236380-girl-in-pieces',
+          ),
+          NovelData(
+            title: 'The Bell Jar - Sylvia Plath',
+            description:
+                'A powerful semi-autobiographical novel about a young woman\'s descent into depression and her journey toward recovery.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.goodreads.com/book/show/6514.The_Bell_Jar',
+          ),
+          NovelData(
+            title: 'The Kite Runner - Khaled Hosseini',
+            description:
+                'A powerful story of friendship, betrayal, and redemption set against the backdrop of Afghanistan\'s turbulent history.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/13536.The_Kite_Runner',
+          ),
+        ];
+      case 'Depressed':
+        return [
+          NovelData(
+            title: 'Reasons to Stay Alive - Matt Haig',
+            description:
+                'A memoir-style novel blending fiction and real life about overcoming depression and finding reasons to keep going.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/25733573-reasons-to-stay-alive',
+          ),
+          NovelData(
+            title: 'The Bell Jar - Sylvia Plath',
+            description:
+                'A powerful semi-autobiographical novel about a young woman\'s descent into depression and her journey toward recovery.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.goodreads.com/book/show/6514.The_Bell_Jar',
+          ),
+          NovelData(
+            title: 'Challenger Deep - Neal Shusterman',
+            description:
+                'An award-winning novel about a teen navigating schizophrenia, told through vivid imagery and dual narratives.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/18075234-challenger-deep',
+          ),
+          NovelData(
+            title: 'A Man Called Ove - Fredrik Backman',
+            description:
+                'A heartwarming tale of a grumpy old man who rediscovers the joy of living through unexpected friendships.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1519682577862-22b62b24e493?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/18774964-a-man-called-ove',
+          ),
+        ];
+      case 'Anxious':
+        return [
+          NovelData(
+            title: 'Turtles All the Way Down - John Green',
+            description:
+                'A gripping novel about living with OCD, spiraling thoughts, and finding your identity beyond your mental illness.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/35504431-turtles-all-the-way-down',
+          ),
+          NovelData(
+            title: 'Highly Illogical Behavior - John Corey Whaley',
+            description:
+                'A quirky novel about a teen with agoraphobia and the unexpected friendship that challenges his comfort zone.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/26109391-highly-illogical-behavior',
+          ),
+          NovelData(
+            title: 'All the Bright Places - Jennifer Niven',
+            description:
+                'A deeply moving love story between two teens who struggle with mental illness and help each other find reasons to live.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/18460392-all-the-bright-places',
+          ),
+          NovelData(
+            title: 'Eleanor Oliphant Is Completely Fine',
+            description:
+                'A beautiful story of a socially awkward woman who learns that connection and kindness can heal deep wounds.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/31434883-eleanor-oliphant-is-completely-fine',
+          ),
+        ];
+      case 'Frustrated':
+        return [
+          NovelData(
+            title: 'The Midnight Library - Matt Haig',
+            description:
+                'A magical novel about a woman who gets to explore alternate lives she could have lived, discovering what truly matters.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/52578297-the-midnight-library',
+          ),
+          NovelData(
+            title: 'A Man Called Ove - Fredrik Backman',
+            description:
+                'A heartwarming tale of a grumpy old man who rediscovers the joy of living through unexpected friendships.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1519682577862-22b62b24e493?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/18774964-a-man-called-ove',
+          ),
+          NovelData(
+            title: 'The Perks of Being a Wallflower',
+            description:
+                'A coming-of-age story exploring trauma, anxiety, and the healing power of friendship through heartfelt letters.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/22628.The_Perks_of_Being_a_Wallflower',
+          ),
+          NovelData(
+            title: 'Girl in Pieces - Kathleen Glasgow',
+            description:
+                'A raw and emotional story of a young girl recovering from self-harm and rebuilding her life through art.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/29236380-girl-in-pieces',
+          ),
+        ];
+      case 'Angry':
+        return [
+          NovelData(
+            title: 'It\'s Kind of a Funny Story - Ned Vizzini',
+            description:
+                'A heartfelt and humorous novel about a teen who checks himself into a psychiatric hospital and discovers hope.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/248704.It_s_Kind_of_a_Funny_Story',
+          ),
+          NovelData(
+            title: 'All the Bright Places - Jennifer Niven',
+            description:
+                'A deeply moving love story between two teens who struggle with mental illness and help each other find reasons to live.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/18460392-all-the-bright-places',
+          ),
+          NovelData(
+            title: 'The Midnight Library - Matt Haig',
+            description:
+                'A magical novel about a woman who gets to explore alternate lives she could have lived, discovering what truly matters.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/52578297-the-midnight-library',
+          ),
+          NovelData(
+            title: 'A Man Called Ove - Fredrik Backman',
+            description:
+                'A heartwarming tale of a grumpy old man who rediscovers the joy of living through unexpected friendships.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1519682577862-22b62b24e493?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/18774964-a-man-called-ove',
+          ),
+        ];
+      case 'Hopeless':
+        return [
+          NovelData(
+            title: 'Reasons to Stay Alive - Matt Haig',
+            description:
+                'A memoir-style novel blending fiction and real life about overcoming depression and finding reasons to keep going.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/25733573-reasons-to-stay-alive',
+          ),
+          NovelData(
+            title: 'The Midnight Library - Matt Haig',
+            description:
+                'A magical novel about a woman who gets to explore alternate lives she could have lived, discovering what truly matters.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/52578297-the-midnight-library',
+          ),
+          NovelData(
+            title: 'The Bell Jar - Sylvia Plath',
+            description:
+                'A powerful semi-autobiographical novel about a young woman\'s descent into depression and her journey toward recovery.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.goodreads.com/book/show/6514.The_Bell_Jar',
+          ),
+          NovelData(
+            title: 'Challenger Deep - Neal Shusterman',
+            description:
+                'An award-winning novel about a teen navigating schizophrenia, told through vivid imagery and dual narratives.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/18075234-challenger-deep',
+          ),
+        ];
+      default:
+        return [
+          NovelData(
+            title: 'The Bell Jar - Sylvia Plath',
+            description:
+                'A powerful semi-autobiographical novel about a young woman\'s descent into depression and her journey toward recovery.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.goodreads.com/book/show/6514.The_Bell_Jar',
+          ),
+          NovelData(
+            title: 'It\'s Kind of a Funny Story - Ned Vizzini',
+            description:
+                'A heartfelt and humorous novel about a teen who checks himself into a psychiatric hospital and discovers hope.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/248704.It_s_Kind_of_a_Funny_Story',
+          ),
+          NovelData(
+            title: 'The Perks of Being a Wallflower',
+            description:
+                'A coming-of-age story exploring trauma, anxiety, and the healing power of friendship through heartfelt letters.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/22628.The_Perks_of_Being_a_Wallflower',
+          ),
+          NovelData(
+            title: 'The Midnight Library - Matt Haig',
+            description:
+                'A magical novel about a woman who gets to explore alternate lives she could have lived, discovering what truly matters.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/book/show/52578297-the-midnight-library',
+          ),
+        ];
+    }
+  }
+
   Widget _buildNovelContainer(NovelData novel, Color accent, bool isLight) {
     return Container(
       width: double.infinity,
@@ -290,6 +473,10 @@ class _NovelPageState extends State<NovelPage> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
+              insetPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 24,
+              ),
               backgroundColor: isLight
                   ? Colors.white
                   : Color.fromRGBO(30, 30, 30, 1.0),
@@ -330,8 +517,11 @@ class _NovelPageState extends State<NovelPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    runAlignment: WrapAlignment.center,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: ratingOptions.entries.map((entry) {
                       final String emoji = entry.key;
                       final String label = entry.value;
@@ -501,28 +691,35 @@ class _NovelPageState extends State<NovelPage> {
   }
 
   Future<void> _launchURL(String url) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Open Page'),
-        content: Text('Would you like to open this page?\n\n$url'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Future.delayed(const Duration(milliseconds: 300), () {
-                _showRatingDialog();
-              });
-            },
-            child: const Text('Open'),
-          ),
-        ],
-      ),
-    );
+    String normalized = url.trim();
+    if (!normalized.contains('://')) normalized = 'https://' + normalized;
+    final uri = Uri.tryParse(normalized);
+    if (uri == null) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Invalid URL: $url')));
+      return;
+    }
+
+    try {
+      bool launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched) {
+        launched = await launchUrl(uri, mode: LaunchMode.platformDefault);
+      }
+      if (launched) {
+        _pendingShowRating = true;
+        return;
+      }
+    } catch (_) {}
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Unable to open link: $url')));
   }
 
   @override

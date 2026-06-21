@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BlogData {
   final String title;
@@ -32,91 +33,305 @@ class BlogPage extends StatefulWidget {
   State<BlogPage> createState() => _BlogPageState();
 }
 
-class _BlogPageState extends State<BlogPage> {
-  List<BlogData> blogs = [
-    // Articles & Blogs
-    BlogData(
-      title: 'Anxiety Disorders',
-      description:
-          'A guide to understanding different types of anxiety disorders, their symptoms, and coping strategies.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.helpguide.org/articles/anxiety/anxiety-disorders-and-anxiety-attacks.htm',
-    ),
-    BlogData(
-      title: 'The Science of Gratitude',
-      description:
-          'Discover how practicing gratitude rewires your brain for happiness and improves your overall mental well-being.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop',
-      bookUrl: 'https://greatergood.berkeley.edu/topic/gratitude',
-    ),
-    BlogData(
-      title: 'Mindfulness for Beginners',
-      description:
-          'A beginner-friendly blog on how to start practicing mindfulness to reduce stress and live in the present moment.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.mindful.org/meditation/mindfulness-getting-started/',
-    ),
+class _BlogPageState extends State<BlogPage> with WidgetsBindingObserver {
+  late final List<BlogData> blogs;
+  bool _pendingShowRating = false;
 
-    BlogData(
-      title: 'Sleep and Mental Health',
-      description:
-          'A Harvard Medical School journal exploring the deep connection between quality sleep and mental health recovery.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.health.harvard.edu/newsletter_article/sleep-and-mental-health',
-    ),
-    BlogData(
-      title: 'Exercise and the Brain',
-      description:
-          'Research-backed journal on how physical exercise directly impacts brain chemistry, reducing anxiety and depression.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.apa.org/topics/exercise-fitness/stress',
-    ),
-    BlogData(
-      title: 'Media & Mental Health',
-      description:
-          'An in-depth journal study on the impact of social media usage on mental health, self-esteem, and body image.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.mcleanhospital.org/essential/it-or-not-social-medias-affecting-your-mental-health',
-    ),
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    blogs = _getBlogDataForFeeling(widget.feeling);
+  }
 
-    BlogData(
-      title: 'Burnout: Signs and Recovery',
-      description:
-          'Recognize the early warning signs of burnout and learn effective strategies to recover and prevent it.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1508963493744-76fce69379c0?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.helpguide.org/articles/stress/burnout-prevention-and-recovery.htm',
-    ),
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
-    BlogData(
-      title: 'Emotional Healing',
-      description:
-          'Learn how expressive writing and journaling can help process emotions, reduce stress, and boost clarity.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1517842645767-c639042777db?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://psychcentral.com/health/benefits-of-journaling-for-mental-health',
-    ),
-    BlogData(
-      title: 'Resilience in Tough Times',
-      description:
-          'Expert advice on developing emotional resilience to bounce back from setbacks and face life\'s challenges.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.apa.org/topics/resilience/building-your-resilience',
-    ),
-  ];
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && _pendingShowRating) {
+      _pendingShowRating = false;
+      Future.delayed(const Duration(milliseconds: 600), () {
+        if (mounted) _showRatingDialog();
+      });
+    }
+  }
+
+  List<BlogData> _getBlogDataForFeeling(String feeling) {
+    switch (feeling) {
+      case 'Sad':
+        return [
+          BlogData(
+            title: 'Anxiety Disorders',
+            description:
+                'A guide to understanding different types of anxiety disorders, their symptoms, and coping strategies.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.helpguide.org/articles/anxiety/anxiety-disorders-and-anxiety-attacks.htm',
+          ),
+          BlogData(
+            title: 'Mindfulness for Beginners',
+            description:
+                'A beginner-friendly blog on how to start practicing mindfulness to reduce stress and live in the present moment.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.mindful.org/meditation/mindfulness-getting-started/',
+          ),
+          BlogData(
+            title: 'Healing Through Reading',
+            description:
+                'Discover powerful books designed to heal your soul and uplift your spirit through inspirational stories.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.headspace.com/meditation/meditation-for-beginners',
+          ),
+          BlogData(
+            title: 'Resilience in Tough Times',
+            description:
+                'Expert advice on developing emotional resilience to bounce back from setbacks and face life\'s challenges.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.apa.org/topics/resilience/building-your-resilience',
+          ),
+        ];
+      case 'Depressed':
+        return [
+          BlogData(
+            title: 'Sleep and Mental Health',
+            description:
+                'A Harvard Medical School journal exploring the deep connection between quality sleep and mental health recovery.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.health.harvard.edu/newsletter_article/sleep-and-mental-health',
+          ),
+          BlogData(
+            title: 'Emotional Healing',
+            description:
+                'Learn how expressive writing and journaling can help process emotions, reduce stress, and boost clarity.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1517842645767-c639042777db?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://psychcentral.com/health/benefits-of-journaling-for-mental-health',
+          ),
+          BlogData(
+            title: 'Burnout: Signs and Recovery',
+            description:
+                'Recognize the early warning signs of burnout and learn effective strategies to recover and prevent it.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1508963493744-76fce69379c0?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.helpguide.org/articles/stress/burnout-prevention-and-recovery.htm',
+          ),
+          BlogData(
+            title: 'Resilience in Tough Times',
+            description:
+                'Expert advice on developing emotional resilience to bounce back from setbacks and face life\'s challenges.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.apa.org/topics/resilience/building-your-resilience',
+          ),
+        ];
+      case 'Anxious':
+        return [
+          BlogData(
+            title: 'Anxiety Disorders',
+            description:
+                'A guide to understanding different types of anxiety disorders, their symptoms, and coping strategies.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.helpguide.org/articles/anxiety/anxiety-disorders-and-anxiety-attacks.htm',
+          ),
+          BlogData(
+            title: 'Mindfulness for Beginners',
+            description:
+                'A beginner-friendly blog on how to start practicing mindfulness to reduce stress and live in the present moment.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.mindful.org/meditation/mindfulness-getting-started/',
+          ),
+          BlogData(
+            title: 'Exercise and the Brain',
+            description:
+                'Research-backed journal on how physical exercise directly impacts brain chemistry, reducing anxiety and depression.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.apa.org/topics/exercise-fitness/stress',
+          ),
+          BlogData(
+            title: 'Media & Mental Health',
+            description:
+                'An in-depth journal study on the impact of social media usage on mental health, self-esteem, and body image.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.mcleanhospital.org/essential/it-or-not-social-medias-affecting-your-mental-health',
+          ),
+        ];
+      case 'Frustrated':
+        return [
+          BlogData(
+            title: 'Exercise and the Brain',
+            description:
+                'Research-backed journal on how physical exercise directly impacts brain chemistry, reducing anxiety and depression.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.apa.org/topics/exercise-fitness/stress',
+          ),
+          BlogData(
+            title: 'Media & Mental Health',
+            description:
+                'An in-depth journal study on the impact of social media usage on mental health, self-esteem, and body image.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.mcleanhospital.org/essential/it-or-not-social-medias-affecting-your-mental-health',
+          ),
+          BlogData(
+            title: 'Burnout: Signs and Recovery',
+            description:
+                'Recognize the early warning signs of burnout and learn effective strategies to recover and prevent it.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1508963493744-76fce69379c0?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.helpguide.org/articles/stress/burnout-prevention-and-recovery.htm',
+          ),
+          BlogData(
+            title: 'The Science of Gratitude',
+            description:
+                'Discover how practicing gratitude rewires your brain for happiness and improves your overall mental well-being.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop',
+            bookUrl: 'https://greatergood.berkeley.edu/topic/gratitude',
+          ),
+        ];
+      case 'Angry':
+        return [
+          BlogData(
+            title: 'The Science of Gratitude',
+            description:
+                'Discover how practicing gratitude rewires your brain for happiness and improves your overall mental well-being.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop',
+            bookUrl: 'https://greatergood.berkeley.edu/topic/gratitude',
+          ),
+          BlogData(
+            title: 'Daily Affirmations',
+            description:
+                'Start your day with positive affirmations and spiritual motivation to face challenges with strength and courage.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.mindtools.com/pages/article/affirmations.htm',
+          ),
+          BlogData(
+            title: 'Emotional Healing',
+            description:
+                'Learn how expressive writing and journaling can help process emotions, reduce stress, and boost clarity.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1517842645767-c639042777db?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://psychcentral.com/health/benefits-of-journaling-for-mental-health',
+          ),
+          BlogData(
+            title: 'Resilience in Tough Times',
+            description:
+                'Expert advice on developing emotional resilience to bounce back from setbacks and face life\'s challenges.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.apa.org/topics/resilience/building-your-resilience',
+          ),
+        ];
+      case 'Hopeless':
+        return [
+          BlogData(
+            title: 'Sleep and Mental Health',
+            description:
+                'A Harvard Medical School journal exploring the deep connection between quality sleep and mental health recovery.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.health.harvard.edu/newsletter_article/sleep-and-mental-health',
+          ),
+          BlogData(
+            title: 'Emotional Healing',
+            description:
+                'Learn how expressive writing and journaling can help process emotions, reduce stress, and boost clarity.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1517842645767-c639042777db?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://psychcentral.com/health/benefits-of-journaling-for-mental-health',
+          ),
+          BlogData(
+            title: 'Resilience in Tough Times',
+            description:
+                'Expert advice on developing emotional resilience to bounce back from setbacks and face life\'s challenges.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.apa.org/topics/resilience/building-your-resilience',
+          ),
+          BlogData(
+            title: 'Burnout: Signs and Recovery',
+            description:
+                'Recognize the early warning signs of burnout and learn effective strategies to recover and prevent it.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1508963493744-76fce69379c0?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.helpguide.org/articles/stress/burnout-prevention-and-recovery.htm',
+          ),
+        ];
+      default:
+        return [
+          BlogData(
+            title: 'Anxiety Disorders',
+            description:
+                'A guide to understanding different types of anxiety disorders, their symptoms, and coping strategies.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.helpguide.org/articles/anxiety/anxiety-disorders-and-anxiety-attacks.htm',
+          ),
+          BlogData(
+            title: 'The Science of Gratitude',
+            description:
+                'Discover how practicing gratitude rewires your brain for happiness and improves your overall mental well-being.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop',
+            bookUrl: 'https://greatergood.berkeley.edu/topic/gratitude',
+          ),
+          BlogData(
+            title: 'Mindfulness for Beginners',
+            description:
+                'A beginner-friendly blog on how to start practicing mindfulness to reduce stress and live in the present moment.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.mindful.org/meditation/mindfulness-getting-started/',
+          ),
+          BlogData(
+            title: 'Sleep and Mental Health',
+            description:
+                'A Harvard Medical School journal exploring the deep connection between quality sleep and mental health recovery.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.health.harvard.edu/newsletter_article/sleep-and-mental-health',
+          ),
+        ];
+    }
+  }
+
   Widget _buildBlogContainer(BlogData blog, Color accent, bool isLight) {
     return Container(
       width: double.infinity,
@@ -247,6 +462,10 @@ class _BlogPageState extends State<BlogPage> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
+              insetPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 24,
+              ),
               backgroundColor: isLight
                   ? Colors.white
                   : Color.fromRGBO(30, 30, 30, 1.0),
@@ -287,8 +506,11 @@ class _BlogPageState extends State<BlogPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    runAlignment: WrapAlignment.center,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: ratingOptions.entries.map((entry) {
                       final String emoji = entry.key;
                       final String label = entry.value;
@@ -458,28 +680,35 @@ class _BlogPageState extends State<BlogPage> {
   }
 
   Future<void> _launchURL(String url) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Open Page'),
-        content: Text('Would you like to open this page?\n\n$url'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Future.delayed(const Duration(milliseconds: 300), () {
-                _showRatingDialog();
-              });
-            },
-            child: const Text('Open'),
-          ),
-        ],
-      ),
-    );
+    String normalized = url.trim();
+    if (!normalized.contains('://')) normalized = 'https://' + normalized;
+    final uri = Uri.tryParse(normalized);
+    if (uri == null) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Invalid URL: $url')));
+      return;
+    }
+
+    try {
+      bool launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched) {
+        launched = await launchUrl(uri, mode: LaunchMode.platformDefault);
+      }
+      if (launched) {
+        _pendingShowRating = true;
+        return;
+      }
+    } catch (_) {}
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Unable to open link: $url')));
   }
 
   @override

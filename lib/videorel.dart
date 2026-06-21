@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class VideoData {
   final String title;
@@ -33,65 +34,236 @@ class VideoRelPage extends StatefulWidget {
   State<VideoRelPage> createState() => _VideoRelPageState();
 }
 
-class _VideoRelPageState extends State<VideoRelPage> {
-  List<VideoData> videos = [
-    VideoData(
-      title: 'Peaceful Islamic Recitation',
-      description:
-          'Listen to the beautiful recitation of Quran verses that bring peace and tranquility to your heart.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    ),
-    VideoData(
-      title: 'Meditation Guide',
-      description:
-          'A guided meditation session to help you calm your mind and find inner peace through breathing techniques.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    ),
-    VideoData(
-      title: 'Spiritual Healing Music',
-      description:
-          'Immerse yourself in soothing spiritual music designed to heal your soul and uplift your spirit.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    ),
-    VideoData(
-      title: 'Quran Reading - Al-Baqarah',
-      description:
-          'Complete recitation of Surah Al-Baqarah with clear pronunciation and spiritual reflection.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    ),
-    VideoData(
-      title: 'Morning Affirmations',
-      description:
-          'Start your day with positive affirmations and spiritual motivation to face challenges with strength.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    ),
-    VideoData(
-      title: 'Islamic Lectures',
-      description:
-          'Inspiring lectures by renowned Islamic scholars discussing spirituality and personal growth.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    ),
-    VideoData(
-      title: 'Quran Reading',
-      description:
-          'Evening recitation session perfect for reflecting on the day and seeking guidance.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    ),
-  ];
+class _VideoRelPageState extends State<VideoRelPage>
+    with WidgetsBindingObserver {
+  late final List<VideoData> videos;
+  bool _pendingShowRating = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    videos = _getVideoDataForFeeling(widget.feeling);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && _pendingShowRating) {
+      _pendingShowRating = false;
+      Future.delayed(const Duration(milliseconds: 600), () {
+        if (mounted) _showRatingDialog();
+      });
+    }
+  }
+
+  List<VideoData> _getVideoDataForFeeling(String feeling) {
+    switch (feeling) {
+      case 'Sad':
+        return [
+          VideoData(
+            title: 'Comforting Quran Recitation',
+            description:
+                'Soothing Quran verses chosen to bring peace and comfort when sadness feels overwhelming.',
+            thumbnailUrl:
+                'https://cdn.sanity.io/images/2sxb14me/production/38d0b155d3a602383dc7b85d521b730ca198c18f-512x471.jpg',
+            videoUrl: 'https://youtu.be/3OZ5C2ON2b0?si=_coSVH1z4ZV2Xz0A',
+          ),
+          VideoData(
+            title: 'Healing Nasheed for the Heart',
+            description:
+                'A gentle spiritual song that helps release emotional weight and restore calm.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Hope Through Remembrance',
+            description:
+                'Reflective reminders from the Quran and hadith to rebuild hope and inner strength.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Guided Spiritual Breathing',
+            description:
+                'A breathing exercise paired with gentle spiritual prompts to calm a sad mind.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+        ];
+      case 'Depressed':
+        return [
+          VideoData(
+            title: 'Light of Faith Reflection',
+            description:
+                'Uplifting reflections on Allah’s mercy to help restore purpose and motivation.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Gentle Islamic Affirmations',
+            description:
+                'Positive affirmations rooted in faith to rebuild self-worth and reduce hopelessness.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Healing Supplication for the Heart',
+            description:
+                'A short du’a session designed to soothe emotional pain and invite spiritual support.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Slow Spiritual Recitation',
+            description:
+                'A calming recitation with reflective pauses to gently ease a heavy mind.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+        ];
+      case 'Anxious':
+        return [
+          VideoData(
+            title: 'Calming Quranic Breathing',
+            description:
+                'A guided breathing and Quran reflection practice to reduce anxiety and restore balance.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Mindfulness Through Dhikr',
+            description:
+                'An anxiety-relief session focused on repeating meaningful names of Allah for calm and clarity.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Stress-Relief Spiritual Talk',
+            description:
+                'A short lecture on trusting Allah and handling anxious moments with faith.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+        ];
+      case 'Frustrated':
+        return [
+          VideoData(
+            title: 'Patience and Sabr',
+            description:
+                'A thoughtful talk about patience, emotional release, and healing through trust in Allah.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Letting Go With Prayer',
+            description:
+                'A guided du’a session to calm frustration and encourage gentle self-reflection.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Soothing Spiritual Music',
+            description:
+                'Music designed to ease irritation and help your heart become more accepting and calm.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+        ];
+      case 'Angry':
+        return [
+          VideoData(
+            title: 'Mercy Over Anger',
+            description:
+                'A powerful reminder of mercy and self-control when anger starts to overwhelm.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Peace After Emotional Turmoil',
+            description:
+                'A calming lecture focusing on releasing anger and returning to inner peace.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Gentle Du’a for Calm',
+            description:
+                'A short guided supplication to soften the heart and ease feelings of anger.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+        ];
+      case 'Hopeless':
+        return [
+          VideoData(
+            title: 'Finding Hope in Faith',
+            description:
+                'Uplifting reminders from the Quran that inspire hope and resilience in dark moments.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Stories of Spiritual Renewal',
+            description:
+                'Realistic reflections on overcoming despair through faith and persistence.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Hope-Filled Recitation',
+            description:
+                'A gentle Quran recitation meant to bring light and confidence back into your heart.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+        ];
+      default:
+        return [
+          VideoData(
+            title: 'Spiritual Healing Essentials',
+            description:
+                'A selection of healing videos combining recitation, reflection, and calming music.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+          VideoData(
+            title: 'Reflection and Renewal',
+            description:
+                'A faith-based reminder to reset your mind and reconnect with what matters most.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          ),
+        ];
+    }
+  }
+
   Widget _buildVideoContainer(VideoData video, Color accent, bool isLight) {
     return Container(
       width: double.infinity,
@@ -232,6 +404,10 @@ class _VideoRelPageState extends State<VideoRelPage> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
+              insetPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 24,
+              ),
               backgroundColor: isLight
                   ? Colors.white
                   : Color.fromRGBO(30, 30, 30, 1.0),
@@ -272,8 +448,11 @@ class _VideoRelPageState extends State<VideoRelPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    runAlignment: WrapAlignment.center,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: ratingOptions.entries.map((entry) {
                       final String emoji = entry.key;
                       final String label = entry.value;
@@ -443,28 +622,35 @@ class _VideoRelPageState extends State<VideoRelPage> {
   }
 
   Future<void> _launchURL(String url) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Open Page'),
-        content: Text('Would you like to open this page?\n\n$url'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Future.delayed(const Duration(milliseconds: 300), () {
-                _showRatingDialog();
-              });
-            },
-            child: const Text('Open'),
-          ),
-        ],
-      ),
-    );
+    String normalized = url.trim();
+    if (!normalized.contains('://')) normalized = 'https://' + normalized;
+    final uri = Uri.tryParse(normalized);
+    if (uri == null) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Invalid URL: $url')));
+      return;
+    }
+
+    try {
+      bool launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched) {
+        launched = await launchUrl(uri, mode: LaunchMode.platformDefault);
+      }
+      if (launched) {
+        _pendingShowRating = true;
+        return;
+      }
+    } catch (_) {}
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Unable to open link: $url')));
   }
 
   @override
@@ -584,138 +770,6 @@ class _VideoRelPageState extends State<VideoRelPage> {
               separatorBuilder: (context, index) => const SizedBox(height: 20),
             ),
           ),
-
-          /*endDrawer: Drawer(
-            width: 250,
-            elevation: 30,
-            backgroundColor: isLight
-                ? Color.fromARGB(255, 255, 255, 255)
-                : Color.fromARGB(255, 19, 19, 19),
-            shadowColor: isLight
-                ? Color.fromARGB(255, 4, 13, 9)
-                : Color.fromARGB(255, 184, 220, 193),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
-              ),
-            ),
-            child: Container(
-              child: Column(
-                children: [
-                  SizedBox(height: 100),
-                  ElevatedButton.icon(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      backgroundColor: isLight
-                          ? Color.fromARGB(255, 255, 255, 255)
-                          : Color.fromARGB(255, 19, 19, 19),
-                    ),
-                    icon: Icon(
-                      Icons.person,
-                      color: isLight
-                          ? Color.fromARGB(255, 16, 100, 56)
-                          : Color.fromARGB(255, 184, 220, 193),
-                      size: 25,
-                    ),
-                    label: Text(
-                      'Profile',
-
-                      style: TextStyle(
-                        color: isLight
-                            ? Color.fromARGB(255, 16, 100, 56)
-                            : Color.fromARGB(255, 184, 220, 193),
-                        fontFamily: 'Nunito',
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    '-------------------------',
-                    style: TextStyle(
-                      color: isLight
-                          ? Color.fromARGB(255, 16, 100, 56)
-                          : Color.fromARGB(255, 184, 220, 193),
-                      fontFamily: 'Nunito',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: isLight
-                                ? Color.fromARGB(255, 16, 100, 56)
-                                : Color.fromARGB(255, 184, 220, 193),
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                widget.onThemeChanged(true);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: isLight
-                                      ? Color.fromARGB(255, 16, 100, 56)
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(13),
-                                ),
-                                child: Icon(
-                                  Icons.light_mode,
-                                  color: isLight
-                                      ? Color.fromARGB(255, 255, 255, 255)
-                                      : Color.fromARGB(255, 184, 220, 193),
-                                  size: 24,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                widget.onThemeChanged(false);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: !isLight
-                                      ? Color.fromARGB(255, 184, 220, 193)
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Icon(
-                                  Icons.dark_mode,
-                                  color: !isLight
-                                      ? Color.fromARGB(255, 42, 42, 42)
-                                      : Color.fromARGB(255, 16, 100, 56),
-                                  size: 24,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),*/
         );
       },
     );

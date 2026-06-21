@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BookData {
   final String title;
@@ -33,65 +34,292 @@ class ReadRelPage extends StatefulWidget {
   State<ReadRelPage> createState() => _ReadRelPageState();
 }
 
-class _ReadRelPageState extends State<ReadRelPage> {
-  List<BookData> books = [
-    BookData(
-      title: 'Al Quran - A Spiritual Guide',
-      description:
-          'Read the beautiful verses of Quran that bring peace and tranquility to your heart through divine wisdom.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.example.com/quran',
-    ),
-    BookData(
-      title: 'Meditation and Mindfulness',
-      description:
-          'A comprehensive guide to meditation practices and mindfulness techniques to calm your mind and find inner peace.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.example.com/meditation-guide',
-    ),
-    BookData(
-      title: 'Healing Through Reading',
-      description:
-          'Discover powerful books designed to heal your soul and uplift your spirit through inspirational stories.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.example.com/spiritual-healing',
-    ),
-    BookData(
-      title: 'Islamic Wisdom',
-      description:
-          'Explore deep Islamic wisdom and teachings from the Quran with clear explanations and spiritual reflection.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.example.com/islamic-teachings',
-    ),
-    BookData(
-      title: 'Daily Affirmations',
-      description:
-          'Start your day with positive affirmations and spiritual motivation to face challenges with strength and courage.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.example.com/affirmations',
-    ),
-    BookData(
-      title: 'Islamic Philosophy',
-      description:
-          'Read inspiring works and lectures by renowned Islamic scholars discussing spirituality and personal growth.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.example.com/islamic-scholars',
-    ),
-    BookData(
-      title: 'Reflections and Guidance',
-      description:
-          'Evening reading sessions perfect for reflecting on the day and seeking guidance through spiritual texts.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.example.com/evening-reflections',
-    ),
-  ];
+class _ReadRelPageState extends State<ReadRelPage> with WidgetsBindingObserver {
+  late final List<BookData> books;
+  bool _pendingShowRating = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    books = _getBookDataForFeeling(widget.feeling);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && _pendingShowRating) {
+      _pendingShowRating = false;
+      Future.delayed(const Duration(milliseconds: 600), () {
+        if (mounted) _showRatingDialog();
+      });
+    }
+  }
+
+  List<BookData> _getBookDataForFeeling(String feeling) {
+    switch (feeling) {
+      case 'Sad':
+        return [
+          BookData(
+            title: 'Al Quran - A Spiritual Guide',
+            description:
+                'Read the beautiful verses of Quran that bring peace and tranquility to your heart through divine wisdom.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+            bookUrl: 'https://quran.com/',
+          ),
+          BookData(
+            title: 'Meditation and Mindfulness',
+            description:
+                'A comprehensive guide to meditation practices and mindfulness techniques to calm your mind and find inner peace.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.mindful.org/meditation/mindfulness-getting-started/',
+          ),
+          BookData(
+            title: 'Daily Affirmations',
+            description:
+                'Start your day with positive affirmations and spiritual motivation to face challenges with strength and courage.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.mindtools.com/pages/article/affirmations.htm',
+          ),
+          BookData(
+            title: 'Reflections and Guidance',
+            description:
+                'Evening reading sessions perfect for reflecting on the day and seeking guidance through spiritual texts.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.mindful.org/mindful-evening-routine/',
+          ),
+        ];
+      case 'Depressed':
+        return [
+          BookData(
+            title: 'Healing Through Reading',
+            description:
+                'Discover powerful books designed to heal your soul and uplift your spirit through inspirational stories.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.headspace.com/meditation/meditation-for-beginners',
+          ),
+          BookData(
+            title: 'Islamic Wisdom',
+            description:
+                'Explore deep Islamic wisdom and teachings from the Quran with clear explanations and spiritual reflection.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.islamicity.org/',
+          ),
+          BookData(
+            title: 'Daily Affirmations',
+            description:
+                'Start your day with positive affirmations and spiritual motivation to face challenges with strength and courage.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.mindtools.com/pages/article/affirmations.htm',
+          ),
+          BookData(
+            title: 'Reflections and Guidance',
+            description:
+                'Evening reading sessions perfect for reflecting on the day and seeking guidance through spiritual texts.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.mindful.org/mindful-evening-routine/',
+          ),
+        ];
+      case 'Anxious':
+        return [
+          BookData(
+            title: 'Meditation and Mindfulness',
+            description:
+                'A comprehensive guide to meditation practices and mindfulness techniques to calm your mind and find inner peace.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.mindful.org/meditation/mindfulness-getting-started/',
+          ),
+          BookData(
+            title: 'Healing Through Reading',
+            description:
+                'Discover powerful books designed to heal your soul and uplift your spirit through inspirational stories.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.headspace.com/meditation/meditation-for-beginners',
+          ),
+          BookData(
+            title: 'Daily Affirmations',
+            description:
+                'Start your day with positive affirmations and spiritual motivation to face challenges with strength and courage.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.mindtools.com/pages/article/affirmations.htm',
+          ),
+          BookData(
+            title: 'Reflections and Guidance',
+            description:
+                'Evening reading sessions perfect for reflecting on the day and seeking guidance through spiritual texts.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.mindful.org/mindful-evening-routine/',
+          ),
+        ];
+      case 'Frustrated':
+        return [
+          BookData(
+            title: 'Islamic Philosophy',
+            description:
+                'Read inspiring works and lectures by renowned Islamic scholars discussing spirituality and personal growth.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.britannica.com/topic/Islamic-philosophy',
+          ),
+          BookData(
+            title: 'Daily Affirmations',
+            description:
+                'Start your day with positive affirmations and spiritual motivation to face challenges with strength and courage.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.mindtools.com/pages/article/affirmations.htm',
+          ),
+          BookData(
+            title: 'Meditation and Mindfulness',
+            description:
+                'A comprehensive guide to meditation practices and mindfulness techniques to calm your mind and find inner peace.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.mindful.org/meditation/mindfulness-getting-started/',
+          ),
+          BookData(
+            title: 'Healing Through Reading',
+            description:
+                'Discover powerful books designed to heal your soul and uplift your spirit through inspirational stories.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.headspace.com/meditation/meditation-for-beginners',
+          ),
+        ];
+      case 'Angry':
+        return [
+          BookData(
+            title: 'Islamic Wisdom',
+            description:
+                'Explore deep Islamic wisdom and teachings from the Quran with clear explanations and spiritual reflection.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.islamicity.org/',
+          ),
+          BookData(
+            title: 'Daily Affirmations',
+            description:
+                'Start your day with positive affirmations and spiritual motivation to face challenges with strength and courage.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.mindtools.com/pages/article/affirmations.htm',
+          ),
+          BookData(
+            title: 'Islamic Philosophy',
+            description:
+                'Read inspiring works and lectures by renowned Islamic scholars discussing spirituality and personal growth.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.britannica.com/topic/Islamic-philosophy',
+          ),
+          BookData(
+            title: 'Reflections and Guidance',
+            description:
+                'Evening reading sessions perfect for reflecting on the day and seeking guidance through spiritual texts.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.mindful.org/mindful-evening-routine/',
+          ),
+        ];
+      case 'Hopeless':
+        return [
+          BookData(
+            title: 'Al Quran - A Spiritual Guide',
+            description:
+                'Read the beautiful verses of Quran that bring peace and tranquility to your heart through divine wisdom.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+            bookUrl: 'https://quran.com/',
+          ),
+          BookData(
+            title: 'Healing Through Reading',
+            description:
+                'Discover powerful books designed to heal your soul and uplift your spirit through inspirational stories.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.headspace.com/meditation/meditation-for-beginners',
+          ),
+          BookData(
+            title: 'Reflections and Guidance',
+            description:
+                'Evening reading sessions perfect for reflecting on the day and seeking guidance through spiritual texts.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.mindful.org/mindful-evening-routine/',
+          ),
+          BookData(
+            title: 'Daily Affirmations',
+            description:
+                'Start your day with positive affirmations and spiritual motivation to face challenges with strength and courage.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.mindtools.com/pages/article/affirmations.htm',
+          ),
+        ];
+      default:
+        return [
+          BookData(
+            title: 'Al Quran - A Spiritual Guide',
+            description:
+                'Read the beautiful verses of Quran that bring peace and tranquility to your heart through divine wisdom.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+            bookUrl: 'https://quran.com/',
+          ),
+          BookData(
+            title: 'Meditation and Mindfulness',
+            description:
+                'A comprehensive guide to meditation practices and mindfulness techniques to calm your mind and find inner peace.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.mindful.org/meditation/mindfulness-getting-started/',
+          ),
+          BookData(
+            title: 'Healing Through Reading',
+            description:
+                'Discover powerful books designed to heal your soul and uplift your spirit through inspirational stories.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.headspace.com/meditation/meditation-for-beginners',
+          ),
+          BookData(
+            title: 'Reflections and Guidance',
+            description:
+                'Evening reading sessions perfect for reflecting on the day and seeking guidance through spiritual texts.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.mindful.org/mindful-evening-routine/',
+          ),
+        ];
+    }
+  }
+
   Widget _buildBookContainer(BookData book, Color accent, bool isLight) {
     return Container(
       width: double.infinity,
@@ -222,6 +450,10 @@ class _ReadRelPageState extends State<ReadRelPage> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
+              insetPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 24,
+              ),
               backgroundColor: isLight
                   ? Colors.white
                   : Color.fromRGBO(30, 30, 30, 1.0),
@@ -262,8 +494,11 @@ class _ReadRelPageState extends State<ReadRelPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    runAlignment: WrapAlignment.center,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: ratingOptions.entries.map((entry) {
                       final String emoji = entry.key;
                       final String label = entry.value;
@@ -433,28 +668,35 @@ class _ReadRelPageState extends State<ReadRelPage> {
   }
 
   Future<void> _launchURL(String url) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Open Page'),
-        content: Text('Would you like to open this page?\n\n$url'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Future.delayed(const Duration(milliseconds: 300), () {
-                _showRatingDialog();
-              });
-            },
-            child: const Text('Open'),
-          ),
-        ],
-      ),
-    );
+    String normalized = url.trim();
+    if (!normalized.contains('://')) normalized = 'https://' + normalized;
+    final uri = Uri.tryParse(normalized);
+    if (uri == null) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Invalid URL: $url')));
+      return;
+    }
+
+    try {
+      bool launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched) {
+        launched = await launchUrl(uri, mode: LaunchMode.platformDefault);
+      }
+      if (launched) {
+        _pendingShowRating = true;
+        return;
+      }
+    } catch (_) {}
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Unable to open link: $url')));
   }
 
   @override

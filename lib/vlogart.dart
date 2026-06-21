@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class VlogData {
   final String title;
@@ -32,99 +33,283 @@ class VlogPage extends StatefulWidget {
   State<VlogPage> createState() => _VlogPageState();
 }
 
-class _VlogPageState extends State<VlogPage> {
-  List<VlogData> vlogs = [
-    VlogData(
-      title: 'What Depression Feels Like',
-      description:
-          'A raw and honest vlog by a mental health creator sharing their personal experience living with depression.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.youtube.com/watch?v=XiCrniLQGYc',
-    ),
-    VlogData(
-      title: 'My Anxiety Story - Anna',
-      description:
-          'Anna opens up about her journey with anxiety, panic attacks, and how she found healthy ways to cope.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.youtube.com/watch?v=WWloIAQpMcQ',
-    ),
-    VlogData(
-      title: 'Day in My Life',
-      description:
-          'A calming day-in-my-life vlog focused on self-care routines, therapy sessions, and mental health recovery.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.youtube.com/watch?v=4q1dgn_C0AU',
-    ),
+class _VlogPageState extends State<VlogPage> with WidgetsBindingObserver {
+  late final List<VlogData> vlogs;
+  bool _pendingShowRating = false;
 
-    VlogData(
-      title: 'The Mind Explained - Netflix',
-      description:
-          'A fascinating Netflix documentary series exploring anxiety, mindfulness, memory, and how our brains work.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.youtube.com/watch?v=KNjMq4mS6fQ',
-    ),
-    VlogData(
-      title: 'The Power of the Mind',
-      description:
-          'A powerful documentary exploring the connection between mind, body, and spirit in the healing process.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1532798442725-41036acc7489?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.youtube.com/watch?v=gJo81_JfsSg',
-    ),
-    VlogData(
-      title: 'What Makes Us Happy?',
-      description:
-          'A documentary traveling the world to discover the secrets of happiness from neuroscience to real-life stories.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.youtube.com/watch?v=krq9GcFaRSA',
-    ),
-    VlogData(
-      title: 'My Year of Living Mindfully',
-      description:
-          'A filmmaker documents his year-long experiment with daily meditation and its impact on his mental health.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.youtube.com/watch?v=AqBbXHf_bOc',
-    ),
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    vlogs = _getVlogDataForFeeling(widget.feeling);
+  }
 
-    VlogData(
-      title: 'How Therapy Works',
-      description:
-          'A mental health professional explains different therapy types like CBT, DBT, and EMDR in simple terms.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.youtube.com/watch?v=g-i6QMvIAA0',
-    ),
-    VlogData(
-      title: 'Burnout Is Real',
-      description:
-          'A personal vlog documenting the signs of burnout and the steps taken to recover and rebuild balance.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1508963493744-76fce69379c0?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.youtube.com/watch?v=WR03vbN2LOY',
-    ),
-    VlogData(
-      title: 'Living with PTSD',
-      description:
-          'A military veteran shares their emotional journey of living with PTSD and finding hope through community.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.youtube.com/watch?v=b1BtagDjafI',
-    ),
-    VlogData(
-      title: 'Free from Social Anxiety',
-      description:
-          'A heartfelt vlog about the daily struggles of social anxiety and practical steps to overcome it gradually.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.youtube.com/watch?v=8tRoIgNZ_SU',
-    ),
-  ];
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && _pendingShowRating) {
+      _pendingShowRating = false;
+      Future.delayed(const Duration(milliseconds: 600), () {
+        if (mounted) _showRatingDialog();
+      });
+    }
+  }
+
+  List<VlogData> _getVlogDataForFeeling(String feeling) {
+    switch (feeling) {
+      case 'Sad':
+        return [
+          VlogData(
+            title: 'What Depression Feels Like',
+            description:
+                'A raw and honest vlog by a mental health creator sharing their personal experience living with depression.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=XiCrniLQGYc',
+          ),
+          VlogData(
+            title: 'Free from Social Anxiety',
+            description:
+                'A heartfelt vlog about the daily struggles of social anxiety and practical steps to overcome it gradually.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=8tRoIgNZ_SU',
+          ),
+          VlogData(
+            title: 'Living with PTSD',
+            description:
+                'A military veteran shares their emotional journey of living with PTSD and finding hope through community.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=b1BtagDjafI',
+          ),
+          VlogData(
+            title: 'Burnout Is Real',
+            description:
+                'A personal vlog documenting the signs of burnout and the steps taken to recover and rebuild balance.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1508963493744-76fce69379c0?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=WR03vbN2LOY',
+          ),
+        ];
+      case 'Depressed':
+        return [
+          VlogData(
+            title: 'What Depression Feels Like',
+            description:
+                'A raw and honest vlog by a mental health creator sharing their personal experience living with depression.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=XiCrniLQGYc',
+          ),
+          VlogData(
+            title: 'My Anxiety Story - Anna',
+            description:
+                'Anna opens up about her journey with anxiety, panic attacks, and how she found healthy ways to cope.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=WWloIAQpMcQ',
+          ),
+          VlogData(
+            title: 'How Therapy Works',
+            description:
+                'A mental health professional explains different therapy types like CBT, DBT, and EMDR in simple terms.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=g-i6QMvIAA0',
+          ),
+          VlogData(
+            title: 'The Mind Explained - Netflix',
+            description:
+                'A fascinating Netflix documentary series exploring anxiety, mindfulness, memory, and how our brains work.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=KNjMq4mS6fQ',
+          ),
+        ];
+      case 'Anxious':
+        return [
+          VlogData(
+            title: 'My Anxiety Story - Anna',
+            description:
+                'Anna opens up about her journey with anxiety, panic attacks, and how she found healthy ways to cope.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=WWloIAQpMcQ',
+          ),
+          VlogData(
+            title: 'Free from Social Anxiety',
+            description:
+                'A heartfelt vlog about the daily struggles of social anxiety and practical steps to overcome it gradually.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=8tRoIgNZ_SU',
+          ),
+          VlogData(
+            title: 'Day in My Life',
+            description:
+                'A calming day-in-my-life vlog focused on self-care routines, therapy sessions, and mental health recovery.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=4q1dgn_C0AU',
+          ),
+          VlogData(
+            title: 'The Power of the Mind',
+            description:
+                'A powerful documentary exploring the connection between mind, body, and spirit in the healing process.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1532798442725-41036acc7489?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=gJo81_JfsSg',
+          ),
+        ];
+      case 'Frustrated':
+        return [
+          VlogData(
+            title: 'Burnout Is Real',
+            description:
+                'A personal vlog documenting the signs of burnout and the steps taken to recover and rebuild balance.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1508963493744-76fce69379c0?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=WR03vbN2LOY',
+          ),
+          VlogData(
+            title: 'How Therapy Works',
+            description:
+                'A mental health professional explains different therapy types like CBT, DBT, and EMDR in simple terms.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=g-i6QMvIAA0',
+          ),
+          VlogData(
+            title: 'The Mind Explained - Netflix',
+            description:
+                'A fascinating Netflix documentary series exploring anxiety, mindfulness, memory, and how our brains work.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=KNjMq4mS6fQ',
+          ),
+          VlogData(
+            title: 'Day in My Life',
+            description:
+                'A calming day-in-my-life vlog focused on self-care routines, therapy sessions, and mental health recovery.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=4q1dgn_C0AU',
+          ),
+        ];
+      case 'Angry':
+        return [
+          VlogData(
+            title: 'Living with PTSD',
+            description:
+                'A military veteran shares their emotional journey of living with PTSD and finding hope through community.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=b1BtagDjafI',
+          ),
+          VlogData(
+            title: 'Burnout Is Real',
+            description:
+                'A personal vlog documenting the signs of burnout and the steps taken to recover and rebuild balance.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1508963493744-76fce69379c0?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=WR03vbN2LOY',
+          ),
+          VlogData(
+            title: 'The Power of the Mind',
+            description:
+                'A powerful documentary exploring the connection between mind, body, and spirit in the healing process.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1532798442725-41036acc7489?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=gJo81_JfsSg',
+          ),
+          VlogData(
+            title: 'How Therapy Works',
+            description:
+                'A mental health professional explains different therapy types like CBT, DBT, and EMDR in simple terms.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=g-i6QMvIAA0',
+          ),
+        ];
+      case 'Hopeless':
+        return [
+          VlogData(
+            title: 'What Makes Us Happy?',
+            description:
+                'A documentary traveling the world to discover the secrets of happiness from neuroscience to real-life stories.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=krq9GcFaRSA',
+          ),
+          VlogData(
+            title: 'My Year of Living Mindfully',
+            description:
+                'A filmmaker documents his year-long experiment with daily meditation and its impact on his mental health.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=AqBbXHf_bOc',
+          ),
+          VlogData(
+            title: 'The Power of the Mind',
+            description:
+                'A powerful documentary exploring the connection between mind, body, and spirit in the healing process.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1532798442725-41036acc7489?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=gJo81_JfsSg',
+          ),
+          VlogData(
+            title: 'The Mind Explained - Netflix',
+            description:
+                'A fascinating Netflix documentary series exploring anxiety, mindfulness, memory, and how our brains work.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=KNjMq4mS6fQ',
+          ),
+        ];
+      default:
+        return [
+          VlogData(
+            title: 'What Depression Feels Like',
+            description:
+                'A raw and honest vlog by a mental health creator sharing their personal experience living with depression.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=XiCrniLQGYc',
+          ),
+          VlogData(
+            title: 'My Anxiety Story - Anna',
+            description:
+                'Anna opens up about her journey with anxiety, panic attacks, and how she found healthy ways to cope.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=WWloIAQpMcQ',
+          ),
+          VlogData(
+            title: 'Day in My Life',
+            description:
+                'A calming day-in-my-life vlog focused on self-care routines, therapy sessions, and mental health recovery.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=4q1dgn_C0AU',
+          ),
+          VlogData(
+            title: 'The Mind Explained - Netflix',
+            description:
+                'A fascinating Netflix documentary series exploring anxiety, mindfulness, memory, and how our brains work.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.youtube.com/watch?v=KNjMq4mS6fQ',
+          ),
+        ];
+    }
+  }
+
   Widget _buildVlogContainer(VlogData vlog, Color accent, bool isLight) {
     return Container(
       width: double.infinity,
@@ -263,6 +448,10 @@ class _VlogPageState extends State<VlogPage> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
+              insetPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 24,
+              ),
               backgroundColor: isLight
                   ? Colors.white
                   : Color.fromRGBO(30, 30, 30, 1.0),
@@ -303,8 +492,11 @@ class _VlogPageState extends State<VlogPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    runAlignment: WrapAlignment.center,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: ratingOptions.entries.map((entry) {
                       final String emoji = entry.key;
                       final String label = entry.value;
@@ -474,28 +666,35 @@ class _VlogPageState extends State<VlogPage> {
   }
 
   Future<void> _launchURL(String url) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Open Page'),
-        content: Text('Would you like to open this page?\n\n$url'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Future.delayed(const Duration(milliseconds: 300), () {
-                _showRatingDialog();
-              });
-            },
-            child: const Text('Open'),
-          ),
-        ],
-      ),
-    );
+    String normalized = url.trim();
+    if (!normalized.contains('://')) normalized = 'https://' + normalized;
+    final uri = Uri.tryParse(normalized);
+    if (uri == null) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Invalid URL: $url')));
+      return;
+    }
+
+    try {
+      bool launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched) {
+        launched = await launchUrl(uri, mode: LaunchMode.platformDefault);
+      }
+      if (launched) {
+        _pendingShowRating = true;
+        return;
+      }
+    } catch (_) {}
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Unable to open link: $url')));
   }
 
   @override
@@ -615,138 +814,6 @@ class _VlogPageState extends State<VlogPage> {
               separatorBuilder: (context, index) => const SizedBox(height: 20),
             ),
           ),
-
-          /*endDrawer: Drawer(
-            width: 250,
-            elevation: 30,
-            backgroundColor: isLight
-                ? Color.fromARGB(255, 255, 255, 255)
-                : Color.fromARGB(255, 19, 19, 19),
-            shadowColor: isLight
-                ? Color.fromARGB(255, 4, 13, 9)
-                : Color.fromARGB(255, 184, 220, 193),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
-              ),
-            ),
-            child: Container(
-              child: Column(
-                children: [
-                  SizedBox(height: 100),
-                  ElevatedButton.icon(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      backgroundColor: isLight
-                          ? Color.fromARGB(255, 255, 255, 255)
-                          : Color.fromARGB(255, 19, 19, 19),
-                    ),
-                    icon: Icon(
-                      Icons.person,
-                      color: isLight
-                          ? Color.fromARGB(255, 16, 100, 56)
-                          : Color.fromARGB(255, 184, 220, 193),
-                      size: 25,
-                    ),
-                    label: Text(
-                      'Profile',
-
-                      style: TextStyle(
-                        color: isLight
-                            ? Color.fromARGB(255, 16, 100, 56)
-                            : Color.fromARGB(255, 184, 220, 193),
-                        fontFamily: 'Nunito',
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    '-------------------------',
-                    style: TextStyle(
-                      color: isLight
-                          ? Color.fromARGB(255, 16, 100, 56)
-                          : Color.fromARGB(255, 184, 220, 193),
-                      fontFamily: 'Nunito',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: isLight
-                                ? Color.fromARGB(255, 16, 100, 56)
-                                : Color.fromARGB(255, 184, 220, 193),
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                widget.onThemeChanged(true);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: isLight
-                                      ? Color.fromARGB(255, 16, 100, 56)
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(13),
-                                ),
-                                child: Icon(
-                                  Icons.light_mode,
-                                  color: isLight
-                                      ? Color.fromARGB(255, 255, 255, 255)
-                                      : Color.fromARGB(255, 184, 220, 193),
-                                  size: 24,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                widget.onThemeChanged(false);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: !isLight
-                                      ? Color.fromARGB(255, 184, 220, 193)
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Icon(
-                                  Icons.dark_mode,
-                                  color: !isLight
-                                      ? Color.fromARGB(255, 42, 42, 42)
-                                      : Color.fromARGB(255, 16, 100, 56),
-                                  size: 24,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),*/
         );
       },
     );

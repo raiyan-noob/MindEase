@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MovieData {
   final String title;
@@ -32,65 +33,284 @@ class MovieEntPage extends StatefulWidget {
   State<MovieEntPage> createState() => _MovieEntPageState();
 }
 
-class _MovieEntPageState extends State<MovieEntPage> {
-  List<MovieData> movies = [
-    MovieData(
-      title: 'Inside Out 2',
-      description:
-          'Join Riley as she navigates new emotions during adolescence — a fun and heartfelt look at mental health for all ages.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=LEjhY15eCx0',
-    ),
-    MovieData(
-      title: 'The Pursuit of Happyness',
-      description:
-          'A powerful true story about resilience, perseverance, and overcoming life\'s toughest challenges with hope.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1535016120720-40c646be5580?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=DMOBlEcRuw8',
-    ),
-    MovieData(
-      title: 'Soul',
-      description:
-          'A Pixar masterpiece exploring the meaning of life, purpose, and what truly makes us feel alive.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=xOsLIiBStEs',
-    ),
-    MovieData(
-      title: 'A Beautiful Mind',
-      description:
-          'The inspiring story of John Nash\'s journey through mental illness and his triumph over schizophrenia.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=9wZMbOvzVEo',
-    ),
-    MovieData(
-      title: 'Good Will Hunting',
-      description:
-          'A troubled young genius finds healing through therapy and meaningful human connection.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=PaZVjZEFkRs',
-    ),
-    MovieData(
-      title: 'Silver Linings Playbook',
-      description:
-          'A heartwarming dramedy about two people managing mental health struggles who find hope in each other.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=Lj5_FhLaaQQ',
-    ),
-    MovieData(
-      title: 'Encanto',
-      description:
-          'A colorful Disney film about family pressure, self-worth, and embracing who you truly are inside.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&h=300&fit=crop',
-      videoUrl: 'https://www.youtube.com/watch?v=CaimKeDcudo',
-    ),
-  ];
+class _MovieEntPageState extends State<MovieEntPage>
+    with WidgetsBindingObserver {
+  late final List<MovieData> movies;
+  bool _pendingShowRating = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    movies = _getMovieDataForFeeling(widget.feeling);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && _pendingShowRating) {
+      _pendingShowRating = false;
+      Future.delayed(const Duration(milliseconds: 600), () {
+        if (mounted) _showRatingDialog();
+      });
+    }
+  }
+
+  List<MovieData> _getMovieDataForFeeling(String feeling) {
+    switch (feeling) {
+      case 'Sad':
+        return [
+          MovieData(
+            title: 'Inside Out 2',
+            description:
+                'Join Riley as she navigates new emotions during adolescence — a fun and heartfelt look at mental health for all ages.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=LEjhY15eCx0',
+          ),
+          MovieData(
+            title: 'Soul',
+            description:
+                'A Pixar masterpiece exploring the meaning of life, purpose, and what truly makes us feel alive.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=xOsLIiBStEs',
+          ),
+          MovieData(
+            title: 'Good Will Hunting',
+            description:
+                'A troubled young genius finds healing through therapy and meaningful human connection.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=PaZVjZEFkRs',
+          ),
+          MovieData(
+            title: 'Encanto',
+            description:
+                'A colorful Disney film about family pressure, self-worth, and embracing who you truly are inside.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=CaimKeDcudo',
+          ),
+        ];
+      case 'Depressed':
+        return [
+          MovieData(
+            title: 'The Pursuit of Happyness',
+            description:
+                'A powerful true story about resilience, perseverance, and overcoming life\'s toughest challenges with hope.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1535016120720-40c646be5580?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=DMOBlEcRuw8',
+          ),
+          MovieData(
+            title: 'A Beautiful Mind',
+            description:
+                'The inspiring story of John Nash\'s journey through mental illness and his triumph over schizophrenia.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=9wZMbOvzVEo',
+          ),
+          MovieData(
+            title: 'Silver Linings Playbook',
+            description:
+                'A heartwarming dramedy about two people managing mental health struggles who find hope in each other.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=Lj5_FhLaaQQ',
+          ),
+          MovieData(
+            title: 'Soul',
+            description:
+                'A Pixar masterpiece exploring the meaning of life, purpose, and what truly makes us feel alive.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=xOsLIiBStEs',
+          ),
+        ];
+      case 'Anxious':
+        return [
+          MovieData(
+            title: 'Inside Out 2',
+            description:
+                'Join Riley as she navigates new emotions during adolescence — a fun and heartfelt look at mental health for all ages.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=LEjhY15eCx0',
+          ),
+          MovieData(
+            title: 'Encanto',
+            description:
+                'A colorful Disney film about family pressure, self-worth, and embracing who you truly are inside.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=CaimKeDcudo',
+          ),
+          MovieData(
+            title: 'Silver Linings Playbook',
+            description:
+                'A heartwarming dramedy about two people managing mental health struggles who find hope in each other.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=Lj5_FhLaaQQ',
+          ),
+          MovieData(
+            title: 'Soul',
+            description:
+                'A Pixar masterpiece exploring the meaning of life, purpose, and what truly makes us feel alive.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=xOsLIiBStEs',
+          ),
+        ];
+      case 'Frustrated':
+        return [
+          MovieData(
+            title: 'The Pursuit of Happyness',
+            description:
+                'A powerful true story about resilience, perseverance, and overcoming life\'s toughest challenges with hope.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1535016120720-40c646be5580?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=DMOBlEcRuw8',
+          ),
+          MovieData(
+            title: 'Good Will Hunting',
+            description:
+                'A troubled young genius finds healing through therapy and meaningful human connection.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=PaZVjZEFkRs',
+          ),
+          MovieData(
+            title: 'Inside Out 2',
+            description:
+                'Join Riley as she navigates new emotions during adolescence — a fun and heartfelt look at mental health for all ages.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=LEjhY15eCx0',
+          ),
+          MovieData(
+            title: 'Soul',
+            description:
+                'A Pixar masterpiece exploring the meaning of life, purpose, and what truly makes us feel alive.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=xOsLIiBStEs',
+          ),
+        ];
+      case 'Angry':
+        return [
+          MovieData(
+            title: 'Inside Out 2',
+            description:
+                'Join Riley as she navigates new emotions during adolescence — a fun and heartfelt look at mental health for all ages.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=LEjhY15eCx0',
+          ),
+          MovieData(
+            title: 'Silver Linings Playbook',
+            description:
+                'A heartwarming dramedy about two people managing mental health struggles who find hope in each other.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=Lj5_FhLaaQQ',
+          ),
+          MovieData(
+            title: 'Encanto',
+            description:
+                'A colorful Disney film about family pressure, self-worth, and embracing who you truly are inside.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=CaimKeDcudo',
+          ),
+          MovieData(
+            title: 'Good Will Hunting',
+            description:
+                'A troubled young genius finds healing through therapy and meaningful human connection.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=PaZVjZEFkRs',
+          ),
+        ];
+      case 'Hopeless':
+        return [
+          MovieData(
+            title: 'The Pursuit of Happyness',
+            description:
+                'A powerful true story about resilience, perseverance, and overcoming life\'s toughest challenges with hope.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1535016120720-40c646be5580?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=DMOBlEcRuw8',
+          ),
+          MovieData(
+            title: 'A Beautiful Mind',
+            description:
+                'The inspiring story of John Nash\'s journey through mental illness and his triumph over schizophrenia.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=9wZMbOvzVEo',
+          ),
+          MovieData(
+            title: 'Soul',
+            description:
+                'A Pixar masterpiece exploring the meaning of life, purpose, and what truly makes us feel alive.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=xOsLIiBStEs',
+          ),
+          MovieData(
+            title: 'Good Will Hunting',
+            description:
+                'A troubled young genius finds healing through therapy and meaningful human connection.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=PaZVjZEFkRs',
+          ),
+        ];
+      default:
+        return [
+          MovieData(
+            title: 'Inside Out 2',
+            description:
+                'Join Riley as she navigates new emotions during adolescence — a fun and heartfelt look at mental health for all ages.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=LEjhY15eCx0',
+          ),
+          MovieData(
+            title: 'Soul',
+            description:
+                'A Pixar masterpiece exploring the meaning of life, purpose, and what truly makes us feel alive.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=xOsLIiBStEs',
+          ),
+          MovieData(
+            title: 'A Beautiful Mind',
+            description:
+                'The inspiring story of John Nash\'s journey through mental illness and his triumph over schizophrenia.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=9wZMbOvzVEo',
+          ),
+          MovieData(
+            title: 'Silver Linings Playbook',
+            description:
+                'A heartwarming dramedy about two people managing mental health struggles who find hope in each other.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=300&fit=crop',
+            videoUrl: 'https://www.youtube.com/watch?v=Lj5_FhLaaQQ',
+          ),
+        ];
+    }
+  }
+
   Widget _buildMovieContainer(MovieData movie, Color accent, bool isLight) {
     return Container(
       width: double.infinity,
@@ -225,6 +445,10 @@ class _MovieEntPageState extends State<MovieEntPage> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
+              insetPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 24,
+              ),
               backgroundColor: isLight
                   ? Colors.white
                   : Color.fromRGBO(30, 30, 30, 1.0),
@@ -265,8 +489,11 @@ class _MovieEntPageState extends State<MovieEntPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    runAlignment: WrapAlignment.center,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: ratingOptions.entries.map((entry) {
                       final String emoji = entry.key;
                       final String label = entry.value;
@@ -436,28 +663,35 @@ class _MovieEntPageState extends State<MovieEntPage> {
   }
 
   Future<void> _launchURL(String url) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Open Page'),
-        content: Text('Would you like to open this page?\n\n$url'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Future.delayed(const Duration(milliseconds: 300), () {
-                _showRatingDialog();
-              });
-            },
-            child: const Text('Open'),
-          ),
-        ],
-      ),
-    );
+    String normalized = url.trim();
+    if (!normalized.contains('://')) normalized = 'https://' + normalized;
+    final uri = Uri.tryParse(normalized);
+    if (uri == null) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Invalid URL: $url')));
+      return;
+    }
+
+    try {
+      bool launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched) {
+        launched = await launchUrl(uri, mode: LaunchMode.platformDefault);
+      }
+      if (launched) {
+        _pendingShowRating = true;
+        return;
+      }
+    } catch (_) {}
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Unable to open link: $url')));
   }
 
   @override
