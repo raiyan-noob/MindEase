@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SongData {
   final String title;
@@ -33,7 +34,9 @@ class SongEntPage extends StatefulWidget {
   State<SongEntPage> createState() => _SongEntPageState();
 }
 
-class _SongEntPageState extends State<SongEntPage> {
+class _SongEntPageState extends State<SongEntPage> with WidgetsBindingObserver {
+  bool _pendingShowRating = false;
+
   List<SongData> songs = [
     // Calming & Relaxation
     SongData(
@@ -178,6 +181,28 @@ class _SongEntPageState extends State<SongEntPage> {
                         color: accent.withOpacity(0.2),
                         child: Icon(Icons.music_note, color: accent, size: 40),
                       );
+                      @override
+                      void initState() {
+                        super.initState();
+                        WidgetsBinding.instance.addObserver(this);
+                      }
+
+                      @override
+                      void dispose() {
+                        WidgetsBinding.instance.removeObserver(this);
+                        super.dispose();
+                      }
+
+                      @override
+                      void didChangeAppLifecycleState(AppLifecycleState state) {
+                        if (state == AppLifecycleState.resumed &&
+                            _pendingShowRating) {
+                          _pendingShowRating = false;
+                          Future.delayed(const Duration(milliseconds: 600), () {
+                            if (mounted) _showRatingDialog();
+                          });
+                        }
+                      }
                     },
                   ),
 
@@ -263,6 +288,10 @@ class _SongEntPageState extends State<SongEntPage> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
+              insetPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 24,
+              ),
               backgroundColor: isLight
                   ? Colors.white
                   : Color.fromRGBO(30, 30, 30, 1.0),
@@ -303,8 +332,11 @@ class _SongEntPageState extends State<SongEntPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    runAlignment: WrapAlignment.center,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: ratingOptions.entries.map((entry) {
                       final String emoji = entry.key;
                       final String label = entry.value;
@@ -474,28 +506,35 @@ class _SongEntPageState extends State<SongEntPage> {
   }
 
   Future<void> _launchURL(String url) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Open Page'),
-        content: Text('Would you like to open this page?\n\n$url'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Future.delayed(const Duration(milliseconds: 300), () {
-                _showRatingDialog();
-              });
-            },
-            child: const Text('Open'),
-          ),
-        ],
-      ),
-    );
+    String normalized = url.trim();
+    if (!normalized.contains('://')) normalized = 'https://' + normalized;
+    final uri = Uri.tryParse(normalized);
+    if (uri == null) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Invalid URL: $url')));
+      return;
+    }
+
+    try {
+      bool launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched) {
+        launched = await launchUrl(uri, mode: LaunchMode.platformDefault);
+      }
+      if (launched) {
+        _pendingShowRating = true;
+        return;
+      }
+    } catch (_) {}
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Unable to open link: $url')));
   }
 
   @override

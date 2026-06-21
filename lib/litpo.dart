@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PoemData {
   final String title;
@@ -32,138 +33,300 @@ class PoemPage extends StatefulWidget {
   State<PoemPage> createState() => _PoemPageState();
 }
 
-class _PoemPageState extends State<PoemPage> {
-  List<PoemData> poems = [
-    PoemData(
-      title: 'Still I Rise - Maya Angelou',
-      description:
-          'A powerful poem about resilience, self-worth, and rising above adversity with unshakable strength and grace.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.poetryfoundation.org/poems/46446/still-i-rise',
-    ),
-    PoemData(
-      title: 'The Guest House - Rumi',
-      description:
-          'A beautiful Rumi poem about welcoming all emotions — joy, sorrow, and pain — as unexpected visitors to learn from.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.poetryfoundation.org/poems/43568/the-guest-house',
-    ),
-    PoemData(
-      title: 'Invictus - William Ernest Henley',
-      description:
-          'I am the master of my fate, I am the captain of my soul — an iconic poem about inner strength and determination.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.poetryfoundation.org/poems/51642/invictus',
-    ),
-    PoemData(
-      title: 'The Road Not Taken - Robert Frost',
-      description:
-          'A timeless poem reflecting on life choices, self-discovery, and the courage to take the less traveled path.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.poetryfoundation.org/poems/44272/the-road-not-taken',
-    ),
+class _PoemPageState extends State<PoemPage> with WidgetsBindingObserver {
+  late final List<PoemData> poems;
+  bool _pendingShowRating = false;
 
-    // Mental Health Awareness Poems
-    PoemData(
-      title: 'Not Waving but Drowning - Stevie Smith',
-      description:
-          'A haunting poem about hidden suffering and how people often mask their pain behind a smile.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.poetryfoundation.org/poems/46479/not-waving-but-drowning',
-    ),
-    PoemData(
-      title: 'Heavy - Mary Oliver',
-      description:
-          'A short yet profound poem about letting go of the emotional weight we carry and choosing to live fully.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.goodreads.com/quotes/7987-heavy',
-    ),
-    PoemData(
-      title: 'Autobiography in Five Chapters - Portia Nelson',
-      description:
-          'A brilliant metaphorical poem about personal growth, breaking patterns, and choosing a new path in life.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
-      bookUrl:
-          'https://www.goodreads.com/quotes/7510-autobiography-in-five-short-chapters',
-    ),
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    poems = _getPoemDataForFeeling(widget.feeling);
+  }
 
-    // Inspirational Quotes Collections
-    PoemData(
-      title: 'Quotes on Anxiety & Courage',
-      description:
-          '"You don\'t have to control your thoughts. You just have to stop letting them control you." — Dan Millman',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1489533119213-66a5cd877091?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.verywellmind.com/anxiety-quotes-5094498',
-    ),
-    PoemData(
-      title: 'Quotes on Depression & Hope',
-      description:
-          '"Even the darkest night will end and the sun will rise." — Victor Hugo. A collection of quotes to light your way.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.verywellmind.com/depression-quotes-5094454',
-    ),
-    PoemData(
-      title: 'Quotes on Self-Love & Healing',
-      description:
-          '"You yourself, as much as anybody in the entire universe, deserve your love and affection." — Buddha',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.goodreads.com/quotes/tag/self-love',
-    ),
-    PoemData(
-      title: 'Quotes on Strength & Resilience',
-      description:
-          '"The human capacity for burden is like bamboo — far more flexible than you\'d ever believe." — Jodi Picoult',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.goodreads.com/quotes/tag/resilience',
-    ),
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
-    // Soothing & Mindfulness Poems
-    PoemData(
-      title: 'Wild Geese - Mary Oliver',
-      description:
-          'You do not have to be good. A gentle reminder that you belong in this world just as you are, imperfections and all.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.poetryfoundation.org/poems/48568/wild-geese',
-    ),
-    PoemData(
-      title: 'Desiderata - Max Ehrmann',
-      description:
-          'A timeless prose poem offering gentle life advice about peace, patience, and being kind to yourself.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.desiderata.com/desiderata.html',
-    ),
-    PoemData(
-      title: 'Love After Love - Derek Walcott',
-      description:
-          'A beautiful poem about rediscovering yourself after hardship and learning to love who you truly are again.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.poetryfoundation.org/poems/53489/love-after-love',
-    ),
-    PoemData(
-      title: 'If - Rudyard Kipling',
-      description:
-          'A father\'s timeless advice to his son about keeping calm, staying strong, and never losing faith in yourself.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=400&h=300&fit=crop',
-      bookUrl: 'https://www.poetryfoundation.org/poems/46473/if---',
-    ),
-  ];
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && _pendingShowRating) {
+      _pendingShowRating = false;
+      Future.delayed(const Duration(milliseconds: 600), () {
+        if (mounted) _showRatingDialog();
+      });
+    }
+  }
+
+  List<PoemData> _getPoemDataForFeeling(String feeling) {
+    switch (feeling) {
+      case 'Sad':
+        return [
+          PoemData(
+            title: 'Not Waving but Drowning - Stevie Smith',
+            description:
+                'A haunting poem about hidden suffering and how people often mask their pain behind a smile.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/46479/not-waving-but-drowning',
+          ),
+          PoemData(
+            title: 'Heavy - Mary Oliver',
+            description:
+                'A short yet profound poem about letting go of the emotional weight we carry and choosing to live fully.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.goodreads.com/quotes/7987-heavy',
+          ),
+          PoemData(
+            title: 'Autobiography in Five Chapters - Portia Nelson',
+            description:
+                'A brilliant metaphorical poem about personal growth, breaking patterns, and choosing a new path in life.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/quotes/7510-autobiography-in-five-short-chapters',
+          ),
+          PoemData(
+            title: 'The Guest House - Rumi',
+            description:
+                'A beautiful Rumi poem about welcoming all emotions — joy, sorrow, and pain — as unexpected visitors to learn from.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/43568/the-guest-house',
+          ),
+        ];
+      case 'Depressed':
+        return [
+          PoemData(
+            title: 'Still I Rise - Maya Angelou',
+            description:
+                'A powerful poem about resilience, self-worth, and rising above adversity with unshakable strength and grace.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/46446/still-i-rise',
+          ),
+          PoemData(
+            title: 'The Road Not Taken - Robert Frost',
+            description:
+                'A timeless poem reflecting on life choices, self-discovery, and the courage to take the less traveled path.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/44272/the-road-not-taken',
+          ),
+          PoemData(
+            title: 'Quotes on Depression & Hope',
+            description:
+                '"Even the darkest night will end and the sun will rise." — Victor Hugo. A collection of quotes to light your way.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.verywellmind.com/depression-quotes-5094454',
+          ),
+          PoemData(
+            title: 'Love After Love - Derek Walcott',
+            description:
+                'A beautiful poem about rediscovering yourself after hardship and learning to love who you truly are again.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/53489/love-after-love',
+          ),
+        ];
+      case 'Anxious':
+        return [
+          PoemData(
+            title: 'Invictus - William Ernest Henley',
+            description:
+                'I am the master of my fate, I am the captain of my soul — an iconic poem about inner strength and determination.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.poetryfoundation.org/poems/51642/invictus',
+          ),
+          PoemData(
+            title: 'Quotes on Anxiety & Courage',
+            description:
+                '"You don\'t have to control your thoughts. You just have to stop letting them control you." — Dan Millman',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1489533119213-66a5cd877091?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.verywellmind.com/anxiety-quotes-5094498',
+          ),
+          PoemData(
+            title: 'The Guest House - Rumi',
+            description:
+                'A beautiful Rumi poem about welcoming all emotions — joy, sorrow, and pain — as unexpected visitors to learn from.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/43568/the-guest-house',
+          ),
+          PoemData(
+            title: 'Wild Geese - Mary Oliver',
+            description:
+                'You do not have to be good. A gentle reminder that you belong in this world just as you are, imperfections and all.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.poetryfoundation.org/poems/48568/wild-geese',
+          ),
+        ];
+      case 'Frustrated':
+        return [
+          PoemData(
+            title: 'Quotes on Strength & Resilience',
+            description:
+                '"The human capacity for burden is like bamboo — far more flexible than you\'d ever believe." — Jodi Picoult',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/resilience',
+          ),
+          PoemData(
+            title: 'Brave - Sara Bareilles',
+            description:
+                'Wait, that is a song; we should instead include a poem focusing on overcoming frustration.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/46013/as-we-grow-older',
+          ),
+          PoemData(
+            title: 'If - Rudyard Kipling',
+            description:
+                'A father\'s timeless advice to his son about keeping calm, staying strong, and never losing faith in yourself.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.poetryfoundation.org/poems/46473/if---',
+          ),
+          PoemData(
+            title: 'Autobiography in Five Chapters - Portia Nelson',
+            description:
+                'A brilliant metaphorical poem about personal growth, breaking patterns, and choosing a new path in life.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.goodreads.com/quotes/7510-autobiography-in-five-short-chapters',
+          ),
+        ];
+      case 'Angry':
+        return [
+          PoemData(
+            title: 'Still I Rise - Maya Angelou',
+            description:
+                'A powerful poem about resilience, self-worth, and rising above adversity with unshakable strength and grace.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/46446/still-i-rise',
+          ),
+          PoemData(
+            title: 'If - Rudyard Kipling',
+            description:
+                'A father\'s timeless advice to his son about keeping calm, staying strong, and never losing faith in yourself.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.poetryfoundation.org/poems/46473/if---',
+          ),
+          PoemData(
+            title: 'The Guest House - Rumi',
+            description:
+                'A beautiful Rumi poem about welcoming all emotions — joy, sorrow, and pain — as unexpected visitors to learn from.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/43568/the-guest-house',
+          ),
+          PoemData(
+            title: 'Not Waving but Drowning - Stevie Smith',
+            description:
+                'A haunting poem about hidden suffering and how people often mask their pain behind a smile.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/46479/not-waving-but-drowning',
+          ),
+        ];
+      case 'Hopeless':
+        return [
+          PoemData(
+            title: 'Desiderata - Max Ehrmann',
+            description:
+                'A timeless prose poem offering gentle life advice about peace, patience, and being kind to yourself.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.desiderata.com/desiderata.html',
+          ),
+          PoemData(
+            title: 'Love After Love - Derek Walcott',
+            description:
+                'A beautiful poem about rediscovering yourself after hardship and learning to love who you truly are again.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/53489/love-after-love',
+          ),
+          PoemData(
+            title: 'Still I Rise - Maya Angelou',
+            description:
+                'A powerful poem about resilience, self-worth, and rising above adversity with unshakable strength and grace.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/46446/still-i-rise',
+          ),
+          PoemData(
+            title: 'The Guest House - Rumi',
+            description:
+                'A beautiful Rumi poem about welcoming all emotions — joy, sorrow, and pain — as unexpected visitors to learn from.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/43568/the-guest-house',
+          ),
+        ];
+      default:
+        return [
+          PoemData(
+            title: 'Still I Rise - Maya Angelou',
+            description:
+                'A powerful poem about resilience, self-worth, and rising above adversity with unshakable strength and grace.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/46446/still-i-rise',
+          ),
+          PoemData(
+            title: 'The Guest House - Rumi',
+            description:
+                'A beautiful Rumi poem about welcoming all emotions — joy, sorrow, and pain — as unexpected visitors to learn from.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=400&h=300&fit=crop',
+            bookUrl:
+                'https://www.poetryfoundation.org/poems/43568/the-guest-house',
+          ),
+          PoemData(
+            title: 'Invictus - William Ernest Henley',
+            description:
+                'I am the master of my fate, I am the captain of my soul — an iconic poem about inner strength and determination.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.poetryfoundation.org/poems/51642/invictus',
+          ),
+          PoemData(
+            title: 'Quotes on Self-Love & Healing',
+            description:
+                '"You yourself, as much as anybody in the entire universe, deserve your love and affection." — Buddha',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/self-love',
+          ),
+        ];
+    }
+  }
+
   Widget _buildPoemContainer(PoemData poem, Color accent, bool isLight) {
     return Container(
       width: double.infinity,
@@ -294,6 +457,10 @@ class _PoemPageState extends State<PoemPage> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
+              insetPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 24,
+              ),
               backgroundColor: isLight
                   ? Colors.white
                   : Color.fromRGBO(30, 30, 30, 1.0),
@@ -334,8 +501,11 @@ class _PoemPageState extends State<PoemPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    runAlignment: WrapAlignment.center,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: ratingOptions.entries.map((entry) {
                       final String emoji = entry.key;
                       final String label = entry.value;
@@ -505,28 +675,35 @@ class _PoemPageState extends State<PoemPage> {
   }
 
   Future<void> _launchURL(String url) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Open Page'),
-        content: Text('Would you like to open this page?\n\n$url'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Future.delayed(const Duration(milliseconds: 300), () {
-                _showRatingDialog();
-              });
-            },
-            child: const Text('Open'),
-          ),
-        ],
-      ),
-    );
+    String normalized = url.trim();
+    if (!normalized.contains('://')) normalized = 'https://' + normalized;
+    final uri = Uri.tryParse(normalized);
+    if (uri == null) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Invalid URL: $url')));
+      return;
+    }
+
+    try {
+      bool launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched) {
+        launched = await launchUrl(uri, mode: LaunchMode.platformDefault);
+      }
+      if (launched) {
+        _pendingShowRating = true;
+        return;
+      }
+    } catch (_) {}
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Unable to open link: $url')));
   }
 
   @override
