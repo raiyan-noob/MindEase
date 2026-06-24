@@ -35,103 +35,417 @@ class SongEntPage extends StatefulWidget {
 }
 
 class _SongEntPageState extends State<SongEntPage> with WidgetsBindingObserver {
+  late final List<SongData> songs;
   bool _pendingShowRating = false;
 
-  List<SongData> songs = [
-    // Calming & Relaxation
-    SongData(
-      title: 'Weightless - Marconi Union',
-      description:
-          'Scientifically proven to be one of the most relaxing songs ever made, reducing anxiety by up to 65%.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=300&fit=crop',
-      bookUrl: 'https://open.spotify.com/track/6kkwzB6hXLIONkEk9JciA6',
-    ),
-    SongData(
-      title: 'Lovely Day - Bill Withers',
-      description:
-          'An uplifting soul classic that fills your heart with warmth and positivity to brighten any tough day.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=300&fit=crop',
-      bookUrl: 'https://open.spotify.com/track/0bRXwKfigvpKZUurwqAlEh',
-    ),
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    songs = _getSongDataForFeeling(widget.feeling);
+  }
 
-    SongData(
-      title: 'Fight Song - Rachel Platten',
-      description:
-          'An empowering anthem about finding your inner strength and never giving up on yourself.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop',
-      bookUrl: 'https://open.spotify.com/track/0r2Blm2MBHiLLsB1gYXjtV',
-    ),
-    SongData(
-      title: 'Rise Up - Andra Day',
-      description:
-          'A powerful ballad about resilience and rising above challenges — ideal when you need emotional strength.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
-      bookUrl: 'https://open.spotify.com/track/56k8ay5GNGeCEUjkHPGQsH',
-    ),
-    SongData(
-      title: 'Brave - Sara Bareilles',
-      description:
-          'An energizing track encouraging you to speak your truth and embrace courage in everyday life.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
-      bookUrl: 'https://open.spotify.com/track/2kR0bH0EiYGJHyg7NMsaRX',
-    ),
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
-    SongData(
-      title: 'Let It Be - The Beatles',
-      description:
-          'A soothing melody reminding you to let go of things you can\'t control and find peace within.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=400&h=300&fit=crop',
-      bookUrl: 'https://open.spotify.com/track/7iN1s7xHE4ifF5povM6A48',
-    ),
-    SongData(
-      title: 'Breathe Me - Sia',
-      description:
-          'A deeply emotional song about vulnerability and the courage to ask for help when you need it most.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
-      bookUrl: 'https://open.spotify.com/track/2SiJiyBMpqIEPqrLOiJwgG',
-    ),
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && _pendingShowRating) {
+      _pendingShowRating = false;
+      Future.delayed(const Duration(milliseconds: 600), () {
+        if (mounted) _showRatingDialog();
+      });
+    }
+  }
 
-    SongData(
-      title: 'Clair de Lune - Debussy',
-      description:
-          'A timeless classical masterpiece perfect for deep relaxation, meditation, and calming anxious thoughts.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=400&h=300&fit=crop',
-      bookUrl: 'https://open.spotify.com/track/1JSTJqkT5qHq8MDJnJbRE1',
-    ),
-    SongData(
-      title: 'River Flows In You - Yiruma',
-      description:
-          'A gentle piano piece that washes away stress and creates a peaceful atmosphere for self-reflection.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1552422535-c45813c61732?w=400&h=300&fit=crop',
-      bookUrl: 'https://open.spotify.com/track/4PJAqWio3KFVFJGpXplaYH',
-    ),
-    SongData(
-      title: 'Lo-Fi Chill Beats Mix',
-      description:
-          'A curated lo-fi beats playlist perfect for studying, unwinding, or creating a calming environment.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1483412033650-1015ddeb83d1?w=400&h=300&fit=crop',
-      bookUrl: 'https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn',
-    ),
+  List<SongData> _getSongDataForFeeling(String feeling) {
+    switch (feeling) {
+      case 'Sad':
+        return [
+          SongData(
+            title: 'Happy',
+            description:
+                'One of the most famous feel-good songs ever made. Its upbeat rhythm and positive energy have helped millions of listeners lift their mood and focus on joy rather than sadness.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/ZbZSe6N_BXs/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=ZbZSe6N_BXs',
+          ),
 
-    SongData(
-      title: 'Amazing Grace - Hymn',
-      description:
-          'A beloved Christian hymn about hope, redemption, and the transforming power of grace and faith.',
-      thumbnailUrl:
-          'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=400&h=300&fit=crop',
-      bookUrl: 'https://open.spotify.com/track/3Dy0VRo0talXOJVB4eqhb1',
-    ),
-  ];
+          SongData(
+            title: 'Don\'t Worry, Be Happy',
+            description:
+                'A timeless classic that encourages listeners to let go of worries and embrace a lighter perspective on life. Simple, cheerful, and surprisingly effective when feeling down.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/d-diB65scQU/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=d-diB65scQU',
+          ),
+
+          SongData(
+            title: 'Walking On Sunshine',
+            description:
+                'An energetic song that instantly brings warmth and positivity. Frequently recommended in happiness playlists because of its infectious optimism and uplifting vibe.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/iPUmE-tne5U/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=iPUmE-tne5U',
+          ),
+
+          SongData(
+            title: 'Mr. Blue Sky',
+            description:
+                'A cheerful classic filled with bright melodies and hopeful energy. Many listeners describe it as one of the easiest songs to smile to, even during difficult days.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/wuJIqmha2Hk/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=wuJIqmha2Hk',
+          ),
+
+          SongData(
+            title: 'Firework',
+            description:
+                'A motivational anthem about recognizing your worth and shining despite challenges. Its message of self-belief can be especially comforting during periods of sadness.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/QGJuMBdaqIw/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=QGJuMBdaqIw',
+          ),
+
+          SongData(
+            title: 'Good Time',
+            description:
+                'A lighthearted song about enjoying the present moment and letting go of stress. Perfect for creating a more positive and carefree mindset.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/H7HmzwI67ec/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=H7HmzwI67ec',
+          ),
+
+          SongData(
+            title: 'Beautiful Day',
+            description:
+                'A powerful reminder that even during difficult moments there is still beauty and hope to be found. Its uplifting message has resonated with listeners for decades.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/co6WMzDOh1o/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=co6WMzDOh1o',
+          ),
+        ];
+      case 'Depressed':
+        return [
+          SongData(
+            title: 'Fight Song',
+            description:
+                'An empowering anthem about finding strength when life feels overwhelming. Many listeners turn to this song during difficult periods because of its message that even a small spark of hope can make a difference.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/xo1VInw-SKc/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=xo1VInw-SKc',
+          ),
+
+          SongData(
+            title: 'Hall of Fame',
+            description:
+                'A motivational song that encourages listeners to believe in themselves and keep moving forward despite setbacks. Its uplifting lyrics remind people that their struggles do not define their future.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/mk48xRzuNvA/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=mk48xRzuNvA',
+          ),
+
+          SongData(
+            title: 'Rise Up',
+            description:
+                'A deeply emotional song about resilience, healing, and standing up again after being knocked down by life. It has become a source of comfort and inspiration for many people facing emotional struggles.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/kNKu1uNBVkU/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=kNKu1uNBVkU',
+          ),
+
+          SongData(
+            title: 'Unstoppable',
+            description:
+                'A powerful reminder of inner strength and perseverance. The song encourages listeners to believe that they are stronger than their fears, doubts, and difficult circumstances.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/YaEG2aWJnZ8/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=YaEG2aWJnZ8',
+          ),
+
+          SongData(
+            title: 'Stronger (What Doesn\'t Kill You)',
+            description:
+                'A motivational anthem about growing through adversity. Its energetic message encourages people to see challenges as opportunities to become stronger and more resilient.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/Xn676-fLq7I/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=Xn676-fLq7I',
+          ),
+
+          SongData(
+            title: 'Count on Me',
+            description:
+                'A warm and reassuring song about friendship, support, and never facing struggles alone. It reminds listeners that there are always people who care about them.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/6k8cpUkKK4c/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=6k8cpUkKK4c',
+          ),
+
+          SongData(
+            title: 'Here Comes the Sun',
+            description:
+                'A timeless classic about hope returning after a long period of darkness. Its gentle melody and optimistic message have comforted listeners for generations.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/KQetemT1sWc/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=KQetemT1sWc',
+          ),
+        ];
+      case 'Anxious':
+        return [
+          SongData(
+            title: 'Weightless',
+            description:
+                'Often cited as one of the most relaxing pieces of music ever created. Its slow tempo, ambient sounds, and soothing progression have helped many listeners reduce feelings of stress, anxiety, and mental overwhelm.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/UfcAVejslrU/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=UfcAVejslrU',
+          ),
+
+          SongData(
+            title: 'River Flows in You',
+            description:
+                'A beautiful piano composition that creates a sense of calm and emotional balance. Many people listen to it while studying, meditating, or trying to quiet anxious thoughts.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/7maJOI3QMu0/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=7maJOI3QMu0',
+          ),
+
+          SongData(
+            title: 'Clair de Lune',
+            description:
+                'One of the most beloved classical piano pieces ever written. Its gentle and dreamy melody can help slow racing thoughts and create a peaceful mental space.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/CvFH_6DNRCY/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=CvFH_6DNRCY',
+          ),
+
+          SongData(
+            title: 'Three Little Birds',
+            description:
+                'Bob Marley’s iconic message of “every little thing is gonna be alright” has comforted generations of listeners facing worry, uncertainty, and anxiety.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/HNBCVM4KbUM/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=HNBCVM4KbUM',
+          ),
+          SongData(
+            title: 'Pure Shores',
+            description:
+                'A relaxing and atmospheric song that creates a feeling of escape from everyday stress. Its soothing soundscape makes it popular among people seeking calm and clarity.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/dVNdTXEJv1A/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=dVNdTXEJv1A',
+          ),
+
+          SongData(
+            title: 'Breathe Me',
+            description:
+                'A deeply emotional and reflective song that helps listeners feel understood during moments of vulnerability. Many people find comfort in its honesty and gentle delivery.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/PwB56IYDfWs/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=PwB56IYDfWs',
+          ),
+        ];
+      case 'Frustrated':
+        return [
+          SongData(
+            title: 'Eye of the Tiger',
+            description:
+                'One of the most iconic motivational songs ever created. Its driving rhythm and determined energy help transform frustration into focus, perseverance, and action.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/btPJPFnesV4/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=btPJPFnesV4',
+          ),
+
+          SongData(
+            title: 'Hall of Fame',
+            description:
+                'A powerful anthem about pushing through obstacles and believing in your potential. Perfect for moments when frustration is making you doubt yourself or your abilities.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/mk48xRzuNvA/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=mk48xRzuNvA',
+          ),
+
+          SongData(
+            title: 'Stronger (What Doesn\'t Kill You)',
+            description:
+                'An uplifting reminder that challenges can make us more resilient. The song encourages listeners to view setbacks as opportunities for growth rather than reasons to give up.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/Xn676-fLq7I/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=Xn676-fLq7I',
+          ),
+
+          SongData(
+            title: 'Unstoppable',
+            description:
+                'A confidence-boosting anthem that inspires listeners to keep moving forward despite obstacles. Its empowering lyrics make it a favorite during moments of self-doubt and frustration.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/YaEG2aWJnZ8/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=YaEG2aWJnZ8',
+          ),
+
+          SongData(
+            title: 'Believer',
+            description:
+                'A high-energy song about transforming pain and frustration into strength. Many listeners find its message empowering when dealing with setbacks or difficult circumstances.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/7wtfhZwyrcc/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=7wtfhZwyrcc',
+          ),
+
+          SongData(
+            title: 'Lose Yourself',
+            description:
+                'A legendary motivational track about seizing opportunities and overcoming fear. Its intense focus and determination can help redirect frustration into productive action.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/_Yhyp-_hX2s/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=_Yhyp-_hX2s',
+          ),
+
+          SongData(
+            title: 'On Top of the World',
+            description:
+                'An upbeat and optimistic song that encourages listeners to celebrate progress and keep moving forward. Great for shifting from frustration to a more positive mindset.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/w5tWYmIOWGk/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=w5tWYmIOWGk',
+          ),
+        ];
+      case 'Angry':
+        return [
+          SongData(
+            title: 'Let It Be',
+            description:
+                'A timeless classic about acceptance, wisdom, and finding peace during difficult moments. Its gentle message encourages listeners to step back from intense emotions and trust that clarity will come with time.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/QDYfEBY9NM4/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=QDYfEBY9NM4',
+          ),
+
+          SongData(
+            title: 'Three Little Birds',
+            description:
+                'Bob Marley’s reassuring message that “every little thing is gonna be alright” has helped generations of listeners reduce stress, anger, and frustration. A simple but powerful reminder to let go of what cannot be controlled.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/HNBCVM4KbUM/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=HNBCVM4KbUM',
+          ),
+
+          SongData(
+            title: 'Here Comes the Sun',
+            description:
+                'A warm and hopeful song about moving through dark periods and welcoming brighter days. Its uplifting melody can help soften feelings of anger and replace them with optimism.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/KQetemT1sWc/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=KQetemT1sWc',
+          ),
+
+          SongData(
+            title: 'River Flows in You',
+            description:
+                'A calming piano composition that helps slow racing thoughts and emotional intensity. Many listeners use it as a way to decompress after stressful or frustrating experiences.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/7maJOI3QMu0/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=7maJOI3QMu0',
+          ),
+
+          SongData(
+            title: 'Weightless',
+            description:
+                'Created specifically to promote relaxation, this ambient track is widely known for helping listeners reduce stress and emotional tension. Ideal for cooling down when anger feels overwhelming.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/UfcAVejslrU/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=UfcAVejslrU',
+          ),
+
+          SongData(
+            title: 'Fix You',
+            description:
+                'A heartfelt song about healing, support, and emotional recovery. Its comforting lyrics and gradual build-up encourage listeners to process difficult emotions with compassion rather than resentment.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/k4V3Mo61fJM/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=k4V3Mo61fJM',
+          ),
+        ];
+      case 'Hopeless':
+        return [
+          SongData(
+            title: 'Rise Up',
+            description:
+                'A powerful anthem about standing back up after life knocks you down. Its message of resilience, courage, and perseverance has inspired countless listeners facing hardship and hopelessness.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/kNKu1uNBVkU/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=kNKu1uNBVkU',
+          ),
+
+          SongData(
+            title: 'You Raise Me Up',
+            description:
+                'A deeply uplifting song about finding strength through support, faith, and human connection. Many listeners turn to it during difficult times as a reminder that they do not have to carry their burdens alone.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/aJxrX42WcjQ/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=aJxrX42WcjQ',
+          ),
+
+          SongData(
+            title: 'Carry On',
+            description:
+                'A hopeful reminder that even after setbacks, heartbreak, or failure, life continues. Its encouraging lyrics help listeners find the strength to keep moving forward one step at a time.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/q7yCLn-O-Y0/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=q7yCLn-O-Y0',
+          ),
+
+          SongData(
+            title: 'Fix You',
+            description:
+                'One of the most comforting songs ever written about pain, healing, and emotional recovery. Its message reassures listeners that brokenness is not permanent and that healing is possible.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/k4V3Mo61fJM/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=k4V3Mo61fJM',
+          ),
+
+          SongData(
+            title: 'Here Comes the Sun',
+            description:
+                'A timeless classic about hope returning after a long period of darkness. Its gentle optimism reminds listeners that difficult seasons eventually pass and brighter days can come again.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/KQetemT1sWc/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=KQetemT1sWc',
+          ),
+
+          SongData(
+            title: 'Brave',
+            description:
+                'An encouraging song about finding your voice, taking small steps forward, and refusing to let fear define your future. Its uplifting message can help restore confidence and hope.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/QUQsqBqxoR4/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=QUQsqBqxoR4',
+          ),
+
+          SongData(
+            title: 'Somewhere Over the Rainbow',
+            description:
+                'A soothing and hopeful song that paints a picture of better days ahead. Its calming melody and optimistic message have comforted listeners for generations.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/V1bFr2SWP1I/maxresdefault.jpg',
+            bookUrl: 'https://www.youtube.com/watch?v=V1bFr2SWP1I',
+          ),
+        ];
+      default:
+        return [
+          SongData(
+            title: 'Default Song',
+            description: 'A default song placeholder.',
+            thumbnailUrl: 'https://glasp.co/images/og-default.png',
+            bookUrl: 'https://glasp.co/youtube/EEAJT3yqKb4',
+          ),
+        ];
+    }
+  }
+
   Widget _buildSongContainer(SongData song, Color accent, bool isLight) {
     return Container(
       width: double.infinity,
@@ -181,28 +495,6 @@ class _SongEntPageState extends State<SongEntPage> with WidgetsBindingObserver {
                         color: accent.withOpacity(0.2),
                         child: Icon(Icons.music_note, color: accent, size: 40),
                       );
-                      @override
-                      void initState() {
-                        super.initState();
-                        WidgetsBinding.instance.addObserver(this);
-                      }
-
-                      @override
-                      void dispose() {
-                        WidgetsBinding.instance.removeObserver(this);
-                        super.dispose();
-                      }
-
-                      @override
-                      void didChangeAppLifecycleState(AppLifecycleState state) {
-                        if (state == AppLifecycleState.resumed &&
-                            _pendingShowRating) {
-                          _pendingShowRating = false;
-                          Future.delayed(const Duration(milliseconds: 600), () {
-                            if (mounted) _showRatingDialog();
-                          });
-                        }
-                      }
                     },
                   ),
 
@@ -244,24 +536,105 @@ class _SongEntPageState extends State<SongEntPage> with WidgetsBindingObserver {
                 ),
                 const SizedBox(height: 8),
 
-                Text(
-                  song.description,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontFamily: 'Nunito',
-                    fontWeight: FontWeight.w500,
-                    color: isLight
-                        ? Color.fromRGBO(70, 70, 70, 1.0)
-                        : Color.fromRGBO(200, 200, 200, 1.0),
+                GestureDetector(
+                  onTap: () => _showDescriptionDialog(
+                    title: song.title,
+                    description: song.description,
+                    link: song.bookUrl,
                   ),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
+                  child: Text(
+                    song.description,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontFamily: 'Nunito',
+                      fontWeight: FontWeight.w500,
+                      color: isLight
+                          ? Color.fromRGBO(70, 70, 70, 1.0)
+                          : Color.fromRGBO(200, 200, 200, 1.0),
+                    ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  void _showDescriptionDialog({
+    required String title,
+    required String description,
+    required String link,
+  }) {
+    final bool isLight = widget.isLightNotifier.value;
+    final Color accent = isLight
+        ? Color.fromRGBO(16, 100, 56, 1.0)
+        : Color.fromRGBO(184, 220, 193, 1.0);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 24,
+          ),
+          backgroundColor: isLight
+              ? Colors.white
+              : Color.fromRGBO(30, 30, 30, 1.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(color: accent, width: 2),
+          ),
+          title: Text(
+            title,
+            style: TextStyle(
+              fontFamily: 'Nunito',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: accent,
+            ),
+          ),
+          content: SingleChildScrollView(
+            child: Text(
+              description,
+              style: TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: 15,
+                color: isLight
+                    ? Color.fromRGBO(35, 35, 35, 1.0)
+                    : Color.fromRGBO(220, 220, 220, 1.0),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Close', style: TextStyle(color: accent)),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _launchURL(link);
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: accent),
+              child: Text(
+                'Start Healing✨',
+                style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 15,
+                  color: isLight
+                      ? Color.fromRGBO(220, 220, 220, 1.0)
+                      : Color.fromRGBO(35, 35, 35, 1.0),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 

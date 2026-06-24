@@ -429,24 +429,105 @@ class _NovelPageState extends State<NovelPage> with WidgetsBindingObserver {
                 ),
                 const SizedBox(height: 8),
 
-                Text(
-                  novel.description,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: 'Nunito',
-                    fontWeight: FontWeight.w500,
-                    color: isLight
-                        ? Color.fromRGBO(70, 70, 70, 1.0)
-                        : Color.fromRGBO(200, 200, 200, 1.0),
+                GestureDetector(
+                  onTap: () => _showDescriptionDialog(
+                    title: novel.title,
+                    description: novel.description,
+                    link: novel.bookUrl,
                   ),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
+                  child: Text(
+                    novel.description,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'Nunito',
+                      fontWeight: FontWeight.w500,
+                      color: isLight
+                          ? Color.fromRGBO(70, 70, 70, 1.0)
+                          : Color.fromRGBO(200, 200, 200, 1.0),
+                    ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  void _showDescriptionDialog({
+    required String title,
+    required String description,
+    required String link,
+  }) {
+    final bool isLight = widget.isLightNotifier.value;
+    final Color accent = isLight
+        ? Color.fromRGBO(16, 100, 56, 1.0)
+        : Color.fromRGBO(184, 220, 193, 1.0);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 24,
+          ),
+          backgroundColor: isLight
+              ? Colors.white
+              : Color.fromRGBO(30, 30, 30, 1.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(color: accent, width: 2),
+          ),
+          title: Text(
+            title,
+            style: TextStyle(
+              fontFamily: 'Nunito',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: accent,
+            ),
+          ),
+          content: SingleChildScrollView(
+            child: Text(
+              description,
+              style: TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: 15,
+                color: isLight
+                    ? Color.fromRGBO(35, 35, 35, 1.0)
+                    : Color.fromRGBO(220, 220, 220, 1.0),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Close', style: TextStyle(color: accent)),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _launchURL(link);
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: accent),
+              child: Text(
+                'Start Healing✨',
+                style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 15,
+                  color: isLight
+                      ? Color.fromRGBO(220, 220, 220, 1.0)
+                      : Color.fromRGBO(35, 35, 35, 1.0),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 

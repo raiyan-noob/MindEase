@@ -79,167 +79,275 @@ class _VideoRelPageState extends State<VideoRelPage>
             description:
                 'A gentle spiritual song that helps release emotional weight and restore calm.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://i.scdn.co/image/ab67616d00001e029f134c5abe0ba0f5b777df24',
+            videoUrl: 'https://youtu.be/naWQJpsbPFM?si=oOcg3wUq-NmYx--B',
           ),
           VideoData(
-            title: 'Hope Through Remembrance',
+            title: 'Feel to Heal',
             description:
-                'Reflective reminders from the Quran and hadith to rebuild hope and inner strength.',
+                'A reflective talk about how to connect with your feelings and find healing through faith.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://cdn-images.dzcdn.net/images/cover/2cc7be639552a7084d46f70787106bc0/1900x1900-000000-80-0-0.jpg',
+            videoUrl: 'https://youtu.be/Ycn2_QuGe34?si=a4oQbIkrjJ8CIZVC',
           ),
           VideoData(
-            title: 'Guided Spiritual Breathing',
+            title: 'The Quranic remedy for sadness',
             description:
-                'A breathing exercise paired with gentle spiritual prompts to calm a sad mind.',
+                'A soulsearching lecture by Br. Nouman Ali Khan about how to find solace and healing in the Quran during times of sadness.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://assets.cdn.filesafe.space/vSidPvREeZ6jk189rZX7/media/69e72c342c135a8c83d43349.webp',
+            videoUrl: 'https://youtu.be/_3zy5EdKR3g?si=JwVePlg859wm84SJ',
+          ),
+          VideoData(
+            title: 'The Art of Transforming Suffering',
+            description:
+                'An insightful talk on how to turn pain into spiritual growth and resilience through faith.',
+            thumbnailUrl:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnbF-2W5dxJnarcQRSJwRrXxxoLE1FTK6WdnWdXzWsYpS8_2qOcHKQfqoy&s=10',
+            videoUrl: 'https://youtu.be/1CnDFr8CJwo?si=VvzV1SHk449q3Hm1',
+          ),
+          VideoData(
+            title: 'How to Handle Your Darkest Seasons',
+            description:
+                'Sometimes the only way out is through. In this raw and unflinching talk, Dr. Jordan Peterson confronts the one truth most self-help gurus avoid: your darkest season isn’t a detour—it’s the forge where your strongest self is built.',
+            thumbnailUrl:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQapxigIwrSC1ss44XR4Z5IqHDIQoAalSI_OCwjYqtvaEE1NV6LfTB0eY8&s=10',
+            videoUrl: 'https://youtu.be/Pp8h6-hieLU?si=gHS_XMlK-hAKZorn',
           ),
         ];
       case 'Depressed':
         return [
           VideoData(
-            title: 'Light of Faith Reflection',
+            title: 'How to Overcome Anxiety & Depression',
             description:
-                'Uplifting reflections on Allah’s mercy to help restore purpose and motivation.',
+                'In this powerful Islamic lecture, Yasmin Mogahed addresses one of the most common struggles of our time: anxiety and depression. With wisdom rooted in the Qur’an and Sunnah.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKsfhT29IKrqfb4RyK0e9kpzF_k9QpIMcVzg&s',
+            videoUrl: 'https://youtu.be/US3R_z6DMNw?si=mLC5Yekx9RX4m9Se',
           ),
           VideoData(
-            title: 'Gentle Islamic Affirmations',
+            title: 'Overcoming Darkness: A Guide To Healing Depression',
             description:
-                'Positive affirmations rooted in faith to rebuild self-worth and reduce hopelessness.',
+                'A compassionate lecture on understanding depression and finding hope through faith and practical steps.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFIF5sV2iLPzzQS42ur3MBtz4u92vuexN9vQ&s',
+            videoUrl: 'https://youtu.be/A5CQAn-Szl4?si=TXGbumcva26INFMe',
           ),
           VideoData(
-            title: 'Healing Supplication for the Heart',
+            title: 'Islam\'s Cure for Depression',
             description:
-                'A short du’a session designed to soothe emotional pain and invite spiritual support.',
+                'Islam cultivates beliefs and practices in our daily lives that empower us to stay positive and cure the feelings of depression that hold us down.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXSG5NDmdM4gf1I7tPupZVB4UN-kLlharxYA&s',
+            videoUrl:
+                'https://www.youtube.com/live/0reVZCMYa2w?si=mPtA9ua7gpua5-0n',
           ),
           VideoData(
-            title: 'Slow Spiritual Recitation',
+            title: 'A Sermon on Depression',
             description:
-                'A calming recitation with reflective pauses to gently ease a heavy mind.',
+                'Feeling depressed doesn’t mean you lack faith any more than being happy means you have it. Mental illness is not a sin, it’s an illness. It’s time we started talking about it as such.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://cdn.cokesbury.com/images/products/Large/602/9798887691602.jpg',
+            videoUrl: 'https://youtu.be/7i4FroQUKYg?si=bihNkSKHzMjMbkEL',
+          ),
+          VideoData(
+            title: 'How To Deal With Depression?',
+            description:
+                'A lecture on how to deal with depression and anxiety from an Monk\'s perspective.',
+            thumbnailUrl:
+                'https://web-cdn.meridianuniversity.edu/site-content-images/content-library/mahayana-buddhism-image-two.webp',
+            videoUrl: 'https://youtu.be/TEwoWxLwCfA?si=SY7hr4ZzNLfT-NVf',
           ),
         ];
       case 'Anxious':
         return [
           VideoData(
-            title: 'Calming Quranic Breathing',
+            title: 'Fear & Anxiety | Dealing with Difficulty',
             description:
-                'A guided breathing and Quran reflection practice to reduce anxiety and restore balance.',
+                'A lecture on how to manage fear and anxiety through faith, reflection, and practical coping strategies.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://i.ytimg.com/vi/ltghXvRvf1E/hqdefault.jpg?v=66041932',
+            videoUrl: 'https://youtu.be/ltghXvRvf1E?si=ZtY7a0V0HJjrsGYu',
           ),
           VideoData(
-            title: 'Mindfulness Through Dhikr',
+            title: 'Quranic Guidance for Anxiety| Surah Al-Inshirah',
             description:
-                'An anxiety-relief session focused on repeating meaningful names of Allah for calm and clarity.',
+                'A reflective verses of Quran that provides guidance and comfort for those struggling with anxiety.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAjC1xv-uxDy2erjfkXplWNpe5Iw_0R6A8nw&s',
+            videoUrl: 'https://youtu.be/lqJIWX3xMH4?si=cpfOxR9IwExZ3O3J',
           ),
           VideoData(
-            title: 'Stress-Relief Spiritual Talk',
+            title: 'How to Overcome Anxiety & Depression',
             description:
-                'A short lecture on trusting Allah and handling anxious moments with faith.',
+                'In this powerful Islamic lecture, Yasmin Mogahed addresses one of the most common struggles of our time: anxiety and depression. With wisdom rooted in the Qur’an and Sunnah.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKsfhT29IKrqfb4RyK0e9kpzF_k9QpIMcVzg&s',
+            videoUrl: 'https://youtu.be/US3R_z6DMNw?si=mLC5Yekx9RX4m9Se',
+          ),
+          VideoData(
+            title: 'Five Ways Faith Can Free You From Anxiety and Depression',
+            description:
+                'Friends, psychoanalyst Carl Jung said, “At bottom all psychological problems are spiritual problems.',
+            thumbnailUrl:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBUyPJZvW1UIHC-WgYjDkqeXAMH6xAuDiL1g&s',
+            videoUrl: 'https://youtu.be/uP9v7H7ZWzg?si=-aDVMqrdBBSCyqwA',
+          ),
+          VideoData(
+            title: '4 Ways to Deal with Anxiety | Sadhguru',
+            description:
+                'Sadhguru explains how to deal with anxiety and stress in a simple and effective way, helping you find inner peace and clarity.',
+            thumbnailUrl:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdckuBFuemJu7__gPVIpdi3IuAafxFrzTF2g&s',
+            videoUrl: 'https://youtu.be/vO570HeAreI?si=fIPbUNxB3-9gUhBU',
+          ),
+          VideoData(
+            title: 'Meditation for Anxiety and Panic',
+            description:
+                'Drawing from his own childhood struggles with severe panic attacks, Rinpoche demonstrates how to say "hello" to anxiety and embrace it, rather than fighting it and making it stronger.',
+            thumbnailUrl:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBHi7H0IuiUVbZ1BRfK60yeJELCo1i3buMmw&s',
+            videoUrl: 'https://youtu.be/n6hsQTFNMic?si=vI68cn6_6JJ50zlE',
           ),
         ];
       case 'Frustrated':
         return [
           VideoData(
-            title: 'Patience and Sabr',
+            title: 'YOUR FRUSTRATION HAS A PURPOSE || Yasmin Mogahed',
             description:
-                'A thoughtful talk about patience, emotional release, and healing through trust in Allah.',
+                'This video directly addresses the frustration of unmet expectations. She explains how to transition your heart from "Why is this happening to me?" to trusting that God’s delays are often a form of protection.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA1T_a7hRQ75fPAXyTY52U_mfvZQ-WB6LzCw&s',
+            videoUrl: 'https://youtu.be/tOK5p6Unj24?si=jmziVtF1lILPk-iN',
           ),
           VideoData(
-            title: 'Letting Go With Prayer',
+            title: 'Frustrating Situations | Dealing with Difficulty',
             description:
-                'A guided du’a session to calm frustration and encourage gentle self-reflection.',
+                'A highly practical, comforting talk about dealing with everyday frustrations caused by people or failed plans. He provides direct steps from the Prophetic tradition, such as changing your physical posture and seeking refuge when you feel your blood boiling.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj2qZBTKgC1Iv2i_nTIB3w58t8locbhgJQnA&s',
+            videoUrl: 'https://youtu.be/4SNaVzg71bE?si=Mah-Uh0S8DYPu6nu',
           ),
           VideoData(
-            title: 'Soothing Spiritual Music',
+            title: 'Reacting vs Responding',
             description:
-                'Music designed to ease irritation and help your heart become more accepting and calm.',
+                'Using a mix of humor and deep wisdom, this monk explains that frustration comes from trying to control things outside our circle of influence. He shares a famous mental framework to help you stop worrying about outcomes you cannot change',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://cdn.penguin.co.in/wp-content/uploads/2022/09/9789354928093-1-scaled.jpg',
+            videoUrl: 'https://youtu.be/fpi0KuJhz2A?si=8FLpDzst3Wf0O9rI',
+          ),
+          VideoData(
+            title: 'What to Do When You Are Hurting | Joyce Meyer',
+            description:
+                'Joyce Meyer delivers a raw, highly relatable sermon on how frustration is a sign that we are trying to force our own will instead of trusting God. She gives practical advice on how to physically and mentally step back and "let God work."',
+            thumbnailUrl:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_lLiEOc-RrhF8jhrIpTXE-eNyU0l_wtFy5A&s',
+            videoUrl: 'https://youtu.be/KW1F8AZESBI?si=r0Llndab4qEGKkMb',
+          ),
+          VideoData(
+            title: 'Transforming Frustration Into Peace',
+            description:
+                'A deeply gentle teaching on how to handle the "energy of frustration." Instead of acting out or suppressing your annoyance, the Zen Master teaches you how to use mindful breathing to calm your mind and look at the situation with deep insight.',
+            thumbnailUrl:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_lr_0YKmihdY8rki5MyHe4XSKCwQuHdooxg&s',
+            videoUrl: 'https://youtu.be/lknQHg6pqWQ?si=ZZA7MWIFUMrSXT13',
           ),
         ];
       case 'Angry':
         return [
           VideoData(
-            title: 'Mercy Over Anger',
+            title: 'Taking Care of Anger',
             description:
-                'A powerful reminder of mercy and self-control when anger starts to overwhelm.',
+                'Thich Nhat Hanh explains how anger often grows from unaddressed suffering and misunderstanding. Through mindful breathing and self-awareness, this talk teaches practical ways to calm intense emotions and transform anger into compassion.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://img.youtube.com/vi/9OvLOna5_1A/maxresdefault.jpg',
+            videoUrl: 'https://www.youtube.com/watch?v=9OvLOna5_1A',
+          ),
+
+          VideoData(
+            title: 'How to Let Anger Out?',
+            description:
+                'A thoughtful discussion on dealing with anger without suppressing or expressing it destructively. Learn how mindfulness can help you understand the root causes of your emotions and respond with wisdom instead of reaction.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/WTF9xgqLIvI/maxresdefault.jpg',
+            videoUrl: 'https://www.youtube.com/watch?v=WTF9xgqLIvI',
+          ),
+
+          VideoData(
+            title: 'Controlling Anger',
+            description:
+                'This session offers practical mindfulness exercises that can be used during moments of frustration and irritation. It focuses on developing patience, emotional awareness, and inner peace in everyday life.',
+            thumbnailUrl:
+                'https://i.ytimg.com/vi/PdM5sCzld5o/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDULOEPhvE6-HUqxCVQ8Q7VjOdglg',
+            videoUrl: 'https://youtu.be/znYFlGgK3vs?si=_YbUGeVcbqSf-wmK',
+          ),
+
+          VideoData(
+            title: 'Dealing With Anger',
+            description:
+                'Drawing from the Quran and Sunnah, this talk provides guidance on controlling anger before it controls you. Learn effective spiritual practices that encourage patience, mercy, and self-restraint during difficult situations.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/5pyZkY93B2A/maxresdefault.jpg',
+            videoUrl: 'https://www.youtube.com/watch?v=5pyZkY93B2A',
           ),
           VideoData(
-            title: 'Peace After Emotional Turmoil',
+            title: 'Healing the Heart',
             description:
-                'A calming lecture focusing on releasing anger and returning to inner peace.',
+                'Yasmin Mogahed discusses how emotional wounds, disappointments, and unmet expectations often fuel anger. Discover faith-based perspectives on healing, acceptance, and finding tranquility through trust in Allah.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://img.youtube.com/vi/mlk70CGw5g4/maxresdefault.jpg',
+            videoUrl: 'https://www.youtube.com/watch?v=mlk70CGw5g4',
           ),
           VideoData(
-            title: 'Gentle Du’a for Calm',
+            title: 'Anger Management-FULL SERMON | Joyce Meyer',
             description:
-                'A short guided supplication to soften the heart and ease feelings of anger.',
+                'An insightful sermon on understanding the nature of anger, its impact on our lives, and how to manage it effectively through spiritual and practical approaches.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK4a6DMoEKGM6ObGcFO2wXz3YRWA6WBNbchg&s',
+            videoUrl: 'https://youtu.be/QWyowstWWhI?si=6zDnU5mrTUhaw32t',
           ),
         ];
       case 'Hopeless':
         return [
           VideoData(
-            title: 'Finding Hope in Faith',
+            title: 'Hope in the Mercy of Allah - Mufti Menk',
             description:
-                'Uplifting reminders from the Quran that inspire hope and resilience in dark moments.',
+                'A powerful reminder that no matter how difficult life becomes, Allah’s mercy is always greater. This talk encourages patience, trust, and hope during periods of sadness, failure, and uncertainty.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://glasp.co/_next/image?url=https%3A%2F%2Fi.ytimg.com%2Fvi%2FyaPe2wpjT3I%2Fmaxresdefault.jpg&w=1920&q=75',
+            videoUrl: 'https://youtu.be/yaPe2wpjT3I?si=Wuu3rgf2_SobLeTn',
           ),
           VideoData(
-            title: 'Stories of Spiritual Renewal',
+            title: 'From Despair to Hope',
             description:
-                'Realistic reflections on overcoming despair through faith and persistence.',
+                'Learn how faith, gratitude, and reliance on Allah can help transform feelings of hopelessness into optimism. This lecture offers practical spiritual guidance for overcoming despair.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVySY4xQ9QqHlp9DKE0cDemwIk0FkcWDOdaQ&s',
+            videoUrl: 'https://youtu.be/-RS6SGsHVl4?si=ktNRwCcYyrCNjOHP',
           ),
           VideoData(
-            title: 'Hope-Filled Recitation',
+            title: 'Healing the Heart',
             description:
-                'A gentle Quran recitation meant to bring light and confidence back into your heart.',
+                'Yasmin Mogahed discusses how emotional wounds, disappointments, and unmet expectations often fuel anger. Discover faith-based perspectives on healing, acceptance, and finding tranquility through trust in Allah.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://img.youtube.com/vi/mlk70CGw5g4/maxresdefault.jpg',
+            videoUrl: 'https://www.youtube.com/watch?v=mlk70CGw5g4',
+          ),
+          VideoData(
+            title: 'No Mud No Lotus',
+            description:
+                'Thich Nhat Hanh explains how suffering can become the foundation for growth, healing, and happiness. This teaching offers hope to those struggling with despair by showing how pain can be transformed into wisdom and compassion.',
+            thumbnailUrl:
+                'https://img.youtube.com/vi/stiG6IzDITc/maxresdefault.jpg',
+            videoUrl: 'https://www.youtube.com/watch?v=stiG6IzDITc',
+          ),
+          VideoData(
+            title: 'God Has Not Forgotten You',
+            description:
+                'An uplifting Christian message for anyone feeling lost, discouraged, or abandoned. This sermon reminds viewers that hope, strength, and purpose can be found through faith in God.',
+            thumbnailUrl:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7JGBsTiT12QoaUq1z3TCBaFQUkhG-tmSeOw&s',
+            videoUrl: 'https://youtu.be/Cy0V5Omwpyc?si=0-nBhu9LGJrAn6PO',
           ),
         ];
       default:
@@ -359,18 +467,25 @@ class _VideoRelPageState extends State<VideoRelPage>
                   ),
                   const SizedBox(height: 8),
 
-                  Text(
-                    video.description,
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.w500,
-                      color: isLight
-                          ? Color.fromRGBO(70, 70, 70, 1.0)
-                          : Color.fromRGBO(200, 200, 200, 1.0),
+                  GestureDetector(
+                    onTap: () => _showDescriptionDialog(
+                      title: video.title,
+                      description: video.description,
+                      link: video.videoUrl,
                     ),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
+                    child: Text(
+                      video.description,
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: 'Nunito',
+                        fontWeight: FontWeight.w500,
+                        color: isLight
+                            ? Color.fromRGBO(70, 70, 70, 1.0)
+                            : Color.fromRGBO(200, 200, 200, 1.0),
+                      ),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
@@ -378,6 +493,80 @@ class _VideoRelPageState extends State<VideoRelPage>
           ],
         ),
       ),
+    );
+  }
+
+  void _showDescriptionDialog({
+    required String title,
+    required String description,
+    required String link,
+  }) {
+    final bool isLight = widget.isLightNotifier.value;
+    final Color accent = isLight
+        ? Color.fromRGBO(16, 100, 56, 1.0)
+        : Color.fromRGBO(184, 220, 193, 1.0);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 24,
+          ),
+          backgroundColor: isLight
+              ? Colors.white
+              : Color.fromRGBO(30, 30, 30, 1.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(color: accent, width: 2),
+          ),
+          title: Text(
+            title,
+            style: TextStyle(
+              fontFamily: 'Nunito',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: accent,
+            ),
+          ),
+          content: SingleChildScrollView(
+            child: Text(
+              description,
+              style: TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: 15,
+                color: isLight
+                    ? Color.fromRGBO(35, 35, 35, 1.0)
+                    : Color.fromRGBO(220, 220, 220, 1.0),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Close', style: TextStyle(color: accent)),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _launchURL(link);
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: accent),
+              child: Text(
+                'Start Healing✨',
+                style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 15,
+                  color: isLight
+                      ? Color.fromRGBO(220, 220, 220, 1.0)
+                      : Color.fromRGBO(35, 35, 35, 1.0),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
