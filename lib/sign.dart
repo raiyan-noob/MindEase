@@ -20,8 +20,7 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController ageController = TextEditingController();
   final TextEditingController genderController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   String message = "";
   bool isLoading = false;
@@ -85,8 +84,16 @@ class _SignupPageState extends State<SignupPage> {
           });
         } on FirebaseException catch (e) {
           debugPrint('Firestore profile save error: ${e.code} ${e.message}');
+          String detail = "Account created, but profile save failed";
+          if (e.code == 'permission-denied') {
+            detail = "Account created, but Firestore rules blocked the save";
+          } else if (e.code == 'unavailable') {
+            detail = "Account created, but no internet to save profile";
+          } else if (e.code == 'network-request-failed') {
+            detail = "Account created, but no internet to save profile";
+          }
           setState(() {
-            message = "Account created, but profile save failed";
+            message = detail;
           });
           return;
         }

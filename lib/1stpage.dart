@@ -351,7 +351,7 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
 
       setState(() {
         _displayName = (name != null && name.trim().isNotEmpty)
-            ? name.trim()
+            ? _formatDisplayName(name)
             : (user.email?.split('@').first ?? 'User');
       });
     } catch (_) {
@@ -360,6 +360,14 @@ class _MyAppState extends State<MyAppFirst> with TickerProviderStateMixin {
         _displayName = user.email?.split('@').first ?? 'User';
       });
     }
+  }
+
+  String _formatDisplayName(String fullName) {
+    final trimmed = fullName.trim();
+    if (trimmed.isEmpty) return 'User';
+    final firstWord = trimmed.split(RegExp(r'\s+')).first;
+    if (firstWord.isEmpty) return 'User';
+    return firstWord[0].toUpperCase() + firstWord.substring(1).toLowerCase();
   }
 
   @override
