@@ -65,230 +65,329 @@ class _BlogPageState extends State<BlogPage> with WidgetsBindingObserver {
       case 'Sad':
         return [
           BlogData(
-            title: 'Anxiety Disorders',
+            title: 'How to Cope with Sadness',
             description:
-                'A guide to understanding different types of anxiety disorders, their symptoms, and coping strategies.',
+                'A practical guide written by mental health professionals that helps readers understand sadness, identify its causes, and develop healthy coping strategies. The article emphasizes self-compassion and emotional processing rather than suppressing difficult feelings.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.helpguide.org/articles/anxiety/anxiety-disorders-and-anxiety-attacks.htm',
+                'https://images.squarespace-cdn.com/content/v1/656f4e4dababbd7c042c4946/0760e947-13c2-4131-953f-d6b85ca59712/how+to+stop+feeling+sad-3x2.jpg?format=2500w',
+            bookUrl: 'https://www.talkspace.com/blog/how-to-deal-with-sadness/',
+          ),
+
+          BlogData(
+            title: 'How to Stop Feeling Sad: 7 Tips to Boost Your Mood',
+            description:
+                'A thoughtful article that explains why sadness is a normal part of life and provides practical, evidence-informed ways to navigate it. Readers learn mindfulness techniques, connection strategies, and small habits that can gradually improve emotional well-being.',
+            thumbnailUrl:
+                'https://cdn.prod.website-files.com/643420fa9df2945c7d77af2d/690a7294a276cf35fb2ca835_690a72931e790b1973aadf3f_how-to-deal-with-sadness-featured.jpeg',
+            bookUrl: 'https://www.calm.com/blog/how-to-stop-feeling-sad',
+          ),
+
+          BlogData(
+            title: 'On Sadness: How to Accept, Grieve, and Reclaim Your Energy',
+            description:
+                'A therapist-guided reflection on understanding sadness without fighting it. The article encourages readers to accept difficult emotions, process grief in a healthy way, and gradually move toward healing and renewed energy.',
+            thumbnailUrl:
+                'https://cdn.prod.website-files.com/6668b6628314b015b39991b8/689c8258f9756bbe3eabcf83_blog-emotions-sad-edge.svg',
+            bookUrl: 'https://www.getstoic.com/blog/on-sadness',
+          ),
+
+          BlogData(
+            title:
+                'Grief Meditation: How to Use Mindfulness to Heal After Loss',
+            description:
+                'This Calm article explores how mindfulness can help people navigate grief, sadness, and emotional pain. It offers practical meditation techniques and compassionate guidance for healing after loss.',
+            thumbnailUrl:
+                'https://images.squarespace-cdn.com/content/v1/656f4e4dababbd7c042c4946/dd9b08f6-4f37-483f-8045-dde267eae760/grief-meditation?format=2500w',
+            bookUrl: 'https://www.calm.com/blog/grief-meditation',
           ),
           BlogData(
-            title: 'Mindfulness for Beginners',
+            title:
+                'Meditation for Healing: 14 Practices for Emotional Recovery',
             description:
-                'A beginner-friendly blog on how to start practicing mindfulness to reduce stress and live in the present moment.',
+                'A collection of guided mindfulness approaches designed to support emotional healing, resilience, and recovery from sadness, grief, and emotional exhaustion.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.mindful.org/meditation/mindfulness-getting-started/',
-          ),
-          BlogData(
-            title: 'Healing Through Reading',
-            description:
-                'Discover powerful books designed to heal your soul and uplift your spirit through inspirational stories.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.headspace.com/meditation/meditation-for-beginners',
-          ),
-          BlogData(
-            title: 'Resilience in Tough Times',
-            description:
-                'Expert advice on developing emotional resilience to bounce back from setbacks and face life\'s challenges.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.apa.org/topics/resilience/building-your-resilience',
+                'https://images.squarespace-cdn.com/content/v1/656f4e4dababbd7c042c4946/63582d6d-815f-4560-b9e0-f1f2d2a5afcf/meditation+for+healing-3x2.jpg?format=2500w',
+            bookUrl: 'https://www.calm.com/blog/meditation-for-healing',
           ),
         ];
       case 'Depressed':
         return [
           BlogData(
-            title: 'Sleep and Mental Health',
+            title: 'What Depression Really Feels Like',
             description:
-                'A Harvard Medical School journal exploring the deep connection between quality sleep and mental health recovery.',
+                'A compassionate article that helps readers understand depression beyond ordinary sadness. It explores common experiences such as emotional numbness, hopelessness, exhaustion, and self-doubt while reminding readers that recovery is possible.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.health.harvard.edu/newsletter_article/sleep-and-mental-health',
+                'https://media.post.rvohealth.io/wp-content/uploads/2022/11/sports-fans-732x549-thumbnail.jpg',
+            bookUrl: 'https://www.healthline.com/health/depression',
           ),
+
           BlogData(
-            title: 'Emotional Healing',
+            title: 'Self-Compassion and Depression',
             description:
-                'Learn how expressive writing and journaling can help process emotions, reduce stress, and boost clarity.',
+                'Many people struggling with depression become trapped in cycles of self-criticism. This article explains how self-compassion can reduce emotional suffering and help create a healthier relationship with oneself.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1517842645767-c639042777db?w=400&h=300&fit=crop',
+                'https://self-compassion.org/wp-content/uploads/self-compassion.jpg',
             bookUrl:
-                'https://psychcentral.com/health/benefits-of-journaling-for-mental-health',
+                'https://self-compassion.org/self-compassion-and-depression/',
           ),
+
           BlogData(
-            title: 'Burnout: Signs and Recovery',
+            title: 'How Mindfulness Helps Depression',
             description:
-                'Recognize the early warning signs of burnout and learn effective strategies to recover and prevent it.',
+                'This article explains how mindfulness practices can help reduce rumination, improve emotional awareness, and create space between negative thoughts and personal identity.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1508963493744-76fce69379c0?w=400&h=300&fit=crop',
+                'https://www.mindful.org/content/uploads/juliane-liebermann-O-RKu3Aqnsw-unsplash-2048x1365.jpg',
             bookUrl:
-                'https://www.helpguide.org/articles/stress/burnout-prevention-and-recovery.htm',
+                'https://www.mindful.org/how-mindfulness-can-help-with-depression/',
           ),
+
           BlogData(
-            title: 'Resilience in Tough Times',
+            title: 'The Importance of Human Connection',
             description:
-                'Expert advice on developing emotional resilience to bounce back from setbacks and face life\'s challenges.',
+                'Depression often causes people to withdraw from others. This article explores why meaningful relationships are essential for emotional well-being and how small social connections can support recovery.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=400&h=300&fit=crop',
+                'https://ggsc.s3.us-west-2.amazonaws.com/assets/images/6_18_26_soh_wowsabout_awe_-_abcdef_-_0f7fa3008cfea6a8d775697c0e41c13efd958423.webp',
             bookUrl:
-                'https://www.apa.org/topics/resilience/building-your-resilience',
+                'https://greatergood.berkeley.edu/article/item/why_social_connection_is_important',
+          ),
+
+          BlogData(
+            title: 'Emotional Exhaustion: When Your Feelings Feel Overwhelming',
+            description:
+                'A practical guide from mental health professionals explaining emotional exhaustion, hopelessness, lack of motivation, and burnout. The article provides actionable strategies for regaining emotional balance, managing stress, and taking small steps toward recovery.',
+            thumbnailUrl:
+                'https://www.mayoclinichealthsystem.org/-/media/national-files/images/hometown-health/2024/holding-dog-outdoors.jpg?sc_lang=en&hash=EBE588F623ABC155AD43F491BA25004E',
+            bookUrl:
+                'https://www.mayoclinichealthsystem.org/hometown-health/speaking-of-health/emotional-exhaustion-during-times-of-unrest',
           ),
         ];
       case 'Anxious':
         return [
           BlogData(
-            title: 'Anxiety Disorders',
+            title: '12 Ways to Calm Your Anxiety',
             description:
-                'A guide to understanding different types of anxiety disorders, their symptoms, and coping strategies.',
+                'A practical guide from Healthline that offers evidence-based techniques for managing anxiety. Readers learn breathing exercises, journaling methods, mindfulness practices, and lifestyle adjustments that can help reduce anxious thoughts and regain emotional balance.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.helpguide.org/articles/anxiety/anxiety-disorders-and-anxiety-attacks.htm',
+                'https://media.post.rvohealth.io/wp-content/uploads/2026/01/integrity4.jpg',
+            bookUrl: 'https://www.healthline.com/health/how-to-calm-anxiety',
           ),
+
           BlogData(
-            title: 'Mindfulness for Beginners',
+            title: 'Effective Coping Techniques for Anxiety',
             description:
-                'A beginner-friendly blog on how to start practicing mindfulness to reduce stress and live in the present moment.',
+                'This article explores actionable strategies for coping with anxiety in daily life. It covers breathing exercises, physical activity, journaling, and long-term habits that can improve mental well-being and reduce overwhelming worry.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
+                'https://media.post.rvohealth.io/wp-content/uploads/2026/06/blood_pressure-thumbnail-732x549-1.jpg',
             bookUrl:
-                'https://www.mindful.org/meditation/mindfulness-getting-started/',
+                'https://www.healthline.com/health/mental-health/medicine-and-self-care-for-anxiety',
           ),
+
           BlogData(
-            title: 'Exercise and the Brain',
+            title: '8 Ways To Calm Your Anxiety in the Moment',
             description:
-                'Research-backed journal on how physical exercise directly impacts brain chemistry, reducing anxiety and depression.',
+                'A Cleveland Clinic guide written by mental health experts. It focuses on practical techniques that can quickly reduce anxiety, including deep breathing, grounding exercises, positive self-talk, and managing negative thought patterns.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.apa.org/topics/exercise-fitness/stress',
+                'https://assets.clevelandclinic.org/transform/LargeFeatureImage/ef17e33f-d829-48f8-9b94-b6783f187b07/walking-outdoors-2184231568',
+            bookUrl: 'https://health.clevelandclinic.org/how-to-calm-anxiety',
           ),
+
           BlogData(
-            title: 'Media & Mental Health',
+            title: 'How to Use Mindfulness for Anxiety',
             description:
-                'An in-depth journal study on the impact of social media usage on mental health, self-esteem, and body image.',
+                'A Calm article that teaches seven mindfulness techniques designed to help people stay grounded when their minds become overwhelmed by worry. Ideal for users looking for practical and gentle anxiety relief.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop',
+                'https://images.squarespace-cdn.com/content/v1/656f4e4dababbd7c042c4946/1530a471-cf65-4641-ba26-952b79ff2889/mindfulness+for+anxiety-3x2.jpg?format=2500w',
+            bookUrl: 'https://www.calm.com/blog/mindfulness-for-anxiety',
+          ),
+
+          BlogData(
+            title: 'How to Manage Fear and Anxiety',
+            description:
+                'Published by the Mental Health Foundation, this resource explains the difference between fear and anxiety while providing self-help strategies, coping tools, and guidance for seeking support when needed.',
+            thumbnailUrl:
+                'https://www.mentalhealth.org.uk/sites/default/files/styles/750_x_450_mhf_theme/public/2025-01/RS34_mhf-33-view-of-nature.jpg?h=87d750eb&itok=tKCmf7bc',
             bookUrl:
-                'https://www.mcleanhospital.org/essential/it-or-not-social-medias-affecting-your-mental-health',
+                'https://www.mentalhealth.org.uk/how-overcome-anxiety-and-fear',
+          ),
+
+          BlogData(
+            title: 'Anxiety: What It Is, What To Do',
+            description:
+                'A Harvard Health article that explains how anxiety affects the brain and body, why it happens, and what practical steps can be taken to manage it. Written in a reassuring and easy-to-understand style.',
+            thumbnailUrl:
+                'https://domf5oio6qrcr.cloudfront.net/medialibrary/9475/iStock-693982796.jpg',
+            bookUrl:
+                'https://www.health.harvard.edu/blog/anxiety-what-it-is-what-to-do-2018060113955',
+          ),
+
+          BlogData(
+            title: 'How to Use Mindfulness to Reduce Anxiety',
+            description:
+                'A detailed guide explaining how mindfulness helps interrupt cycles of worry and stress. It provides practical exercises and examples that many readers have found useful for calming anxious thoughts.',
+            thumbnailUrl:
+                'https://www.calmclinic.com/storage/images/556/rhs0uu/main/w1600.webp',
+            bookUrl: 'https://www.calmclinic.com/anxiety/mindfulness',
           ),
         ];
       case 'Frustrated':
         return [
           BlogData(
-            title: 'Exercise and the Brain',
+            title: '12 Ways to Cope With Frustration',
             description:
-                'Research-backed journal on how physical exercise directly impacts brain chemistry, reducing anxiety and depression.',
+                'A detailed Psychology Today article explaining why frustration happens and offering practical strategies such as mindfulness, emotional regulation, and problem-solving. Ideal for people who feel stuck, irritated, or blocked from reaching their goals.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.apa.org/topics/exercise-fitness/stress',
-          ),
-          BlogData(
-            title: 'Media & Mental Health',
-            description:
-                'An in-depth journal study on the impact of social media usage on mental health, self-esteem, and body image.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=800',
             bookUrl:
-                'https://www.mcleanhospital.org/essential/it-or-not-social-medias-affecting-your-mental-health',
+                'https://www.psychologytoday.com/us/blog/evolution-of-the-self/202408/12-effective-ways-to-cope-with-frustration',
           ),
+
           BlogData(
-            title: 'Burnout: Signs and Recovery',
+            title: 'The Key to Coping With Frustration',
             description:
-                'Recognize the early warning signs of burnout and learn effective strategies to recover and prevent it.',
+                'This Psychology Today article explains that frustration often comes from unmet expectations. It teaches readers how to recognize unrealistic expectations and adjust them to reduce emotional distress.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1508963493744-76fce69379c0?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800',
             bookUrl:
-                'https://www.helpguide.org/articles/stress/burnout-prevention-and-recovery.htm',
+                'https://www.psychologytoday.com/us/blog/flex-your-feelings/202208/the-key-coping-frustration',
           ),
+
           BlogData(
-            title: 'The Science of Gratitude',
+            title: '5 Steps to Overcoming Frustration',
             description:
-                'Discover how practicing gratitude rewires your brain for happiness and improves your overall mental well-being.',
+                'A Psych Central guide that provides concrete techniques such as identifying triggers, journaling, physical activity, and self-care to prevent frustration from escalating into anger or helplessness.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop',
-            bookUrl: 'https://greatergood.berkeley.edu/topic/gratitude',
+                'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800',
+            bookUrl:
+                'https://psychcentral.com/health/steps-to-overcoming-frustration',
+          ),
+
+          BlogData(
+            title: 'Signs of Frustration',
+            description:
+                'A WebMD article explaining the causes, symptoms, and effects of frustration. It helps readers understand how frustration develops and what can be done before it begins affecting mental well-being.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800',
+            bookUrl: 'https://www.webmd.com/mental-health/signs-frustration',
+          ),
+
+          BlogData(
+            title: 'Five Science-Backed Strategies to Build Resilience',
+            description:
+                'Frustration often follows setbacks and obstacles. This Greater Good Magazine article focuses on building resilience so that challenges become opportunities for growth rather than sources of ongoing irritation.',
+            thumbnailUrl:
+                'https://ggsc.s3.us-west-2.amazonaws.com/assets/images/heart_-_abcdef_-_b5a6588aa0402433fda311fa1a0782b0f6623c94.webp',
+            bookUrl:
+                'https://greatergood.berkeley.edu/article/item/five_science_backed_strategies_to_build_resilience',
           ),
         ];
       case 'Angry':
         return [
           BlogData(
-            title: 'The Science of Gratitude',
+            title: 'Anger Management: 10 Tips to Tame Your Temper',
             description:
-                'Discover how practicing gratitude rewires your brain for happiness and improves your overall mental well-being.',
+                'A practical guide from Mayo Clinic that teaches evidence-based anger management techniques including time-outs, exercise, communication skills, forgiveness, and relaxation methods. One of the most trusted resources for learning how to calm anger before it causes harm.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop',
-            bookUrl: 'https://greatergood.berkeley.edu/topic/gratitude',
-          ),
-          BlogData(
-            title: 'Daily Affirmations',
-            description:
-                'Start your day with positive affirmations and spiritual motivation to face challenges with strength and courage.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.mindtools.com/pages/article/affirmations.htm',
-          ),
-          BlogData(
-            title: 'Emotional Healing',
-            description:
-                'Learn how expressive writing and journaling can help process emotions, reduce stress, and boost clarity.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1517842645767-c639042777db?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800',
             bookUrl:
-                'https://psychcentral.com/health/benefits-of-journaling-for-mental-health',
+                'https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-depth/anger-management/art-20045434',
           ),
+
           BlogData(
-            title: 'Resilience in Tough Times',
+            title: 'Let Go of Your Anger: Take Back Control of Your Life',
             description:
-                'Expert advice on developing emotional resilience to bounce back from setbacks and face life\'s challenges.',
+                'A helpful article about recognizing when anger becomes harmful and learning practical ways to release it. Includes breathing exercises, trigger awareness, and techniques for restoring emotional balance.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=400&h=300&fit=crop',
+                'https://cdn2.psychologytoday.com/assets/default_images/counseling.jpg',
             bookUrl:
-                'https://www.apa.org/topics/resilience/building-your-resilience',
+                'https://www.psychologytoday.com/us/blog/trial-triumph/202109/let-go-your-anger-take-back-control-your-life',
+          ),
+
+          BlogData(
+            title: '6 Ways to Take Control Back From Anger',
+            description:
+                'Focuses on self-care, perspective, emotional regulation, and healthy coping skills. Especially useful for people who frequently feel irritated, resentful, or overwhelmed by anger.',
+            thumbnailUrl:
+                'https://cdn2.psychologytoday.com/assets/styles/article_inline_full_caption/public/field_blog_entry_images/2022-02/pexels-shvets_production.jpeg.jpg?itok=sA-PDsPH',
+            bookUrl:
+                'https://www.psychologytoday.com/us/blog/mental-health-nerd/202202/6-ways-to-take-control-back-from-anger',
+          ),
+
+          BlogData(
+            title: 'Anger Management: What It Is, Skills & Techniques',
+            description:
+                'A Cleveland Clinic guide explaining how anger affects mental and physical health. It introduces communication techniques, relaxation skills, and coping strategies that can help people respond more constructively.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800',
+            bookUrl:
+                'https://my.clevelandclinic.org/health/diseases/12195-anger-management/',
+          ),
+
+          BlogData(
+            title: 'Anger Management Techniques and Tips',
+            description:
+                'A straightforward WebMD resource that explains the causes of anger and practical ways to manage it. Ideal for users looking for simple, actionable advice.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800',
+            bookUrl: 'https://www.webmd.com/mental-health/anger-management',
+          ),
+
+          BlogData(
+            title: 'How to Control Anger: 25 Tips to Help You Stay Calm',
+            description:
+                'One of Healthline’s most popular anger-management articles. Covers breathing exercises, mindfulness, reframing thoughts, communication skills, and other practical techniques for staying calm.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1482192505345-5655af888cc4?w=800',
+            bookUrl:
+                'https://www.healthline.com/health/mental-health/how-to-control-anger',
           ),
         ];
       case 'Hopeless':
         return [
           BlogData(
-            title: 'Sleep and Mental Health',
+            title: 'Feeling Hopeless? 7 Ways to Support Yourself',
             description:
-                'A Harvard Medical School journal exploring the deep connection between quality sleep and mental health recovery.',
+                'A Healthline article that explains how hopelessness develops and provides practical strategies for rebuilding hope. It encourages readers to take small actions, stay connected with others, and focus on what can be controlled in the present moment.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.health.harvard.edu/newsletter_article/sleep-and-mental-health',
+                'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800',
+            bookUrl: 'https://www.healthline.com/health/feeling-hopeless',
           ),
+
           BlogData(
-            title: 'Emotional Healing',
+            title: 'Finding Hope',
             description:
-                'Learn how expressive writing and journaling can help process emotions, reduce stress, and boost clarity.',
+                'This Psychology Today article explores the concept of learned helplessness and explains how people can regain hope after repeated setbacks. It includes actionable suggestions such as finding role models, taking small steps, and practicing kindness.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1517842645767-c639042777db?w=400&h=300&fit=crop',
+                'https://cdn2.psychologytoday.com/assets/styles/manual_crop_3_2_600x400/public/teaser_image/blog_entry/2026-04/pexels-sky-miller-103843835-9790290.jpg?itok=vj7tzI2E',
             bookUrl:
-                'https://psychcentral.com/health/benefits-of-journaling-for-mental-health',
+                'https://www.psychologytoday.com/us/blog/pieces-of-mind/201504/finding-hope',
           ),
+
           BlogData(
-            title: 'Resilience in Tough Times',
+            title: 'How to Develop Hope When You Feel Hopeless',
             description:
-                'Expert advice on developing emotional resilience to bounce back from setbacks and face life\'s challenges.',
+                'Written by mental strength expert Amy Morin, this article provides science-backed techniques for cultivating hope. It explains how hope differs from wishful thinking and how small actions can create a more positive future.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1482192505345-5655af888cc4?w=800',
             bookUrl:
-                'https://www.apa.org/topics/resilience/building-your-resilience',
+                'https://www.psychologytoday.com/us/blog/what-mentally-strong-people-dont-do/202306/how-to-develop-hope-when-you-feel-hopeless',
           ),
+
           BlogData(
-            title: 'Burnout: Signs and Recovery',
+            title: 'The Importance of Hope for Mental Health',
             description:
-                'Recognize the early warning signs of burnout and learn effective strategies to recover and prevent it.',
+                'An article discussing how hope influences resilience, motivation, and emotional recovery. It highlights practical ways to strengthen hope even during difficult periods of life.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1508963493744-76fce69379c0?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.helpguide.org/articles/stress/burnout-prevention-and-recovery.htm',
+                'https://cdn2.psychologytoday.com/assets/styles/manual_crop_1_1_288x288/public/field_blog_entry_teaser_image/2021-05/tamas-pap-4pywyal_nli-unsplash.jpg?itok=0QScEC40',
+            bookUrl: 'https://www.psychologytoday.com/us/blog/hope-resilience',
+          ),
+
+          BlogData(
+            title: 'How Resilience Helps You Recover From Adversity',
+            description:
+                'A guide to understanding resilience and developing the ability to bounce back from hardship. Particularly helpful for people who feel defeated or stuck after repeated disappointments.',
+            thumbnailUrl:
+                'https://www.apa.org/images/resilience-topic-tile_tcm7-305099_w640_n.jpg',
+            bookUrl: 'https://www.apa.org/topics/resilience',
           ),
         ];
       default:
@@ -418,24 +517,96 @@ class _BlogPageState extends State<BlogPage> with WidgetsBindingObserver {
                 ),
                 const SizedBox(height: 8),
 
-                Text(
-                  blog.description,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontFamily: 'Nunito',
-                    fontWeight: FontWeight.w500,
-                    color: isLight
-                        ? Color.fromRGBO(70, 70, 70, 1.0)
-                        : Color.fromRGBO(200, 200, 200, 1.0),
+                GestureDetector(
+                  onTap: () => _showDescriptionDialog(
+                    title: blog.title,
+                    description: blog.description,
+                    link: blog.bookUrl,
                   ),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
+                  child: Text(
+                    blog.description,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'Nunito',
+                      fontWeight: FontWeight.w500,
+                      color: isLight
+                          ? Color.fromRGBO(70, 70, 70, 1.0)
+                          : Color.fromRGBO(200, 200, 200, 1.0),
+                    ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  void _showDescriptionDialog({
+    required String title,
+    required String description,
+    required String link,
+  }) {
+    final bool isLight = widget.isLightNotifier.value;
+    final Color accent = isLight
+        ? Color.fromRGBO(16, 100, 56, 1.0)
+        : Color.fromRGBO(184, 220, 193, 1.0);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 24,
+          ),
+          backgroundColor: isLight
+              ? Colors.white
+              : Color.fromRGBO(30, 30, 30, 1.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(color: accent, width: 2),
+          ),
+          title: Text(
+            title,
+            style: TextStyle(
+              fontFamily: 'Nunito',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: accent,
+            ),
+          ),
+          content: SingleChildScrollView(
+            child: Text(
+              description,
+              style: TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: 15,
+                color: isLight
+                    ? Color.fromRGBO(35, 35, 35, 1.0)
+                    : Color.fromRGBO(220, 220, 220, 1.0),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Close', style: TextStyle(color: accent)),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _launchURL(link);
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: accent),
+              child: const Text('Start Healing'),
+            ),
+          ],
+        );
+      },
     );
   }
 

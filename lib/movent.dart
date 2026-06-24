@@ -66,106 +66,174 @@ class _MovieEntPageState extends State<MovieEntPage>
       case 'Sad':
         return [
           MovieData(
-            title: 'Inside Out 2',
+            title: 'The Pursuit of Happyness',
             description:
-                'Join Riley as she navigates new emotions during adolescence — a fun and heartfelt look at mental health for all ages.',
+                'A deeply inspiring story about perseverance, hope, and a father’s love. Perfect for reminding yourself that difficult times are temporary and that persistence can lead to brighter days.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=LEjhY15eCx0',
+                'https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FzHNlrkRUUeDoKPWekjQikb3gMPC.png&output=webp&q=50&n=-1',
+            videoUrl: 'https://www.cineby.app/movie/1402',
           ),
+
+          MovieData(
+            title: 'A Man Called Otto',
+            description:
+                'A touching and heartwarming film about loneliness, healing, friendship, and rediscovering purpose in life. It starts emotionally heavy but leaves viewers feeling hopeful.',
+            thumbnailUrl:
+                'https://image.tmdb.org/t/p/w500/130H1gap9lFfiTF9iDrqNIkFvC9.jpg',
+            videoUrl: 'https://www.cineby.app/movie/937278',
+          ),
+
+          MovieData(
+            title: 'Forrest Gump',
+            description:
+                'An uplifting journey through life filled with kindness, resilience, and unforgettable moments. Forrest’s optimism can be surprisingly comforting during periods of sadness.',
+            thumbnailUrl:
+                'https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg',
+            videoUrl: 'https://www.cineby.app/movie/13',
+          ),
+
           MovieData(
             title: 'Soul',
             description:
-                'A Pixar masterpiece exploring the meaning of life, purpose, and what truly makes us feel alive.',
+                'A beautiful animated movie about purpose, appreciating life, and finding joy in everyday moments. Many viewers describe it as therapeutic during difficult emotional periods.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=xOsLIiBStEs',
+                'https://image.tmdb.org/t/p/w500/hm58Jw4Lw8OIeECIq5qyPYhAeRJ.jpg',
+            videoUrl: 'https://www.cineby.app/movie/508442',
           ),
+
           MovieData(
-            title: 'Good Will Hunting',
+            title: 'Kiki’s Delivery Service',
             description:
-                'A troubled young genius finds healing through therapy and meaningful human connection.',
+                'A cozy Studio Ghibli film about self-discovery, independence, and overcoming self-doubt. Its gentle atmosphere makes it an excellent comfort watch.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=PaZVjZEFkRs',
+                'https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FtceNr5IuyrqQswjyb0p6SknnhG2.png&output=webp&q=50&n=-1',
+            videoUrl: 'https://www.cineby.app/movie/16859',
           ),
+
           MovieData(
-            title: 'Encanto',
+            title: 'Barakamon',
             description:
-                'A colorful Disney film about family pressure, self-worth, and embracing who you truly are inside.',
+                'A wholesome anime about a burnt-out artist who finds healing, friendship, and joy in a small rural community. Lighthearted, funny, and surprisingly emotional.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=CaimKeDcudo',
+                'https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw300%2Fx6Vk2gAR7FR1A3hrOnTJRRHBn6u.jpg&output=webp&q=50&n=-1',
+            videoUrl: 'https://www.cineby.at/tv/67048',
+          ),
+
+          MovieData(
+            title: 'Ted Lasso',
+            description:
+                'A heartwarming series filled with optimism, kindness, humor, and emotional growth. Frequently recommended by viewers struggling with sadness or loneliness.',
+            thumbnailUrl:
+                'https://image.tmdb.org/t/p/w500/5fhZdwP1DVJ0FyVH6vrFdHwpXIn.jpg',
+            videoUrl: 'https://www.cineby.app/tv/97546',
           ),
         ];
       case 'Depressed':
         return [
           MovieData(
+            title: 'The Secret Life of Walter Mitty',
+            description:
+                'A shy man trapped in routine discovers courage, purpose, and adventure. This uplifting journey reminds viewers that life can still hold beauty, meaning, and unexpected opportunities even when they feel stuck.',
+            thumbnailUrl:
+                'https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FiBvmyOYch3qFY27KSETOYbpLqYZ.png&output=webp&q=50&n=-1',
+            videoUrl: 'https://www.cineby.at/movie/116745',
+          ),
+          MovieData(
             title: 'The Pursuit of Happyness',
             description:
-                'A powerful true story about resilience, perseverance, and overcoming life\'s toughest challenges with hope.',
+                'A deeply inspiring story about perseverance, hope, and a father’s love. Perfect for reminding yourself that difficult times are temporary and that persistence can lead to brighter days.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1535016120720-40c646be5580?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=DMOBlEcRuw8',
+                'https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FzHNlrkRUUeDoKPWekjQikb3gMPC.png&output=webp&q=50&n=-1',
+            videoUrl: 'https://www.cineby.app/movie/1402',
           ),
           MovieData(
-            title: 'A Beautiful Mind',
+            title: 'Forrest Gump',
             description:
-                'The inspiring story of John Nash\'s journey through mental illness and his triumph over schizophrenia.',
+                'An uplifting journey through life filled with kindness, resilience, and unforgettable moments. Forrest’s optimism can be surprisingly comforting during periods of sadness.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=9wZMbOvzVEo',
+                'https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg',
+            videoUrl: 'https://www.cineby.app/movie/13',
           ),
-          MovieData(
-            title: 'Silver Linings Playbook',
-            description:
-                'A heartwarming dramedy about two people managing mental health struggles who find hope in each other.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=Lj5_FhLaaQQ',
-          ),
+
           MovieData(
             title: 'Soul',
             description:
-                'A Pixar masterpiece exploring the meaning of life, purpose, and what truly makes us feel alive.',
+                'A beautiful animated movie about purpose, appreciating life, and finding joy in everyday moments. Many viewers describe it as therapeutic during difficult emotional periods.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=xOsLIiBStEs',
+                'https://image.tmdb.org/t/p/w500/hm58Jw4Lw8OIeECIq5qyPYhAeRJ.jpg',
+            videoUrl: 'https://www.cineby.app/movie/508442',
+          ),
+          MovieData(
+            title: 'A Silent Voice',
+            description:
+                'A powerful anime film about guilt, loneliness, forgiveness, and second chances. It explores depression and self-worth in a compassionate way while offering a hopeful message of healing and connection.',
+            thumbnailUrl:
+                'https://image.tmdb.org/t/p/w500/tuFaWiqX0TXoWu7DGNcmX3UW7sT.jpg',
+            videoUrl: 'https://www.cineby.at/movie/378064',
+          ),
+          MovieData(
+            title: 'Barakamon',
+            description:
+                'A wholesome anime about a burnt-out artist who finds healing, friendship, and joy in a small rural community. Lighthearted, funny, and surprisingly emotional.',
+            thumbnailUrl:
+                'https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw300%2Fx6Vk2gAR7FR1A3hrOnTJRRHBn6u.jpg&output=webp&q=50&n=-1',
+            videoUrl: 'https://www.cineby.at/tv/67048',
+          ),
+
+          MovieData(
+            title: 'Ted Lasso',
+            description:
+                'A heartwarming series filled with optimism, kindness, humor, and emotional growth. Frequently recommended by viewers struggling with sadness or loneliness.',
+            thumbnailUrl:
+                'https://image.tmdb.org/t/p/w500/5fhZdwP1DVJ0FyVH6vrFdHwpXIn.jpg',
+            videoUrl: 'https://www.cineby.app/tv/97546',
           ),
         ];
       case 'Anxious':
         return [
           MovieData(
-            title: 'Inside Out 2',
+            title: 'My Neighbor Totoro',
             description:
-                'Join Riley as she navigates new emotions during adolescence — a fun and heartfelt look at mental health for all ages.',
+                'A gentle Studio Ghibli classic filled with wonder, nature, and childhood innocence. Its calming atmosphere and heartwarming moments make it a favorite comfort film for people dealing with anxiety and stress.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=LEjhY15eCx0',
+                'https://image.tmdb.org/t/p/w500/rtGDOeG9LzoerkDGZF9dnVeLppL.jpg',
+            videoUrl: 'https://www.cineby.at/movie/8392',
           ),
+
           MovieData(
-            title: 'Encanto',
+            title: 'Kiki’s Delivery Service',
             description:
-                'A colorful Disney film about family pressure, self-worth, and embracing who you truly are inside.',
+                'A comforting story about self-discovery, independence, and overcoming self-doubt. Kiki’s journey reminds viewers that feeling overwhelmed is normal and that confidence grows with patience and perseverance.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=CaimKeDcudo',
+                'https://m.media-amazon.com/images/M/MV5BOGVkNGEzZmUtOGUwMS00MDFiLWJjNzAtNzg3NGE5MmI0ZGMyXkEyXkFqcGdeQXRyYW5zY29kZS13b3JrZmxvdw@@._V1_.jpg',
+            videoUrl: 'https://www.cineby.at/movie/16859',
           ),
+
           MovieData(
-            title: 'Silver Linings Playbook',
+            title: 'Barakamon',
             description:
-                'A heartwarming dramedy about two people managing mental health struggles who find hope in each other.',
+                'A wholesome anime about a burnt-out artist who finds healing, friendship, and joy in a small rural community. Lighthearted, funny, and surprisingly emotional.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=Lj5_FhLaaQQ',
+                'https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw300%2Fx6Vk2gAR7FR1A3hrOnTJRRHBn6u.jpg&output=webp&q=50&n=-1',
+            videoUrl: 'https://www.cineby.at/tv/67048',
           ),
+
           MovieData(
-            title: 'Soul',
+            title: 'Bluey',
             description:
-                'A Pixar masterpiece exploring the meaning of life, purpose, and what truly makes us feel alive.',
+                'Although designed for children, Bluey is widely loved by adults for its warmth, humor, and positive messages. Its short episodes and wholesome family moments provide a relaxing mental break.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=xOsLIiBStEs',
+                'https://cdn.iview.abc.net.au/thumbs/1200/ch/CH1702Q_60753d79d7c4d_1920.jpg',
+            videoUrl: 'https://www.cineby.at/tv/82728',
+          ),
+
+          MovieData(
+            title: 'Parks and Recreation',
+            description:
+                'A feel-good comedy series full of supportive friendships, optimism, and uplifting humor. Its positive tone makes it a popular comfort show during stressful periods.',
+            thumbnailUrl:
+                'https://m.media-amazon.com/images/M/MV5BNDlhMzAwNTAtNTk2NS00MTdkLWE3ZWYtMDU0MTFiYmU2ZTc0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+            videoUrl: 'https://www.cineby.at/tv/8592',
           ),
         ];
       case 'Frustrated':
@@ -173,104 +241,158 @@ class _MovieEntPageState extends State<MovieEntPage>
           MovieData(
             title: 'The Pursuit of Happyness',
             description:
-                'A powerful true story about resilience, perseverance, and overcoming life\'s toughest challenges with hope.',
+                'A powerful true story about perseverance through setbacks, rejection, and hardship. Watching Chris Gardner refuse to give up despite overwhelming obstacles can be incredibly motivating when life feels unfair or frustrating.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1535016120720-40c646be5580?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=DMOBlEcRuw8',
+                'https://m.media-amazon.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_FMjpg_UX1000_.jpg',
+            videoUrl: 'https://www.cineby.at/movie/1402',
           ),
+
           MovieData(
-            title: 'Good Will Hunting',
+            title: 'Rocky',
             description:
-                'A troubled young genius finds healing through therapy and meaningful human connection.',
+                'One of the greatest underdog stories ever told. Rocky reminds viewers that success is not about never failing—it is about continuing to move forward despite frustration, doubt, and setbacks.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=PaZVjZEFkRs',
+                'https://image.tmdb.org/t/p/w500/8eihUxjQsJ7WvGySkVMC0EwbPAD.jpg',
+            videoUrl: 'https://www.cineby.at/movie/1366',
           ),
+
           MovieData(
-            title: 'Inside Out 2',
+            title: 'The Secret Life of Walter Mitty',
             description:
-                'Join Riley as she navigates new emotions during adolescence — a fun and heartfelt look at mental health for all ages.',
+                'A visually beautiful journey about breaking free from routine and self-doubt. Perfect for anyone feeling stuck, frustrated, or trapped by circumstances.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=LEjhY15eCx0',
+                'https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p10016880_p_v12_ap.jpg',
+            videoUrl: 'https://www.cineby.at/movie/116745',
           ),
+
           MovieData(
-            title: 'Soul',
+            title: 'Barakamon',
             description:
-                'A Pixar masterpiece exploring the meaning of life, purpose, and what truly makes us feel alive.',
+                'After a major career setback, a young calligrapher moves to the countryside and slowly rediscovers joy, creativity, and personal growth. Funny, wholesome, and deeply refreshing.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=xOsLIiBStEs',
+                'https://m.media-amazon.com/images/M/MV5BMWFkYWI4NTctNGU5Yy00YTIxLWFkMGYtMjlmZWE3MjY2MDQ3XkEyXkFqcGc@._V1_.jpg',
+            videoUrl: 'https://www.cineby.at/tv/61318',
+          ),
+
+          MovieData(
+            title: 'Haikyuu!!',
+            description:
+                'An inspiring sports anime about determination, teamwork, and never giving up after failure. Its energy and positivity make it a fantastic choice for overcoming frustration and regaining motivation.',
+            thumbnailUrl:
+                'https://m.media-amazon.com/images/M/MV5BYjYxMWFlYTAtYTk0YS00NTMxLWJjNTQtM2E0NjdhYTRhNzE4XkEyXkFqcGc@._V1_.jpg',
+            videoUrl: 'https://www.cineby.at/tv/60863',
+          ),
+
+          MovieData(
+            title: 'Ted Lasso',
+            description:
+                'A heartwarming series about leadership, resilience, and kindness. Ted’s ability to stay optimistic in difficult situations offers a refreshing perspective when frustration starts taking over.',
+            thumbnailUrl:
+                'https://image.tmdb.org/t/p/w500/5fhZdwP1DVJ0FyVH6vrFdHwpXIn.jpg',
+            videoUrl: 'https://www.cineby.at/tv/97546',
+          ),
+
+          MovieData(
+            title: 'The Karate Kid',
+            description:
+                'A classic story of discipline, perseverance, and self-improvement. It teaches that frustration is often part of the learning process and that growth comes from persistence.',
+            thumbnailUrl:
+                'https://m.media-amazon.com/images/M/MV5BMTQ0ODg3ODEyMF5BMl5BanBnXkFtZTcwNjI1MTgxMw@@._V1_FMjpg_UX1000_.jpg',
+            videoUrl: 'https://www.cineby.at/movie/1885',
           ),
         ];
       case 'Angry':
         return [
           MovieData(
-            title: 'Inside Out 2',
+            title: 'Good Will Hunting',
             description:
-                'Join Riley as she navigates new emotions during adolescence — a fun and heartfelt look at mental health for all ages.',
+                'A powerful story about a troubled young man learning to confront his past, manage his emotions, and accept help from others. The film beautifully explores healing, forgiveness, and emotional growth.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=LEjhY15eCx0',
+                'https://image.tmdb.org/t/p/w500/z2FnLKpFi1HPO7BEJxdkv6hpJSU.jpg',
+            videoUrl: 'https://www.cineby.at/movie/489',
           ),
+
+          MovieData(
+            title: 'The Intouchables',
+            description:
+                'An uplifting French film about an unlikely friendship that changes two lives. Its humor, warmth, and message of empathy can help shift focus away from anger and toward human connection.',
+            thumbnailUrl:
+                'https://image.tmdb.org/t/p/w500/323BP0itpxTsO0skTwdnVmf7YC9.jpg',
+            videoUrl: 'https://www.cineby.at/movie/77338',
+          ),
+
           MovieData(
             title: 'Silver Linings Playbook',
             description:
-                'A heartwarming dramedy about two people managing mental health struggles who find hope in each other.',
+                'A heartfelt story about overcoming emotional struggles, rebuilding relationships, and learning healthier ways to cope with life\'s frustrations. Funny, hopeful, and surprisingly therapeutic.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=Lj5_FhLaaQQ',
+                'https://image.tmdb.org/t/p/w500/y7iOVneBvITlBdhy6tVqXVOa1Js.jpg',
+            videoUrl: 'https://www.cineby.at/movie/82693',
           ),
+
           MovieData(
-            title: 'Encanto',
+            title: 'The Peanut Butter Falcon',
             description:
-                'A colorful Disney film about family pressure, self-worth, and embracing who you truly are inside.',
+                'A wholesome adventure filled with kindness, friendship, and self-discovery. Its positive energy and lovable characters make it an excellent choice when trying to let go of anger.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=CaimKeDcudo',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYAEkWAqKOOGyskZDDR3tZRFIzreJeTkWy2g&s',
+            videoUrl: 'https://www.cineby.at/movie/463257',
           ),
+
           MovieData(
-            title: 'Good Will Hunting',
+            title: 'The Way Way Back',
             description:
-                'A troubled young genius finds healing through therapy and meaningful human connection.',
+                'A coming-of-age comedy-drama about finding confidence, support, and belonging. Its uplifting tone and emotional warmth make it a great antidote to lingering anger and resentment.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=PaZVjZEFkRs',
+                'https://m.media-amazon.com/images/M/MV5BNTU5ODk5NDg0Nl5BMl5BanBnXkFtZTcwNzQwMjI1OQ@@._V1_.jpg',
+            videoUrl: 'https://www.cineby.at/movie/147773',
           ),
         ];
       case 'Hopeless':
         return [
           MovieData(
-            title: 'The Pursuit of Happyness',
+            title: 'The Shawshank Redemption',
             description:
-                'A powerful true story about resilience, perseverance, and overcoming life\'s toughest challenges with hope.',
+                'One of the most inspiring stories ever told about hope and perseverance. Despite years of hardship and isolation, Andy never gives up on the possibility of a better future, reminding viewers that hope can survive even the darkest circumstances.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1535016120720-40c646be5580?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=DMOBlEcRuw8',
+                'https://image.tmdb.org/t/p/w500/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg',
+            videoUrl: 'https://www.cineby.at/movie/278',
           ),
+
           MovieData(
-            title: 'A Beautiful Mind',
+            title: 'Life of Pi',
             description:
-                'The inspiring story of John Nash\'s journey through mental illness and his triumph over schizophrenia.',
+                'A visually stunning journey of survival, faith, and resilience. Through impossible challenges and uncertainty, the story encourages viewers to keep believing even when the path ahead seems unclear.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=9wZMbOvzVEo',
+                'https://image.tmdb.org/t/p/w500/iLgRu4hhSr6V1uManX6ukDriiSc.jpg',
+            videoUrl: 'https://www.cineby.at/movie/87827',
           ),
+
           MovieData(
-            title: 'Soul',
+            title: 'Anne with an E',
             description:
-                'A Pixar masterpiece exploring the meaning of life, purpose, and what truly makes us feel alive.',
+                'A beautiful series about an optimistic orphan girl who transforms the lives of everyone around her. Filled with warmth, hope, friendship, and personal growth.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=xOsLIiBStEs',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3WKUl7MUsM02AqX6fTtUdY8jvlr1eoqryeA&s',
+            videoUrl: 'https://www.cineby.at/tv/70785',
           ),
+
           MovieData(
-            title: 'Good Will Hunting',
+            title: 'The Boy, the Mole, the Fox and the Horse',
             description:
-                'A troubled young genius finds healing through therapy and meaningful human connection.',
+                'A gentle and uplifting animated story filled with wisdom about courage, friendship, kindness, and hope. Perfect for moments when life feels overwhelming or directionless.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop',
-            videoUrl: 'https://www.youtube.com/watch?v=PaZVjZEFkRs',
+                'https://image.tmdb.org/t/p/w500/oQRgyQCzcyZvE6w5heM9ktVY0LT.jpg',
+            videoUrl: 'https://www.cineby.at/movie/995133',
+          ),
+
+          MovieData(
+            title: 'Hidden Figures',
+            description:
+                'Based on a true story, this inspiring film follows three brilliant women who overcome enormous obstacles through determination, intelligence, and resilience. A powerful reminder not to give up.',
+            thumbnailUrl:
+                'https://image.tmdb.org/t/p/w500/9lfz2W2uGjyow3am00rsPJ8iOyq.jpg',
+            videoUrl: 'https://www.cineby.at/movie/381284',
           ),
         ];
       default:
@@ -401,24 +523,96 @@ class _MovieEntPageState extends State<MovieEntPage>
                 ),
                 const SizedBox(height: 8),
 
-                Text(
-                  movie.description,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontFamily: 'Nunito',
-                    fontWeight: FontWeight.w500,
-                    color: isLight
-                        ? Color.fromRGBO(70, 70, 70, 1.0)
-                        : Color.fromRGBO(200, 200, 200, 1.0),
+                GestureDetector(
+                  onTap: () => _showDescriptionDialog(
+                    title: movie.title,
+                    description: movie.description,
+                    link: movie.videoUrl,
                   ),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
+                  child: Text(
+                    movie.description,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'Nunito',
+                      fontWeight: FontWeight.w500,
+                      color: isLight
+                          ? Color.fromRGBO(70, 70, 70, 1.0)
+                          : Color.fromRGBO(200, 200, 200, 1.0),
+                    ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  void _showDescriptionDialog({
+    required String title,
+    required String description,
+    required String link,
+  }) {
+    final bool isLight = widget.isLightNotifier.value;
+    final Color accent = isLight
+        ? Color.fromRGBO(16, 100, 56, 1.0)
+        : Color.fromRGBO(184, 220, 193, 1.0);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 24,
+          ),
+          backgroundColor: isLight
+              ? Colors.white
+              : Color.fromRGBO(30, 30, 30, 1.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(color: accent, width: 2),
+          ),
+          title: Text(
+            title,
+            style: TextStyle(
+              fontFamily: 'Nunito',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: accent,
+            ),
+          ),
+          content: SingleChildScrollView(
+            child: Text(
+              description,
+              style: TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: 15,
+                color: isLight
+                    ? Color.fromRGBO(35, 35, 35, 1.0)
+                    : Color.fromRGBO(220, 220, 220, 1.0),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Close', style: TextStyle(color: accent)),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _launchURL(link);
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: accent),
+              child: const Text('Start Healing'),
+            ),
+          ],
+        );
+      },
     );
   }
 
