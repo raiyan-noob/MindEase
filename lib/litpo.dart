@@ -65,226 +65,306 @@ class _PoemPageState extends State<PoemPage> with WidgetsBindingObserver {
       case 'Sad':
         return [
           PoemData(
-            title: 'Not Waving but Drowning - Stevie Smith',
+            title: 'Desiderata',
             description:
-                'A haunting poem about hidden suffering and how people often mask their pain behind a smile.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.poetryfoundation.org/poems/46479/not-waving-but-drowning',
+                'A timeless prose poem offering wisdom about peace, self-acceptance, patience, and finding meaning in life. Many people revisit it during periods of sadness and uncertainty.',
+            thumbnailUrl: 'https://www.desiderata.com/images/desiderata.jpg',
+            bookUrl: 'https://www.desiderata.com/desiderata.html',
           ),
+
           PoemData(
-            title: 'Heavy - Mary Oliver',
+            title: 'Invictus',
             description:
-                'A short yet profound poem about letting go of the emotional weight we carry and choosing to live fully.',
+                'Written by William Ernest Henley during a period of severe illness, this powerful poem speaks about resilience, courage, and refusing to surrender to despair.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.goodreads.com/quotes/7987-heavy',
+                'https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?w=800',
+            bookUrl: 'https://www.poetryfoundation.org/poems/51642/invictus',
           ),
+
           PoemData(
-            title: 'Autobiography in Five Chapters - Portia Nelson',
+            title: 'Kindness',
             description:
-                'A brilliant metaphorical poem about personal growth, breaking patterns, and choosing a new path in life.',
+                'Naomi Shihab Nye’s famous poem explores how loss and sadness can deepen our understanding of compassion and human connection. Many readers find it comforting during difficult periods.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/quotes/7510-autobiography-in-five-short-chapters',
+                'https://poets.org/sites/default/files/images/biographies/NaomiShihabNye_NewBioPhoto.png',
+            bookUrl: 'https://poets.org/poem/kindness',
           ),
+
           PoemData(
-            title: 'The Guest House - Rumi',
+            title: 'If',
             description:
-                'A beautiful Rumi poem about welcoming all emotions — joy, sorrow, and pain — as unexpected visitors to learn from.',
+                'Rudyard Kipling’s classic poem encourages emotional balance, patience, perseverance, and dignity during adversity. It remains one of the most shared inspirational poems in the world.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.poetryfoundation.org/poems/43568/the-guest-house',
+                'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800',
+            bookUrl: 'https://www.poetryfoundation.org/poems/46473/if---',
+          ),
+
+          PoemData(
+            title: 'Healing Quotes Collection',
+            description:
+                'A carefully curated collection of quotes about healing, hope, grief, resilience, and emotional recovery. Useful for readers seeking short but meaningful encouragement.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/healing',
           ),
         ];
       case 'Depressed':
         return [
           PoemData(
-            title: 'Still I Rise - Maya Angelou',
+            title: 'Still I Rise',
             description:
-                'A powerful poem about resilience, self-worth, and rising above adversity with unshakable strength and grace.',
+                'Maya Angelou’s iconic poem about resilience, dignity, and rising above pain. Its message of perseverance has inspired countless readers facing depression, self-doubt, and emotional hardship.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800',
             bookUrl:
                 'https://www.poetryfoundation.org/poems/46446/still-i-rise',
           ),
+
           PoemData(
-            title: 'The Road Not Taken - Robert Frost',
+            title: 'The Guest House',
             description:
-                'A timeless poem reflecting on life choices, self-discovery, and the courage to take the less traveled path.',
+                'A profound poem by Rumi that encourages people to welcome every emotion, including sadness and despair, as part of the human experience. Many readers find it comforting during periods of depression and emotional struggle.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400&h=300&fit=crop',
+                'https://ap-pics2.gotpoem.com/ap-pics/user/4913/439.jpg?137x190',
             bookUrl:
-                'https://www.poetryfoundation.org/poems/44272/the-road-not-taken',
+                'https://allpoetry.com/poem/8534703-The-Guest-House-by-Mewlana-Jalaluddin-Rumi',
           ),
+
           PoemData(
-            title: 'Quotes on Depression & Hope',
+            title: 'Wild Geese',
             description:
-                '"Even the darkest night will end and the sun will rise." — Victor Hugo. A collection of quotes to light your way.',
+                'Mary Oliver’s beloved poem reminds readers that they do not have to be perfect to deserve love and belonging. It is frequently recommended by therapists and mental health communities.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1518611505868-48a8f8f22ca3?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.verywellmind.com/depression-quotes-5094454',
-          ),
-          PoemData(
-            title: 'Love After Love - Derek Walcott',
-            description:
-                'A beautiful poem about rediscovering yourself after hardship and learning to love who you truly are again.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
+                'https://ap-pics2.gotpoem.com/ap-pics/user/5964/343.jpg?SymeMaryOliverjpg8',
             bookUrl:
-                'https://www.poetryfoundation.org/poems/53489/love-after-love',
+                'https://allpoetry.com/poem/15374223-Wild-geese-by-Mary-J-Oliver',
+          ),
+
+          PoemData(
+            title: 'Recovery Quotes Collection',
+            description:
+                'A collection of quotes about healing, recovery, resilience, and overcoming difficult periods. Readers often find encouragement in the stories and wisdom shared by others who faced similar challenges.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/recovery',
+          ),
+
+          PoemData(
+            title: 'Mental Health Quotes Collection',
+            description:
+                'A curated selection of quotes focused on emotional well-being, self-acceptance, resilience, and hope. Helpful for readers looking for brief but meaningful reminders that recovery is possible.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/mental-health',
+          ),
+
+          PoemData(
+            title: 'Inspirational Quotes About Strength',
+            description:
+                'An extensive collection of quotes about inner strength, perseverance, and overcoming adversity. Particularly useful during times when motivation and hope feel difficult to maintain.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/strength',
           ),
         ];
       case 'Anxious':
         return [
           PoemData(
-            title: 'Invictus - William Ernest Henley',
+            title: 'The Peace of Wild Things',
             description:
-                'I am the master of my fate, I am the captain of my soul — an iconic poem about inner strength and determination.',
+                'Wendell Berry’s beloved poem about finding peace in nature when anxiety and fear become overwhelming. Many readers return to it during stressful periods because of its calming and grounding message.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.poetryfoundation.org/poems/51642/invictus',
-          ),
-          PoemData(
-            title: 'Quotes on Anxiety & Courage',
-            description:
-                '"You don\'t have to control your thoughts. You just have to stop letting them control you." — Dan Millman',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1489533119213-66a5cd877091?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.verywellmind.com/anxiety-quotes-5094498',
-          ),
-          PoemData(
-            title: 'The Guest House - Rumi',
-            description:
-                'A beautiful Rumi poem about welcoming all emotions — joy, sorrow, and pain — as unexpected visitors to learn from.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=400&h=300&fit=crop',
+                'https://www.scottishpoetrylibrary.org.uk/wp-content/themes/spl2023/img/chars/single/B.svg',
             bookUrl:
-                'https://www.poetryfoundation.org/poems/43568/the-guest-house',
+                'https://www.scottishpoetrylibrary.org.uk/poem/peace-wild-things/',
+          ),
+
+          PoemData(
+            title: 'The Guest House',
+            description:
+                'A profound poem by Rumi that encourages people to welcome every emotion, including sadness and despair, as part of the human experience. Many readers find it comforting during periods of depression and emotional struggle.',
+            thumbnailUrl:
+                'https://ap-pics2.gotpoem.com/ap-pics/user/4913/439.jpg?137x190',
+            bookUrl:
+                'https://allpoetry.com/poem/8534703-The-Guest-House-by-Mewlana-Jalaluddin-Rumi',
           ),
           PoemData(
-            title: 'Wild Geese - Mary Oliver',
+            title: 'Mindfulness Quotes Collection',
             description:
-                'You do not have to be good. A gentle reminder that you belong in this world just as you are, imperfections and all.',
+                'A curated collection of quotes about mindfulness, awareness, and living in the present moment. These insights can help interrupt cycles of overthinking and anxious rumination.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.poetryfoundation.org/poems/48568/wild-geese',
+                'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/mindfulness',
+          ),
+
+          PoemData(
+            title: 'Inner Peace Quotes Collection',
+            description:
+                'A selection of quotes from philosophers, spiritual teachers, and writers focused on cultivating calmness, acceptance, and emotional balance.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/inner-peace',
+          ),
+
+          PoemData(
+            title: 'Anxiety Quotes Collection',
+            description:
+                'A collection of reflections and quotes from people who have experienced anxiety themselves. Many readers find comfort in knowing others have faced similar fears and found ways to cope.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/anxiety',
           ),
         ];
       case 'Frustrated':
         return [
           PoemData(
-            title: 'Quotes on Strength & Resilience',
+            title: 'If—',
             description:
-                '"The human capacity for burden is like bamboo — far more flexible than you\'d ever believe." — Jodi Picoult',
+                'Rudyard Kipling’s classic poem teaches patience, self-control, perseverance, and resilience in the face of setbacks. It is one of the most quoted poems for people struggling with frustration and adversity.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.goodreads.com/quotes/tag/resilience',
-          ),
-          PoemData(
-            title: 'Brave - Sara Bareilles',
-            description:
-                'Wait, that is a song; we should instead include a poem focusing on overcoming frustration.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.poetryfoundation.org/poems/46013/as-we-grow-older',
-          ),
-          PoemData(
-            title: 'If - Rudyard Kipling',
-            description:
-                'A father\'s timeless advice to his son about keeping calm, staying strong, and never losing faith in yourself.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800',
             bookUrl: 'https://www.poetryfoundation.org/poems/46473/if---',
           ),
+
           PoemData(
-            title: 'Autobiography in Five Chapters - Portia Nelson',
+            title: 'Invictus',
             description:
-                'A brilliant metaphorical poem about personal growth, breaking patterns, and choosing a new path in life.',
+                'Written by William Ernest Henley during a period of severe illness, this powerful poem speaks about resilience, courage, and refusing to surrender to despair.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/quotes/7510-autobiography-in-five-short-chapters',
+                'https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?w=800',
+            bookUrl: 'https://www.poetryfoundation.org/poems/51642/invictus',
+          ),
+          PoemData(
+            title: 'Perseverance Quotes Collection',
+            description:
+                'A collection of quotes from leaders, athletes, writers, and thinkers about persistence, determination, and continuing despite obstacles. Ideal for moments when frustration threatens motivation.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/perseverance',
+          ),
+
+          PoemData(
+            title: 'Motivational Quotes Collection',
+            description:
+                'An extensive collection of motivational quotes that encourage persistence, effort, and positive action when progress feels slow or obstacles seem overwhelming.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/motivation',
+          ),
+
+          PoemData(
+            title: 'Determination Quotes Collection',
+            description:
+                'Quotes focused on determination, grit, and maintaining momentum during difficult periods. Helpful for readers who feel discouraged by repeated setbacks or challenges.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/determination',
           ),
         ];
       case 'Angry':
         return [
           PoemData(
-            title: 'Still I Rise - Maya Angelou',
+            title: 'A Psalm of Life',
             description:
-                'A powerful poem about resilience, self-worth, and rising above adversity with unshakable strength and grace.',
+                'Henry Wadsworth Longfellow’s inspirational poem encourages action, courage, and purpose instead of dwelling on resentment or negativity. It inspires readers to channel emotional energy into meaningful living.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800',
             bookUrl:
-                'https://www.poetryfoundation.org/poems/46446/still-i-rise',
+                'https://www.poetryfoundation.org/poems/44644/a-psalm-of-life',
           ),
+
           PoemData(
-            title: 'If - Rudyard Kipling',
+            title: 'Forgiveness Quotes Collection',
             description:
-                'A father\'s timeless advice to his son about keeping calm, staying strong, and never losing faith in yourself.',
+                'A carefully curated collection of quotes about forgiveness, letting go of resentment, and finding peace after being hurt. Many readers find these reflections helpful when anger feels difficult to release.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.poetryfoundation.org/poems/46473/if---',
+                'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/forgiveness',
           ),
+
           PoemData(
-            title: 'The Guest House - Rumi',
+            title: 'Peace Quotes Collection',
             description:
-                'A beautiful Rumi poem about welcoming all emotions — joy, sorrow, and pain — as unexpected visitors to learn from.',
+                'An extensive collection of quotes focused on inner peace, calmness, and emotional balance. These reminders encourage readers to step away from anger and reconnect with tranquility.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.poetryfoundation.org/poems/43568/the-guest-house',
+                'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/peace',
           ),
+
           PoemData(
-            title: 'Not Waving but Drowning - Stevie Smith',
+            title: 'Patience Quotes Collection',
             description:
-                'A haunting poem about hidden suffering and how people often mask their pain behind a smile.',
+                'Quotes from philosophers, spiritual teachers, and writers emphasizing patience, understanding, and self-control. Particularly helpful when anger arises from impatience or unmet expectations.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.poetryfoundation.org/poems/46479/not-waving-but-drowning',
+                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/patience',
+          ),
+
+          PoemData(
+            title: 'Compassion Quotes Collection',
+            description:
+                'A collection of quotes highlighting empathy, kindness, and compassion toward ourselves and others. These perspectives can soften anger and encourage healthier responses to conflict.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/compassion',
           ),
         ];
       case 'Hopeless':
         return [
           PoemData(
-            title: 'Desiderata - Max Ehrmann',
+            title: 'Hope is the Thing with Feathers',
             description:
-                'A timeless prose poem offering gentle life advice about peace, patience, and being kind to yourself.',
+                'Emily Dickinson’s most famous poem about hope. It portrays hope as a small bird that never stops singing, even during life’s harshest storms. Many readers turn to this poem when they need a reminder that hope can survive even in the darkest moments.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.desiderata.com/desiderata.html',
-          ),
-          PoemData(
-            title: 'Love After Love - Derek Walcott',
-            description:
-                'A beautiful poem about rediscovering yourself after hardship and learning to love who you truly are again.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1510936111840-65e151ad71bb?w=800',
             bookUrl:
-                'https://www.poetryfoundation.org/poems/53489/love-after-love',
+                'https://www.poetryfoundation.org/poems/42889/hope-is-the-thing-with-feathers-314',
           ),
+
           PoemData(
-            title: 'Still I Rise - Maya Angelou',
+            title: 'Invictus',
             description:
-                'A powerful poem about resilience, self-worth, and rising above adversity with unshakable strength and grace.',
+                'A timeless poem of resilience and determination written by William Ernest Henley while facing serious illness. Its message reminds readers that circumstances may be difficult, but they still possess inner strength and courage.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?w=800',
+            bookUrl: 'https://www.poetryfoundation.org/poems/51642/invictus',
+          ),
+
+          PoemData(
+            title: 'Still I Rise',
+            description:
+                'Maya Angelou’s powerful poem celebrates resilience, self-worth, and the refusal to be defeated. It has inspired millions of people facing hardship, rejection, or hopelessness.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800',
             bookUrl:
                 'https://www.poetryfoundation.org/poems/46446/still-i-rise',
           ),
+
           PoemData(
-            title: 'The Guest House - Rumi',
+            title: 'Hope Quotes Collection',
             description:
-                'A beautiful Rumi poem about welcoming all emotions — joy, sorrow, and pain — as unexpected visitors to learn from.',
+                'A carefully curated collection of quotes about hope, perseverance, and believing in a brighter future. These reflections come from writers, leaders, philosophers, and survivors who overcame adversity.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.poetryfoundation.org/poems/43568/the-guest-house',
+                'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/hope',
+          ),
+
+          PoemData(
+            title: 'Resilience Quotes Collection',
+            description:
+                'An inspiring collection of quotes about recovering from setbacks, adapting to challenges, and continuing forward despite difficulties. Ideal for moments when life feels overwhelming.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/resilience',
+          ),
+
+          PoemData(
+            title: 'Inspirational Quotes Collection',
+            description:
+                'A broad collection of uplifting quotes about purpose, growth, faith, and overcoming challenges. Many readers revisit these quotes when they need encouragement and perspective.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800',
+            bookUrl: 'https://www.goodreads.com/quotes/tag/inspirational',
           ),
         ];
       default:

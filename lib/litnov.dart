@@ -65,241 +65,340 @@ class _NovelPageState extends State<NovelPage> with WidgetsBindingObserver {
       case 'Sad':
         return [
           NovelData(
-            title: 'The Perks of Being a Wallflower',
+            title: 'The Alchemist',
             description:
-                'A coming-of-age story exploring trauma, anxiety, and the healing power of friendship through heartfelt letters.',
+                'Paulo Coelho’s beloved novel follows a young shepherd on a journey of self-discovery, purpose, and hope. Many readers turn to this book during difficult times because it reminds them that life still holds meaning and possibilities.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqiaY9ClSwmCuPl7hKZHEF_88SX-NG8o3RsOy1Lbt5H2th4l6svlv9sPx_4ANAh4vAitLoFLLHUa9rGuAg3DCWIDtWtsiGVNXawKoAWeV1&s=10',
             bookUrl:
-                'https://www.goodreads.com/book/show/22628.The_Perks_of_Being_a_Wallflower',
+                'https://icrrd.com/public/media/15-05-2021-084550The-Alchemist-Paulo-Coelho.pdf',
           ),
+
           NovelData(
-            title: 'Reasons to Stay Alive - Matt Haig',
+            title: 'The Little Prince',
             description:
-                'A memoir-style novel blending fiction and real life about overcoming depression and finding reasons to keep going.',
+                'A timeless story about friendship, love, loss, and seeing the world through a child’s eyes. Its gentle wisdom has comforted generations of readers dealing with loneliness and sadness.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5AEhv609oN3VgN1veswb5-iULlEpBVhElh4VPcpBltw&s',
             bookUrl:
-                'https://www.goodreads.com/book/show/25733573-reasons-to-stay-alive',
+                'https://blogs.ubc.ca/edcp508/files/2016/02/TheLittlePrince.pdf',
           ),
+
           NovelData(
-            title: 'Girl in Pieces - Kathleen Glasgow',
+            title: 'The Midnight Library',
             description:
-                'A raw and emotional story of a young girl recovering from self-harm and rebuilding her life through art.',
+                'A modern bestseller exploring regret, second chances, and the infinite possibilities of life. Its hopeful message has resonated strongly with readers experiencing sadness and hopelessness.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=800',
             bookUrl:
-                'https://www.goodreads.com/book/show/29236380-girl-in-pieces',
+                'https://www.goodreads.com/book/show/52578297-the-midnight-library',
           ),
+
           NovelData(
-            title: 'The Bell Jar - Sylvia Plath',
+            title: 'Tuesdays with Morrie',
             description:
-                'A powerful semi-autobiographical novel about a young woman\'s descent into depression and her journey toward recovery.',
+                'A touching true story about life lessons, love, purpose, and human connection. Many readers find comfort in its reflections on what truly matters in life.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.goodreads.com/book/show/6514.The_Bell_Jar',
-          ),
-          NovelData(
-            title: 'The Kite Runner - Khaled Hosseini',
-            description:
-                'A powerful story of friendship, betrayal, and redemption set against the backdrop of Afghanistan\'s turbulent history.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJJiurb3jp9Ik6__VEe-s6plF16R_j4wpWhqWYRvvLlEzgiS549ZZt7xnSzUBhxTCQHO5-_BDBq9wRRnaPFvWlBtK9E2K8ridOskdPkD7t&s=10',
             bookUrl:
-                'https://www.goodreads.com/book/show/13536.The_Kite_Runner',
+                'http://pustaka.unp.ac.id/file/abstrak_kki/EBOOKS/tuesdays%20with%20morrie.pdf',
+          ),
+
+          NovelData(
+            title: 'Anne of Green Gables',
+            description:
+                'A charming and uplifting classic filled with imagination, kindness, friendship, and optimism. It remains one of the most comforting novels ever written.',
+            thumbnailUrl:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI74css5SSg0eiNzEho-ClgvPMAR1tfkvNsgDkquunivtTyQ5q232t2uE&s=10',
+            bookUrl:
+                'https://dn720004.ca.archive.org/0/items/anneofgreengable0000lucy_u5q7/anneofgreengable0000lucy_u5q7.pdf',
+          ),
+
+          NovelData(
+            title: 'The Secret Garden',
+            description:
+                'A beautiful story about healing, growth, friendship, and renewal. Readers often find its themes of transformation and hope deeply encouraging during difficult periods.',
+            thumbnailUrl:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6YBZm_7pNiAfiBEn0sA0GwrHNduYMEXp-DObOFJ33tw&s',
+            bookUrl:
+                'https://ia601903.us.archive.org/25/items/TheSecretGarden_201303/The%20Secret%20Garden.pdf',
           ),
         ];
       case 'Depressed':
         return [
           NovelData(
-            title: 'Reasons to Stay Alive - Matt Haig',
+            title: 'Man’s Search for Meaning',
             description:
-                'A memoir-style novel blending fiction and real life about overcoming depression and finding reasons to keep going.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
+                'Viktor Frankl’s classic memoir explores how people can find purpose even in the most difficult circumstances. It is one of the most frequently recommended books for people struggling with hopelessness, depression, or a loss of meaning in life.',
+            thumbnailUrl: 'https://covers.openlibrary.org/b/id/8512577-L.jpg',
             bookUrl:
-                'https://www.goodreads.com/book/show/25733573-reasons-to-stay-alive',
+                'https://antilogicalism.com/wp-content/uploads/2017/07/mans-search-for-meaning.pdf',
           ),
+
           NovelData(
-            title: 'The Bell Jar - Sylvia Plath',
+            title: 'The Yellow Wallpaper',
             description:
-                'A powerful semi-autobiographical novel about a young woman\'s descent into depression and her journey toward recovery.',
+                'A powerful short story about mental health, isolation, and recovery. Although written in the 19th century, it remains one of the most discussed literary works related to depression and emotional suffering.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.goodreads.com/book/show/6514.The_Bell_Jar',
-          ),
-          NovelData(
-            title: 'Challenger Deep - Neal Shusterman',
-            description:
-                'An award-winning novel about a teen navigating schizophrenia, told through vivid imagery and dual narratives.',
-            thumbnailUrl:
-                'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=300&fit=crop',
+                'https://www.gutenberg.org/cache/epub/1952/pg1952.cover.medium.jpg',
             bookUrl:
-                'https://www.goodreads.com/book/show/18075234-challenger-deep',
+                'https://www.nlm.nih.gov/exhibition/theliteratureofprescription/exhibitionAssets/digitalDocs/The-Yellow-Wall-Paper.pdf',
           ),
+
           NovelData(
-            title: 'A Man Called Ove - Fredrik Backman',
+            title: 'The Prophet',
             description:
-                'A heartwarming tale of a grumpy old man who rediscovers the joy of living through unexpected friendships.',
+                'Kahlil Gibran’s spiritual classic offers reflections on sorrow, joy, love, work, and purpose. Many readers find comfort in its philosophical perspective during difficult emotional periods.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1519682577862-22b62b24e493?w=400&h=300&fit=crop',
+                'https://www.gutenberg.org/cache/epub/58585/pg58585.cover.medium.jpg',
             bookUrl:
-                'https://www.goodreads.com/book/show/18774964-a-man-called-ove',
+                'https://www.kahlilgibran.com/images/The%20Prophet%20Ebook%20by%20Kahlil%20Gibran.pdf',
+          ),
+
+          NovelData(
+            title: 'Siddhartha',
+            description:
+                'Hermann Hesse’s spiritual novel follows a man searching for peace, wisdom, and meaning. Its themes of self-discovery and personal growth resonate deeply with readers navigating depression and existential struggles.',
+            thumbnailUrl: 'https://covers.openlibrary.org/b/id/6562532-M.jpg',
+            bookUrl:
+                'https://bca.klesnc.edu.in/wp-content/uploads/2025/07/Siddhartha-by-Hermann-Hesse.pdf',
+          ),
+
+          NovelData(
+            title: 'Letters to a Young Poet',
+            description:
+                'Rainer Maria Rilke’s collection of letters offers thoughtful advice on loneliness, uncertainty, creativity, and personal growth. Many readers describe it as a comforting companion during difficult times.',
+            thumbnailUrl:
+                'https://www.gutenberg.org/cache/epub/60327/pg60327.cover.medium.jpg',
+            bookUrl: 'https://www.gutenberg.org/ebooks/60327',
+          ),
+
+          NovelData(
+            title: 'The Story of My Life',
+            description:
+                'Helen Keller’s autobiography is a remarkable story of perseverance, courage, and hope. It inspires readers to keep moving forward despite overwhelming obstacles.',
+            thumbnailUrl:
+                'https://www.gutenberg.org/cache/epub/2397/pg2397.cover.medium.jpg',
+            bookUrl:
+                'https://cbseacademic.nic.in/web_material/doc/The%20Story%20of%20My%20Life,%20by%20Helen%20Keller.pdf',
           ),
         ];
       case 'Anxious':
         return [
           NovelData(
-            title: 'Turtles All the Way Down - John Green',
+            title: 'Walden',
             description:
-                'A gripping novel about living with OCD, spiraling thoughts, and finding your identity beyond your mental illness.',
+                'Henry David Thoreau’s classic reflection on simple living, mindfulness, and reconnecting with nature. Many anxious readers find comfort in its message of slowing down and focusing on what truly matters.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/book/show/35504431-turtles-all-the-way-down',
+                'https://www.gutenberg.org/files/205/205-h/images/cover.jpg',
+            bookUrl: 'https://www.gutenberg.org/files/205/205-h/205-h.htm',
           ),
+
           NovelData(
-            title: 'Highly Illogical Behavior - John Corey Whaley',
+            title: 'The Blue Castle',
             description:
-                'A quirky novel about a teen with agoraphobia and the unexpected friendship that challenges his comfort zone.',
+                'A heartwarming novel about a woman trapped by fear and anxiety who gradually learns to embrace life and freedom. Readers often describe it as comforting and uplifting.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/book/show/26109391-highly-illogical-behavior',
+                'https://www.gutenberg.org/cache/epub/67979/pg67979.cover.medium.jpg',
+            bookUrl: 'https://www.gutenberg.org/ebooks/67979',
           ),
+
           NovelData(
-            title: 'All the Bright Places - Jennifer Niven',
+            title: 'The Wisdom of Insecurity',
             description:
-                'A deeply moving love story between two teens who struggle with mental illness and help each other find reasons to live.',
+                'Alan Watts explores why the search for certainty often creates anxiety. The book encourages readers to embrace the present moment and find peace in uncertainty.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=400&h=300&fit=crop',
+                'https://openlibrary.org/static/images/icons/avatar_book-sm.png',
             bookUrl:
-                'https://www.goodreads.com/book/show/18460392-all-the-bright-places',
+                'https://todaytelemedicine.com/wp-content/uploads/2023/12/The-Wisdom-of-Insecurity-A-Message-for-an-Age-of-Anxiety-Alan-Watts.pdf',
           ),
+
           NovelData(
-            title: 'Eleanor Oliphant Is Completely Fine',
+            title: 'As a Man Thinketh',
             description:
-                'A beautiful story of a socially awkward woman who learns that connection and kindness can heal deep wounds.',
+                'A short classic about the power of thoughts and mindset. Readers struggling with worry often appreciate its practical insights into how thinking patterns influence emotions and behavior.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400&h=300&fit=crop',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR0tr7wQE5-QJbkMusCpTPR2-v8DWLhzhVmW8Wr5CLmi92If7ApvEyoXdFlq3Ay5JZI0h4doT1VZaUpZkQbbTRfzdgJd1hVrTtB9Vagdp12A&s=10',
             bookUrl:
-                'https://www.goodreads.com/book/show/31434883-eleanor-oliphant-is-completely-fine',
+                'https://dn790000.ca.archive.org/0/items/asmanthinketh00alleiala/asmanthinketh00alleiala.pdf',
+          ),
+
+          NovelData(
+            title: 'The Wind in the Willows',
+            description:
+                'A comforting classic filled with friendship, adventure, and gentle humor. Many readers turn to it as a calming and reassuring escape from stress and anxiety.',
+            thumbnailUrl:
+                'https://www.gutenberg.org/cache/epub/289/pg289.cover.medium.jpg',
+            bookUrl:
+                'https://web.english.upenn.edu/~cavitch/pdf-library/Grahame_Wind_in_the_Willows_1908.pdf',
           ),
         ];
       case 'Frustrated':
         return [
           NovelData(
-            title: 'The Midnight Library - Matt Haig',
+            title: 'The Call of the Wild',
             description:
-                'A magical novel about a woman who gets to explore alternate lives she could have lived, discovering what truly matters.',
+                'Jack London’s classic adventure follows Buck as he faces harsh challenges and constantly adapts to survive. The story inspires resilience, perseverance, and the ability to grow stronger through adversity.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/book/show/52578297-the-midnight-library',
+                'https://www.gutenberg.org/files/215/215-h/images/cover.jpg',
+            bookUrl: 'https://www.gutenberg.org/files/215/215-h/215-h.htm',
           ),
+
           NovelData(
-            title: 'A Man Called Ove - Fredrik Backman',
+            title: 'The Odyssey',
             description:
-                'A heartwarming tale of a grumpy old man who rediscovers the joy of living through unexpected friendships.',
+                'One of the greatest stories of perseverance ever written. Odysseus faces countless setbacks, failures, and obstacles on his journey home, yet never gives up despite overwhelming frustration.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1519682577862-22b62b24e493?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/book/show/18774964-a-man-called-ove',
+                'https://www.gutenberg.org/cache/epub/1727/pg1727.cover.medium.jpg',
+            bookUrl: 'https://www.gutenberg.org/ebooks/1727',
           ),
+
           NovelData(
-            title: 'The Perks of Being a Wallflower',
+            title: 'The Count of Monte Cristo',
             description:
-                'A coming-of-age story exploring trauma, anxiety, and the healing power of friendship through heartfelt letters.',
+                'After suffering betrayal and injustice, Edmond Dantès endures years of hardship before rebuilding his life. The novel demonstrates patience, long-term thinking, and persistence through adversity.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/book/show/22628.The_Perks_of_Being_a_Wallflower',
+                'https://www.gutenberg.org/cache/epub/1184/pg1184.cover.medium.jpg',
+            bookUrl: 'https://www.gutenberg.org/ebooks/1184',
           ),
+
           NovelData(
-            title: 'Girl in Pieces - Kathleen Glasgow',
+            title: 'The Little Engine That Could',
             description:
-                'A raw and emotional story of a young girl recovering from self-harm and rebuilding her life through art.',
+                'A simple but powerful story about determination and self-belief. Its message of “I think I can” continues to inspire readers facing challenges and setbacks.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400&h=300&fit=crop',
+                'https://archive.org/services/img/TheLittleEngineThatCould',
             bookUrl:
-                'https://www.goodreads.com/book/show/29236380-girl-in-pieces',
+                'https://archive.org/search?query=The+Little+Engine+That+Could',
+          ),
+
+          NovelData(
+            title: 'Up From Slavery',
+            description:
+                'Booker T. Washington’s autobiography tells the story of overcoming immense obstacles through persistence, education, and hard work. It remains one of the most inspiring stories of resilience ever written.',
+            thumbnailUrl:
+                'https://www.gutenberg.org/cache/epub/2376/pg2376.cover.medium.jpg',
+            bookUrl: 'https://www.gutenberg.org/files/2376/2376-h/2376-h.htm',
+          ),
+
+          NovelData(
+            title: 'The Story of a Soul',
+            description:
+                'The autobiography of Saint Thérèse of Lisieux. Through everyday struggles and frustrations, she teaches patience, perseverance, and finding meaning in small acts of progress.',
+            thumbnailUrl: 'https://archive.org/services/img/storyofsoul00sain',
+            bookUrl: 'https://archive.org/search?query=Story+of+a+Soul+Therese',
           ),
         ];
       case 'Angry':
         return [
           NovelData(
-            title: 'It\'s Kind of a Funny Story - Ned Vizzini',
+            title: 'The Analects',
             description:
-                'A heartfelt and humorous novel about a teen who checks himself into a psychiatric hospital and discovers hope.',
+                'Confucius teaches patience, self-discipline, humility, and respectful relationships. Many readers find its wisdom helpful when dealing with anger, resentment, and interpersonal conflicts.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/book/show/248704.It_s_Kind_of_a_Funny_Story',
+                'https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=800',
+            bookUrl: 'https://archive.org/details/theanalectsconfucius',
           ),
+
           NovelData(
-            title: 'All the Bright Places - Jennifer Niven',
+            title: 'Uncle Tom’s Cabin',
             description:
-                'A deeply moving love story between two teens who struggle with mental illness and help each other find reasons to live.',
+                'A moving story that explores injustice, forgiveness, compassion, and moral courage. Despite experiencing cruelty, many characters choose empathy over hatred, making it a meaningful read for angry readers.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/book/show/18460392-all-the-bright-places',
+                'https://www.gutenberg.org/cache/epub/203/pg203.cover.medium.jpg',
+            bookUrl: 'https://www.gutenberg.org/files/203/203-h/203-h.htm',
           ),
+
           NovelData(
-            title: 'The Midnight Library - Matt Haig',
+            title: 'The Practice of the Presence of God',
             description:
-                'A magical novel about a woman who gets to explore alternate lives she could have lived, discovering what truly matters.',
+                'Brother Lawrence shares simple reflections on peace, patience, and maintaining calmness in daily life. Readers often turn to this classic when seeking inner tranquility.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/book/show/52578297-the-midnight-library',
+                'https://www.gutenberg.org/cache/epub/5657/pg5657.cover.medium.jpg',
+            bookUrl: 'https://www.gutenberg.org/ebooks/5657',
           ),
+
           NovelData(
-            title: 'A Man Called Ove - Fredrik Backman',
+            title: 'Ben-Hur: A Tale of the Christ',
             description:
-                'A heartwarming tale of a grumpy old man who rediscovers the joy of living through unexpected friendships.',
+                'A powerful story of betrayal, suffering, revenge, and ultimately forgiveness. The protagonist’s journey from anger to compassion resonates deeply with readers seeking emotional healing.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1519682577862-22b62b24e493?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/book/show/18774964-a-man-called-ove',
+                'https://www.gutenberg.org/cache/epub/2145/pg2145.cover.medium.jpg',
+            bookUrl: 'https://www.gutenberg.org/ebooks/2145',
+          ),
+
+          NovelData(
+            title: 'Aesop’s Fables',
+            description:
+                'These timeless stories teach lessons about temper, impulsiveness, wisdom, and human nature. Many of the fables show the consequences of acting in anger and the value of thoughtful restraint.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800',
+            bookUrl: 'https://www.gutenberg.org/ebooks/11339',
           ),
         ];
       case 'Hopeless':
         return [
           NovelData(
-            title: 'Reasons to Stay Alive - Matt Haig',
+            title: 'Pollyanna',
             description:
-                'A memoir-style novel blending fiction and real life about overcoming depression and finding reasons to keep going.',
+                'A heartwarming classic about a young girl who teaches an entire town to find reasons for gratitude even during hardship. Her famous "Glad Game" helps people discover hope and positivity when life feels overwhelming.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/book/show/25733573-reasons-to-stay-alive',
+                'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800',
+            bookUrl: 'https://www.gutenberg.org/ebooks/1450',
           ),
+
           NovelData(
-            title: 'The Midnight Library - Matt Haig',
+            title: 'A Little Princess',
             description:
-                'A magical novel about a woman who gets to explore alternate lives she could have lived, discovering what truly matters.',
+                'Despite losing nearly everything she loves, Sara Crewe refuses to surrender her kindness, imagination, and hope. This inspiring story reminds readers that inner strength can survive even the darkest circumstances.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/book/show/52578297-the-midnight-library',
+                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=800',
+            bookUrl: 'https://www.gutenberg.org/ebooks/146',
           ),
+
           NovelData(
-            title: 'The Bell Jar - Sylvia Plath',
+            title: 'The Wonderful Wizard of Oz',
             description:
-                'A powerful semi-autobiographical novel about a young woman\'s descent into depression and her journey toward recovery.',
+                'Dorothy’s journey through an unfamiliar world becomes a powerful story about courage, friendship, and discovering the strengths we already possess. It offers a hopeful reminder that solutions are often closer than they appear.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop',
-            bookUrl: 'https://www.goodreads.com/book/show/6514.The_Bell_Jar',
+                'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800',
+            bookUrl: 'https://www.gutenberg.org/ebooks/55',
           ),
+
           NovelData(
-            title: 'Challenger Deep - Neal Shusterman',
+            title: 'The Railway Children',
             description:
-                'An award-winning novel about a teen navigating schizophrenia, told through vivid imagery and dual narratives.',
+                'A touching story about a family facing sudden hardship and uncertainty. Through love, perseverance, and kindness, they gradually find hope and healing together.',
             thumbnailUrl:
-                'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=300&fit=crop',
-            bookUrl:
-                'https://www.goodreads.com/book/show/18075234-challenger-deep',
+                'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=800',
+            bookUrl: 'https://www.gutenberg.org/ebooks/1874',
+          ),
+
+          NovelData(
+            title: 'Little Women',
+            description:
+                'This beloved novel follows four sisters through struggles, disappointments, and personal growth. Its themes of family, resilience, purpose, and hope have comforted readers for generations.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800',
+            bookUrl: 'https://www.gutenberg.org/ebooks/514',
+          ),
+
+          NovelData(
+            title: 'Heidi',
+            description:
+                'A timeless story of healing, friendship, and the restorative power of nature. Heidi’s optimism and kindness bring hope not only to herself but also to those around her.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800',
+            bookUrl: 'https://www.gutenberg.org/ebooks/20781',
+          ),
+
+          NovelData(
+            title: 'Pilgrim’s Progress',
+            description:
+                'One of the most influential stories ever written about perseverance, faith, and continuing forward despite obstacles. It offers encouragement to readers who feel lost or discouraged.',
+            thumbnailUrl:
+                'https://images.unsplash.com/photo-1510936111840-65e151ad71bb?w=800',
+            bookUrl: 'https://www.gutenberg.org/ebooks/131',
           ),
         ];
       default:
