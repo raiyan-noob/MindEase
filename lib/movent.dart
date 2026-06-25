@@ -608,7 +608,16 @@ class _MovieEntPageState extends State<MovieEntPage>
                 _launchURL(link);
               },
               style: ElevatedButton.styleFrom(backgroundColor: accent),
-              child: const Text('Start Healing'),
+              child: Text(
+                'Start Healing✨',
+                style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 15,
+                  color: isLight
+                      ? Color.fromRGBO(220, 220, 220, 1.0)
+                      : Color.fromRGBO(35, 35, 35, 1.0),
+                ),
+              ),
             ),
           ],
         );

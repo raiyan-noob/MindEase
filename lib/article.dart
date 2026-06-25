@@ -213,280 +213,476 @@ class _ArticlePageState extends State<ArticlePage>
             : Color.fromRGBO(192, 226, 201, 1.0);
 
         return Scaffold(
-          backgroundColor: Colors.transparent,
-          extendBodyBehindAppBar: true,
-          extendBody: true,
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: isLight ? Colors.black : accent,
-              ),
-              onPressed: () => Navigator.pop(context),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 16, top: 8),
-                child: GestureDetector(
-                  onTap: () {
-                    widget.onThemeChanged(!isLight);
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isLight
-                          ? Color.fromRGBO(255, 255, 255, 0.9)
-                          : Color.fromRGBO(0, 0, 0, 0.6),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromRGBO(0, 0, 0, 0.15),
-                          blurRadius: 8,
-                          offset: const Offset(0, 4),
+          backgroundColor: isLight
+              ? Color.fromRGBO(255, 255, 255, 1.0)
+              : Color.fromRGBO(19, 19, 19, 1.0),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(18, 14, 18, 100),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/newLogoremovebg.png',
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.contain,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            "MindEase",
+                            style: TextStyle(
+                              fontFamily: "Nunito",
+                              fontSize: 28,
+                              fontWeight: FontWeight.w800,
+                              color: textPrimary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          widget.onThemeChanged(!isLight);
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: isLight
+                                ? const Color(0xFFEAF7EF)
+                                : const Color(0xFF2A2A2A),
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color.fromRGBO(0, 0, 0, 0.15),
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            transitionBuilder: (child, animation) =>
+                                RotationTransition(
+                                  turns: animation,
+                                  child: child,
+                                ),
+                            child: Icon(
+                              isLight ? Icons.light_mode : Icons.dark_mode,
+                              key: ValueKey(isLight),
+                              color: isLight
+                                  ? const Color(0xFF0F5132)
+                                  : const Color(0xFFB8DCC1),
+                              size: 24,
+                            ),
+                          ),
                         ),
-                      ],
-                    ),
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 300),
-                      transitionBuilder: (child, animation) =>
-                          RotationTransition(turns: animation, child: child),
-                      child: Icon(
-                        isLight ? Icons.light_mode : Icons.dark_mode,
-                        key: ValueKey(isLight),
-                        color: isLight
-                            ? Color.fromRGBO(16, 100, 56, 1)
-                            : Color.fromRGBO(184, 220, 193, 1),
-                        size: 24,
                       ),
-                    ),
+                    ],
                   ),
-                ),
-              ),
-            ],
-          ),
-          body: Stack(
-            children: [
-              Positioned.fill(
-                child: Image.asset(
-                  isLight ? 'assets/artwbg.jpg' : 'assets/artbbg.jpg',
-                  fit: BoxFit.cover,
-                ),
-              ),
-              LayoutBuilder(
-                builder: (context, constraints) {
-                  return SingleChildScrollView(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: constraints.maxHeight,
-                      ),
-                      child: IntrinsicHeight(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                  const SizedBox(height: 18),
+
+                  //physics: const BouncingScrollPhysics(),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      bottom: 120, // clears bottom nav
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 24),
+
+                        // ── Heading ────────────────────────────────
+                        Text(
+                          'Articles, Blogs & Stories\n can be a source of inspiration,\n offering perspectives that\n resonate with your feelings.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.bold,
+                            color: textPrimary,
+                            height: 1.55,
+                            shadows: [
+                              Shadow(
+                                offset: const Offset(0, 1),
+                                blurRadius: 2,
+                                color: textPrimary.withOpacity(0.3),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              _fadePageRoute(
+                                BlogPage(
+                                  selection: 'Blog',
+                                  feeling: widget.feeling,
+                                  isLightNotifier: widget.isLightNotifier,
+                                  onThemeChanged: widget.onThemeChanged,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 18,
+                              vertical: 20,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isLight
+                                  ? Colors.white.withOpacity(0.93)
+                                  : const Color.fromARGB(238, 41, 46, 42),
+                              borderRadius: BorderRadius.circular(24),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.09),
+                                  blurRadius: 20,
+                                  offset: const Offset(0, 6),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                // Orange play icon circle
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFEFF5EF),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.edit_document,
+                                      color: Color(0xFF4A90E2),
+                                      size: 34,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                // Text content
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Articles & Blogs',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontFamily: 'Nunito',
+                                          fontWeight: FontWeight.w800,
+                                          color: textPrimary,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Text(
+                                        'Discover insightful articles and blogs that offer comfort and guidance.',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontFamily: 'Nunito',
+                                          fontWeight: FontWeight.w500,
+                                          height: 1.45,
+                                          color: isLight
+                                              ? const Color.fromRGBO(
+                                                  70,
+                                                  70,
+                                                  70,
+                                                  1,
+                                                )
+                                              : const Color.fromRGBO(
+                                                  190,
+                                                  190,
+                                                  190,
+                                                  1,
+                                                ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                // Chevron circle
+                                Container(
+                                  width: 30,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: isLight
+                                          ? const Color.fromARGB(
+                                              255,
+                                              160,
+                                              200,
+                                              175,
+                                            )
+                                          : const Color.fromARGB(
+                                              255,
+                                              90,
+                                              120,
+                                              100,
+                                            ),
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  child: Icon(
+                                    Icons.chevron_right_rounded,
+                                    size: 18,
+                                    color: isLight
+                                        ? const Color.fromARGB(255, 16, 100, 56)
+                                        : const Color.fromARGB(
+                                            255,
+                                            184,
+                                            220,
+                                            193,
+                                          ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+
+                        // ── Read Card ──────────────────────────────
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              _fadePageRoute(
+                                VlogPage(
+                                  selection: 'Vlog',
+                                  feeling: widget.feeling,
+                                  isLightNotifier: widget.isLightNotifier,
+                                  onThemeChanged: widget.onThemeChanged,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 18,
+                              vertical: 20,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isLight
+                                  ? Colors.white.withOpacity(0.93)
+                                  : const Color.fromARGB(238, 41, 46, 42),
+                              borderRadius: BorderRadius.circular(24),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.09),
+                                  blurRadius: 20,
+                                  offset: const Offset(0, 6),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                // Green book icon circle
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFEFF5EF),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.videocam_rounded,
+                                      color: Color(0xFF2F3B52),
+                                      size: 36,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                // Text content
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Vlogs & Documentaries',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontFamily: 'Nunito',
+                                          fontWeight: FontWeight.w800,
+                                          color: textPrimary,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Text(
+                                        'Explore vlogs and documentaries that offer comfort and inspiration.',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontFamily: 'Nunito',
+                                          fontWeight: FontWeight.w500,
+                                          height: 1.45,
+                                          color: isLight
+                                              ? const Color.fromRGBO(
+                                                  70,
+                                                  70,
+                                                  70,
+                                                  1,
+                                                )
+                                              : const Color.fromRGBO(
+                                                  190,
+                                                  190,
+                                                  190,
+                                                  1,
+                                                ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                // Chevron circle
+                                Container(
+                                  width: 32,
+                                  height: 32,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: isLight
+                                          ? const Color.fromARGB(
+                                              255,
+                                              160,
+                                              200,
+                                              175,
+                                            )
+                                          : const Color.fromARGB(
+                                              255,
+                                              90,
+                                              120,
+                                              100,
+                                            ),
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  child: Icon(
+                                    Icons.chevron_right_rounded,
+                                    size: 20,
+                                    color: isLight
+                                        ? const Color.fromARGB(255, 16, 100, 56)
+                                        : const Color.fromARGB(
+                                            255,
+                                            184,
+                                            220,
+                                            193,
+                                          ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 48),
+
+                        Column(
                           children: [
-                            const SizedBox(height: 240),
+                            // Large opening quote mark
                             Text(
-                              'Articles, Blogs & Stories\n can be a source of inspiration,\n offering perspectives that\n resonate with your feelings.',
+                              '\u275D',
+                              style: TextStyle(
+                                fontSize: 36,
+                                height: 1,
+                                color: isLight
+                                    ? const Color.fromARGB(80, 16, 100, 56)
+                                    : const Color.fromARGB(80, 184, 220, 193),
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              '"There is hope, even when your brain\n tells you there isn\'t"',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: 'Nunito',
-                                fontWeight: FontWeight.bold,
                                 color: textPrimary,
-                                shadows:
-                                    textPrimary.withOpacity(0.7) !=
-                                        const Color.fromARGB(0, 47, 81, 54)
-                                    ? [
-                                        Shadow(
-                                          offset: const Offset(0, 1),
-                                          blurRadius: 2,
-                                          color: textPrimary.withOpacity(0.7),
-                                        ),
-                                      ]
-                                    : null,
+                                fontFamily: 'Nunito',
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic,
+                                shadows: [
+                                  Shadow(
+                                    offset: const Offset(0, 1),
+                                    blurRadius: 2,
+                                    color: textPrimary.withOpacity(0.3),
+                                  ),
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 20),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 45,
-                                vertical: 6,
+                            const SizedBox(height: 5),
+                            Text(
+                              "- John Green",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: textPrimary,
+                                fontFamily: 'Nunito',
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
                               ),
-                              margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    _fadePageRoute(
-                                      BlogPage(
-                                        selection: 'Blog',
-                                        feeling: widget.feeling,
-                                        isLightNotifier: widget.isLightNotifier,
-                                        onThemeChanged: widget.onThemeChanged,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  elevation: 20,
-                                  side: BorderSide(
+                            ),
+                            const SizedBox(height: 14),
+                            // Decorative divider
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 52,
+                                  height: 1,
+                                  color: isLight
+                                      ? const Color.fromARGB(60, 16, 100, 56)
+                                      : const Color.fromARGB(60, 184, 220, 193),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                  ),
+                                  child: Icon(
+                                    Icons.spa_outlined,
+                                    size: 16,
                                     color: isLight
-                                        ? Color.fromARGB(255, 16, 100, 56)
-                                        : Color.fromARGB(255, 184, 220, 193),
-                                    width: 2,
-                                  ),
-                                  backgroundColor: isLight
-                                      ? Color.fromARGB(255, 240, 240, 240)
-                                      : Color.fromARGB(255, 41, 46, 42),
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 20,
-                                    vertical: 20,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '📝 Articles & Blogs',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontFamily: 'Nunito',
-                                        fontWeight: FontWeight.w700,
-                                        color: textPrimary,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      'Discover insightful articles and blogs that offer comfort and guidance.',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: 'Nunito',
-                                        fontWeight: FontWeight.w500,
-                                        color: isLight
-                                            ? Color.fromRGBO(50, 50, 50, 1.0)
-                                            : Color.fromRGBO(
-                                                200,
-                                                200,
-                                                200,
-                                                1.0,
-                                              ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 25),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 55,
-                                vertical: 6,
-                              ),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    _fadePageRoute(
-                                      VlogPage(
-                                        selection: 'Vlog',
-                                        feeling: widget.feeling,
-                                        isLightNotifier: widget.isLightNotifier,
-                                        onThemeChanged: widget.onThemeChanged,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  elevation: 20,
-                                  side: BorderSide(
-                                    color: isLight
-                                        ? Color.fromARGB(255, 16, 100, 56)
-                                        : Color.fromARGB(255, 184, 220, 193),
-                                    width: 2,
-                                  ),
-                                  backgroundColor: isLight
-                                      ? Color.fromARGB(255, 240, 240, 240)
-                                      : Color.fromARGB(255, 41, 46, 42),
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 20,
-                                    vertical: 20,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '🎥 Vlogs & Documentaries',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontFamily: 'Nunito',
-                                        fontWeight: FontWeight.w700,
-                                        color: textPrimary,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      'Explore vlogs and documentaries that offer comfort and inspiration.',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: 'Nunito',
-                                        fontWeight: FontWeight.w500,
-                                        color: isLight
-                                            ? Color.fromRGBO(50, 50, 50, 1.0)
-                                            : Color.fromRGBO(
-                                                200,
-                                                200,
-                                                200,
-                                                1.0,
-                                              ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const Spacer(),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 90),
-                              child: Text(
-                                '"There is hope, even when your brain\n tells you there isn\'t" - John Green',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: textPrimary,
-                                  fontFamily: 'Nunito',
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic,
-                                  shadows:
-                                      textPrimary.withOpacity(0.5) !=
-                                          const Color.fromARGB(0, 47, 81, 54)
-                                      ? [
-                                          Shadow(
-                                            offset: const Offset(0, 1),
-                                            blurRadius: 2,
-                                            color: textPrimary.withOpacity(0.5),
+                                        ? const Color.fromARGB(140, 16, 100, 56)
+                                        : const Color.fromARGB(
+                                            140,
+                                            184,
+                                            220,
+                                            193,
                                           ),
-                                        ]
-                                      : null,
+                                  ),
                                 ),
-                              ),
+                                Container(
+                                  width: 52,
+                                  height: 1,
+                                  color: isLight
+                                      ? const Color.fromARGB(60, 16, 100, 56)
+                                      : const Color.fromARGB(60, 184, 220, 193),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ),
+                      ],
                     ),
-                  );
-                },
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
 
           bottomNavigationBar: Container(

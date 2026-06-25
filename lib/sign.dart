@@ -15,10 +15,7 @@ class _SignupPageState extends State<SignupPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   final TextEditingController fullNameController = TextEditingController();
-  final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController ageController = TextEditingController();
-  final TextEditingController genderController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
 
@@ -27,18 +24,12 @@ class _SignupPageState extends State<SignupPage> {
 
   Future<void> signup() async {
     final String fullName = fullNameController.text.trim();
-    final String phoneNumber = phoneNumberController.text.trim();
     final String email = emailController.text.trim();
-    final String age = ageController.text.trim();
-    final String gender = genderController.text.trim();
     final String password = passwordController.text.trim();
     final String confirmPassword = confirmPasswordController.text.trim();
 
     if (fullName.isEmpty ||
-        phoneNumber.isEmpty ||
         email.isEmpty ||
-        age.isEmpty ||
-        gender.isEmpty ||
         password.isEmpty ||
         confirmPassword.isEmpty) {
       setState(() {
@@ -76,10 +67,7 @@ class _SignupPageState extends State<SignupPage> {
           await _firestore.collection('users').doc(user.uid).set({
             'uid': user.uid,
             'fullName': fullName,
-            'phoneNumber': phoneNumber,
             'email': email,
-            'age': age,
-            'gender': gender,
             'createdAt': FieldValue.serverTimestamp(),
           });
         } on FirebaseException catch (e) {
@@ -141,10 +129,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   void dispose() {
     fullNameController.dispose();
-    phoneNumberController.dispose();
     emailController.dispose();
-    ageController.dispose();
-    genderController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
@@ -209,83 +194,11 @@ class _SignupPageState extends State<SignupPage> {
                 style: TextStyle(color: Colors.grey),
               ),
               const SizedBox(height: 20),
-              //Phone number field
-              TextField(
-                controller: phoneNumberController,
-                decoration: const InputDecoration(
-                  labelText: "Enter your phone number",
-                  labelStyle: TextStyle(color: Colors.grey),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    borderSide: BorderSide.none,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    borderSide: BorderSide.none,
-                  ),
-                  filled: true,
-                  fillColor: Color(0xFFF0F0F0),
-                ),
-                style: TextStyle(color: Colors.grey),
-              ),
-              const SizedBox(height: 20),
               //Email field
               TextField(
                 controller: emailController,
                 decoration: const InputDecoration(
                   labelText: "Enter your email (eg. abc@gmail.com)",
-                  labelStyle: TextStyle(color: Colors.grey),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    borderSide: BorderSide.none,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    borderSide: BorderSide.none,
-                  ),
-                  filled: true,
-                  fillColor: Color(0xFFF0F0F0),
-                ),
-                style: TextStyle(color: Colors.grey),
-              ),
-              const SizedBox(height: 20),
-              //Age field
-              TextField(
-                controller: ageController,
-                decoration: const InputDecoration(
-                  labelText: "Enter your age",
-                  labelStyle: TextStyle(color: Colors.grey),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    borderSide: BorderSide.none,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    borderSide: BorderSide.none,
-                  ),
-                  filled: true,
-                  fillColor: Color(0xFFF0F0F0),
-                ),
-                style: TextStyle(color: Colors.grey),
-              ),
-              const SizedBox(height: 20),
-              //Gender field
-              TextField(
-                controller: genderController,
-                decoration: const InputDecoration(
-                  labelText: "Enter your gender",
                   labelStyle: TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
