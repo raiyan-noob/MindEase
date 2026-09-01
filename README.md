@@ -1,16 +1,78 @@
-# MindEase
+# 🌿 MindEase
 
-A new Flutter project.
+> **Find Your Calm** — a Flutter-based wellness companion designed to help users discover simple, personalized ways to relax and reset.
 
-## Getting Started
+## 📱 Overview
 
-This project is a starting point for a Flutter application.
+MindEase is a mobile application that lets users select how they are feeling and explore suitable calming content. Users can choose a mood such as **sad, anxious, stressed, or calm**, then select a preferred healing method such as entertainment, spiritual/religious content, poetry, or stories.
 
-A few resources to get you started if this is your first Flutter project:
+The app also includes authentication, cloud-backed data storage, a breathing exercise, and a clean light/dark themed interface.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## ✨ Key Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- 🧠 Mood-based content discovery
+- 🌬️ Guided breathing exercise/timer
+- 🔐 Firebase authentication
+- ☁️ Cloud Firestore integration
+- 🎭 Multiple healing/content categories
+- 🌓 Light and dark themes
+- 🎨 Custom fonts and branded UI
+- 🔗 External content links
+- 📱 Responsive Flutter mobile UI
+
+## 🛠️ Technology Stack
+
+![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![Firestore](https://img.shields.io/badge/Cloud%20Firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+
+## 📦 Dependencies
+
+- `firebase_core`
+- `firebase_auth`
+- `cloud_firestore`
+- `url_launcher`
+- `cupertino_icons`
+- `flutter_lints`
+- `flutter_launcher_icons`
+
+The project targets Dart SDK `^3.10.4`. fileciteturn11file0L2-L6
+
+## 🚀 Run Locally
+
+### Prerequisites
+
+- Flutter SDK installed
+- Dart SDK compatible with the project's environment
+- Android Studio / VS Code with Flutter support
+- A configured Firebase project
+
+### Setup
+
+```bash
+git clone https://github.com/raiyan-noob/MindEase.git
+cd MindEase
+flutter pub get
+flutter run
+```
+
+For a new Firebase setup, add the appropriate Firebase configuration files for your target platform before running the application.
+
+## 📂 Project Highlights
+
+The project includes custom visual assets, branded fonts, login/signup screens, mood/content backgrounds, and launcher-icon configuration. These resources are declared in the Flutter project configuration. fileciteturn11file0L2-L6
+
+## 🔗 Links
+
+- **Repository:** https://github.com/raiyan-noob/MindEase
+- **Developer:** https://github.com/raiyan-noob
+
+## 👨‍💻 Author
+
+**Raiyan Anam**  
+Computer Science & Engineering Student | Competitive Programmer | Software Developer
+
+---
+
+⭐ If you find the project interesting, consider starring the repository!
