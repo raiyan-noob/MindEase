@@ -37,7 +37,7 @@ The app also includes authentication, cloud-backed data storage, a breathing exe
 - `flutter_lints`
 - `flutter_launcher_icons`
 
-The project targets Dart SDK `^3.10.4`. fileciteturn11file0L2-L6
+The project targets Dart SDK `^3.10.4`.
 
 ## 🚀 Run Locally
 
@@ -61,11 +61,17 @@ For a new Firebase setup, add the appropriate Firebase configuration files for y
 
 ## 📂 Project Highlights
 
-The project includes custom visual assets, branded fonts, login/signup screens, mood/content backgrounds, and launcher-icon configuration. These resources are declared in the Flutter project configuration. fileciteturn11file0L2-L6
+The project includes custom visual assets, branded fonts, login/signup screens, mood/content backgrounds, and launcher-icon configuration.
 
 ## 🔗 Links
 
 - **Repository:** https://github.com/raiyan-noob/MindEase
+- **Developer:** https://github.com/raiyan-noob
+
+## 👨‍💻 Author
+
+**Raiyan Anam**  
+Computer Science & Engineering Student | Competitive Programmer | Software Developer
 
 ---
 
