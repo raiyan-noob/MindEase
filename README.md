@@ -67,11 +67,6 @@ The project includes custom visual assets, branded fonts, login/signup screens, 
 
 - **Repository:** https://github.com/raiyan-noob/MindEase
 
-## 👨‍💻 Author
-
-**Raiyan Anam**  
-Computer Science & Engineering Student | Competitive Programmer | Software Developer
-
 ---
 
 ⭐ If you find the project interesting, consider starring the repository!
