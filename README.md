@@ -10,7 +10,9 @@ The app also includes authentication, cloud-backed data storage, a breathing exe
 
 ## 📸 Screenshot
 
- ![MindEase Screenshot](./assets/home.jpg)
+ ![MindEase Screenshot](./assets/home.jpeg)
+ ![MindEase Screenshot](./assets/heal.jpeg)
+ ![MindEase Screenshot](./assets/breath.jpeg)
 
 ## ✨ Key Features
 
