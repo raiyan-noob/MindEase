@@ -8,6 +8,10 @@ MindEase is a mobile application that lets users select how they are feeling and
 
 The app also includes authentication, cloud-backed data storage, a breathing exercise, and a clean light/dark themed interface.
 
+## 📸 Screenshot
+
+ ![MindEase Screenshot](./assets/home.jpg)
+
 ## ✨ Key Features
 
 - 🧠 Mood-based content discovery
